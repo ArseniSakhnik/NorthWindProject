@@ -4,4 +4,16 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\favicon.ico" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\index.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\js\app.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\js\chunk-vendors.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot" />
+  </ItemGroup>
+
 </Project>
