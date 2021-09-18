@@ -4,23 +4,20 @@ const {VueLoaderPlugin} = require('vue-loader')
 module.exports = {
     outputDir: path.resolve('../wwwroot/bundles/'),
     filenameHashing: false,
+    chainWebpack: config => {
+        config.plugins.delete('html')
+        config.plugins.delete('preload')
+        config.plugins.delete('prefetch')
+        config.module
+            .rule('images')
+            .use('url-loader')
+            .loader('url-loader')
+            .tap(options => Object.assign(options, {limit: 10240}))
+    },
     runtimeCompiler: true,
     configureWebpack: {
         module: {
             rules: [
-                {
-                    test: /\.(png|jpg|gif)$/,
-                    use: {
-                        loader: 'url-loader',
-                        options: {
-                            esModule: false,
-                            limit: 2048,
-                            name: '[hash]-[name].[ext]',
-                            outputPath: '../img/',
-                            publicPath: './bundles/img/'
-                        }
-                    }
-                },
                 {
                     test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
                     use: {
@@ -32,15 +29,6 @@ module.exports = {
                         }
                     }
                 },
-                // {
-                //     test: /\.vue$/,
-                //     include: path.resolve(__dirname, './src/'),
-                //     loader: 'vue-loader'
-                // },
-                // {
-                //     test: /\.(css|scss)$/,
-                //     use: ['style-loader', 'css-loader','sass-loader']
-                // },
             ]
         }
     }
