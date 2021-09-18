@@ -300,9 +300,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
   !*** ./src/assets/logo.png ***!
   \*****************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-eval("module.exports = __webpack_require__.p + \"img/logo.png\";\n\n//# sourceURL=webpack:///./src/assets/logo.png?");
+eval("module.exports = \"data:image/png;base64,bW9kdWxlLmV4cG9ydHMgPSAiLi9idW5kbGVzL2ltZy84MmI5YzdhNWEzZjQwNTAzMmIxZGI3MWEyNWY2NzAyMS1sb2dvLnBuZyI7\"\n\n//# sourceURL=webpack:///./src/assets/logo.png?");
 
 /***/ }),
 

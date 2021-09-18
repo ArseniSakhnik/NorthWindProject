@@ -10,6 +10,7 @@
     <_ContentIncludedByDefault Remove="wwwroot\bundles\index.html" />
     <_ContentIncludedByDefault Remove="wwwroot\bundles\js\app.js" />
     <_ContentIncludedByDefault Remove="wwwroot\bundles\js\chunk-vendors.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\img\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
