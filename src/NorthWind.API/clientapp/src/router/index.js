@@ -12,7 +12,7 @@ const routes = [
         }
     },
     {
-        path: '/AdminPanel',
+        path: '/#/AdminPanel',
         name: 'AdminPanelPage',
         component: AdminPanelPage,
         meta: {

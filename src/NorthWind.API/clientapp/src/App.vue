@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <router-link to="/AdminPanel">Админская панель</router-link>
+  <router-link to="/#/AdminPanel">Админская панель</router-link>
   <component :is="layout + '-layout'" v-if="layout">
   </component>
 </template>
