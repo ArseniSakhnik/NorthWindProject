@@ -8,9 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using NorthWind.API.Data;
 using NorthWind.API.Models;
 using NorthWind.API.Services;
+using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Interfaces;
 using NorthWindProject.Core.Entities;
 
@@ -36,6 +37,7 @@ namespace NorthWind.API
             services.AddDbContext<AppDbContext>(options =>
                 options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 26))));
 
+            services.AddApplication();
             services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = true;
