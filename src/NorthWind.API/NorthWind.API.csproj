@@ -14,7 +14,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="clientapp\src\components" />
+    <Folder Include="clientapp\src\mixins" />
+    <Folder Include="clientapp\src\store" />
+    <Folder Include="clientapp\src\use" />
+    <Folder Include="clientapp\src\utils" />
     <Folder Include="wwwroot" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Web.config">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NorthWindProject.Application\NorthWindProject.Application.csproj" />
+    <ProjectReference Include="..\NorthWindProject.Core\NorthWindProject.Core.csproj" />
   </ItemGroup>
 
 </Project>
