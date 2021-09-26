@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MainLayout.vue"
+  name: "MainLayout"
 }
 </script>
 

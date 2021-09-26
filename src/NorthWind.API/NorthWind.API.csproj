@@ -19,15 +19,8 @@
     <Folder Include="clientapp\src\store" />
     <Folder Include="clientapp\src\use" />
     <Folder Include="clientapp\src\utils" />
+    <Folder Include="clientapp\viewshtml\backgrounds" />
     <Folder Include="wwwroot" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Web.config">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
