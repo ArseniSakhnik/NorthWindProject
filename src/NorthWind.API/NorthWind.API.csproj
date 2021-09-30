@@ -20,6 +20,7 @@
     <Folder Include="clientapp\src\use" />
     <Folder Include="clientapp\src\utils" />
     <Folder Include="clientapp\viewshtml\backgrounds" />
+    <Folder Include="clientapp\viewshtml\fonts\Raleway" />
     <Folder Include="wwwroot" />
   </ItemGroup>
 

@@ -2,11 +2,23 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: Raleway;
+    src: 
+    url("../fonts/Raleway-Light.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+a {
+    text-decoration: none;
 }
 
 .site-background {
@@ -20,21 +32,44 @@ html, body {
     height: 100%;
 }
 
-.nav {
-    /*Настройка флекса навбара*/
+.nav-bar {
     display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-between;
+    flex-wrap: wrap;
 
     height: 100px;
-    border-bottom: 2px solid rgba(154,167,179,255);
+    border-bottom: 2px solid rgba(154, 167, 179, 255);
 }
 
-.nav-menu {
-    width: 100%;
+.container {
+    width: 940px;
+    padding: 0 10px;
+    margin: 0 auto;
 }
 
-.nav-logo {
-    width: 100%;
+.main-nav,
+.user-menu {
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+    margin: auto 0;
+}
+
+.user-menu {
+    margin-right: auto;
+}
+
+.main-nav-item,
+.user-menu-item {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.nav-item-link,
+.user-menu-link {
+    position: relative;
+    display: block;
+    padding: 25px 20px;
+    font-family: Raleway, sans-serif;
+    font-size: 22px;
+    color: rgba(242, 246, 255, .75);
 }
