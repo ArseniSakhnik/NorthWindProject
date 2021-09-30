@@ -17,8 +17,10 @@ using NorthWind.API.Models;
 using NorthWind.API.Pages;
 using NorthWind.API.Services;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Interfaces;
+using NorthWindProject.Application.Interfaces.DomainEvents;
 using NorthWindProject.Core.Entities;
 using Index = System.Index;
 
@@ -54,6 +56,9 @@ namespace NorthWind.API
 
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddRazorPages();
+
+            //Подключение сервисов
+            services.AddScoped<IDomainEventService, DomainEventService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
