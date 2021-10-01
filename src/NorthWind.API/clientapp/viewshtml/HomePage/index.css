@@ -3,7 +3,7 @@
 }
 
 @font-face {
-    font-family: Raleway;
+    font-family: RalewayLight;
     src: 
     url("../fonts/Raleway-Light.ttf");
     font-weight: bold;
@@ -14,7 +14,6 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 a {
@@ -22,7 +21,7 @@ a {
 }
 
 .site-background {
-    background: url('../backgrounds/services1.jpg') no-repeat center center rgba(27, 54, 72, 0.5) fixed;
+    background: url('../backgrounds/services1.jpg') no-repeat top center rgba(27, 54, 72, 0.5) fixed;
     background-blend-mode: overlay;
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
@@ -38,6 +37,8 @@ a {
 
     height: 100px;
     border-bottom: 2px solid rgba(154, 167, 179, 255);
+    padding-right: 100px;
+    padding-left: 100px;
 }
 
 .container {
@@ -69,7 +70,36 @@ a {
     position: relative;
     display: block;
     padding: 25px 20px;
-    font-family: Raleway, sans-serif;
+    font-family: RalewayLight, sans-serif;
     font-size: 22px;
     color: rgba(242, 246, 255, .75);
+}
+
+.page-main {
+    flex-grow: 1;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.services-section {
+    height: calc(100vh - 120px);
+    
+    display: flex;
+}
+
+.services-content {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.service-title {
+    padding-bottom: 50px;
+}
+
+.services-button {
+    width: 200px;
+    height: 52px;
+    background: none;
+    border: solid rgba(213, 220, 230, 1) 3px;
+    font-family: Raleway, sans-serif;
 }
