@@ -1,7 +1,4 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <router-link to="/AdminPanel">Админская панель</router-link>
-  <router-link to="/Login">Логин</router-link>
   <component :is="layout + '-layout'" v-if="layout">
   </component>
 </template>
@@ -13,9 +10,6 @@ import {useRoute} from "vue-router";
 
 export default defineComponent({
   name: 'App',
-  created() {
-    console.log(this.$route)
-  },
   setup() {
     const route = useRoute();
     return {
@@ -27,6 +21,7 @@ export default defineComponent({
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

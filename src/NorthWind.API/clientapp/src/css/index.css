@@ -5,7 +5,7 @@
 @font-face {
     font-family: RalewayLight;
     src: 
-    url("../fonts/Raleway-Light.ttf");
+    url("../fonts/Raleway-Light.ttf") format('ttf');
     font-weight: bold;
     font-style: italic;
 }
@@ -21,7 +21,7 @@ a {
 }
 
 .site-background {
-    background: url('../backgrounds/services1.jpg') no-repeat top center rgba(27, 54, 72, 0.5) fixed;
+    background: url('./services1.jpg') no-repeat top center rgba(27, 54, 72, 0.5) fixed;
     background-blend-mode: overlay;
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */

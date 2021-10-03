@@ -11,6 +11,7 @@
   "dependencies": {
     "@vue/eslint-config-airbnb": "^5.3.0",
     "core-js": "^3.6.5",
+    "file-loader": "^6.2.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.3"
   },
