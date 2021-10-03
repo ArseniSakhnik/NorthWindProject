@@ -43,8 +43,15 @@ namespace NorthWind.API
             var appSettings = appSettingsSection.Get<AppSettings>();
 
             var connectionString = appSettings.Connection;
+            var mySqlVersion = new MySqlServerVersion(new Version(8, 0, 26));
             services.AddDbContext<AppDbContext>(options =>
-                options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 26))));
+            {
+                options.UseMySql(connectionString, mySqlVersion, sql =>
+                {
+                    sql.MigrationsAssembly("NorthWind.API");
+                });
+            });
+                
 
             services.AddApplication();
             services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
@@ -58,7 +65,7 @@ namespace NorthWind.API
             services.AddRazorPages();
 
             //Подключение сервисов
-            services.AddScoped<IDomainEventService, DomainEventService>();
+            // services.AddScoped<IDomainEventService, DomainEventService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,30 +8,29 @@
   </div>
 </template>
 
-<script>
-import {UserService} from "@/services/UserService";
-import {ref} from "vue";
+<script lang="ts">
+import {defineComponent, ref} from "vue";
+import {UserService} from '@/services/UserService'
 
-export default {
+export default defineComponent({
   name: "LoginPage",
   setup() {
     const userName = ref('');
     const password = ref('');
     const userService = new UserService();
-    
-    
+
+
     const onSubmit = () => {
       userService.logIn(userName.value, password.value)
-      .then();
     };
-    
+
     return {
       userName,
       password,
       onSubmit
     }
   }
-}
+})
 </script>
 
 <style scoped>

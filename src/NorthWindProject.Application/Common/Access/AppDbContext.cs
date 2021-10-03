@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,20 +17,26 @@ namespace NorthWindProject.Application.Common.Access
     {
         private readonly DomainEventService _domainEventService;
         
-        public AppDbContext(DbContextOptions<AppDbContext> options, DomainEventService domainEventService)
+        public DbSet<Test> Tests { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
         {
-            _domainEventService = domainEventService;
-            Database.EnsureCreated();
+            _domainEventService = new DomainEventService(mediator);
         }
+        // public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        // {
+        //     Database.EnsureCreated();
+        // }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-
+            var result = await base.SaveChangesAsync(cancellationToken);
+            
             var events = GetDomainEvents().ToList();
             await DispatchEventAsync(events);
             
-            return await base.SaveChangesAsync(cancellationToken);
+            return result;
         }
 
 
@@ -57,7 +64,7 @@ namespace NorthWindProject.Application.Common.Access
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var hasher = new PasswordHasher<ApplicationUser>();
-            
+
             builder.Entity<IdentityRole<int>>().HasData(new List<IdentityRole<int>>
             {
                 new IdentityRole<int>
@@ -111,7 +118,7 @@ namespace NorthWindProject.Application.Common.Access
                     UserId = 2
                 }
             });
-            
+
             base.OnModelCreating(builder);
         }
     }
