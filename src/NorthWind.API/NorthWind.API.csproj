@@ -14,10 +14,11 @@
     <_ContentIncludedByDefault Remove="wwwroot\fonts\6c084270ccdeb72fd9f5a5144cea628f-Raleway-Light.ttf" />
     <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.ttf" />
     <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.[ttf]" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\backgrounds\services1.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\fonts\Raleway-Light.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="clientapp\src\backgrounds" />
     <Folder Include="clientapp\src\mixins" />
     <Folder Include="clientapp\src\store" />
     <Folder Include="clientapp\src\use" />
