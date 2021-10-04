@@ -85,9 +85,15 @@ namespace NorthWind.API
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "clientapp")),
-                RequestPath = "/clientapp"
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/img")),
+                RequestPath = "/img"
             });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/fonts")),
+                RequestPath = "/fonts"
+            });
+            
 
             app.UseRouting();
 
