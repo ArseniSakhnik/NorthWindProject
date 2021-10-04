@@ -2,12 +2,12 @@
     box-sizing: border-box;
 }
 
-@font-face {
-    font-family: RalewayLight;
-    src: url("../fonts/Raleway-Light.ttf") format('ttf');
-    font-weight: bold;
-    font-style: italic;
-}
+/*@font-face {*/
+/*    font-family: RalewayLight;*/
+/*    src: url("../fonts/Raleway-Light.ttf") format('ttf');*/
+/*    font-weight: bold;*/
+/*    font-style: italic;*/
+/*}*/
 
 html, body {
     height: 100%;
@@ -69,7 +69,7 @@ a {
     position: relative;
     display: block;
     padding: 25px 20px;
-    font-family: RalewayLight, sans-serif;
+    font-family: Raleway, sans-serif;
     font-size: 22px;
     color: rgba(242, 246, 255, .75);
 }
