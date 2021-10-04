@@ -1,19 +1,28 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using NorthWind.API.Models;
+using NorthWind.API.Pages;
 using NorthWind.API.Services;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Interfaces;
+using NorthWindProject.Application.Interfaces.DomainEvents;
 using NorthWindProject.Core.Entities;
+using Index = System.Index;
 
 namespace NorthWind.API
 {
@@ -34,19 +43,29 @@ namespace NorthWind.API
             var appSettings = appSettingsSection.Get<AppSettings>();
 
             var connectionString = appSettings.Connection;
+            var mySqlVersion = new MySqlServerVersion(new Version(8, 0, 26));
             services.AddDbContext<AppDbContext>(options =>
-                options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 26))));
+            {
+                options.UseMySql(connectionString, mySqlVersion, sql =>
+                {
+                    sql.MigrationsAssembly("NorthWind.API");
+                });
+            });
+                
 
             services.AddApplication();
             services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
-                {
-                    options.SignIn.RequireConfirmedAccount = true;
-                }).AddEntityFrameworkStores<AppDbContext>();
-            
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+            }).AddEntityFrameworkStores<AppDbContext>();
+
             services.AddHttpContextAccessor();
 
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddRazorPages();
+
+            //Подключение сервисов
+            // services.AddScoped<IDomainEventService, DomainEventService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,9 +85,15 @@ namespace NorthWind.API
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "clientapp")),
-                RequestPath = "/clientapp"
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/img")),
+                RequestPath = "/img"
             });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/fonts")),
+                RequestPath = "/fonts"
+            });
+            
 
             app.UseRouting();
 

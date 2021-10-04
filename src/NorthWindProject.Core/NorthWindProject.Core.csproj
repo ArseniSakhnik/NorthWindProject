@@ -9,4 +9,10 @@
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="NorthWindProject.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\NorthWindProject.Application\bin\Debug\net5.0\NorthWindProject.Application.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

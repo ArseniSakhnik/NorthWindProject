@@ -1,24 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NorthWindProject.Application.Common.Services;
+using NorthWindProject.Application.Interfaces.DomainEvents;
 using NorthWindProject.Core.Entities;
 
 namespace NorthWindProject.Application.Common.Access
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        private readonly DomainEventService _domainEventService;
+        
+        public DbSet<Test> Tests { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
         {
-            Database.EnsureCreated();
+            _domainEventService = new DomainEventService(mediator);
+        }
+        // public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        // {
+        //     Database.EnsureCreated();
+        // }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            var result = await base.SaveChangesAsync(cancellationToken);
+            
+            var events = GetDomainEvents().ToList();
+            await DispatchEventAsync(events);
+            
+            return result;
+        }
+
+
+        private IEnumerable<DomainEvent> GetDomainEvents()
+        {
+            var domainEventEntity = ChangeTracker
+                .Entries<IHasDomainEvent>()
+                .Select(x => x.Entity.DomainEvents)
+                .SelectMany(x => x)
+                .Where(domainEvent => !domainEvent.IsPublished);
+            return domainEventEntity;
+        }
+
+        private async Task DispatchEventAsync(IList<DomainEvent> eventsToDispatch)
+        {
+            while (eventsToDispatch.Any())
+            {
+                var domainEventEntity = eventsToDispatch.First();
+                domainEventEntity.IsPublished = true;
+                await _domainEventService.Publish(domainEventEntity);
+                eventsToDispatch.RemoveAt(0);
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var hasher = new PasswordHasher<ApplicationUser>();
-            
+
             builder.Entity<IdentityRole<int>>().HasData(new List<IdentityRole<int>>
             {
                 new IdentityRole<int>
@@ -72,7 +118,7 @@ namespace NorthWindProject.Application.Common.Access
                     UserId = 2
                 }
             });
-            
+
             base.OnModelCreating(builder);
         }
     }

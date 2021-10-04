@@ -19,4 +19,8 @@
     <ProjectReference Include="..\NorthWindProject.Core\NorthWindProject.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Models" />
+  </ItemGroup>
+
 </Project>
