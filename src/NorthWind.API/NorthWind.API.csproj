@@ -16,6 +16,7 @@
     <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.[ttf]" />
     <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\backgrounds\services1.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\fonts\Raleway-Light.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\img\services1.jpg" />
   </ItemGroup>
 
   <ItemGroup>

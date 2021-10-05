@@ -8,19 +8,19 @@
       </ul>
       <ul class="main-nav">
         <li class="main-nav-item">
-          <a class="nav-item-link" href="#">Услуги</a>
+          <router-link class="nav-item-link" to="/">Услуги</router-link>
         </li>
         <li class="main-nav-item">
-          <a class="nav-item-link" href="#">Документы</a>
+          <router-link class="nav-item-link" to="#">Документы</router-link>
         </li>
         <li class="main-nav-item">
-          <a class="nav-item-link" href="#">Вакансии</a>
+          <router-link class="nav-item-link" to="#">Вакансии</router-link>
         </li>
         <li class="main-nav-item">
-          <a class="nav-item-link" href="#">Контакты</a>
+          <router-link class="nav-item-link" to="#">Контакты</router-link>
         </li>
         <li class="main-nav-item">
-          <a class="nav-item-link" href="#">Выход</a>
+          <router-link class="nav-item-link" to="#">Выход</router-link>
         </li>
       </ul>
     </nav>
