@@ -16,7 +16,6 @@
     <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.[ttf]" />
     <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\backgrounds\services1.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\fonts\Raleway-Light.ttf" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\img\services1.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +41,13 @@
   <ItemGroup>
     <ProjectReference Include="..\NorthWindProject.Application\NorthWindProject.Application.csproj" />
     <ProjectReference Include="..\NorthWindProject.Core\NorthWindProject.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="clientapp\src\layouts\AdditionalViews.vue" />
+    <None Remove="clientapp\src\views\DocumentsPage.vue" />
+    <None Remove="clientapp\src\views\VacanciesPage.vue" />
+    <None Remove="clientapp\src\views\ContactsPage.vue" />
   </ItemGroup>
 
 </Project>

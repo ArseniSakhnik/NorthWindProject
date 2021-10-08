@@ -1,22 +1,15 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 import HomePage from "@/views/HomePage.vue";
 import AdminPanelPage from "@/views/AdminPanelPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
-import DocumentsPage from '@/views/DocumentsPage.vue'
 
-
-enum layouts {
-    main = 'main',
-    additional = 'additional'
-}
-
-const routes : Array<RouteRecordRaw> = [
+const routes = [
     {
         path: '/',
         name: 'HomePage',
         component: HomePage,
         meta: {
-            layout: layouts.main
+            layout: 'main'
         },
     },
     {
@@ -24,7 +17,7 @@ const routes : Array<RouteRecordRaw> = [
         name: 'AdminPanelPage',
         component: AdminPanelPage,
         meta: {
-            layout: layouts.additional
+            layout: 'main'
         }
     },
     {
@@ -32,23 +25,7 @@ const routes : Array<RouteRecordRaw> = [
         name: 'LoginPage',
         component: LoginPage,
         meta: {
-            layout: layouts.additional
-        }
-    },
-    {
-        path: '/Documents',
-        name: 'DocumentPage',
-        component: DocumentsPage,
-        meta: {
-            layout: layouts.additional
-        }
-    },
-    {
-        path: '/Vacancies',
-        name: 'VacanciesPage',
-        component: DocumentsPage,
-        meta: {
-            layout: layouts.additional
+            layout: 'main'
         }
     }
 ];
