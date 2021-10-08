@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NorthWind.API.Models;
-using NorthWindProject.Core.Entities;
-using NorthWindProject.Core.Enums;
+using NorthWindProject.Application.Entities.User;
 
 namespace NorthWind.API.Controllers
 {

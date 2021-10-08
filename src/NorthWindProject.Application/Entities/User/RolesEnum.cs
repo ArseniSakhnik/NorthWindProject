@@ -1,4 +1,4 @@
-﻿namespace NorthWindProject.Core.Enums
+﻿namespace NorthWindProject.Application.Entities.User
 {
     public enum RolesEnum
     {

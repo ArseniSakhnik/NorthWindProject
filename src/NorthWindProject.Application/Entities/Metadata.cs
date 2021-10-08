@@ -1,6 +1,7 @@
 ﻿using System;
+using NorthWindProject.Application.Entities.User;
 
-namespace NorthWindProject.Core.Entities
+namespace NorthWindProject.Application.Entities
 {
     public abstract class Metadata
     {

@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Services;
+using NorthWindProject.Application.Entities.Test;
+using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
-using NorthWindProject.Core.Entities;
 
 namespace NorthWindProject.Application.Common.Access
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-namespace NorthWindProject.Core.Entities
+namespace NorthWindProject.Application.Entities.User
 {
     public class ApplicationUser : IdentityUser<int>
     {

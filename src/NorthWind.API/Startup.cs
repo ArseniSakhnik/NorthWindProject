@@ -12,8 +12,8 @@ using NorthWind.API.Models;
 using NorthWind.API.Services;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.DependencyInjection;
+using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces;
-using NorthWindProject.Core.Entities;
 
 namespace NorthWind.API
 {

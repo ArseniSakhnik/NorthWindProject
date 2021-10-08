@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces;
-using NorthWindProject.Core.Enums;
 
 namespace NorthWindProject.Application.Features.User.Queries.GetCurrentUserQuery
 {

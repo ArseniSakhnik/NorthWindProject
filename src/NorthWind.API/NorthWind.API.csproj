@@ -40,7 +40,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NorthWindProject.Application\NorthWindProject.Application.csproj" />
-    <ProjectReference Include="..\NorthWindProject.Core\NorthWindProject.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

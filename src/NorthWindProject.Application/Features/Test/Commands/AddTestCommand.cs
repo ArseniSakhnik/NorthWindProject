@@ -22,7 +22,7 @@ namespace NorthWindProject.Application.Features.Test.Commands
         
         public async Task<Unit> Handle(AddTestCommand request, CancellationToken cancellationToken)
         {
-            var test = new Core.Entities.Test
+            var test = new Entities.Test.Test
             {
                 Name = request.Name
             };

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
-namespace NorthWindProject.Core.Entities
+namespace NorthWindProject.Application.Entities.Test
 {
     public class Test: IHasDomainEvent
     {

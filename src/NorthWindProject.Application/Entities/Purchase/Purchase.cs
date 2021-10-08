@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
-namespace NorthWindProject.Core.Entities.Purchase
+namespace NorthWindProject.Application.Entities.Purchase
 {
     public class Purchase : Metadata, IHasDomainEvent
     {
