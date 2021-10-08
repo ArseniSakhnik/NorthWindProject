@@ -7,7 +7,9 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchase;
 using NorthWindProject.Application.Common.Services;
+using NorthWindProject.Application.Entities.Purchase;
 using NorthWindProject.Application.Entities.Test;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -19,6 +21,7 @@ namespace NorthWindProject.Application.Common.Access
         private readonly DomainEventService _domainEventService;
         
         public DbSet<Test> Tests { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
@@ -64,6 +67,8 @@ namespace NorthWindProject.Application.Common.Access
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new PurchaseConfiguration());
+            
             var hasher = new PasswordHasher<ApplicationUser>();
 
             builder.Entity<IdentityRole<int>>().HasData(new List<IdentityRole<int>>

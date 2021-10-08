@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <Folder Include="Common\Configuration\ConfigurationEntities\Purchase" />
-    <Folder Include="Common\Configuration\ConfigurationEntities\User" />
     <Folder Include="Common\Models" />
   </ItemGroup>
 
