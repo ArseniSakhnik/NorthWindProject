@@ -74,6 +74,10 @@ a {
     color: rgba(242, 246, 255, .75);
 }
 
+.link-active {
+    
+}
+
 .page-main {
     flex-grow: 1;
     padding-left: 100px;

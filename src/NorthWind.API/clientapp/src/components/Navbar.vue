@@ -8,7 +8,7 @@
       </ul>
       <ul class="main-nav">
         <li class="main-nav-item">
-          <router-link class="nav-item-link" to="/">Услуги</router-link>
+          <router-link class="nav-item-link link-active" to="/">Услуги</router-link>
         </li>
         <li class="main-nav-item">
           <router-link class="nav-item-link" to="#">Документы</router-link>
