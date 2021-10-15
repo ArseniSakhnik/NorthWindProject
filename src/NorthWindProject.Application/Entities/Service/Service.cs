@@ -6,7 +6,7 @@ namespace NorthWindProject.Application.Entities.Service
     {
         public int ServiceId { get; set; }
 
-        public int ServiceViewId { get; set; }
+        public int? ServiceViewId { get; set; }
         public ServiceView ServiceView { get; set; }
         
         public List<ServiceProp> ServiceProps = new();

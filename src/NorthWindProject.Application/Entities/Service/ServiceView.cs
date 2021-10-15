@@ -4,6 +4,7 @@
     {
         public int ServiceViewId { get; set; }
         
+        public string Theme { get; set; }
         public int ServiceId { get; set; }
         public Service Service { get; set; }
     }

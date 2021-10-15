@@ -8,6 +8,7 @@
         public int ServiceId { get; set; }
         
         public ServicePropTypeEnum ServiceType { get; set; } 
+        public string PermissibleValue { get; set; } 
         public string Value { get; set; }
     }
 }
