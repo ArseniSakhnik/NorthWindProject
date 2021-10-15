@@ -20,7 +20,7 @@ namespace NorthWind.API.Controllers
         {
             return Ok(await Mediator.Send(new AddTestCommand
             {
-                Name = "testName"
+                Name = ""
             }));
         }
     }

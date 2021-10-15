@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchase;
+using NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Service;
 using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.Entities.Purchase;
+using NorthWindProject.Application.Entities.Service;
 using NorthWindProject.Application.Entities.Test;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -22,16 +24,16 @@ namespace NorthWindProject.Application.Common.Access
         
         public DbSet<Test> Tests { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<PurchaseField> PurchaseFields { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceProp> ServiceProps { get; set; }
+        public DbSet<ServiceView> ServiceViews { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
         {
             _domainEventService = new DomainEventService(mediator);
         }
-        // public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        // {
-        //     Database.EnsureCreated();
-        // }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -68,6 +70,7 @@ namespace NorthWindProject.Application.Common.Access
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new PurchaseConfiguration());
+            builder.ApplyConfiguration(new ServiceConfiguration());
             
             var hasher = new PasswordHasher<ApplicationUser>();
 

@@ -8,12 +8,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
     {
         public void Configure(EntityTypeBuilder<Entities.Purchase.Purchase> builder)
         {
-            builder
-                .Ignore(purchase => purchase.DomainEvents);
-
-            builder
-                .HasOne(user => user.ApplicationUser)
-                .WithMany(user => user.Purchases);
+            builder.Ignore(purchase => purchase.DomainEvents);
         }
     }
 }

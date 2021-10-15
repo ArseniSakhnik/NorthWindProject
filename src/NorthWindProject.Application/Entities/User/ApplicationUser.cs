@@ -5,6 +5,9 @@ namespace NorthWindProject.Application.Entities.User
 {
     public class ApplicationUser : IdentityUser<int>
     {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string MiddleName { get; set; }
         public List<Purchase.Purchase> Purchases = new();
     }
 }
