@@ -10,6 +10,8 @@ namespace NorthWindProject.Application.Features.Services.Commands
     public class CreateServiceCommand : IRequest
     {
         //TODO добавить возможность создания ServiceView
+        public string Name { get; set; }
+        public string Description { get; set; }
         public List<ServiceProp> ServiceProps { get; set; }
     }
 
@@ -21,16 +23,12 @@ namespace NorthWindProject.Application.Features.Services.Commands
         {
             _context = context;
         }
-        
+
         public async Task<Unit> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
         {
-            var service = new Service
-            {
-                ServiceProps = request.ServiceProps
-            };
+            var service = new Service(request.Name, request.Description, request.ServiceProps);
             await _context.Services.AddAsync(service, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            
             return Unit.Value;
         }
     }

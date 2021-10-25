@@ -20,7 +20,6 @@
   <ItemGroup>
     <Folder Include="Common\Configuration\ConfigurationEntities\Purchase" />
     <Folder Include="Common\Models" />
-    <Folder Include="Features\Purchase\Queries" />
   </ItemGroup>
 
 </Project>

@@ -6,9 +6,19 @@
         
         public Service Service { get; set; }
         public int ServiceId { get; set; }
-        
+        /// <summary>
+        /// Тип поля сервиса
+        /// </summary>
         public ServicePropTypeEnum ServiceType { get; set; } 
+        
+        /// <summary>
+        /// Допустимые значения поля сервиса
+        /// </summary>
         public string PermissibleValue { get; set; } 
-        public string Value { get; set; }
+        
+        /// <summary>
+        /// Название поля
+        /// </summary>
+        public string Name { get; set; }
     }
 }
