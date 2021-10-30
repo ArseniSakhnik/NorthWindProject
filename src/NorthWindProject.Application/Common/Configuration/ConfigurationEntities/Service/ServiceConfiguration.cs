@@ -13,6 +13,12 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 .HasOne(service => service.ServiceView)
                 .WithOne(serviceView => serviceView.Service)
                 .HasForeignKey<ServiceView>(serviceView => serviceView.ServiceId);
+
+            builder
+                .HasMany(service => service.ServiceProps)
+                .WithOne(serviceProp => serviceProp.Service)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

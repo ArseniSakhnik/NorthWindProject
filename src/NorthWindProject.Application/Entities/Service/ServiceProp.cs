@@ -3,21 +3,22 @@
     public class ServiceProp
     {
         public int ServicePropId { get; set; }
-        
+
         public Service Service { get; set; }
         public int ServiceId { get; set; }
+
         /// <summary>
-        /// Тип поля сервиса
+        ///     Тип поля сервиса
         /// </summary>
-        public ServicePropTypeEnum ServicePropTypeId { get; set; } 
-        
+        public ServicePropTypeEnum ServicePropTypeId { get; set; }
+
         /// <summary>
-        /// Допустимые значения поля сервиса
+        ///     Допустимые значения поля сервиса
         /// </summary>
-        public string PermissibleValue { get; set; } 
-        
+        public string PermissibleValue { get; set; }
+
         /// <summary>
-        /// Название поля
+        ///     Название поля
         /// </summary>
         public string Name { get; set; }
     }
