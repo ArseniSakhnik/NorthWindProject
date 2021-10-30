@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NorthWindProject.Application.Features.Test.Commands;
@@ -18,12 +17,9 @@ namespace NorthWind.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTest()
+        public async Task<IActionResult> CreateTest(AddTestCommand command)
         {
-            return Ok(await Mediator.Send(new AddTestCommand
-            {
-                Name = ""
-            }));
+            return Ok(await Mediator.Send(command));
         }
     }
 }

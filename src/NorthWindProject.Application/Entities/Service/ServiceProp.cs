@@ -9,7 +9,7 @@
         /// <summary>
         /// Тип поля сервиса
         /// </summary>
-        public ServicePropTypeEnum ServiceType { get; set; } 
+        public ServicePropTypeEnum ServicePropTypeId { get; set; } 
         
         /// <summary>
         /// Допустимые значения поля сервиса

@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using NorthWindProject.Application.Common.Validation;
 
 namespace NorthWindProject.Application.DependencyInjection
 {
@@ -10,6 +12,8 @@ namespace NorthWindProject.Application.DependencyInjection
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddValidatorsFromAssemblies(new[] {Assembly.GetExecutingAssembly()});
 
             return services;
         }

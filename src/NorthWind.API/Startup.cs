@@ -1,19 +1,28 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using NorthWind.API.Models;
 using NorthWind.API.Services;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.Exceptions;
+using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces;
+using NorthWindProject.Application.Interfaces.DomainEvents;
+using NorthWindProject.Application.Middlewares;
 
 namespace NorthWind.API
 {
@@ -53,8 +62,8 @@ namespace NorthWind.API
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddRazorPages();
 
-            //Подключение сервисов
-            // services.AddScoped<IDomainEventService, DomainEventService>();
+            services.AddScoped<IDomainEventService, DomainEventService>();
+            services.AddTransient<ExceptionHandlingMiddleware>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +93,8 @@ namespace NorthWind.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
