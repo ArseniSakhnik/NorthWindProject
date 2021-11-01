@@ -21,13 +21,14 @@ namespace NorthWindProject.Application.Common.Access
     public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
         private readonly DomainEventService _domainEventService;
-        
+
         public DbSet<Test> Tests { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchaseField> PurchaseFields { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceProp> ServiceProps { get; set; }
         public DbSet<ServiceView> ServiceViews { get; set; }
+        public DbSet<PermissibleValue> PermissibleValues { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
@@ -38,10 +39,10 @@ namespace NorthWindProject.Application.Common.Access
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var result = await base.SaveChangesAsync(cancellationToken);
-            
+
             var events = GetDomainEvents().ToList();
             await DispatchEventAsync(events);
-            
+
             return result;
         }
 
@@ -71,7 +72,8 @@ namespace NorthWindProject.Application.Common.Access
         {
             builder.ApplyConfiguration(new PurchaseConfiguration());
             builder.ApplyConfiguration(new ServiceConfiguration());
-            
+            builder.ApplyConfiguration(new PermissibleValueConfiguration());
+
             var hasher = new PasswordHasher<ApplicationUser>();
 
             builder.Entity<IdentityRole<int>>().HasData(new List<IdentityRole<int>>

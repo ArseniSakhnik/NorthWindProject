@@ -1,4 +1,6 @@
-﻿namespace NorthWindProject.Application.Entities.Service
+﻿using System.Collections.Generic;
+
+namespace NorthWindProject.Application.Entities.Service
 {
     public class ServiceProp
     {
@@ -15,7 +17,7 @@
         /// <summary>
         ///     Допустимые значения поля сервиса
         /// </summary>
-        public string PermissibleValue { get; set; }
+        public List<PermissibleValue> PermissibleValues { get; set; }
 
         /// <summary>
         ///     Название поля
