@@ -23,6 +23,7 @@ using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 using NorthWindProject.Application.Middlewares;
+using VueCliMiddleware;
 
 namespace NorthWind.API
 {
@@ -61,6 +62,10 @@ namespace NorthWind.API
 
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddRazorPages();
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "clientapp";
+            });
 
             services.AddScoped<IDomainEventService, DomainEventService>();
             services.AddTransient<ExceptionHandlingMiddleware>();
@@ -78,27 +83,27 @@ namespace NorthWind.API
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
-            //app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/img")),
-                RequestPath = "/img"
-            });
-
-
+            
             app.UseRouting();
-
+            app.UseHttpsRedirection();
+            // app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            app.UseSpa(spa =>
             {
-                endpoints.MapRazorPages();
-                endpoints.MapControllers();
+                spa.Options.SourcePath = env.IsDevelopment() ? "clientapp" : "dist";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseVueCli(npmScript: "serve");
+                }
             });
         }
     }

@@ -16,6 +16,7 @@
     <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.[ttf]" />
     <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\backgrounds\services1.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\fonts\Raleway-Light.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\bundles\img\services1.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +36,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+    <PackageReference Include="VueCliMiddleware" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

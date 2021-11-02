@@ -1,41 +1,27 @@
-import {createRouter, createWebHistory} from 'vue-router';
-import HomePage from "@/views/HomePage.vue";
-import AdminPanelPage from "@/views/AdminPanelPage.vue";
-import LoginPage from "@/views/LoginPage.vue";
+import Vue from 'vue';
+import VueRouter, { RouteConfig } from 'vue-router';
+import Home from '../views/Home.vue';
 
-const routes = [
-    {
-        path: '/',
-        name: 'HomePage',
-        component: HomePage,
-        meta: {
-            layout: 'main'
-        },
-    },
-    {
-        path: '/AdminPanel',
-        name: 'AdminPanelPage',
-        component: AdminPanelPage,
-        meta: {
-            layout: 'main'
-        }
-    },
-    {
-        path: '/Login',
-        name: 'LoginPage',
-        component: LoginPage,
-        meta: {
-            layout: 'main'
-        }
-    }
+Vue.use(VueRouter);
+
+const routes: Array<RouteConfig> = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+  },
+  {
+    path: '/about',
+    name: 'About',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+  },
 ];
 
-const router = createRouter({
-    history: createWebHistory('#'),
-    routes,
-    linkActiveClass: 'active',
-    linkExactActiveClass: 'active',
+const router = new VueRouter({
+  routes,
 });
 
 export default router;
-
