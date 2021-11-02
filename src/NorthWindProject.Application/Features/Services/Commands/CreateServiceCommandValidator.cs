@@ -18,6 +18,10 @@ namespace NorthWindProject.Application.Features.Services.Commands
             RuleFor(command => command.Name)
                 .NotEmpty()
                 .WithMessage("Необходимо ввести имя сервиса");
+            
+            RuleFor(command => command.Name)
+                .NotEmpty()
+                .WithMessage("Необходимо ввести описание сервиса");
         }
     }
 }
