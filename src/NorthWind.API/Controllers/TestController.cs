@@ -9,11 +9,11 @@ namespace NorthWind.API.Controllers
     [Route("api/[controller]")]
     public class TestController : ApiController
     {
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Test()
         {
-            return Ok("ok");
+            return Ok(new {message = "ok"});
         }
 
         [HttpPost]
