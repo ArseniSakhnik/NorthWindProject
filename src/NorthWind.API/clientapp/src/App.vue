@@ -1,20 +1,15 @@
 <template>
-  <component :is="getLayout + '-layout'" v-if="getLayout">
-  </component>
+  <router-view/>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
-import MainLayout from '@/layouts/MainLayout.vue'
+import Vue from 'vue';
 
-@Component({components: {MainLayout}})
-export default class App extends Vue {
+export default Vue.extend({
+  name: 'App',
 
-
-  private get getLayout() {
-    //@ts-ignore
-    return this.$route.meta.layout;
-  }
-
-}
+  data: () => ({
+    //
+  }),
+});
 </script>

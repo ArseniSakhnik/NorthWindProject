@@ -96,14 +96,18 @@ namespace NorthWind.API
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
-            app.UseSpa(spa =>
+            
+            app.MapWhen(x => !x.Request.Path.Value.StartsWith("/api"), builder =>
             {
-                spa.Options.SourcePath = env.IsDevelopment() ? "clientapp" : "dist";
-
-                if (env.IsDevelopment())
+                app.UseSpa(spa =>
                 {
-                    spa.UseVueCli(npmScript: "serve");
-                }
+                    spa.Options.SourcePath = env.IsDevelopment() ? "clientapp" : "dist";
+                
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseVueCli(npmScript: "serve");
+                    }
+                });
             });
         }
     }

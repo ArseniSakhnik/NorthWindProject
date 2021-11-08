@@ -1,20 +1,23 @@
 <template>
   <div>
+    <section class="service-list">
 
+    </section>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HelloWorld from '../components/HelloWorld.vue';
+import {Vue, Component} from 'vue-property-decorator'
 
-export default Vue.extend({
-  name: 'Home',
+@Component
+export default class Home extends Vue {
 
-  components: {
-    HelloWorld,
-  },
-});
+}
 </script>
-<style>
+<style scoped lang="scss">
+.service-list {
+  background-image: url(../assets/services1.jpg);
+  
+}
 </style>
+
