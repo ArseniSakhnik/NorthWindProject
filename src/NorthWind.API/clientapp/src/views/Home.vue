@@ -23,7 +23,7 @@
       </ul>
     </nav>
     <section class="service-list">
-      
+
     </section>
     <section style="height: 1000px">
       хуй
@@ -46,6 +46,7 @@ export default class Home extends Vue {
 }
 </script>
 <style scoped lang="scss">
+
 .main-navbar {
   width: 100%;
   position: fixed;
