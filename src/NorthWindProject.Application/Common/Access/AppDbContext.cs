@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchase;
-using NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Service;
 using NorthWindProject.Application.Common.Services;
+using NorthWindProject.Application.Entities.DocumentTemplate;
 using NorthWindProject.Application.Entities.Purchase;
 using NorthWindProject.Application.Entities.Service;
 using NorthWindProject.Application.Entities.Test;
@@ -23,12 +23,14 @@ namespace NorthWindProject.Application.Common.Access
         private readonly DomainEventService _domainEventService;
 
         public DbSet<Test> Tests { get; set; }
+        
+        public DbSet<Service> Services { get; set; }
+        //Todo реализовать вьюхи для сервисов
+        // public DbSet<ServiceView> ServiceViews { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<DocumentField> DocumentFields { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchaseField> PurchaseFields { get; set; }
-        public DbSet<Service> Services { get; set; }
-        public DbSet<ServiceProp> ServiceProps { get; set; }
-        public DbSet<ServiceView> ServiceViews { get; set; }
-        public DbSet<PermissibleValue> PermissibleValues { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
@@ -70,21 +72,20 @@ namespace NorthWindProject.Application.Common.Access
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new PurchaseConfiguration());
-            builder.ApplyConfiguration(new ServiceConfiguration());
-            builder.ApplyConfiguration(new PermissibleValueConfiguration());
-
             var hasher = new PasswordHasher<ApplicationUser>();
+
+            var assemblyWithConfigurations = GetType().Assembly; //get whatever assembly you want
+            builder.ApplyConfigurationsFromAssembly(assemblyWithConfigurations);
 
             builder.Entity<IdentityRole<int>>().HasData(new List<IdentityRole<int>>
             {
-                new IdentityRole<int>
+                new()
                 {
                     Id = 1,
                     Name = "Admin",
                     NormalizedName = "Admin".ToUpper()
                 },
-                new IdentityRole<int>
+                new()
                 {
                     Id = 2,
                     Name = "Client",
@@ -94,7 +95,7 @@ namespace NorthWindProject.Application.Common.Access
 
             builder.Entity<ApplicationUser>().HasData(new List<ApplicationUser>
             {
-                new ApplicationUser
+                new()
                 {
                     Id = 1,
                     UserName = "Admin",
@@ -104,7 +105,7 @@ namespace NorthWindProject.Application.Common.Access
                     LockoutEnabled = true,
                     SecurityStamp = Guid.NewGuid().ToString("D")
                 },
-                new ApplicationUser
+                new()
                 {
                     Id = 2,
                     UserName = "Client",
@@ -112,18 +113,19 @@ namespace NorthWindProject.Application.Common.Access
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, "client"),
                     LockoutEnabled = true,
-                    SecurityStamp = Guid.NewGuid().ToString("D")
-                },
+                    SecurityStamp = Guid.NewGuid().ToString("D"),
+                    Email = "sakhnikarseni@Mail.ru"
+                }
             });
 
             builder.Entity<IdentityUserRole<int>>().HasData(new List<IdentityUserRole<int>>
             {
-                new IdentityUserRole<int>
+                new()
                 {
                     RoleId = 1,
                     UserId = 1
                 },
-                new IdentityUserRole<int>
+                new()
                 {
                     RoleId = 2,
                     UserId = 2
