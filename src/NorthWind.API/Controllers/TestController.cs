@@ -21,5 +21,11 @@ namespace NorthWind.API.Controllers
         {
             return Ok(await Mediator.Send(command));
         }
+
+        [HttpPost("base-initialize")]
+        public async Task<IActionResult> CreateBaseService()
+        {
+            return Ok(await Mediator.Send(new BaseInitializeCommand()));
+        }
     }
 }

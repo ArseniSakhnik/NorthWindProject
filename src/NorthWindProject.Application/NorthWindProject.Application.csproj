@@ -17,9 +17,4 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\Configuration\ConfigurationEntities\Purchase" />
-    <Folder Include="Common\Models" />
-  </ItemGroup>
-
 </Project>
