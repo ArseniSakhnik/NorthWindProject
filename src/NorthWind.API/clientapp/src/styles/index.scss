@@ -1,5 +1,11 @@
 @import "mixins/fluid-type";
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
 
 h1{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
   @include fluid-type($min_width, $max_width, 40px, 48px);
+  text-transform: uppercase;
+  line-height: 124.9%;
+  letter-spacing: 0.1em;
 }

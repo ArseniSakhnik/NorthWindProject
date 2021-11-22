@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <h1>
+  <div class="service">
+    <h1 class="text-white">
       {{ title }}
     </h1>
-    <vs-button color="#fff" flat>Заказать услугу</vs-button>
-    <vs-button color="#fff" border>Подробнее</vs-button>
+    <div class="buttons">
+      <vs-button color="#fff" flat>Заказать услугу</vs-button>
+      <vs-button color="#fff" border>Подробнее</vs-button>
+    </div>
   </div>
 </template>
 
@@ -17,6 +19,22 @@ export default class SlideContent extends Vue {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.service {
+  padding: 7%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 
+  h1{
+    width: 50%;
+  }
+
+  .buttons{
+    width: 50%;
+    display: flex;
+  }
+}
 </style>

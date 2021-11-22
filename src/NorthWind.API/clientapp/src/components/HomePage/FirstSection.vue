@@ -2,17 +2,13 @@
   <section
       :style="`background-image: url(${slideImage})`"
       class="service-list">
-    <div style="padding: 400px">
-      <div class="slider-control-back">
-        <v-btn @click="previousSlide">Назад</v-btn>
-      </div>
-      <slide-content :title="slideItems[currentSlide].title"/>
-      <slides-navigation
-
-      />
-      <div class="slider-control-next">
-        <v-btn @click="nextSlide">Вперед</v-btn>
-      </div>
+    <div class="slider-control-back">
+      <v-btn @click="previousSlide">Назад</v-btn>
+    </div>
+    <slide-content class="border-2" :title="slideItems[currentSlide].title"/>
+    <slides-navigation/>
+    <div class="slider-control-next">
+      <v-btn @click="nextSlide">Вперед</v-btn>
     </div>
   </section>
 </template>
@@ -93,11 +89,11 @@ export default class FirstSection extends Vue {
   top: 0;
 }
 
-.slider-control-next{
+.slider-control-next {
   right: 0;
 }
 
-.slider-control-back{
+.slider-control-back {
   left: 0;
 }
 </style>
