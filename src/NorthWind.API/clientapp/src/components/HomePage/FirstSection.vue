@@ -1,12 +1,12 @@
 <template>
   <section
       :style="`background-image: url(${slideImage})`"
-      class="service-list">
+      class="service-list relative">
     <div class="slider-control-back">
       <v-btn @click="previousSlide">Назад</v-btn>
     </div>
+    <slides-navigation :current-item.sync="currentSlide"/>
     <slide-content class="border-2" :title="slideItems[currentSlide].title"/>
-    <slides-navigation/>
     <div class="slider-control-next">
       <v-btn @click="nextSlide">Вперед</v-btn>
     </div>
@@ -17,14 +17,14 @@
 import {Vue, Component, Ref} from 'vue-property-decorator'
 import SlideContent from "@/components/HomePage/firstSection/slideContent.vue";
 import SlidesNavigation from "@/components/HomePage/firstSection/slidesNavigation.vue";
-
+type Slide = {title: string; to: string; image: string}
 @Component({
   components: {SlidesNavigation, SlideContent}
 })
 export default class FirstSection extends Vue {
   private currentSlide: number = 0;
   @Ref('first-section') private firstSection!: HTMLElement;
-  private slideItems: [] = [
+  private slideItems: Slide[] = [
     {
       title: 'Вывоз строительного и крупногабаритного мусора',
       to: '/',
