@@ -3,9 +3,16 @@
       :style="`background-image: url(${slideImage})`"
       class="service-list">
     <div style="padding: 400px">
-      <v-btn @click="previousSlide">Назад</v-btn>
+      <div class="slider-control-back">
+        <v-btn @click="previousSlide">Назад</v-btn>
+      </div>
       <slide-content :title="slideItems[currentSlide].title"/>
-      <v-btn @click="nextSlide">Вперед</v-btn>
+      <slides-navigation
+
+      />
+      <div class="slider-control-next">
+        <v-btn @click="nextSlide">Вперед</v-btn>
+      </div>
     </div>
   </section>
 </template>
@@ -13,8 +20,10 @@
 <script lang="ts">
 import {Vue, Component, Ref} from 'vue-property-decorator'
 import SlideContent from "@/components/HomePage/firstSection/slideContent.vue";
+import SlidesNavigation from "@/components/HomePage/firstSection/slidesNavigation.vue";
+
 @Component({
-  components: {SlideContent}
+  components: {SlidesNavigation, SlideContent}
 })
 export default class FirstSection extends Vue {
   private currentSlide: number = 0;
@@ -36,27 +45,27 @@ export default class FirstSection extends Vue {
       image: 'services3.png'
     },
   ];
+
   get slideImage() {
     return require(`../../assets/homePage/firstSection/${this.slideItems[this.currentSlide].image}`);
   }
 
-  get slidesLength(){
+  get slidesLength() {
     return this.slideItems.length
   }
 
-  private nextSlide(){
-    if(this.currentSlide >= this.slidesLength - 1){
+  private nextSlide() {
+    if (this.currentSlide >= this.slidesLength - 1) {
       this.currentSlide = 0
-    }
-    else{
+    } else {
       this.currentSlide++
     }
   }
-  private previousSlide(){
-    if(this.currentSlide <= 0){
+
+  private previousSlide() {
+    if (this.currentSlide <= 0) {
       this.currentSlide = this.slidesLength - 1
-    }
-    else{
+    } else {
       this.currentSlide--
     }
   }
@@ -65,11 +74,30 @@ export default class FirstSection extends Vue {
 </script>
 <style scoped lang="scss">
 .service-list {
-  background-position: center top;
-  background-blend-mode: overlay;
-  background-color: rgba(27, 54, 72, 0.5);
+  position: relative;
+  background-blend-mode: multiply;
+  background-position: center bottom;
+  background-color: rgba(#1b3648, 0.35);
   background-size: cover;
-  width: 100vw;
+  background-repeat: no-repeat;
+  width: 100%;
   height: 100vh;
+}
+
+.slider-control-back, .slider-control-next {
+  position: absolute;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+}
+
+.slider-control-next{
+  right: 0;
+}
+
+.slider-control-back{
+  left: 0;
 }
 </style>

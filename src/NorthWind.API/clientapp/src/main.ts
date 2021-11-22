@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import '../src/styles/globalStyle.css'
+import '../src/styles/index.scss'
 // @ts-ignore
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
