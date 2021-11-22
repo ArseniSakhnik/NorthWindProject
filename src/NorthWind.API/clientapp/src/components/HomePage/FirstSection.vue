@@ -6,7 +6,7 @@
       <v-btn @click="previousSlide">Назад</v-btn>
     </div>
     <slides-navigation :current-item.sync="currentSlide"/>
-    <slide-content class="border-2" :title="slideItems[currentSlide].title"/>
+    <slide-content :title="slideItems[currentSlide].title"/>
     <div class="slider-control-next">
       <v-btn @click="nextSlide">Вперед</v-btn>
     </div>
