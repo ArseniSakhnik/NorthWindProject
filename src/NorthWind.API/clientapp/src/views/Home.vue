@@ -1,6 +1,7 @@
 <template>
   <div class="home-page">
     <first-section/>
+    <second-section/>
     <section class="service-list">
 
     </section>
@@ -13,8 +14,9 @@
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
 import FirstSection from "@/components/HomePage/FirstSection.vue";
+import SecondSection from "@/components/HomePage/SecondSection.vue";
 @Component({
-  components: {FirstSection}
+  components: {SecondSection, FirstSection}
 })
 export default class Home extends Vue {
 

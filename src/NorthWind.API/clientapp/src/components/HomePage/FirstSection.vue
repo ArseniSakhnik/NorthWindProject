@@ -4,6 +4,7 @@
       class="service-list">
     <div style="padding: 400px">
       <v-btn @click="previousSlide">Назад</v-btn>
+      <slide-content :title="slideItems[currentSlide].title"/>
       <v-btn @click="nextSlide">Вперед</v-btn>
     </div>
   </section>
@@ -11,8 +12,10 @@
 
 <script lang="ts">
 import {Vue, Component, Ref} from 'vue-property-decorator'
-
-@Component
+import SlideContent from "@/components/HomePage/firstSection/slideContent.vue";
+@Component({
+  components: {SlideContent}
+})
 export default class FirstSection extends Vue {
   private currentSlide: number = 0;
   @Ref('first-section') private firstSection!: HTMLElement;

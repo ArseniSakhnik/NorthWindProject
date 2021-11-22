@@ -1,29 +1,28 @@
 <template>
-  <v-app-bar
-      app
-      shrink-on-scroll
-      prominent
-      height="75"
-      color="transparent"
-      class="main-navbar sticky border border-indigo-600"
-      flat
-      ref="navbar">
-    <v-app-bar-title>
-      <div class="flex">
-        <v-img src="../assets/small_logo.png"/>
-        <span>
+  <vs-navbar
+      class="bg-transparent"
+      padding-scroll
+      fixed
+      text-white
+      square
+      center-collapsed>
+    <template #left>
+      <v-img src="../assets/small_logo.png"/>
+      <span>
         Северный Ветер
       </span>
-      </div>
-    </v-app-bar-title>
-    <v-tabs right color="white">
-      <v-tab v-for="({title, to},index) in menuItems"
-             :key="index"
-             :to="to">
-        {{ title }}
-      </v-tab>
-    </v-tabs>
-  </v-app-bar>
+    </template>
+    <vs-navbar-item v-for="({title, to},index) in menuItems"
+                    :key="index"
+                    :to="to">
+      {{ title }}
+    </vs-navbar-item>
+    <template #right>
+
+      <vs-button color="#fff" flat>Войти</vs-button>
+      <vs-button color="#fff" border>Оставить заявку</vs-button>
+    </template>
+  </vs-navbar>
 </template>
 
 <script lang="ts">
@@ -46,10 +45,6 @@ export default class Navbar extends Vue {
     },
     {
       title: 'Контакты',
-      to: '/'
-    },
-    {
-      title: 'Вход',
       to: '/'
     },
   ];
