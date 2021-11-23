@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: "RecyclingCar"
+  name: "Land"
 }
 </script>
 
