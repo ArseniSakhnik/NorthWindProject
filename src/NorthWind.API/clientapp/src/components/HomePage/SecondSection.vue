@@ -4,11 +4,13 @@
   </div>
 </template>
 
-<script>
-import AboutService from "@/components/HomePage/secondSection/aboutService";
-export default {
-  name: "SecondSection",
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator'
+import AboutService from "@/components/HomePage/secondSection/AboutService.vue";
+@Component({
   components: {AboutService}
+})
+export default class SecondSection extends Vue {
 }
 </script>
 

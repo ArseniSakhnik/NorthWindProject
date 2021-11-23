@@ -15,8 +15,8 @@
 
 <script lang="ts">
 import {Vue, Component, Ref} from 'vue-property-decorator'
-import SlideContent from "@/components/HomePage/firstSection/slideContent.vue";
-import SlidesNavigation from "@/components/HomePage/firstSection/slidesNavigation.vue";
+import SlideContent from "@/components/HomePage/firstSection/SlideContent.vue";
+import SlidesNavigation from "@/components/HomePage/firstSection/SlidesNavigation.vue";
 type Slide = {title: string; to: string; image: string}
 @Component({
   components: {SlidesNavigation, SlideContent}

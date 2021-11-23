@@ -14,9 +14,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "aboutService"
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator'
+
+@Component
+export default class AboutService extends Vue {
 }
 </script>
 
