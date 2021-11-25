@@ -38,12 +38,12 @@
         shaped
     >
       <v-list-item
-          v-for="n in 5"
-          :key="n"
+          v-for="(item, index) in services"
+          :key="index"
           link
       >
         <v-list-item-content>
-          <v-list-item-title>Item {{ n }}</v-list-item-title>
+          <router-link :to="item.link">{{item.title}}</router-link>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -55,7 +55,13 @@ import {Vue, Component} from 'vue-property-decorator'
 
 @Component
 export default class AdminSidebar extends Vue {
-
+  private drawer: any = {}
+  private services: any = [
+      {
+        title: 'Сервисы',
+        link: '/services'
+      }
+  ]
 }
 </script>
 <style scoped>

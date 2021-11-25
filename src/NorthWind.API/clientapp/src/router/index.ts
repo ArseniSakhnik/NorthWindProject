@@ -3,6 +3,8 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Admin from '../views/Admin.vue'
+import ServicesPage from '@/components/Admin/views/Services/ServicesPage.vue'
+import CreateServicePage from '@/components/Admin/views/Services/CreateServicePage.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +29,22 @@ const routes: Array<RouteConfig> = [
     path: '/admin',
     name: 'Admin',
     component: Admin,
+    meta: {
+      layout: 'Admin'
+    }
+  },
+  {
+    path: '/services',
+    name: 'Services',
+    component: ServicesPage,
+    meta: {
+      layout: 'Admin'
+    },
+  },
+  {
+    path: '/services/create',
+    name: 'CreateServicePage',
+    component: CreateServicePage,
     meta: {
       layout: 'Admin'
     }
