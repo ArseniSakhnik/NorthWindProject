@@ -48,14 +48,6 @@ export default class Navbar extends Vue {
       to: '/'
     },
   ];
-
-  mounted() {
-    window.addEventListener('scroll', () => {
-      //@ts-ignore
-      this.$refs.navbar.classList.toggle('sticky', window.scrollY > 0)
-    })
-
-  }
 }
 </script>
 <style scoped lang="scss">

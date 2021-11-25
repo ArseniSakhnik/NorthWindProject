@@ -1,19 +1,19 @@
 <template>
-  <v-app>
-    <navbar/>
-    <router-view/>
-  </v-app>
+  <component :is="$route.meta.layout + '-layout'">
+  </component>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Navbar from "@/components/Navbar.vue";
+import {Vue, Component} from 'vue-property-decorator'
+import MainLayout from '@/layouts/MainLayout.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
 
-export default Vue.extend({
-  name: 'App',
-  components: {Navbar},
-  data: () => ({
-    //
-  }),
-});
+@Component({components: {MainLayout, AdminLayout}})
+export default class App extends Vue {
+
+}
 </script>
+<style scoped>
+
+</style>
+
