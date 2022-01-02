@@ -9,9 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Services;
-using NorthWindProject.Application.Entities.DocumentTemplate;
-using NorthWindProject.Application.Entities.Purchase;
-using NorthWindProject.Application.Entities.Service;
 using NorthWindProject.Application.Entities.Test;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -23,14 +20,6 @@ namespace NorthWindProject.Application.Common.Access
         private readonly DomainEventService _domainEventService;
 
         public DbSet<Test> Tests { get; set; }
-        
-        public DbSet<Service> Services { get; set; }
-        //Todo реализовать вьюхи для сервисов
-        // public DbSet<ServiceView> ServiceViews { get; set; }
-        public DbSet<Document> Documents { get; set; }
-        public DbSet<DocumentField> DocumentFields { get; set; }
-        public DbSet<Purchase> Purchases { get; set; }
-        public DbSet<PurchaseField> PurchaseFields { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)

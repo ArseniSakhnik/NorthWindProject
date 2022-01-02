@@ -27,5 +27,6 @@ namespace NorthWind.API.Controllers
         {
             return Ok(await Mediator.Send(new BaseInitializeCommand()));
         }
+        
     }
 }

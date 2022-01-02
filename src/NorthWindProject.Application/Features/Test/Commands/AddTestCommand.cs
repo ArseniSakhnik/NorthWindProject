@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Features.Test.Events;
+using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Features.Test.Commands
 {

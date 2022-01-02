@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using NorthWind.API.Configuration;
 using NorthWind.API.Models;
 using NorthWind.API.Services;
 using NorthWindProject.Application.Common.Access;
@@ -44,28 +45,31 @@ namespace NorthWind.API
             var appSettings = appSettingsSection.Get<AppSettings>();
 
             var connectionString = appSettings.Connection;
-            var mySqlVersion = new MySqlServerVersion(new Version(8, 0, 26));
+            var mySqlMajor = int.Parse(appSettings.MySqlMajorVersion);
+            var mySqlMinor = int.Parse(appSettings.MySqlMinorVersion);
+            var mySqlBuild = int.Parse(appSettings.MySqlBuild);
+            var mySqlVersion = new MySqlServerVersion(new Version(mySqlMajor, mySqlMinor, mySqlBuild));
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseMySql(connectionString, mySqlVersion,
                     sql => { sql.MigrationsAssembly("NorthWind.API"); });
             });
-
-
+            
+            
+            services.AddHttpContextAccessor();
             services.AddApplication();
+
+            
             services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
             }).AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddHttpContextAccessor();
+            
 
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddRazorPages();
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "clientapp";
-            });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "clientapp"; });
 
             services.AddScoped<IDomainEventService, DomainEventService>();
             services.AddTransient<ExceptionHandlingMiddleware>();
@@ -83,12 +87,12 @@ namespace NorthWind.API
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-            
+
             app.UseRouting();
             app.UseHttpsRedirection();
             // app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -96,13 +100,13 @@ namespace NorthWind.API
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
-            
+
             app.MapWhen(x => !x.Request.Path.Value.StartsWith("/api"), builder =>
             {
                 app.UseSpa(spa =>
                 {
                     spa.Options.SourcePath = env.IsDevelopment() ? "clientapp" : "dist";
-                
+
                     if (env.IsDevelopment())
                     {
                         spa.UseVueCli(npmScript: "serve");

@@ -10,7 +10,10 @@ import AdminLayout from '@/layouts/AdminLayout.vue'
 
 @Component({components: {MainLayout, AdminLayout}})
 export default class App extends Vue {
-
+  created() {
+    //@ts-ignore
+    console.log(this.$route.meta.layout)
+  }
 }
 </script>
 <style scoped>
