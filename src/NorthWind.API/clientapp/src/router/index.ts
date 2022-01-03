@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Admin from '../views/Admin.vue'
 import CreateServicePage from '@/components/Admin/views/Services/CreateServicePage.vue'
+import DeveloperPage from "@/views/DeveloperPage/DeveloperPage.vue"
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,14 @@ const routes: Array<RouteConfig> = [
     component: CreateServicePage,
     meta: {
       layout: 'Admin'
+    }
+  },
+  {
+    path: '/developer-page',
+    name: 'DeveloperPage',
+    component: DeveloperPage,
+    meta: {
+      layout: 'Main'
     }
   }
 ]

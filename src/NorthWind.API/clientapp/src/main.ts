@@ -6,6 +6,10 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import '../src/styles/globalStyle.css'
 import '../src/styles/index.scss'
+
+import 'devextreme/dist/css/dx.common.css';
+import './themes/generated/theme.base.css';
+
 // @ts-ignore
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
