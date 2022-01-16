@@ -27,6 +27,12 @@ namespace NorthWind.API.Controllers
         {
             return Ok(await Mediator.Send(new BaseInitializeCommand()));
         }
+
+        [HttpPost("email")]
+        public async Task<IActionResult> TestEmail()
+        {
+            return Ok(await Mediator.Send(new EmailTestCommand()));
+        }
         
     }
 }

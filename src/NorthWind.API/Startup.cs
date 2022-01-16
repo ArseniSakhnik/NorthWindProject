@@ -42,6 +42,10 @@ namespace NorthWind.API
         {
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
+            var emailSenderService = Configuration.GetSection("EmailSettings");
+            services.Configure<EmailSettings>(emailSenderService);
+            
+            
             var appSettings = appSettingsSection.Get<AppSettings>();
 
             var connectionString = appSettings.Connection;
@@ -54,24 +58,29 @@ namespace NorthWind.API
                 options.UseMySql(connectionString, mySqlVersion,
                     sql => { sql.MigrationsAssembly("NorthWind.API"); });
             });
-            
-            
+
+
             services.AddHttpContextAccessor();
             services.AddApplication();
 
-            
-            services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = true;
-            }).AddEntityFrameworkStores<AppDbContext>();
 
-            
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                    options.SignIn.RequireConfirmedEmail = true;
+                    options.Lockout.AllowedForNewUsers = true;
+                    options.User.RequireUniqueEmail = true;
+                })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
 
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddRazorPages();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "clientapp"; });
 
             services.AddScoped<IDomainEventService, DomainEventService>();
+            services.AddScoped<IEmailSenderService, EmailSenderService>();
             services.AddTransient<ExceptionHandlingMiddleware>();
         }
 
