@@ -5,6 +5,7 @@ import About from '../views/About.vue'
 import Admin from '../views/Admin.vue'
 import CreateServicePage from '@/components/Admin/views/Services/CreateServicePage.vue'
 import DeveloperPage from "@/views/DeveloperPage/DeveloperPage.vue"
+import ConfirmEmail from "@/views/System/ConfirmEmail.vue"
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,14 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
+    path: 'confirm-email',
+    name: 'ConfirmEmail',
+    component: ConfirmEmail,
+    meta: {
+      layout: 'Main'
+    }
+  },
+  {
     path: '/create-service',
     name: 'CreateService',
     component: CreateServicePage,
@@ -48,7 +57,7 @@ const routes: Array<RouteConfig> = [
     meta: {
       layout: 'Main'
     }
-  }
+  },
 ]
 
 const router = new VueRouter({
