@@ -3,8 +3,9 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Admin from '../views/Admin.vue'
-import ServicesPage from '@/components/Admin/views/Services/ServicesPage.vue'
 import CreateServicePage from '@/components/Admin/views/Services/CreateServicePage.vue'
+import DeveloperPage from "@/views/DeveloperPage/DeveloperPage.vue"
+import ConfirmEmail from "@/views/System/ConfirmEmail.vue"
 
 Vue.use(VueRouter)
 
@@ -34,21 +35,29 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/services',
-    name: 'Services',
-    component: ServicesPage,
+    path: 'confirm-email',
+    name: 'ConfirmEmail',
+    component: ConfirmEmail,
     meta: {
-      layout: 'Admin'
-    },
+      layout: 'Main'
+    }
   },
   {
-    path: '/services/create',
-    name: 'CreateServicePage',
+    path: '/create-service',
+    name: 'CreateService',
     component: CreateServicePage,
     meta: {
       layout: 'Admin'
     }
-  }
+  },
+  {
+    path: '/developer-page',
+    name: 'DeveloperPage',
+    component: DeveloperPage,
+    meta: {
+      layout: 'Main'
+    }
+  },
 ]
 
 const router = new VueRouter({

@@ -3,7 +3,9 @@
     <admin-navbar/>
     <admin-sidebar/>
     <admin-actionbar/>
-    <router-view/>
+    <v-main>
+      <router-view/>
+    </v-main>
     <admin-footer/>
   </v-app>
 </template>

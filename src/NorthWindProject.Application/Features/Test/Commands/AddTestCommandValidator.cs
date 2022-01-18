@@ -14,7 +14,6 @@ namespace NorthWindProject.Application.Features.Test.Commands
             RuleFor(command => command.Name)
                 .Must(Test)
                 .WithMessage("Ошибка валидации 2");
-            
         }
 
         private bool Test(string name)
