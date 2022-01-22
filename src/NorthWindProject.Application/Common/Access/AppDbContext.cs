@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Services;
+using NorthWindProject.Application.Entities.Service;
 using NorthWindProject.Application.Entities.Test;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -20,6 +21,15 @@ namespace NorthWindProject.Application.Common.Access
         private readonly DomainEventService _domainEventService;
 
         public DbSet<Test> Tests { get; set; }
+
+        #region Service
+
+        public DbSet<DocumentService> DocumentServices { get; set; }
+        public DbSet<FieldService> FieldServices { get; set; }
+        public DbSet<FieldTypeService> FieldTypeServices { get; set; }
+        public DbSet<Service> Services { get; set; }
+
+        #endregion
 
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
