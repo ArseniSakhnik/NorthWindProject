@@ -18,8 +18,13 @@
       {{ title }}
     </vs-navbar-item>
     <template #right>
-
-      <vs-button color="#fff" flat>Войти</vs-button>
+      <vs-button
+          color="#fff"
+          flat
+          @click="isLogInDialogOpened = !isLogInDialogOpened"
+      >Войти
+      </vs-button>
+      <login-window :is-dialog-opened="isLogInDialogOpened"/>
       <vs-button color="#fff" border>Оставить заявку</vs-button>
     </template>
   </vs-navbar>
@@ -27,8 +32,11 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
+import LoginWindow from "@/components/HomePage/loginWindow/LoginWindow.vue"
 
-@Component
+@Component({
+  components: {LoginWindow}
+})
 export default class Navbar extends Vue {
   private menuItems: object[] = [
     {
@@ -47,7 +55,8 @@ export default class Navbar extends Vue {
       title: 'Контакты',
       to: '/'
     },
-  ];
+  ]
+  private isLogInDialogOpened: boolean = false
 }
 </script>
 <style scoped lang="scss">

@@ -1,25 +1,25 @@
 <template>
-  <div class="navigation">
-    <v-item-group
-        class="flex"
-        :value="syncedCurrentItem">
-      <v-item
-          v-slot="{ active }"
-          v-for="(item, index) in menuItems"
-              :key="index">
-        <v-card
-            flat
-            tile
-            @click="setCurrentItem(index)"
-            dark
-            :color="active ? '#FF782E' : '#003366'">
-          <v-icon>{{ item.icon }}</v-icon>
-          <v-card-title>{{ item.title }}</v-card-title>
-        </v-card>
-      </v-item>
+<!--  <div class="navigation">-->
+<!--    <v-item-group-->
+<!--        class="flex"-->
+<!--        :value="syncedCurrentItem">-->
+<!--      <v-item-->
+<!--          v-slot="{ active }"-->
+<!--          v-for="(item, index) in menuItems"-->
+<!--              :key="index">-->
+<!--        <v-card-->
+<!--            flat-->
+<!--            tile-->
+<!--            @click="setCurrentItem(index)"-->
+<!--            dark-->
+<!--            :color="active ? '#FF782E' : '#003366'">-->
+<!--          <v-icon>{{ item.icon }}</v-icon>-->
+<!--          <v-card-title>{{ item.title }}</v-card-title>-->
+<!--        </v-card>-->
+<!--      </v-item>-->
 
-    </v-item-group>
-  </div>
+<!--    </v-item-group>-->
+<!--  </div>-->
 </template>
 
 <script lang="ts">
@@ -29,7 +29,6 @@ type MenuItem = { title: string; icon: string }
 
 @Component
 export default class SlidesNavigation extends Vue {
-  @PropSync('currentItem',{type: Number, required: true}) syncedCurrentItem!: number;
   private menuItems: MenuItem[] = [
     {
       title: 'Вывоз строительного мусора',
@@ -44,9 +43,9 @@ export default class SlidesNavigation extends Vue {
       icon: '$recyclingCar'
     },
   ];
-  setCurrentItem(index) {
-    this.syncedCurrentItem = index
-  }
+  // setCurrentItem(index) {
+  //   this.syncedCurrentItem = index
+  // }
 }
 </script>
 

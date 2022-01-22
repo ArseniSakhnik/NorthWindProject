@@ -9,6 +9,7 @@ import '../src/styles/index.scss'
 
 import 'devextreme/dist/css/dx.common.css';
 import './themes/generated/theme.base.css';
+import '../src/styles/styleKiller.css';
 
 // @ts-ignore
 import Vuesax from 'vuesax'
