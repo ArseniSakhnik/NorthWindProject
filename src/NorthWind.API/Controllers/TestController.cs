@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NorthWindProject.Application.Features.Test.Commands;
+using NorthWindProject.Application.Features.UploadBasicServices.UploadAssenizatorService;
 
 namespace NorthWind.API.Controllers
 {
@@ -22,17 +25,18 @@ namespace NorthWind.API.Controllers
             return Ok(await Mediator.Send(command));
         }
 
-        [HttpPost("base-initialize")]
-        public async Task<IActionResult> CreateBaseService()
-        {
-            return Ok(await Mediator.Send(new BaseInitializeCommand()));
-        }
-
         [HttpPost("email")]
         public async Task<IActionResult> TestEmail()
         {
             return Ok(await Mediator.Send(new EmailTestCommand()));
         }
-        
+
+
+        [HttpPost("upload-assenizator-service")]
+        public async Task<IActionResult> UploadAssenizatorService(CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(new UploadAssenizatorServiceCommand
+            {
+                File = Request.Form.Files.SingleOrDefault()
+            }, cancellationToken));
     }
 }

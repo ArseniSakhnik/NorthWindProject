@@ -4,6 +4,9 @@
     {
         Text = 0,
         Number = 1,
-        Date = 2
+        Day = 2,
+        Month = 3,
+        Year = 4,
+        Date = 5
     }
 }
