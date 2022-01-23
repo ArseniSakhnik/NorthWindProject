@@ -1,10 +1,12 @@
 ﻿using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using NorthWind.API.Models;
 using NorthWindProject.Application.Entities.User;
+using NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
 namespace NorthWind.API.Controllers
@@ -22,6 +24,10 @@ namespace NorthWind.API.Controllers
             _userManager = userManager;
             _emailSenderService = emailSenderService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCurrentUserInfo(CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(new GetCurrentUserInfoQuery(), cancellationToken));
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginModel loginModel)

@@ -24,20 +24,22 @@
           @click="isLogInDialogOpened = !isLogInDialogOpened"
       >Войти
       </vs-button>
-      <login-window :is-dialog-opened="isLogInDialogOpened"/>
+      <login-window :is-dialog-opened.sync="isLogInDialogOpened"/>
       <vs-button color="#fff" border>Оставить заявку</vs-button>
+      <button @click="test">Тест</button>
     </template>
   </vs-navbar>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Vue, Component, Mixins} from 'vue-property-decorator'
 import LoginWindow from "@/components/HomePage/loginWindow/LoginWindow.vue"
+import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue"
 
 @Component({
   components: {LoginWindow}
 })
-export default class Navbar extends Vue {
+export default class Navbar extends Mixins(HttpServiceMixin) {
   private menuItems: object[] = [
     {
       title: 'Услуги',
@@ -57,6 +59,11 @@ export default class Navbar extends Vue {
     },
   ]
   private isLogInDialogOpened: boolean = false
+
+  private async test(): void {
+    await this.accountService.GetCurrentUserInfo()
+        .then(response => console.log(response))
+  }
 }
 </script>
 <style scoped lang="scss">

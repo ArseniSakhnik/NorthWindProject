@@ -1,6 +1,10 @@
 ﻿<template>
   <div>
-    <vs-dialog v-model="isDialogOpenedSync">
+    <vs-dialog
+        v-model="isDialogOpenedSync"
+        ref="dialogWindow"
+        @close="close"
+    >
       <template #header>
         <h4 class="not-margin">
           Welcome to <b>Vuesax</b>
@@ -25,8 +29,8 @@
 
       <template #footer>
         <div class="footer-dialog">
-          <vs-button block>
-            Sign In
+          <vs-button block @click="authenticate">
+            Вход
           </vs-button>
 
           <div class="new">
@@ -39,15 +43,30 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop, PropSync} from 'vue-property-decorator'
+import {Vue, Component, PropSync, Mixins} from 'vue-property-decorator'
+import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue"
 
 @Component
-export default class LoginWindow extends Vue {
+export default class LoginWindow extends Mixins(HttpServiceMixin) {
   @PropSync('isDialogOpened', {type: Boolean, required: true}) isDialogOpenedSync!: boolean
+
   private email: string = ''
   private password: string = ''
   private rememberMe: boolean = false
 
+  private async authenticate() {
+    await this.accountService.Login({
+      email: this.email,
+      password: this.password,
+      rememberMe: this.rememberMe
+    }).then(() => {
+      this.close();
+    })
+  }
+
+  private close(): void {
+    this.isDialogOpenedSync = false
+  }
 }
 </script>
 <style lang="scss">
@@ -101,15 +120,16 @@ export default class LoginWindow extends Vue {
     margin-top: 20px;
     padding: 0;
     font-size: .7rem;
-    
+
     .a {
       margin-left: 6px;
+
       &:hover {
         text-decoration: underline;
       }
     }
   }
-  
+
   .vs-button {
     margin: 0;
   }
