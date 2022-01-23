@@ -1,16 +1,24 @@
 <template>
   <div>
-    
+    Подтверждение аккаунта
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Component, Mixins} from 'vue-property-decorator'
+import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue"
 
 //TODO Протестировать регистрацию и добавить сервисы!!!!
 @Component
-export default class ConfirmEmail extends Vue {
-  
+export default class ConfirmEmail extends Mixins(HttpServiceMixin) {
+
+  async mounted() {
+    const userId = this.$route.query.userId as string
+    const code = this.$route.query.code as string
+
+    await this.accountService.ConfirmEmail({userId, code})
+        .then(() => this.$router.push('/'))
+  }
 }
 </script>
 <style scoped>

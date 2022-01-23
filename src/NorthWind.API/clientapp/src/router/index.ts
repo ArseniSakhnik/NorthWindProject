@@ -35,11 +35,11 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: 'confirm-email',
+    path: '/confirm-email',
     name: 'ConfirmEmail',
     component: ConfirmEmail,
     meta: {
-      layout: 'Main'
+      layout: 'System'
     }
   },
   {

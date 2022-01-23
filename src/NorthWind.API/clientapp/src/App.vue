@@ -7,12 +7,11 @@
 import {Vue, Component} from 'vue-property-decorator'
 import MainLayout from '@/layouts/MainLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import SystemLayout from "@/layouts/SystemLayout.vue"
 
-@Component({components: {MainLayout, AdminLayout}})
+@Component({components: {MainLayout, AdminLayout, SystemLayout}})
 export default class App extends Vue {
   created() {
-    //@ts-ignore
-    console.log(this.$route.meta.layout)
   }
 }
 </script>
