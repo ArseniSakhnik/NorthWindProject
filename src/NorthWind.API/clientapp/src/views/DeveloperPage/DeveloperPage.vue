@@ -29,7 +29,7 @@ import {DxButton} from 'devextreme-vue/button'
     }
 )
 export default class DeveloperPage extends Vue {
-  private uploadUrl: string = 'api/test/upload-assenizator-service'
+  private uploadUrl: string = 'api/services/upload-assenizator-service'
 
 }
 </script>

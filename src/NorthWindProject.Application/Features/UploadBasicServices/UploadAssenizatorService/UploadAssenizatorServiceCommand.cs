@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Entities.Service;
+using NorthWindProject.Application.Enums;
 using NorthWindProject.Application.Enums.AssenizatorServiceEnums;
 
 namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAssenizatorService
@@ -19,7 +20,7 @@ namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAsseni
     public class UploadAssenizatorServiceCommandHandler : IRequestHandler<UploadAssenizatorServiceCommand>
     {
         private readonly AppDbContext _context;
-        private const int assenizatorServicesId = 1;
+        private const int assenizatorServicesId = (int) ServicesEnum.Ассенизатор;
 
         public UploadAssenizatorServiceCommandHandler(AppDbContext context)
         {
@@ -32,7 +33,7 @@ namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAsseni
             await AddDocumentServiceIndividualAsync(request.File, cancellationToken);
             await AddDocumentServiceIndividualFieldsAsync(cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            
+
             return Unit.Value;
         }
 

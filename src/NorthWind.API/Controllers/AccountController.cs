@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using NorthWind.API.Models;
 using NorthWindProject.Application.Entities.User;
+using NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndPurchases;
+using NorthWindProject.Application.Features.Account.Command.Login;
+using NorthWindProject.Application.Features.Account.Command.Register;
 using NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
@@ -14,15 +17,10 @@ namespace NorthWind.API.Controllers
     public class AccountController : ApiController
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSenderService _emailSenderService;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager, IEmailSenderService emailSenderService)
+        public AccountController(SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
-            _userManager = userManager;
-            _emailSenderService = emailSenderService;
         }
 
         [HttpGet]
@@ -30,49 +28,21 @@ namespace NorthWind.API.Controllers
             => Ok(await Mediator.Send(new GetCurrentUserInfoQuery(), cancellationToken));
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginCommand command, CancellationToken cancellationToken)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginModel.Email,
-                loginModel.Password,
-                loginModel.RememberMe,
-                true);
+            var result = await Mediator.Send(command, cancellationToken);
 
-            if (result.Succeeded) return Ok();
+            if (result.IsSucceed) return Ok();
 
-            if (result.IsNotAllowed) return BadRequest("Аккаунт не подтвержден");
-
-            return BadRequest("Неверное имя пользователя или пароль");
+            return BadRequest(result.Message);
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterModel registerModel)
+        public async Task<IActionResult> Register(RegisterCommand command, CancellationToken cancellationToken)
         {
-            var user = new ApplicationUser
-            {
-                UserName = registerModel.Email,
-                Email = registerModel.Email
-            };
+            var result = await Mediator.Send(command, cancellationToken);
 
-            var result = await _userManager.CreateAsync(user, registerModel.Password);
-
-            if (result.Succeeded)
-            {
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-                var request = HttpContext.Request;
-                var callbackUrl = $"{request.Scheme}://{request.Host.Value}/confirm-email?userId={user.Id}&code={code}";
-
-                await _emailSenderService.SendEmailAsync(registerModel.Email,
-                    "Здравствуйте!",
-                    "Подтверждение аккаунта",
-                    $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>");
-
-                await _userManager.AddToRoleAsync(user, RolesEnum.Client.ToString());
-                await _signInManager.SignInAsync(user, false);
-
-                return Ok("Для завершения регистрации подтвердите аккаунт на электронной почте");
-            }
+            if (result.IsSucceed) return Ok(result.Message);
 
             return BadRequest(result.Errors);
         }
@@ -85,24 +55,15 @@ namespace NorthWind.API.Controllers
         }
 
         [HttpPost("confirm-email")]
-        public async Task<IActionResult> ConfirmEmailAsync(ConfirmEmailModel confirmEmailModel)
+        public async Task<IActionResult> ConfirmEmailAsync(ConfirmEmailAndPurchasesCommand command,
+            CancellationToken cancellationToken)
         {
-            if (confirmEmailModel.UserId == null || confirmEmailModel.Code == null)
-            {
-                return BadRequest();
-            }
+            var result = await Mediator.Send(command, cancellationToken);
 
-            var user = await _userManager.FindByIdAsync(confirmEmailModel.UserId);
+            if (!result.IsSucceed)
+                return BadRequest(result.Message);
 
-            if (user == null)
-            {
-                return NotFound("Пользователь не найден");
-            }
-
-            var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(confirmEmailModel.Code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-
-            return result.Succeeded ? (IActionResult) Ok() : BadRequest(result.Errors);
+            return Ok(result.Message);
         }
     }
 }

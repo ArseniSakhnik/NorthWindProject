@@ -31,13 +31,5 @@ namespace NorthWind.API.Controllers
         {
             return Ok(await Mediator.Send(new EmailTestCommand()));
         }
-
-
-        [HttpPost("upload-assenizator-service")]
-        public async Task<IActionResult> UploadAssenizatorService(CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(new UploadAssenizatorServiceCommand
-            {
-                File = Request.Form.Files.SingleOrDefault()
-            }, cancellationToken));
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Services;
+using NorthWindProject.Application.Entities.Purchase;
 using NorthWindProject.Application.Entities.Service;
 using NorthWindProject.Application.Entities.Test;
 using NorthWindProject.Application.Entities.User;
@@ -31,6 +32,12 @@ namespace NorthWindProject.Application.Common.Access
 
         #endregion
 
+        #region Purchase
+
+        public DbSet<Purchase> Purchases { get; set; }
+
+        #endregion
+        
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
         {
