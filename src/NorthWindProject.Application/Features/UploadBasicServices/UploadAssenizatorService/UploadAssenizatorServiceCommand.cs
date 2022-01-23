@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Entities.Service;
-using NorthWindProject.Application.Enums;
+using NorthWindProject.Application.Enums.AssenizatorServiceEnums;
 
 namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAssenizatorService
 {
@@ -19,6 +19,7 @@ namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAsseni
     public class UploadAssenizatorServiceCommandHandler : IRequestHandler<UploadAssenizatorServiceCommand>
     {
         private readonly AppDbContext _context;
+        private const int assenizatorServicesId = 1;
 
         public UploadAssenizatorServiceCommandHandler(AppDbContext context)
         {
@@ -27,115 +28,117 @@ namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAsseni
 
         public async Task<Unit> Handle(UploadAssenizatorServiceCommand request, CancellationToken cancellationToken)
         {
-            // var service = new Entities.Service.Service
-            // {
-            //     Id = 1,
-            //     Name = "Вывоз житких бытовых отходов",
-            //     Description = "",
-            // };
-            //
-            // await _context.Services.AddAsync(service, cancellationToken);
-            //
-            // await using var stream = new MemoryStream();
-            // await request.File.OpenReadStream().CopyToAsync(stream, cancellationToken);
-            //
-            // var documentService = new DocumentService
-            // {
-            //     Id = 1,
-            //     Name = $"Договор № на вывоз жидких бытовых отходов",
-            //     ServiceId = service.Id,
-            //     Content = stream.ToArray(),
-            // };
-            //
-            // await _context.DocumentServices.AddAsync(documentService, cancellationToken);
-            //
-            // service.DocumentServices = new List<DocumentService>(new[] {documentService});
-            //
-            // var fields = new List<FieldService>
-            // {
-            //     new()
-            //     {
-            //         DocumentServiceId = documentService.Id,
-            //         FieldTypeId = FieldServiceTypeEnum.Day,
-            //         BookMarkName = "День",
-            //     },
-            //     new()
-            //     {
-            //         DocumentServiceId = documentService.Id,
-            //         FieldTypeId = FieldServiceTypeEnum.Month,
-            //         BookMarkName = "Месяц"
-            //     },
-            //     new()
-            //     {
-            //         DocumentServiceId = documentService.Id,
-            //         FieldTypeId = FieldServiceTypeEnum.Year,
-            //         BookMarkName = "Год"
-            //     },
-            //     new()
-            //     {
-            //         DocumentServiceId = documentService.Id,
-            //         FieldTypeId = FieldServiceTypeEnum.Text,
-            //         BookMarkName = "АдресТерритории"
-            //     },
-            // };
-            //
-            // await _context.FieldServices.AddRangeAsync(fields, cancellationToken);
-            //
-            // documentService.FieldServices = fields;
-            //
-            // await _context.SaveChangesAsync(cancellationToken);
+            await AddServiceAsync(cancellationToken);
+            await AddDocumentServiceIndividualAsync(request.File, cancellationToken);
+            await AddDocumentServiceIndividualFieldsAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+            
+            return Unit.Value;
+        }
 
-            var service = new Entities.Service.Service
+        private async Task AddServiceAsync(CancellationToken cancellationToken)
+        {
+            var service = new Service
             {
-                Id = 1,
-                Name = "Вывоз житких бытовых отходов",
+                Id = assenizatorServicesId,
+                Name = "Вывоз строительного и крупногабаритного мусора",
                 Description = "",
             };
 
             await _context.Services.AddAsync(service, cancellationToken);
-            
+        }
+
+
+        private async Task AddDocumentServiceIndividualAsync(IFormFile file, CancellationToken cancellationToken)
+        {
             await using var stream = new MemoryStream();
-            await request.File.OpenReadStream().CopyToAsync(stream, cancellationToken);
+            await file.OpenReadStream().CopyToAsync(stream, cancellationToken);
 
             var documentService = new DocumentService
             {
                 Id = 1,
-                ServiceId = service.Id,
                 Content = stream.ToArray(),
-                Name = $"Договор № на вывоз жидких бытовых отходов",
+                Name = "Договор на вывоз жидких бытовых отходов",
+                ServiceId = assenizatorServicesId
             };
-            
+
+            await _context.DocumentServices.AddAsync(documentService, cancellationToken);
+        }
+
+        private async Task AddDocumentServiceIndividualFieldsAsync(CancellationToken cancellationToken)
+        {
             var fields = new List<FieldService>
             {
                 new()
                 {
-                    
-                    DocumentServiceId = documentService.Id,
-                    FieldTypeId = FieldServiceTypeEnum.Day,
-                    BookMarkName = "День",
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.Дата,
+                    BookMarkName = "Дата",
                 },
                 new()
                 {
-                    DocumentServiceId = documentService.Id,
-                    FieldTypeId = FieldServiceTypeEnum.Month,
-                    BookMarkName = "Месяц"
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.Месяц,
+                    BookMarkName = "Месяц",
                 },
                 new()
                 {
-                    DocumentServiceId = documentService.Id,
-                    FieldTypeId = FieldServiceTypeEnum.Year,
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.День,
                     BookMarkName = "Год"
                 },
                 new()
                 {
-                    DocumentServiceId = documentService.Id,
-                    FieldTypeId = FieldServiceTypeEnum.Text,
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ФИО,
+                    BookMarkName = "ФизическоеЛицо"
+                },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортСерия,
+                    BookMarkName = "ПаспортСерия"
+                },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортНомер,
+                    BookMarkName = "ПаспортНомер"
+                },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортВыдан,
+                    BookMarkName = "ПаспортВыдан"
+                },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортДатаВыдачи,
+                    BookMarkName = "ПаспортДатаВыдачи"
+                },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.АдресТерритории,
                     BookMarkName = "АдресТерритории"
                 },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортКП,
+                    BookMarkName = "КП"
+                },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.АдресРегистрации,
+                    BookMarkName = "АдресРегистрации"
+                },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ЦенаЧисло,
+                    BookMarkName = "ЦенаЧисло"
+                },
+                new()
+                {
+                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ЦенаСтрока,
+                    BookMarkName = "ЦенаСтрока"
+                }
             };
-            
-            
-            return Unit.Value;
-        }   
+
+            fields.ForAll(field => field.DocumentServiceId = assenizatorServicesId);
+
+            await _context.FieldServices.AddRangeAsync(fields, cancellationToken);
+        }
     }
 }
