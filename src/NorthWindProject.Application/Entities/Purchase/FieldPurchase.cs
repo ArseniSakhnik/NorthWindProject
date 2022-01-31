@@ -10,5 +10,7 @@ namespace NorthWindProject.Application.Entities.Purchase
         
         public int FieldServiceId { get; set; }
         public FieldService FieldService { get; set; }
+        
+        public string Value { get; set; }
     }
 }

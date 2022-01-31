@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using NorthWind.API.Models;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
@@ -55,10 +56,14 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 var callbackUrl =
                     $"{registerRequest.Scheme}://{registerRequest.Host.Value}/confirm-email?userId={user.Id}&code={code}";
 
-                await _emailSenderService.SendEmailAsync(request.Email,
-                    "Здравствуйте!",
-                    "Подтверждение аккаунта",
-                    $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>");
+                await _emailSenderService.SendEmailAsync(new EmailBodyModel
+                {
+                    ToEmail = request.Email,
+                    Username = "Здравствуйте!",
+                    Subject = "Подтверждение аккаунта",
+                    HtmlBody =
+                        $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>"
+                });
 
                 await _userManager.AddToRoleAsync(user, RolesEnum.Client.ToString());
                 await _signInManager.SignInAsync(user, false);

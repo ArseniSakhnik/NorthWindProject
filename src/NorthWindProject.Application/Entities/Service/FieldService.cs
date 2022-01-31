@@ -1,5 +1,5 @@
 ﻿using NorthWindProject.Application.Enums;
-using NorthWindProject.Application.Enums.AssenizatorServiceEnums;
+using NorthWindProject.Application.Enums.VacuumTruckServiceEnums;
 
 namespace NorthWindProject.Application.Entities.Service
 {
@@ -7,7 +7,7 @@ namespace NorthWindProject.Application.Entities.Service
     {
         public int Id { get; set; }
 
-        public AssenizatorServiceFieldsTypeEnum FieldTypeId { get; set; }
+        public VacuumTruckServiceFieldsTypeEnum FieldTypeId { get; set; }
         
         public int DocumentServiceId { get; set; }
         public DocumentService DocumentService { get; set; }

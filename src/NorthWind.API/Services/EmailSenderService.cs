@@ -1,9 +1,12 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper.Internal;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using NorthWind.API.Configuration;
 using MailKit.Net.Smtp;
+using NorthWind.API.Models;
 using NorthWindProject.Application.Interfaces.DomainEvents;
+using ContentType = System.Net.Mime.ContentType;
 
 namespace NorthWind.API.Services
 {
@@ -18,28 +21,29 @@ namespace NorthWind.API.Services
             _senderEmailPassword = emailOptions.Value.SenderEmailPassword;
         }
 
-        public async Task SendEmailAsync(string toEmail, string username, string subject, string message)
+        public async Task SendEmailAsync(EmailBodyModel emailBodyModel)
         {
             var emailMessage = new MimeMessage();
 
             emailMessage.From.Add(new MailboxAddress("NorthWind", _senderEmail));
-            emailMessage.To.Add(new MailboxAddress(username, toEmail));
+            emailMessage.To.Add(new MailboxAddress(emailBodyModel.Username, emailBodyModel.ToEmail));
             //тайтл сообщения?
-            emailMessage.Subject = subject;
-            emailMessage.Body = new BodyBuilder
-                {
-                    HtmlBody = message
-                }
-                .ToMessageBody();
+            emailMessage.Subject = emailBodyModel.Subject;
 
-            using (var client = new SmtpClient())
+            var builder = new BodyBuilder
             {
-                await client.ConnectAsync("smtp.gmail.com", 587, false);
-                await client.AuthenticateAsync(_senderEmail, _senderEmailPassword);
-                await client.SendAsync(emailMessage);
+                HtmlBody = emailBodyModel.HtmlBody
+            };
+            
+            emailBodyModel.Files.ForAll(file => builder.Attachments.Add(file.Name, file.Content));
+            emailMessage.Body = builder.ToMessageBody();
 
-                await client.DisconnectAsync(true);
-            }
+            using var client = new SmtpClient();
+
+            await client.ConnectAsync("smtp.gmail.com", 587, false);
+            await client.AuthenticateAsync(_senderEmail, _senderEmailPassword);
+            await client.SendAsync(emailMessage);
+            await client.DisconnectAsync(true);
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿namespace NorthWindProject.Application.Enums.AssenizatorServiceEnums
+﻿namespace NorthWindProject.Application.Enums.VacuumTruckServiceEnums
 {
-    public enum AssenizatorServiceFieldsTypeEnum
+    public enum VacuumTruckServiceFieldsTypeEnum
     {
-        Дата = 0,
+        День = 0,
         Месяц = 1,
-        День = 2,
+        Год = 2,
         ФИО = 3,
         ПаспортСерия = 4,
         ПаспортНомер = 5,

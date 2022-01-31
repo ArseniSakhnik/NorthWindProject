@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NorthWindProject.Application.Features.Test.Commands;
-using NorthWindProject.Application.Features.UploadBasicServices.UploadAssenizatorService;
 using NorthWindProject.Application.Interfaces;
 
 namespace NorthWind.API.Controllers

@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NorthWindProject.Application.Common.Configuration.ConfigurationEntities;
 using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.Entities.Purchase;
 using NorthWindProject.Application.Entities.Service;
@@ -79,6 +80,8 @@ namespace NorthWindProject.Application.Common.Access
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var hasher = new PasswordHasher<ApplicationUser>();
+
+            builder.ApplyConfiguration(new PurchaseConfiguration());
 
             var assemblyWithConfigurations = GetType().Assembly; //get whatever assembly you want
             builder.ApplyConfigurationsFromAssembly(assemblyWithConfigurations);

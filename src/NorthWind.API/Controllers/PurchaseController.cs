@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToAssenizatorIndividualService;
+using NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckIndividualService;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
 namespace NorthWind.API.Controllers
@@ -12,7 +13,7 @@ namespace NorthWind.API.Controllers
     {
         [HttpPost("create-assenizator-individual-purchase")]
         public async Task<IActionResult> CreatePurchaseToAssenizatorIndividualService(
-            CreatePurchaseToAssenizatorIndividualServiceCommand command, CancellationToken cancellationToken)
+            CreatePurchaseToVacuumTruckIndividualServiceCommand command, CancellationToken cancellationToken)
             => Ok(await Mediator.Send(command, cancellationToken));
     }
 }

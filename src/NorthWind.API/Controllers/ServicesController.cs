@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NorthWindProject.Application.Features.UploadBasicServices.UploadAssenizatorService;
+using NorthWindProject.Application.Features.UploadBasicServices.UploadVacuumTruckService;
 
 namespace NorthWind.API.Controllers
 {
@@ -10,7 +10,7 @@ namespace NorthWind.API.Controllers
     {
         [HttpPost("upload-assenizator-service")]
         public async Task<IActionResult> UploadAssenizatorService(CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(new UploadAssenizatorServiceCommand
+            => Ok(await Mediator.Send(new UploadVacuumTruckServiceCommand
             {
                 File = Request.Form.Files.SingleOrDefault()
             }, cancellationToken));

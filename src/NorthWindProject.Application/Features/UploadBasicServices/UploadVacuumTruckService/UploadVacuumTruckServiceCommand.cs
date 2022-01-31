@@ -8,26 +8,26 @@ using Microsoft.AspNetCore.Http;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Entities.Service;
 using NorthWindProject.Application.Enums;
-using NorthWindProject.Application.Enums.AssenizatorServiceEnums;
+using NorthWindProject.Application.Enums.VacuumTruckServiceEnums;
 
-namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAssenizatorService
+namespace NorthWindProject.Application.Features.UploadBasicServices.UploadVacuumTruckService
 {
-    public class UploadAssenizatorServiceCommand : IRequest
+    public class UploadVacuumTruckServiceCommand : IRequest
     {
         public IFormFile File { get; set; }
     }
 
-    public class UploadAssenizatorServiceCommandHandler : IRequestHandler<UploadAssenizatorServiceCommand>
+    public class UploadVacuumTruckServiceCommandHandler : IRequestHandler<UploadVacuumTruckServiceCommand>
     {
         private readonly AppDbContext _context;
-        private const int assenizatorServicesId = (int) ServicesEnum.Ассенизатор;
+        private const int VacuumTruckServicesId = (int) ServicesEnum.Ассенизатор;
 
-        public UploadAssenizatorServiceCommandHandler(AppDbContext context)
+        public UploadVacuumTruckServiceCommandHandler(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Unit> Handle(UploadAssenizatorServiceCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UploadVacuumTruckServiceCommand request, CancellationToken cancellationToken)
         {
             await AddServiceAsync(cancellationToken);
             await AddDocumentServiceIndividualAsync(request.File, cancellationToken);
@@ -41,7 +41,7 @@ namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAsseni
         {
             var service = new Service
             {
-                Id = assenizatorServicesId,
+                Id = VacuumTruckServicesId,
                 Name = "Вывоз строительного и крупногабаритного мусора",
                 Description = "",
             };
@@ -60,7 +60,7 @@ namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAsseni
                 Id = 1,
                 Content = stream.ToArray(),
                 Name = "Договор на вывоз жидких бытовых отходов",
-                ServiceId = assenizatorServicesId
+                ServiceId = VacuumTruckServicesId
             };
 
             await _context.DocumentServices.AddAsync(documentService, cancellationToken);
@@ -72,72 +72,72 @@ namespace NorthWindProject.Application.Features.UploadBasicServices.UploadAsseni
             {
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.Дата,
-                    BookMarkName = "Дата",
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.День,
+                    BookMarkName = "День",
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.Месяц,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.Месяц,
                     BookMarkName = "Месяц",
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.День,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.Год,
                     BookMarkName = "Год"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ФИО,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.ФИО,
                     BookMarkName = "ФизическоеЛицо"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортСерия,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.ПаспортСерия,
                     BookMarkName = "ПаспортСерия"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортНомер,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.ПаспортНомер,
                     BookMarkName = "ПаспортНомер"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортВыдан,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.ПаспортВыдан,
                     BookMarkName = "ПаспортВыдан"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортДатаВыдачи,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.ПаспортДатаВыдачи,
                     BookMarkName = "ПаспортДатаВыдачи"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.АдресТерритории,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.АдресТерритории,
                     BookMarkName = "АдресТерритории"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ПаспортКП,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.ПаспортКП,
                     BookMarkName = "КП"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.АдресРегистрации,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.АдресРегистрации,
                     BookMarkName = "АдресРегистрации"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ЦенаЧисло,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.ЦенаЧисло,
                     BookMarkName = "ЦенаЧисло"
                 },
                 new()
                 {
-                    FieldTypeId = AssenizatorServiceFieldsTypeEnum.ЦенаСтрока,
+                    FieldTypeId = VacuumTruckServiceFieldsTypeEnum.ЦенаСтрока,
                     BookMarkName = "ЦенаСтрока"
                 }
             };
 
-            fields.ForAll(field => field.DocumentServiceId = assenizatorServicesId);
+            fields.ForAll(field => field.DocumentServiceId = VacuumTruckServicesId);
 
             await _context.FieldServices.AddRangeAsync(fields, cancellationToken);
         }

@@ -23,7 +23,7 @@ namespace NorthWindProject.Application.Features.Test.Commands
 
         public async Task<Unit> Handle(EmailTestCommand request, CancellationToken cancellationToken)
         {
-            await _emailSenderService.SendEmailAsync("sakhnikarseni@mail.ru", "Арсений Сахник", "Тема письма", "Текст письма");
+            // await _emailSenderService.SendEmailAsync("sakhnikarseni@mail.ru", "Арсений Сахник", "Тема письма", "Текст письма");
             return Unit.Value;
         }
     }
