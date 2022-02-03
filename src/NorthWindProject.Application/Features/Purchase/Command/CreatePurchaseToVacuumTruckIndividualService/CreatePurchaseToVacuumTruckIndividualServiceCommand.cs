@@ -6,12 +6,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.API.Models;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Common.Extensions;
 using NorthWindProject.Application.Entities.Purchase;
 using NorthWindProject.Application.Enums;
 using NorthWindProject.Application.Enums.VacuumTruckServiceEnums;
 using NorthWindProject.Application.Features.Account.Command.AuthomaticCreateAccount;
+using NorthWindProject.Application.Features.ExportDocument.Query;
 using NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToAssenizatorIndividualService;
 using NorthWindProject.Application.Interfaces;
 
@@ -51,6 +53,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
         private readonly IMediator _mediator;
         private readonly AppDbContext _context;
         private readonly ICurrentUserService _currentUserService;
+        private const string ServiceName = "Ассенизатор";
 
         public CreatePurchaseToAssenizatorIndividualServiceCommandHandler(IMediator mediator, AppDbContext context,
             ICurrentUserService currentUserService)
@@ -71,14 +74,19 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
             var userByEmail = await userByEmailQuery
                 .SingleOrDefaultAsync(cancellationToken);
 
+            var purchase = await CreatePurchase(request, cancellationToken);
             var response = new PurchaseCreateResponseDto();
 
             if (userByEmail is null)
             {
+                var fileToConfirm =
+                    await _mediator.Send(new ExportPurchaseQuery(ServiceName, purchase), cancellationToken);
+
                 await _mediator.Send(new AutomaticCreateAccountCommand
                 {
                     Email = request.Email,
-                    PhoneNumber = request.PhoneNumber
+                    PhoneNumber = request.PhoneNumber,
+                    FilesToConfirm = new List<FileModel> {fileToConfirm}
                 }, cancellationToken);
 
                 userByEmail = await userByEmailQuery.SingleOrDefaultAsync(cancellationToken);
@@ -87,9 +95,8 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                     $"Аккаунт был создан. Пожалуйста, подтвердите аккаунт по вашему адресу ${request.Email}\n";
             }
 
-            var purchase = await CreatePurchase(request, cancellationToken);
-            userByEmail.Purchases.Add(purchase);
 
+            userByEmail.Purchases.Add(purchase);
             await _context.SaveChangesAsync(cancellationToken);
             return response;
         }
@@ -99,7 +106,6 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
             CreatePurchaseToVacuumTruckIndividualServiceCommand data, CancellationToken cancellationToken)
         {
             var vacuumTruckService = await _context.Services
-                .AsNoTracking()
                 .Include(service => service.DocumentServices)
                 .ThenInclude(service => service.FieldServices)
                 .Where(service => service.Id == (int) ServicesEnum.Ассенизатор)
@@ -114,6 +120,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
             return new Entities.Purchase.Purchase
             {
                 ServiceId = vacuumTruckService.Id,
+                Service = vacuumTruckService,
                 IsConfirmed = false,
                 Fields = new List<FieldPurchase>
                 {

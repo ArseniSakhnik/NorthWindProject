@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -18,6 +20,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+        public List<FileModel> FilesToConfirm { get; set; }
     }
 
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterResultDto>
@@ -56,13 +59,19 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 var callbackUrl =
                     $"{registerRequest.Scheme}://{registerRequest.Host.Value}/confirm-email?userId={user.Id}&code={code}";
 
+                var additionalMessage = request.FilesToConfirm
+                    .Any()
+                    ? "и созданные заявки"
+                    : "";
+
                 await _emailSenderService.SendEmailAsync(new EmailBodyModel
                 {
                     ToEmail = request.Email,
                     Username = "Здравствуйте!",
                     Subject = "Подтверждение аккаунта",
                     HtmlBody =
-                        $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>"
+                        $"<div>Подтвердите регистрацию {additionalMessage}, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>",
+                    Files = request.FilesToConfirm
                 });
 
                 await _userManager.AddToRoleAsync(user, RolesEnum.Client.ToString());

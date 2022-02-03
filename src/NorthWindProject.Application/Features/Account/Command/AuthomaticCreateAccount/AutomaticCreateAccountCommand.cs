@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using NorthWind.API.Models;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Features.Account.Command.Register;
@@ -14,6 +16,8 @@ namespace NorthWindProject.Application.Features.Account.Command.AuthomaticCreate
     {
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        
+        public List<FileModel> FilesToConfirm { get; set; }
     }
 
     public class AutomaticCreateAccountCommandHandler : IRequestHandler<AutomaticCreateAccountCommand>
@@ -34,7 +38,8 @@ namespace NorthWindProject.Application.Features.Account.Command.AuthomaticCreate
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
                 Password = password,
-                ConfirmPassword = password
+                ConfirmPassword = password,
+                FilesToConfirm = request.FilesToConfirm
             }, cancellationToken);
             
             return Unit.Value;
