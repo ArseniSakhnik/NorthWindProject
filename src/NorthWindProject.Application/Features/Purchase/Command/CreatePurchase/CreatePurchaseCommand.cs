@@ -10,6 +10,7 @@ using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Features.Account.Command.AuthomaticCreateAccount;
 using NorthWindProject.Application.Features.ExportDocument.Query;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
+using NorthWindProject.Application.Features.Purchase.Events.SendConfirmPurchaseEmailEvent;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchase
 {
@@ -65,8 +66,17 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchase
                 response.Message +=
                     $"Аккаунт был создан. Пожалуйста, подтвердите аккаунт по вашему адресу ${request.Data.Email}\n";
             }
-
-
+            else
+            {
+                purchase.DomainEvents.Add(new SendConfirmPurchaseEmailEvent
+                {
+                    Email = userByEmail.Email,
+                    PurchaseId = purchase.Id
+                });
+                
+                response.Message += "Подтвердите ваши заявки на электронной почте.";
+            }
+            
             userByEmail.Purchases.Add(purchase);
             await _context.SaveChangesAsync(cancellationToken);
 

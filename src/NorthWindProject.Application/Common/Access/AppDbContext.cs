@@ -37,6 +37,8 @@ namespace NorthWindProject.Application.Common.Access
 
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<FieldPurchase> FieldPurchases { get; set; }
+        
+        public DbSet<ConfirmPurchase> ConfirmPurchases { get; set; }
 
         #endregion
         
