@@ -5,6 +5,7 @@ namespace NorthWindProject.Application.Entities.Purchase
 {
     public class FieldPurchase
     {
+        public int Id { get; set; }
         public int PurchaseId { get; set; }
         public Purchase Purchase { get; set; }
         
