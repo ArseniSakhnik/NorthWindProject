@@ -80,7 +80,7 @@ namespace NorthWindProject.Application.Features.Purchase.Events.SendConfirmPurch
             var fileToConfirm = await
                 _mediator.Send(new ExportPurchaseQuery(serviceName, purchase), cancellationToken);
 
-            await _emailSenderService.SendEmailAsync(new EmailBodyModel
+            _emailSenderService.SendEmailAsync(new EmailBodyModel
             {
                 ToEmail = notification.DomainEvent.Email,
                 Username = "Здравствуйте!",

@@ -56,7 +56,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 var callbackUrl =
                     $"{StringExtensions.GetCallbackUrl(registerRequest)}/confirm-email?userId={user.Id}&code={code}";
 
-                await _emailSenderService.SendEmailAsync(new EmailBodyModel
+                _emailSenderService.SendEmailAsync(new EmailBodyModel
                 {
                     ToEmail = request.Email,
                     Username = "Здравствуйте!",

@@ -74,7 +74,7 @@ namespace NorthWindProject.Application.Features.Account.Command.AuthomaticCreate
                 user.Purchases.Add(request.Purchase);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                await _emailSenderService.SendEmailAsync(new EmailBodyModel
+                _emailSenderService.SendEmailAsync(new EmailBodyModel
                 {
                     ToEmail = request.Email,
                     Username = "Здравствуйте!",
