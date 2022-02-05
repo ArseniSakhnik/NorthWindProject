@@ -99,18 +99,25 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query
             var booksMarkNavigator = new BookmarksNavigator(document);
 
             var bookMarks = booksMarkNavigator.Document.Bookmarks;
-            
-            foreach (Bookmark bookMark in bookMarks)
+
+            purchaseFields.ForAll(field =>
             {
-                booksMarkNavigator.MoveToBookmark(bookMark.Name);
+                var bookMarkNames = new List<string>();
+
+                for (var i = 0; i < bookMarks.Count; i++)
+                {
+                    if (bookMarks[i].Name.Contains(field.FieldService.BookMarkName))
+                    {
+                        bookMarkNames.Add(bookMarks[i].Name);
+                    }
+                }
                 
-                var fieldValue = purchaseFields
-                    .Where(field => field.FieldService.BookMarkName.Contains(bookMark.Name))
-                    .Select(field => field.Value)
-                    .FirstOrDefault() ?? "";
-                
-                booksMarkNavigator.InsertText(fieldValue, true);
-            }
+                bookMarkNames.ForAll(name =>
+                {
+                    booksMarkNavigator.MoveToBookmark(name);
+                    booksMarkNavigator.InsertText(field.Value);
+                });
+            });
 
             document.SaveToStream(stream, FileFormat.Doc);
 
