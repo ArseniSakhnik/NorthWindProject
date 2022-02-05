@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.API.Models;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.Extensions;
 using NorthWindProject.Application.Entities.Purchase;
 using NorthWindProject.Application.Features.ExportDocument.Query;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -67,8 +68,9 @@ namespace NorthWindProject.Application.Features.Purchase.Events.SendConfirmPurch
             };
 
             var registerRequest = _httpContextAccessor.HttpContext.Request;
+            
             var callbackUrl =
-                $"{registerRequest.Scheme}://{registerRequest.Host.Value}/confirm-purchase?userId={purchase.Id}&code={confirm.Guid}";
+                $"{StringExtensions.GetCallbackUrl(registerRequest)}/confirm-purchase?userId={purchase.Id}&code={confirm.Guid}";
 
             await _context.ConfirmPurchases.AddAsync(confirm, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

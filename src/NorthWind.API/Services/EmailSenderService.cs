@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper.Internal;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using NorthWind.API.Configuration;
-using MailKit.Net.Smtp;
 using NorthWind.API.Models;
 using NorthWindProject.Application.Interfaces.DomainEvents;
-using ContentType = System.Net.Mime.ContentType;
 
 namespace NorthWind.API.Services
 {
@@ -34,8 +33,8 @@ namespace NorthWind.API.Services
             {
                 HtmlBody = emailBodyModel.HtmlBody
             };
-            
-            emailBodyModel.Files.ForAll(file => builder.Attachments.Add(file.Name, file.Content));
+
+            emailBodyModel.Files.ForAll(file => builder.Attachments.Add($"{file.Name}.doc", file.Content));
             emailMessage.Body = builder.ToMessageBody();
 
             using var client = new SmtpClient();
