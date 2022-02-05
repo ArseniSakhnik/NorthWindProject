@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using NorthWind.API.Models;
+using NorthWindProject.Application.Common.Extensions;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
@@ -20,15 +18,14 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-        public List<FileModel> FilesToConfirm { get; set; }
     }
 
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterResultDto>
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSenderService _emailSenderService;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public RegisterCommandHandler(UserManager<ApplicationUser> userManager, IEmailSenderService emailSenderService,
             SignInManager<ApplicationUser> signInManager, IHttpContextAccessor httpContextAccessor)
@@ -57,12 +54,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
 
                 var registerRequest = _httpContextAccessor.HttpContext.Request;
                 var callbackUrl =
-                    $"{registerRequest.Scheme}://{registerRequest.Host.Value}/confirm-email?userId={user.Id}&code={code}";
-
-                var additionalMessage = request.FilesToConfirm
-                    .Any()
-                    ? "и созданные заявки"
-                    : "";
+                    $"{StringExtensions.GetCallbackUrl(registerRequest)}/confirm-email?userId={user.Id}&code={code}";
 
                 await _emailSenderService.SendEmailAsync(new EmailBodyModel
                 {
@@ -70,8 +62,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                     Username = "Здравствуйте!",
                     Subject = "Подтверждение аккаунта",
                     HtmlBody =
-                        $"<div>Подтвердите регистрацию {additionalMessage}, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>",
-                    Files = request.FilesToConfirm
+                        $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>"
                 });
 
                 await _userManager.AddToRoleAsync(user, RolesEnum.Client.ToString());

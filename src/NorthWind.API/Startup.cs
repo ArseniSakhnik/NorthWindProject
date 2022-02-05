@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +23,7 @@ using NorthWindProject.Application.Common.Exceptions;
 using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Entities.User;
+using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
 using NorthWindProject.Application.Interfaces;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 using NorthWindProject.Application.Middlewares;
@@ -81,6 +84,8 @@ namespace NorthWind.API
 
             services.AddScoped<IDomainEventService, DomainEventService>();
             services.AddScoped<IEmailSenderService, EmailSenderService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
+            
             services.AddTransient<ExceptionHandlingMiddleware>();
         }
 

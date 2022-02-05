@@ -1,4 +1,4 @@
-﻿namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchase
+﻿namespace NorthWindProject.Application.Features.Purchase.Services.PurchaseService
 {
     public class PurchaseCreateResponseDto
     {

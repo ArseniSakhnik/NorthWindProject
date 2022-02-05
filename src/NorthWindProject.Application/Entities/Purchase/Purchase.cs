@@ -7,6 +7,8 @@ namespace NorthWindProject.Application.Entities.Purchase
     public class Purchase : IHasDomainEvent
     {
         public int Id { get; set; }
+        
+        public string Name { get; set; }
 
         public int ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
