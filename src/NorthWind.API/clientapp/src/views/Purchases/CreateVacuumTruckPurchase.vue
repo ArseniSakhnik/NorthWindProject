@@ -1,11 +1,6 @@
 ﻿<template>
-  <div>
-    <div style="width: 100%">
-      <v-text-field
-          style="width: 200px"
-          filled
-      />
-    </div>
+  <div class="background-image">
+    
   </div>
 </template>
 
@@ -17,6 +12,16 @@ export default class CreateVacuumTruckPurchase extends Vue {
   
 }
 </script>
-<style scoped>
-  
+<style scoped lang="scss">
+.background-image {
+  background-image: url('../../assets/purchases/vacuumTruck/insignts-1-1192699.jpg');
+  position: relative;
+  background-blend-mode: multiply;
+  background-position: center bottom;
+  background-color: rgba(#1b3648, 0.35);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 25vh;
+}
 </style>

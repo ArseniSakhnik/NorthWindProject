@@ -1,6 +1,6 @@
 <template>
   <vs-navbar
-      class="bg-transparent"
+      class="bg-transparent blur"
       padding-scroll
       fixed
       text-white
@@ -67,6 +67,11 @@ export default class Navbar extends Mixins(HttpServiceMixin) {
 }
 </script>
 <style scoped lang="scss">
+.blur {
+  backdrop-filter: blur(3px);
+}
+
+
 //.main-navbar {
 //  width: 100%;
 //  position: fixed;
