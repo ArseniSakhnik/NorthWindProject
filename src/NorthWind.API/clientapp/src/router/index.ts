@@ -6,6 +6,7 @@ import Admin from '../views/Admin.vue'
 import CreateServicePage from '@/components/Admin/views/Services/CreateServicePage.vue'
 import DeveloperPage from "@/views/DeveloperPage/DeveloperPage.vue"
 import ConfirmEmail from "@/views/System/ConfirmEmail.vue"
+import CreateVacuumTruckPurchase from "@/views/Purchases/CreateVacuumTruckPurchase.vue"
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,14 @@ const routes: Array<RouteConfig> = [
       layout: 'Main'
     }
   },
+  {
+    path: '/create-vacuum-truck-purchase',
+    name: 'CreateVacuumTruckPurchase',
+    component: CreateVacuumTruckPurchase,
+    meta: {
+      layout: 'Action'
+    }
+  }
 ]
 
 const router = new VueRouter({

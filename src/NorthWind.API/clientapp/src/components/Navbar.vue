@@ -60,7 +60,7 @@ export default class Navbar extends Mixins(HttpServiceMixin) {
   ]
   private isLogInDialogOpened: boolean = false
 
-  private async test(): void {
+  private async test(): Promise<void> {
     await this.accountService.GetCurrentUserInfo()
         .then(response => console.log(response))
   }
