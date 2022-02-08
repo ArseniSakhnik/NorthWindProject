@@ -1,6 +1,18 @@
 ﻿<template>
-  <div class="background-image">
-    
+  <div>
+    <div class="background-image">
+
+    </div>
+    <section class="purchase-section">
+      <h1 class="text-center">Заявка на вакуум трак</h1>
+      <div>
+        <v-text-field
+          class="input-field"
+          outlined
+          dense
+        />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -9,7 +21,7 @@ import {Vue, Component} from 'vue-property-decorator'
 
 @Component
 export default class CreateVacuumTruckPurchase extends Vue {
-  
+
 }
 </script>
 <style scoped lang="scss">
@@ -22,6 +34,14 @@ export default class CreateVacuumTruckPurchase extends Vue {
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
-  height: 25vh;
+  height: 15vh;
+}
+
+.purchase-section {
+  padding: 2vw 7vw;
+}
+
+.input-field {
+  width: 30vw;
 }
 </style>
