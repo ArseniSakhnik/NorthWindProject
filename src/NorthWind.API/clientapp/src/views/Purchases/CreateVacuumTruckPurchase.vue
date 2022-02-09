@@ -7,9 +7,9 @@
       <h1 class="text-center">Заявка на вакуум трак</h1>
       <div>
         <v-text-field
-          class="input-field"
-          outlined
-          dense
+            class="input-field"
+            outlined
+            dense
         />
       </div>
     </section>
@@ -23,10 +23,10 @@ import {PurchaseToVacuumTruckIndividualDto} from "@/services/PurchaseService/Req
 @Component
 export default class CreateVacuumTruckPurchase extends Vue {
 
-  private name: string = '';
-  private surname: string = '';
-  private patronymic: string = '';
-  
+  private name: string = ''
+  private surname: string = ''
+  private patronymic: string = ''
+
   private localData: PurchaseToVacuumTruckIndividualDto = {
     email: '',
     fullName: this.fullName,
@@ -40,11 +40,11 @@ export default class CreateVacuumTruckPurchase extends Vue {
     registrationAddress: '',
     territoryAddress: ''
   }
-  
+
   private get fullName(): string {
-    return this.name + ' ' + this.surname + ' ' + this.patronymic
+    return `${this.name} + ${this.surname} + ${this.patronymic};`
   }
-  
+
 }
 </script>
 <style scoped lang="scss">
