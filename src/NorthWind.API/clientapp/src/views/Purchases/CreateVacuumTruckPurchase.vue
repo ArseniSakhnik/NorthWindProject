@@ -18,10 +18,33 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
+import {PurchaseToVacuumTruckIndividualDto} from "@/services/PurchaseService/Requests"
 
 @Component
 export default class CreateVacuumTruckPurchase extends Vue {
 
+  private name: string = '';
+  private surname: string = '';
+  private patronymic: string = '';
+  
+  private localData: PurchaseToVacuumTruckIndividualDto = {
+    email: '',
+    fullName: this.fullName,
+    passportDivisionNumber: '',
+    passportIssued: '',
+    passportIssueDate: '',
+    passportNumber: '',
+    passportSerialNumber: '',
+    phoneNumber: '',
+    priceNumber: 0,
+    registrationAddress: '',
+    territoryAddress: ''
+  }
+  
+  private get fullName(): string {
+    return this.name + ' ' + this.surname + ' ' + this.patronymic
+  }
+  
 }
 </script>
 <style scoped lang="scss">
