@@ -12,6 +12,9 @@
             dense
         />
       </div>
+      <div>
+        <y-maps/>
+      </div>
     </section>
   </div>
 </template>
@@ -19,8 +22,10 @@
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
 import {PurchaseToVacuumTruckIndividualDto} from "@/services/PurchaseService/Requests"
+import YandexMap from "@/components/YMaps/YMaps.vue"
 
-@Component
+
+@Component({components: {YMaps: YandexMap}})
 export default class CreateVacuumTruckPurchase extends Vue {
 
   private name: string = ''
