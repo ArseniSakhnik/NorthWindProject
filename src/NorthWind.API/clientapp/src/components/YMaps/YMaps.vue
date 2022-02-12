@@ -110,7 +110,7 @@ export default class YandexMap extends Vue {
 </script>
 <style scoped>
 .ymap {
-  width: 1000px;
-  height: 1000px;
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -55,7 +55,10 @@ namespace NorthWindProject.Application.Features.Purchase.Services.PurchaseServic
                     Email = data.Email,
                     PhoneNumber = data.PhoneNumber,
                     ServiceName = serviceName,
-                    Purchase = purchase
+                    Purchase = purchase,
+                    Name = data.Name,
+                    Surname = data.Surname,
+                    MiddleName = data.MiddleName
                 }, cancellationToken);
 
                 response.Message +=

@@ -19,6 +19,9 @@ namespace NorthWindProject.Application.Features.Account.Command.AuthomaticCreate
         public string Email { get; set; }
         public Entities.Purchase.Purchase Purchase { get; set; }
         public string ServiceName { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string MiddleName { get; set; }
     }
 
     public class AutomaticCreateAccountCommandHandler : IRequestHandler<AutomaticCreateAccountCommand>
@@ -54,7 +57,10 @@ namespace NorthWindProject.Application.Features.Account.Command.AuthomaticCreate
             {
                 UserName = request.Email,
                 Email = request.Email,
-                PhoneNumber = request.PhoneNumber
+                PhoneNumber = request.PhoneNumber,
+                Name = request.Name,
+                Surname = request.Surname,
+                MiddleName = request.MiddleName,
             };
 
             var result = await _userManager.CreateAsync(user, password);

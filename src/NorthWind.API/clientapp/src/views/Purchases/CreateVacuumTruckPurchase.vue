@@ -5,16 +5,15 @@
     </div>
     <section class="purchase-section">
       <h1 class="text-center">Заявка на вакуум трак</h1>
-      <div>
-        <v-text-field
-            class="input-field"
-            outlined
-            dense
-        />
-      </div>
-      <div>
-        <y-maps/>
-      </div>
+      <full-name-fields
+      />
+      <passport-fields
+          :passport-serial-number.sync="localData.passportSerialNumber"
+          :passport-number.sync="localData.passportNumber"
+          :passport-issued.sync="localData.passportIssued"
+          :passport-issue-date.sync="localData.passportIssueDate"
+          :passport-division-number.sync="localData.passportDivisionNumber"
+      />
     </section>
   </div>
 </template>
@@ -23,9 +22,11 @@
 import {Vue, Component} from 'vue-property-decorator'
 import {PurchaseToVacuumTruckIndividualDto} from "@/services/PurchaseService/Requests"
 import YandexMap from "@/components/YMaps/YMaps.vue"
+import FullNameFields from "@/components/Fields/FullNameFields.vue";
+import PassportFields from "@/components/Fields/PassportFields.vue";
 
 
-@Component({components: {YMaps: YandexMap}})
+@Component({components: {PassportFields, FullNameFields, YMaps: YandexMap}})
 export default class CreateVacuumTruckPurchase extends Vue {
 
   private name: string = ''
@@ -35,11 +36,11 @@ export default class CreateVacuumTruckPurchase extends Vue {
   private localData: PurchaseToVacuumTruckIndividualDto = {
     email: '',
     fullName: this.fullName,
-    passportDivisionNumber: '',
     passportIssued: '',
     passportIssueDate: '',
     passportNumber: '',
     passportSerialNumber: '',
+    passportDivisionNumber: '',
     phoneNumber: '',
     priceNumber: 0,
     registrationAddress: '',
@@ -70,6 +71,6 @@ export default class CreateVacuumTruckPurchase extends Vue {
 }
 
 .input-field {
-  width: 30vw;
+  width: 20vw;
 }
 </style>

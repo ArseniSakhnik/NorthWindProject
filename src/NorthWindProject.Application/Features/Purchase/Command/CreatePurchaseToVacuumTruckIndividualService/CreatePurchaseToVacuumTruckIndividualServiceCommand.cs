@@ -22,7 +22,6 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
         #region Данные для заявки
 
         public DateTime Date { get; set; } = DateTime.Now;
-        public string FullName { get; set; }
         public string PassportSerialNumber { get; set; }
         public string PassportNumber { get; set; }
         public string PassportIssued { get; set; }
@@ -99,7 +98,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                     new()
                     {
                         FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ФИО].Id,
-                        Value = data.FullName
+                        Value = $"{data.Name} {data.Surname} {data.MiddleName}"
                     },
                     new()
                     {
