@@ -1,9 +1,10 @@
 ﻿<template>
   <v-container fluid>
+    <h2 class="headline font-weight-bold mb-3">Паспортные данные</h2>
     <v-row>
       <v-col
           cols="12"
-          sm="2"
+          sm="4"
       >
         <v-text-field
             outlined
@@ -16,7 +17,7 @@
       </v-col>
       <v-col
           cols="12"
-          sm="2"
+          sm="4"
       >
         <v-text-field
             outlined
@@ -69,6 +70,20 @@
         />
       </v-col>
     </v-row>
+    <v-row>
+      <v-col
+          cols="12"
+          sm="12"
+      >
+        <v-text-field
+            outlined
+            dense
+            label="Адрес регистрации"
+            :value="registrationAddressSynced"
+            @input="registrationAddressSyncedHandler"
+        />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -91,6 +106,9 @@ export default class PassportFields extends Vue {
 
   @PropSync('passportDivisionNumber', {type: String})
   passportDivisionNumberSynced!: string;
+  
+  @PropSync('registrationAddress', {type: String})
+  registrationAddressSynced!: string;
 
   passportSerialNumberSyncedHandler(value: string) {
     this.passportSerialNumberSynced = value;
@@ -110,6 +128,10 @@ export default class PassportFields extends Vue {
 
   passportDivisionNumberSyncedHandler(value: string) {
     this.passportDivisionNumberSynced = value;
+  }
+
+  registrationAddressSyncedHandler(value: string) {
+    this.registrationAddressSynced = value.toUpperCase();
   }
 
   passportIssueDateRules: { (value: string): any }[] = [

@@ -1,28 +1,32 @@
 ﻿<template>
-  <div 
-      id="map" 
+  <div
+      id="map"
       class="ymap"
-  >
-  </div>
+  />
 </template>
 
 <script lang="ts">
-import {Vue, Component, Ref} from 'vue-property-decorator'
+import {Vue, Component, Ref, Prop, PropSync} from 'vue-property-decorator'
 //@ts-ignore
 import {yandexMap, ymapMarker, loadYmap} from 'vue-yandex-maps'
 
 
 @Component({components: {yandexMap, ymapMarker}})
 export default class YandexMap extends Vue {
-  @Ref('map') private map!: any
+  @Ref('map')
+  map!: any
 
-  private isMapLoaded: boolean = false
+  @Prop({type: Function, required: true})
+  calculateFunction!: (routeLength: number) => number;
 
-  //в рефы
-  private DELIVERY_TARIFF: number = 20
-  private MINIMUM_COST: number = 500
-  
-  
+  @PropSync('priceNumber')
+  priceNumberSynced!: number;
+
+  @PropSync('distance')
+  distanceSynced!: number;
+
+  isMapLoaded: boolean = false
+
   settings = {
     apiKey: '04ec0a7a-4280-4526-a85b-d7b5c299bae5',
     lang: 'ru_RU',
@@ -71,33 +75,34 @@ export default class YandexMap extends Vue {
     routePanelControl.routePanel.getRouteAsync()
         .then((route: any) => {
           route.model.setParams({results: 1}, true);
-          
+
           route.model.events.add('requestsuccess', () => {
-            
+
             const activeRoute = route.getActiveRoute();
-            
+
             if (activeRoute) {
               const length = route.getActiveRoute().properties.get('distance');
-              
+
               const price = this.calculate(Math.round(length.value / 1000));
-              
+
               //@ts-ignore
               const balloonContentLayout = ymaps.templateLayoutFactory.createClass(
                   '<span>Расстояние: ' + length.text + '.</span><br/>' +
                   '<span style="font-weight: bold; font-style: italic">Стоимость доставки: ' + price + ' р.</span>');
-              
+
               route.options.set('routeBalloonContentLayout', balloonContentLayout);
-              
+
               activeRoute.ballom.open()
             }
-            
+
           })
         })
   }
-  
+
   private calculate(routeLength: number) {
-    console.log(routeLength)
-    return (Math.max(routeLength) * this.DELIVERY_TARIFF, this.MINIMUM_COST);
+    // return (Math.max(routeLength) * this.DELIVERY_TARIFF, this.MINIMUM_COST);
+    const price = this.calculateFunction(routeLength)
+    return price;
   }
 
   async mounted() {

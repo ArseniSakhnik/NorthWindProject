@@ -4,7 +4,9 @@
 }
 
 export interface PurchaseToVacuumTruckIndividualDto extends BaseCreatePurchaseDto {
-	fullName: string,
+	name: string,
+	surname: string,
+	middleName: string,
 	passportSerialNumber: string,
 	passportNumber: string,
 	passportIssued: string,
@@ -12,5 +14,5 @@ export interface PurchaseToVacuumTruckIndividualDto extends BaseCreatePurchaseDt
 	territoryAddress: string,
 	passportDivisionNumber: string,
 	registrationAddress: string,
-	priceNumber: number
+	distance: number
 }

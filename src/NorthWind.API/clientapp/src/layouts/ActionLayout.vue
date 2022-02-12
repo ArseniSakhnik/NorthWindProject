@@ -1,6 +1,7 @@
 ﻿<template>
   <v-app class="background-color">
     <navbar/>
+    <div class="background-image"/>
     <router-view/>
   </v-app>
 </template>
@@ -11,11 +12,23 @@ import Navbar from "@/components/Navbar.vue"
 
 @Component({components: {Navbar}})
 export default class ActionLayout extends Vue {
-  
+
 }
 </script>
-<style scoped>
-  .background-color {
-    background-color: rgba(242,246,255,255);
-  }
+<style scoped lang="scss">
+.background-color {
+  background-color: rgba(242, 246, 255, 255);
+}
+
+.background-image {
+  background-image: url('../assets/purchases/vacuumTruck/insignts-1-1192699.jpg');
+  position: relative;
+  background-blend-mode: multiply;
+  background-position: center bottom;
+  background-color: rgba(#1b3648, 0.35);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 15vh;
+}
 </style>
