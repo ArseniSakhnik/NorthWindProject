@@ -66,9 +66,15 @@ export default class YandexMap extends Vue {
       }
     })
 
+    // Если вы хотите задать неизменяемую точку "откуда", раскомментируйте код ниже.
+    /*routePanelControl.routePanel.state.set({
+        fromEnabled: false,
+        from: 'Москва, Льва Толстого 16'
+     });*/
+
     routePanelControl.routePanel.options.set({
-      type: {auto: true}
-    })
+      types: {auto: true}
+    });
 
     myMap.controls.add(routePanelControl).add(zoomControl)
 
@@ -88,7 +94,7 @@ export default class YandexMap extends Vue {
               //@ts-ignore
               const balloonContentLayout = ymaps.templateLayoutFactory.createClass(
                   '<span>Расстояние: ' + length.text + '.</span><br/>' +
-                  '<span style="font-weight: bold; font-style: italic">Стоимость доставки: ' + price + ' р.</span>');
+                  '<span style="font-weight: bold; font-style: italic">Стоимость перевозки: ' + price + ' р.</span>');
 
               route.options.set('routeBalloonContentLayout', balloonContentLayout);
 
@@ -101,7 +107,9 @@ export default class YandexMap extends Vue {
 
   private calculate(routeLength: number) {
     // return (Math.max(routeLength) * this.DELIVERY_TARIFF, this.MINIMUM_COST);
-    const price = this.calculateFunction(routeLength)
+    const price = this.calculateFunction(routeLength);
+    this.priceNumberSynced = price;
+    this.distanceSynced = routeLength;
     return price;
   }
 

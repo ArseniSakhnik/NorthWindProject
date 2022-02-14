@@ -3,14 +3,16 @@
     <navbar/>
     <div class="background-image"/>
     <router-view/>
+    <action-bar/>
   </v-app>
 </template>
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
 import Navbar from "@/components/Navbar.vue"
+import ActionBar from "@/components/ActionBars/ActionBar.vue";
 
-@Component({components: {Navbar}})
+@Component({components: {ActionBar, Navbar}})
 export default class ActionLayout extends Vue {
 
 }

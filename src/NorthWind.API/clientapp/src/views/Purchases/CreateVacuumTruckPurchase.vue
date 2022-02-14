@@ -23,6 +23,10 @@
                 :passport-division-number.sync="localData.passportDivisionNumber"
                 :registration-address.sync="localData.registrationAddress"
             />
+            <price-fields
+                :distance="localData.distance"
+                :price="priceNumber"
+            />
           </v-col>
           <v-col
               cols="12"
@@ -31,8 +35,8 @@
             <div class="yandex-map">
               <yandex-map
                 :calculate-function="calculate"
-                :distance="localData.distance"
-                :price-number="priceNumber"
+                :distance.sync="localData.distance"
+                :price-number.sync="priceNumber"
               />
             </div>
           </v-col>
@@ -48,25 +52,26 @@ import {PurchaseToVacuumTruckIndividualDto} from "@/services/PurchaseService/Req
 import YandexMap from "@/components/YMaps/YandexMap.vue"
 import PersonalData from "@/components/Fields/PersonalData.vue";
 import PassportFields from "@/components/Fields/PassportFields.vue";
+import PriceFields from "@/components/PriceFields/PriceFields.vue";
 
 
-@Component({components: {PassportFields, FullNameFields: PersonalData, YandexMap}})
+@Component({components: {PriceFields, PassportFields, FullNameFields: PersonalData, YandexMap}})
 export default class CreateVacuumTruckPurchase extends Vue {
 
   private priceNumber: number = 0;
   
   localData: PurchaseToVacuumTruckIndividualDto = {
-    email: '', //
-    name: '', //
-    surname: '', //
-    middleName: '', //
-    passportIssued: '', //
-    passportIssueDate: '', //
-    passportNumber: '', //
-    passportSerialNumber: '', //
-    passportDivisionNumber: '', //
-    phoneNumber: '', //
-    registrationAddress: '', //
+    email: '',
+    name: '',
+    surname: '',
+    middleName: '',
+    passportIssued: '',
+    passportIssueDate: '',
+    passportNumber: '',
+    passportSerialNumber: '',
+    passportDivisionNumber: '',
+    phoneNumber: '',
+    registrationAddress: '',
     territoryAddress: '',
     distance: 0,
   }
