@@ -1,14 +1,16 @@
 <template>
   <section
       :style="`background-image: url(${slideImage})`"
-      class="service-list  flex-container-slides"
+      class="service-list flex-container-slides"
   >
     <div class="arrow-container">
       <div class="arrow left" @click="previousSlide"/>
     </div>
     <div>
       <v-row>
-        <v-col v-if="isComputer"/>
+        <v-col v-if="isComputer">
+          
+        </v-col>
         <v-col>
           <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
           <orange-button
@@ -95,7 +97,6 @@ export default class FirstSection extends Mixins(BreakPointsMixin) {
       this.currentSlide--
     }
   }
-
 }
 </script>
 <style scoped lang="scss">
@@ -118,7 +119,7 @@ export default class FirstSection extends Mixins(BreakPointsMixin) {
 }
 
 .arrow-container {
-  width: 1.7em;
+  width: 2.4em;
 }
 
 .arrow {
@@ -136,7 +137,7 @@ export default class FirstSection extends Mixins(BreakPointsMixin) {
 }
 
 .left {
-  margin-left: 12px;
+  margin-left: 1em;
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
 }

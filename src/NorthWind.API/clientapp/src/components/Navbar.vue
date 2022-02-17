@@ -26,7 +26,6 @@
       </vs-button>
       <login-window :is-dialog-opened.sync="isLogInDialogOpened"/>
       <vs-button color="#fff" border>Оставить заявку</vs-button>
-      <button @click="test">Тест</button>
     </template>
   </vs-navbar>
 </template>
@@ -59,11 +58,6 @@ export default class Navbar extends Mixins(HttpServiceMixin) {
     },
   ]
   private isLogInDialogOpened: boolean = false
-
-  private async test(): Promise<void> {
-    await this.accountService.GetCurrentUserInfo()
-        .then(response => console.log(response))
-  }
 }
 </script>
 <style scoped lang="scss">

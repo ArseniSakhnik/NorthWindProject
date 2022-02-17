@@ -24,14 +24,9 @@ export default class TransparentButton extends Vue {
   font-weight: 800;
   text-transform: uppercase;
 
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-  .button {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(1px);
-    background-color: rgba(255, 255, 255, 0.2);
-  }
+  background: rgba(0, 35, 71, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-sizing: border-box;
+  backdrop-filter: blur(5px);
 }
 </style>

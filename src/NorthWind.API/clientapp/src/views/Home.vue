@@ -1,7 +1,6 @@
 <template>
   <div class="home-page text-block-setting">
     <first-section/>
-
   </div>
 </template>
 
