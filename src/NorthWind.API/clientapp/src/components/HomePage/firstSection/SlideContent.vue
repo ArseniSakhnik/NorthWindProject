@@ -21,7 +21,6 @@ export default class SlideContent extends Vue {
 
 <style scoped lang="scss">
 .service {
-  padding: 7%;
   height: 100%;
   display: flex;
   flex-direction: column;

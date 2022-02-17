@@ -3,14 +3,24 @@
       :style="`background-image: url(${slideImage})`"
       class="service-list  flex-container-slides"
   >
-    <div class="arrow left">
-
+    <div class="arrow-container">
+      <div class="arrow left" @click="previousSlide"/>
     </div>
     <div>
-      
+      <v-row>
+        <v-col v-if="isComputer"/>
+        <v-col>
+          <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
+          <orange-button
+              title="Заказать услугу"
+              style="margin-right: 1em"
+          />
+          <transparent-button />
+        </v-col>
+      </v-row>
     </div>
-    <div class="arrow right">
-
+    <div class="arrow-container">
+      <div class="arrow right" @click="nextSlide"/>
     </div>
   </section>
 </template>
@@ -19,25 +29,29 @@
 <!--    :style="`background-image: url(${slideImage})`"-->
 <!--    class="service-list relative">-->
 <!--<div class="slider-control-back">-->
-<!--  <v-btn @click="previousSlide">Назад</v-btn>-->
+<!--  <v-btn >Назад</v-btn>-->
 <!--</div>-->
 <!--<slides-navigation :current-item.sync="currentSlide"/>-->
 <!--<slide-content :title="slideItems[currentSlide].title"/>-->
 <!--<div class="slider-control-next">-->
-<!--  <v-btn @click="nextSlide">Вперед</v-btn>-->
+<!--  <v-btn >Вперед</v-btn>-->
 <!--</div>-->
 <!--</section>-->
 
 <script lang="ts">
-import {Vue, Component, Ref} from 'vue-property-decorator'
+import {Vue, Component, Ref, Mixins} from 'vue-property-decorator'
 import SlideContent from "@/components/HomePage/firstSection/SlideContent.vue";
 import SlidesNavigation from "@/components/HomePage/firstSection/SlidesNavigation.vue";
+import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
+import OrangeButton from "@/components/Buttons/OrangeButton.vue";
+import TransparentButton from "@/components/Buttons/TransparentButton.vue";
+
 
 type Slide = { title: string; to: string; image: string }
 @Component({
-  components: {SlidesNavigation, SlideContent}
+  components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton}
 })
-export default class FirstSection extends Vue {
+export default class FirstSection extends Mixins(BreakPointsMixin) {
   private currentSlide: number = 0;
   @Ref('first-section') private firstSection!: HTMLElement;
   private slideItems: Slide[] = [
@@ -103,9 +117,13 @@ export default class FirstSection extends Vue {
   align-content: center;
 }
 
+.arrow-container {
+  width: 1.7em;
+}
+
 .arrow {
-  width: 60px;
-  height: 60px;
+  width: 1.2em !important;
+  height: 1.2em !important;
   border-top: 2px solid #F2F6FF;
   border-right: 2px solid #F2F6FF;
   cursor: pointer;
@@ -123,12 +141,17 @@ export default class FirstSection extends Vue {
   -webkit-transform: rotate(-135deg);
 }
 
-@media screen and (max-width: 600px) {
-  .arrow {
-    width: 30px;
-    height: 30px;
+
+.slide-text {
+  font-size: 1em;
+}
+
+@media screen and (max-width: 667px) {
+  .slide-text {
+    font-size: 0.7em;
   }
 }
+
 
 //.service-list {
 //  position: relative;
