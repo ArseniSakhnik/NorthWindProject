@@ -1,6 +1,8 @@
 <template>
   <div class="home-page text-block-setting">
+    <div class="second-section-opened" v-if="isSecondSectionOpened"/>
     <first-section/>
+    <second-section/>
   </div>
 </template>
 
@@ -21,10 +23,18 @@ import SecondSection from "@/components/HomePage/SecondSection.vue";
   components: {SecondSection, FirstSection}
 })
 export default class Home extends Vue {
-
+  private isSecondSectionOpened: boolean = false;
 }
 </script>
 <style scoped lang="scss">
+.second-section-opened {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: linear-gradient(180deg, rgba(0, 51, 102, 0) 23.94%, #003366 100%);
+  z-index: 1;
+}
+
 @media screen and (max-width: 600px) {
   .text-block-setting {
     font-size: 26px

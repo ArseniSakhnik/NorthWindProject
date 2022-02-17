@@ -9,7 +9,7 @@
     <div>
       <v-row>
         <v-col v-if="isComputer">
-          
+
         </v-col>
         <v-col>
           <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
@@ -17,7 +17,7 @@
               title="Заказать услугу"
               style="margin-right: 1em"
           />
-          <transparent-button />
+          <transparent-button/>
         </v-col>
       </v-row>
     </div>
@@ -41,7 +41,7 @@
 <!--</section>-->
 
 <script lang="ts">
-import {Vue, Component, Ref, Mixins} from 'vue-property-decorator'
+import {Vue, Component, Ref, Mixins, Prop} from 'vue-property-decorator'
 import SlideContent from "@/components/HomePage/firstSection/SlideContent.vue";
 import SlidesNavigation from "@/components/HomePage/firstSection/SlidesNavigation.vue";
 import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
@@ -56,6 +56,9 @@ type Slide = { title: string; to: string; image: string }
 export default class FirstSection extends Mixins(BreakPointsMixin) {
   private currentSlide: number = 0;
   @Ref('first-section') private firstSection!: HTMLElement;
+
+  @Prop({type: Boolean}) isSecondSectionOpened!: boolean;
+
   private slideItems: Slide[] = [
     {
       title: 'Вывоз строительного и крупногабаритного мусора',
@@ -153,7 +156,9 @@ export default class FirstSection extends Mixins(BreakPointsMixin) {
   }
 }
 
-
+.second-section-opened {
+  background: linear-gradient(180deg, rgba(0, 51, 102, 0) 23.94%, #003366 100%);
+}
 //.service-list {
 //  position: relative;
 //  background-blend-mode: multiply;
