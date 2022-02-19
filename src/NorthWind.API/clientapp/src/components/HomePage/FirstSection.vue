@@ -8,9 +8,7 @@
     </div>
     <div>
       <v-row>
-        <v-col v-if="isComputer">
-
-        </v-col>
+        <v-col v-if="isComputer"/>
         <v-col>
           <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
           <orange-button
@@ -26,19 +24,6 @@
     </div>
   </section>
 </template>
-
-<!--<section-->
-<!--    :style="`background-image: url(${slideImage})`"-->
-<!--    class="service-list relative">-->
-<!--<div class="slider-control-back">-->
-<!--  <v-btn >Назад</v-btn>-->
-<!--</div>-->
-<!--<slides-navigation :current-item.sync="currentSlide"/>-->
-<!--<slide-content :title="slideItems[currentSlide].title"/>-->
-<!--<div class="slider-control-next">-->
-<!--  <v-btn >Вперед</v-btn>-->
-<!--</div>-->
-<!--</section>-->
 
 <script lang="ts">
 import {Vue, Component, Ref, Mixins, Prop} from 'vue-property-decorator'
@@ -159,31 +144,4 @@ export default class FirstSection extends Mixins(BreakPointsMixin) {
 .second-section-opened {
   background: linear-gradient(180deg, rgba(0, 51, 102, 0) 23.94%, #003366 100%);
 }
-//.service-list {
-//  position: relative;
-//  background-blend-mode: multiply;
-//  background-position: center bottom;
-//  background-color: rgba(#1b3648, 0.35);
-//  background-size: cover;
-//  background-repeat: no-repeat;
-//  width: 100%;
-//  height: 100vh;
-//}
-//
-//.slider-control-back, .slider-control-next {
-//  position: absolute;
-//  height: 100vh;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  top: 0;
-//}
-//
-//.slider-control-next {
-//  right: 0;
-//}
-//
-//.slider-control-back {
-//  left: 0;
-//}
 </style>

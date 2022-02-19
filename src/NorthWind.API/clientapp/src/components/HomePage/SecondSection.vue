@@ -72,6 +72,26 @@
           </div>
         </v-col>
       </v-row>
+      <v-row class="section-padding">
+        <v-col
+            cols="12"
+            lg="6"
+        >
+          <h2 class="text-white about-font">ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА</h2>
+        </v-col>
+        <v-col
+            cols="12"
+            lg="6"
+        >
+          <h3 class="about-company">
+            В автопарке предприятия имеются <span
+              class="company-font">транспортные средства различного назначения:</span> комбинированные
+            дорожно-уборочные машины с поливом, бункеровозы для вывоза крупногабаритных и строительных отходов,
+            ассенизационная техника.
+          </h3>
+        </v-col>
+      </v-row>
+<!--      <slider-auto/>-->
     </v-container>
   </div>
 </template>
@@ -85,9 +105,11 @@ import RecyclingCar from "@/icons/RecyclingCar.vue";
 import Reward from "@/icons/Reward.vue";
 import Time from "@/icons/Time.vue";
 import RecyclingHome from "@/icons/RecyclingHome.vue";
+import ArrowRight from "@/icons/ArrowRight.vue";
+import SliderAuto from "@/components/SliderAuto.vue";
 
 @Component({
-  components: {RecyclingHome, AboutService, Customer, Land, RecyclingCar, Reward, Time}
+  components: {SliderAuto, RecyclingHome, AboutService, Customer, Land, RecyclingCar, Reward, Time, ArrowRight}
 })
 export default class SecondSection extends Vue {
 }
@@ -95,9 +117,10 @@ export default class SecondSection extends Vue {
 
 <style scoped lang="scss">
 .second-section {
-  height: 120vh;
+  height: auto;
   background: linear-gradient(180deg, #003366 0%, #002347 100%),
   radial-gradient(21.56% 41.41% at 17.53% 51.62%, #003F7D 0%, rgba(0, 63, 125, 0) 100%);
+  padding-bottom: 240px;
 }
 
 .about-font {
@@ -123,11 +146,10 @@ export default class SecondSection extends Vue {
 }
 
 .about-company-block {
-  
-  
+
+
   background: linear-gradient(179.94deg, rgba(93, 124, 204, 0.2) 3.9%, rgba(255, 255, 255, 0) 123.19%);
   filter: drop-shadow(-14px 14px 41px rgba(0, 17, 34, 0.5));
-  backdrop-filter: blur(9px);
   border-radius: 7px;
 
 
@@ -136,11 +158,10 @@ export default class SecondSection extends Vue {
   justify-content: flex-start;
   align-items: center;
   align-content: center;
-  
-  
-  
+
+
   padding: 0.5em;
-  
+
   h4 {
     font-size: 0.8em;
     color: white;
@@ -149,7 +170,7 @@ export default class SecondSection extends Vue {
     font-weight: bold;
     text-align: center;
   }
-  
+
   p {
     padding-top: 0.3em;
     font-size: 0.5em;
@@ -159,7 +180,7 @@ export default class SecondSection extends Vue {
     text-align: center;
     color: #FFFFFF;
   }
-  
+
   height: 100%;
 
 }
@@ -167,4 +188,10 @@ export default class SecondSection extends Vue {
 .about-company-icon {
   height: 10vh;
 }
+
+.section-padding {
+  padding-top: 2em;
+}
+
+
 </style>
