@@ -87,13 +87,6 @@ export default class SliderAuto extends Vue {
 </script>
 <style scoped lang="scss">
 
-.slider-section {
-  position: relative;
-  margin-top: 100px;
-  height: 300px;
-  width: auto;
-}
-
 .block {
   height: 400px;
   width: 200px;

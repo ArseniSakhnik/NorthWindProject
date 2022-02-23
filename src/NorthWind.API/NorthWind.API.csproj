@@ -47,4 +47,8 @@
     <None Remove="clientapp\src\views\ContactsPage.vue" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="clientapp\src\assets\cars" />
+  </ItemGroup>
+
 </Project>

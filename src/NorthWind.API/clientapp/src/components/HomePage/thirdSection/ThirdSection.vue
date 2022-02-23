@@ -1,5 +1,5 @@
 ﻿<template>
-  <v-container>
+  <v-container style="margin-top: 250px;">
     <v-row>
       <v-col
           cols="12"
@@ -21,17 +21,26 @@
         <map-svg/>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <h2 class="second-section-font">СВЯЗАТЬСЯ С НАМИ</h2>
+      </v-col>
+      <v-col v-if="isComputer"/>
+    </v-row>
+    <contact-us-section/>
   </v-container>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Vue, Component, Mixins} from "vue-property-decorator";
 import MapSvg from "@/icons/Map.vue";
+import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
+import ContactUsSection from "@/components/HomePage/ContactUsSection/ContactUsSection.vue";
 
 @Component({
-  components: {MapSvg}
+  components: {MapSvg, ContactUsSection}
 })
-export default class ThirdSection extends Vue {
+export default class ThirdSection extends Mixins(BreakPointsMixin) {
 
 }
 </script>

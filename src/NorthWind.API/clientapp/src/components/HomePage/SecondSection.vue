@@ -91,7 +91,9 @@
           </h3>
         </v-col>
       </v-row>
-<!--      <slider-auto/>-->
+      <div class="slider-auto-section">
+        <slider-auto/>
+      </div>
     </v-container>
   </div>
 </template>
@@ -116,6 +118,12 @@ export default class SecondSection extends Vue {
 </script>
 
 <style scoped lang="scss">
+.slider-auto-section {
+  position: absolute;
+  width: calc(100% - 30px);
+  height: 501px;
+}
+
 .second-section {
   height: auto;
   background: linear-gradient(180deg, #003366 0%, #002347 100%),
