@@ -3,26 +3,28 @@
     <div class="auto-section">
       <div ref="sliderContainer" class="slider-container">
         <div ref="slider" class="slider">
-          <div class="slider-item">
-            <div class="block"></div>
-          </div>
-          <div class="slider-item">
-            <div class="block"></div>
-          </div>
-          <div class="slider-item">
-            <div class="block"></div>
-          </div>
-          <div class="slider-item">
-            <div class="block"></div>
-          </div>
-          <div class="slider-item">
-            <div class="block"></div>
-          </div>
-          <div class="slider-item">
-            <div class="block"></div>
-          </div>
-          <div class="slider-item">
-            <div class="block"></div>
+          <div v-for="index in 4">
+            <div
+                class="block" 
+                :style="`background-image: url(${getImage(index)})`"
+            >
+              <h5>БУНКЕРОВОЗЫ</h5>
+              <p>₽ 2 000/час</p>
+              <ul>
+                <li>
+                  <h5>Мощность двигателя</h5>
+                  <p>240 ед.</p>
+                </li>
+                <li>
+                  <h5>Мощность двигателя</h5>
+                  <p>240 ед.</p>
+                </li>
+                <li>
+                  <h5>Мощность двигателя</h5>
+                  <p>240 ед.</p>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -40,6 +42,10 @@ export default class SliderAuto extends Vue {
   clicked: boolean = false;
   xAxis: number = 0;
   x: number = 0;
+  
+  getImage(index: number) {
+    return require(`../assets/cars/car${index}.png`)
+  }
 
   mounted() {
 
@@ -88,9 +94,12 @@ export default class SliderAuto extends Vue {
 <style scoped lang="scss">
 
 .block {
-  height: 400px;
-  width: 200px;
+  height: 438px;
+  width: 360px;
   background-color: black;
+  
+  display: flex;
+  
 }
 
 .slider-container {
@@ -99,7 +108,7 @@ export default class SliderAuto extends Vue {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  height: 300px;
+  height: 500px;
   overflow: hidden;
   cursor: grab;
 }
