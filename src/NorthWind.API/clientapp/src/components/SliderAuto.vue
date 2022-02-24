@@ -5,23 +5,23 @@
         <div ref="slider" class="slider">
           <div v-for="index in 4">
             <div
-                class="block" 
+                class="block"
                 :style="`background-image: url(${getImage(index)})`"
             >
               <h5>БУНКЕРОВОЗЫ</h5>
-              <p>₽ 2 000/час</p>
+              <div class="price-block">₽ 2 000/час</div>
               <ul>
                 <li>
                   <h5>Мощность двигателя</h5>
                   <p>240 ед.</p>
                 </li>
                 <li>
-                  <h5>Мощность двигателя</h5>
-                  <p>240 ед.</p>
+                  <h5>Вместимость кузова</h5>
+                  <p>8 м³</p>
                 </li>
                 <li>
                   <h5>Мощность двигателя</h5>
-                  <p>240 ед.</p>
+                  <p>МАЗ-5337</p>
                 </li>
               </ul>
             </div>
@@ -42,7 +42,7 @@ export default class SliderAuto extends Vue {
   clicked: boolean = false;
   xAxis: number = 0;
   x: number = 0;
-  
+
   getImage(index: number) {
     return require(`../assets/cars/car${index}.png`)
   }
@@ -96,10 +96,57 @@ export default class SliderAuto extends Vue {
 .block {
   height: 438px;
   width: 360px;
-  background-color: black;
-  
+
   display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
   
+  ul {
+    display: flex;
+    padding-left: 0;
+    
+    li {
+      padding: 0.4em 0.4em 0.4em 0.1em;
+
+      h5 {
+        font-family: Montserrat, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 0.3em;
+
+        color: rgba(242, 246, 255, 0.75);
+      }
+      
+      p {
+        font-family: Montserrat, sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 0.3em;
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  h5 {
+    font-family: Raleway, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.4em;
+    letter-spacing: 0.05em;
+  }
+
+  .price-block {
+    background-color: #FF782E;
+    font-family: Raleway, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.5em;
+    letter-spacing: 0.05em;
+    
+    width: 7em;
+    
+    color: #FFFFFF;
+  }
 }
 
 .slider-container {
