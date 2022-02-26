@@ -8,7 +8,7 @@
                 class="block"
                 :style="`background-image: url(${getImage(index)})`"
             >
-              <h5>БУНКЕРОВОЗЫ</h5>
+              <h5 class="text-white">БУНКЕРОВОЗЫ</h5>
               <div class="price-block">₽ 2 000/час</div>
               <ul>
                 <li>
@@ -96,10 +96,7 @@ export default class SliderAuto extends Vue {
 .block {
   height: 438px;
   width: 360px;
-
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
+  padding: 0.5em;
   
   ul {
     display: flex;

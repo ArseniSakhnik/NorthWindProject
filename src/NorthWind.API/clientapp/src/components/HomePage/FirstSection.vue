@@ -14,6 +14,7 @@
           <orange-button
               title="Заказать услугу"
               style="margin-right: 1em"
+              @action="goToPurchase(slideItems[currentSlide].to)"
           />
           <transparent-button/>
         </v-col>
@@ -52,7 +53,7 @@ export default class FirstSection extends Mixins(BreakPointsMixin) {
     },
     {
       title: 'Откачка жидких бытовых отходов',
-      to: '/',
+      to: '/create-vacuum-truck-purchase',
       image: 'services2.png'
     },
     {
@@ -84,6 +85,11 @@ export default class FirstSection extends Mixins(BreakPointsMixin) {
     } else {
       this.currentSlide--
     }
+  }
+
+  goToPurchase(link: string) {
+    console.log(1)
+    this.$router.push(link);
   }
 }
 </script>

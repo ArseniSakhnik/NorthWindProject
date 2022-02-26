@@ -1,15 +1,20 @@
 ﻿<template>
-  <button class="button">
+  <button class="button" @click="action">
     {{ title }}
   </button>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from "vue-property-decorator";
+import {Vue, Component, Prop, Emit} from "vue-property-decorator";
 
 @Component
 export default class OrangeButton extends Vue {
   @Prop({type: String}) title!: string;
+  
+  @Emit()
+  action(e: PointerEvent) {
+    return e;
+  }
 }
 </script>
 <style scoped lang="scss">
