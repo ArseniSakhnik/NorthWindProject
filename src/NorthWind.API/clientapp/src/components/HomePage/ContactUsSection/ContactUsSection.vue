@@ -40,16 +40,26 @@
           outlined
           dense
       />
+      <orange-button
+        title="Отправить"
+        @action="requestCall"
+      />
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts">
 import {Vue, Component} from "vue-property-decorator";
-
-@Component
+import OrangeButton from "@/components/Buttons/OrangeButton.vue";
+@Component({
+  components: {OrangeButton}
+})
 export default class ContactUsSection extends Vue {
   private phoneNumber: string = '';
+  
+  requestCall() {
+    
+  }
 }
 </script>
 <style scoped lang="scss">
