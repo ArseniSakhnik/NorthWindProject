@@ -30,13 +30,19 @@
         <v-col v-if="isComputer"/>
       </v-row>
     </v-container>
-    <div class="relative-container">
-      <div class="margin-section"/>
-      <v-container class="relative-container">
-        <contact-us-section class="contact-us-section"/>
+    <!--    <v-container>-->
+    <!--      <contact-us-section/>-->
+    <!--    </v-container>  -->
+    <div class="background-img">
+      <v-container class="contact-us-section-container">
+        <contact-us-section/>
       </v-container>
-      <div class="background-img"/>
     </div>
+    <!--    <div class="relative-container">-->
+    <!--      <div class="margin-section"/>-->
+    <!--      -->
+    <!--      <div class="background-img"/>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -54,16 +60,20 @@ export default class ThirdSection extends Mixins(BreakPointsMixin) {
 }
 </script>
 <style scoped lang="scss">
-.relative-container {
-  position: relative;
+.background-img {
+  height: 564px;
+  width: 100%;
+  background-color: black;
+  
+  display: flex;
+  align-items: center;
 
-  .background-img {
-    position: absolute;
-    width: 100%;
-    height: 900px;
-    background-color: black;
-    z-index: -1;
-  }
+  background-blend-mode: multiply;
+  background-position: center bottom;
+  background-color: rgba(#1b3648, 0.35);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('/../src/assets/Frame 30.png')
 }
 
 .contact-us-section {
