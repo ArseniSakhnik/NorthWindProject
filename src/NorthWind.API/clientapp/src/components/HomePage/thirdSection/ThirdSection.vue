@@ -56,10 +56,6 @@ export default class ThirdSection extends Mixins(BreakPointsMixin) {
   height: 564px;
   width: 100%;
   background-color: black;
-  
-  //display: flex;
-  //align-items: center;
-  //justify-content: center;
 
   background-blend-mode: multiply;
   background-position: center bottom;
