@@ -1,6 +1,6 @@
 ﻿<template>
   <div>
-    <v-container style="margin-top: 250px;">
+    <v-container style="margin-top: 250px; margin-bottom: 170px">
       <v-row>
         <v-col
             cols="12"
@@ -30,19 +30,11 @@
         <v-col v-if="isComputer"/>
       </v-row>
     </v-container>
-    <!--    <v-container>-->
-    <!--      <contact-us-section/>-->
-    <!--    </v-container>  -->
     <div class="background-img">
       <v-container class="contact-us-section-container">
-        <contact-us-section/>
+        <contact-us-section class="contact-us-section"/>
       </v-container>
     </div>
-    <!--    <div class="relative-container">-->
-    <!--      <div class="margin-section"/>-->
-    <!--      -->
-    <!--      <div class="background-img"/>-->
-    <!--    </div>-->
   </div>
 </template>
 
@@ -65,19 +57,34 @@ export default class ThirdSection extends Mixins(BreakPointsMixin) {
   width: 100%;
   background-color: black;
   
-  display: flex;
-  align-items: center;
+  //display: flex;
+  //align-items: center;
+  //justify-content: center;
 
   background-blend-mode: multiply;
   background-position: center bottom;
   background-color: rgba(#1b3648, 0.35);
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('/../src/assets/Frame 30.png')
-}
-
-.contact-us-section {
-  position: absolute;
+  background-image: url('/../src/assets/Frame 30.png');
+  
+  position: relative;
+  
+  .contact-us-section {
+    position: absolute;
+    top: -170px;
+    left: 20%;
+    right: 20%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media screen and (max-width: 1264px) {
+    .contact-us-section {
+      left: 1em;
+      right: 1em;
+    }
+  }
 }
 
 .third-section {
@@ -111,11 +118,5 @@ export default class ThirdSection extends Mixins(BreakPointsMixin) {
   display: flex;
   align-content: center;
   align-items: center;
-}
-
-.contact-us-section {
-  position: absolute;
-  width: 100%;
-  height: 501px;
 }
 </style>
