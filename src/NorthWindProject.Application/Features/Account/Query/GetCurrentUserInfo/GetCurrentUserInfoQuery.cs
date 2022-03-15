@@ -25,13 +25,22 @@ namespace NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo
 
         public async Task<UserDto> Handle(GetCurrentUserInfoQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Users
-                .Where(user => user.Id == _currentUserService.UserId)
-                .Select(user => new UserDto
-                {
-                    Email = user.UserName
-                })
-                .SingleOrDefaultAsync(cancellationToken);
+            return _currentUserService.UserId == 0
+                ? new UserDto()
+                : await _context.Users
+                    .Where(user => user.Id == _currentUserService.UserId)
+                    .Select(user => new UserDto
+                    {
+                        UserId = user.Id,
+                        Email = user.Email,
+                        EmailConfirmed = user.EmailConfirmed,
+                        PhoneNumber = user.PhoneNumber,
+                        Name = user.Name,
+                        Surname = user.Surname,
+                        MiddleName = user.MiddleName,
+                        FullName = $"{user.Name} {user.MiddleName} {user.Surname}"
+                    })
+                    .SingleOrDefaultAsync(cancellationToken);
         }
     }
 }
