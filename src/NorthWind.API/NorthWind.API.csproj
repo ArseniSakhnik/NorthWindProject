@@ -49,6 +49,7 @@
 
   <ItemGroup>
     <Folder Include="clientapp\src\assets\cars" />
+    <Folder Include="clientapp\src\components\Confirms" />
   </ItemGroup>
 
 </Project>

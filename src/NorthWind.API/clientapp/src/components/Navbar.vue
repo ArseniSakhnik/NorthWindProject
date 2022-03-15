@@ -22,8 +22,13 @@
           color="#fff"
           flat
           @click="isLogInDialogOpened = !isLogInDialogOpened"
-      >Войти
+          v-if="!isUserAuthenticated"
+      >
+        Войти
       </vs-button>
+      <div v-else>
+        {{ fullName }}
+      </div>
       <login-window :is-dialog-opened.sync="isLogInDialogOpened"/>
       <vs-button color="#fff" border>Оставить заявку</vs-button>
     </template>
@@ -34,11 +39,17 @@
 import {Vue, Component, Mixins} from 'vue-property-decorator'
 import LoginWindow from "@/components/HomePage/loginWindow/LoginWindow.vue"
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue"
+import {namespace} from "vuex-class";
+
+const User = namespace('CurrentUserStore');
 
 @Component({
   components: {LoginWindow}
 })
 export default class Navbar extends Mixins(HttpServiceMixin) {
+  @User.Getter('IS_USER_AUTHENTICATED') isUserAuthenticated!: boolean;
+  @User.State('fullName') fullName!: string;
+
   private menuItems: object[] = [
     {
       title: 'Услуги',
@@ -64,46 +75,4 @@ export default class Navbar extends Mixins(HttpServiceMixin) {
 .blur {
   backdrop-filter: blur(3px);
 }
-
-
-//.main-navbar {
-//  width: 100%;
-//  position: fixed;
-//  display: flex;
-//  justify-content: space-between;
-//  padding: 0 1.92vw;
-//  height: 100px;
-//  align-items: center;
-//  transition: 0.6s;
-//
-//  ul {
-//    display: flex;
-//    justify-content: center;
-//
-//    li {
-//      list-style: none;
-//      padding-left: 0.96vw;
-//
-//      .navbar-link {
-//        text-decoration: none;
-//        font-family: 'Raleway', sans-serif;
-//        font-size: 18px;
-//        font-weight: 400;
-//        color: rgba(242, 246, 255, .75);
-//      }
-//
-//      .active {
-//        color: white;
-//      }
-//    }
-//  }
-//}
-//
-//.sticky {
-//  background-color: rgba(255, 255, 255, .5);
-//  -webkit-backdrop-filter: blur(1x);
-//  backdrop-filter: blur(1x);
-//  transition: 0.6s;
-//}
-
 </style>

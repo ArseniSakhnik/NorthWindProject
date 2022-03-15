@@ -7,7 +7,7 @@
     >
       <template #header>
         <h4 class="not-margin">
-          Welcome to <b>Vuesax</b>
+          <b>Здравствуйте!</b>
         </h4>
       </template>
       <div class="con-form">
@@ -16,14 +16,14 @@
             @
           </template>
         </vs-input>
-        <vs-input type="password" v-model="password" placeholder="Password">
+        <vs-input type="password" v-model="password" placeholder="Пароль">
           <template #icon>
             <i class='bx bxs-lock'></i>
           </template>
         </vs-input>
         <div class="flex">
-          <vs-checkbox v-model="rememberMe">Remember me</vs-checkbox>
-          <a href="#">Forgot Password?</a>
+          <vs-checkbox v-model="rememberMe">Запомнить меня?</vs-checkbox>
+          <a href="#">Забыли пароль?</a>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
           </vs-button>
 
           <div class="new">
-            New Here? <a href="#">Create New Account</a>
+            Нет аккаунта? <router-link to="/">Зарегистрируйтесь!</router-link>
           </div>
         </div>
       </template>
