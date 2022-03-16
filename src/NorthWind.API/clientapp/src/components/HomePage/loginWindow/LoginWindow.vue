@@ -33,8 +33,11 @@
             Вход
           </vs-button>
 
+          <p v-if="errorMsg.length" class="error-message">{{ errorMsg }}</p>
+
           <div class="new">
-            Нет аккаунта? <router-link to="/">Зарегистрируйтесь!</router-link>
+            Нет аккаунта?
+            <router-link to="/">Зарегистрируйтесь!</router-link>
           </div>
         </div>
       </template>
@@ -53,6 +56,7 @@ export default class LoginWindow extends Mixins(HttpServiceMixin) {
   private email: string = ''
   private password: string = ''
   private rememberMe: boolean = false
+  private errorMsg: string = '';
 
   private async authenticate() {
     await this.accountService.Login({
@@ -61,6 +65,8 @@ export default class LoginWindow extends Mixins(HttpServiceMixin) {
       rememberMe: this.rememberMe
     }).then(() => {
       this.close();
+    }).catch(response => {
+      this.errorMsg = response.message;
     })
   }
 
@@ -137,6 +143,11 @@ export default class LoginWindow extends Mixins(HttpServiceMixin) {
 
 .vs-input-content:first-child {
   width: 100%;
+}
+
+.error-message {
+  padding-top: 15px;
+  color: red;
 }
 
 </style>
