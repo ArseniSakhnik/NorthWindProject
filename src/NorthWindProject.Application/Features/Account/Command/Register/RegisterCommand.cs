@@ -14,10 +14,12 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
 {
     public class RegisterCommand : IRequest<RegisterResultDto>
     {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string MiddleName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
     }
 
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterResultDto>
@@ -40,6 +42,9 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         {
             var user = new ApplicationUser
             {
+                Name = request.Name,
+                Surname = request.Surname,
+                MiddleName = request.MiddleName,
                 UserName = request.Email,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber

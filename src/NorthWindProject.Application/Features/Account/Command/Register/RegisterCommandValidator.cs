@@ -11,10 +11,6 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 .WithMessage("Введите email")
                 .EmailAddress()
                 .WithMessage("Введите валидный email");
-
-            RuleFor(command => new {Password = command.Password, ConfirmPassword = command.ConfirmPassword})
-                .Must(passwords => passwords.Password == passwords.ConfirmPassword)
-                .WithMessage("Проверьте правильно пароля и подтверждения пароля");
         }
     }
 }

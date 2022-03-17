@@ -11,16 +11,8 @@
         </h4>
       </template>
       <div class="con-form">
-        <vs-input v-model="email" placeholder="Email">
-          <template #icon>
-            @
-          </template>
-        </vs-input>
-        <vs-input type="password" v-model="password" placeholder="Пароль">
-          <template #icon>
-            <i class='bx bxs-lock'></i>
-          </template>
-        </vs-input>
+        <vs-input v-model="email" placeholder="Email"/>
+        <vs-input type="password" v-model="password" placeholder="Пароль"/>
         <div class="flex">
           <vs-checkbox v-model="rememberMe">Запомнить меня?</vs-checkbox>
           <a href="#">Забыли пароль?</a>
