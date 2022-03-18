@@ -23,12 +23,13 @@ namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndP
             ConfirmEmailAndPurchasesDto>
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly AppDbContext _context;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public ConfirmEmailAndPurchasesCommandHandler(UserManager<ApplicationUser> userManager, AppDbContext context)
+        public ConfirmEmailAndPurchasesCommandHandler(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
-            _context = context;
+            _signInManager = signInManager;
         }
 
         public async Task<ConfirmEmailAndPurchasesDto> Handle(ConfirmEmailAndPurchasesCommand request,
@@ -55,24 +56,13 @@ namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndP
                     Message = "Аккаунт подтвержден"
                 };
 
+            await _signInManager.SignInAsync(user, true);
 
-            await ConfirmUserPurchases(user.Id, cancellationToken);
             return new ConfirmEmailAndPurchasesDto
             {
                 IsSucceed = true,
                 Message = "Не удалось подтвердить аккаунт"
             };
-        }
-
-        private async Task ConfirmUserPurchases(int userId, CancellationToken cancellationToken)
-        {
-            var userPurchases = await _context.Purchases
-                .Where(purchase => purchase.ApplicationUserId == userId)
-                .ToListAsync(cancellationToken);
-
-            userPurchases.ForAll(purchase => purchase.IsConfirmed = true);
-
-            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }
