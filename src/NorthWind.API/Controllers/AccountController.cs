@@ -8,6 +8,7 @@ using NorthWind.API.Models;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndPurchases;
 using NorthWindProject.Application.Features.Account.Command.Login;
+using NorthWindProject.Application.Features.Account.Command.Logout;
 using NorthWindProject.Application.Features.Account.Command.Register;
 using NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -16,13 +17,6 @@ namespace NorthWind.API.Controllers
 {
     public class AccountController : ApiController
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-
-        public AccountController(SignInManager<ApplicationUser> signInManager)
-        {
-            _signInManager = signInManager;
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetCurrentUserInfo(CancellationToken cancellationToken)
             => Ok(await Mediator.Send(new GetCurrentUserInfoQuery(), cancellationToken));
@@ -48,10 +42,9 @@ namespace NorthWind.API.Controllers
         }
 
         [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(LogoutCommand command, CancellationToken cancellationToken)
         {
-            await _signInManager.SignOutAsync();
-            return Ok("Вы вышли из системы");
+            return Ok(await Mediator.Send(command, cancellationToken));
         }
 
         [HttpPost("confirm-email")]

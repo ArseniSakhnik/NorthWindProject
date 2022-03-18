@@ -40,10 +40,15 @@
 <script lang="ts">
 import {Vue, Component, PropSync, Mixins} from 'vue-property-decorator'
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue"
+import {namespace} from "vuex-class";
+
+const User = namespace('CurrentUserStore');
 
 @Component
 export default class LoginWindow extends Mixins(HttpServiceMixin) {
   @PropSync('isDialogOpened', {type: Boolean, required: true}) isDialogOpenedSync!: boolean
+  @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => void;
+
 
   private email: string = ''
   private password: string = ''
@@ -55,7 +60,8 @@ export default class LoginWindow extends Mixins(HttpServiceMixin) {
       email: this.email,
       password: this.password,
       rememberMe: this.rememberMe
-    }).then(() => {
+    }).then(async () => {
+      await this.getCurrentUserInfo();
       this.close();
     }).catch(response => {
       this.errorMsg = response.message;

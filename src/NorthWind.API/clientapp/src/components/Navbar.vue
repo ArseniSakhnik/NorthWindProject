@@ -39,10 +39,19 @@
       >
         {{ fullName }}
       </div>
+      <div v-if="isUserAuthenticated">
+        <vs-button
+            color="#fff"
+            flat
+            @click="logout"
+        >
+          Выйти
+        </vs-button>
+      </div>
       <login-window :is-dialog-opened.sync="isLogInDialogOpened"/>
       <vs-button color="#fff" border>Оставить заявку</vs-button>
       <register-confirm
-        :is-active.sync="isRegisterDialogOpened"
+          :is-active.sync="isRegisterDialogOpened"
       />
     </template>
   </vs-navbar>
@@ -62,6 +71,7 @@ const User = namespace('CurrentUserStore');
 })
 export default class Navbar extends Mixins(HttpServiceMixin) {
   @User.Getter('IS_USER_AUTHENTICATED') isUserAuthenticated!: boolean;
+  @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => void;
   @User.State('fullName') fullName!: string;
 
   isRegisterDialogOpened: boolean = false;
@@ -88,6 +98,13 @@ export default class Navbar extends Mixins(HttpServiceMixin) {
 
   openRegisterWindow() {
     this.isRegisterDialogOpened = true;
+  }
+
+  async logout() {
+    await this.accountService.Logout()
+        .then(async () => {
+          await this.getCurrentUserInfo()
+        });
   }
 }
 </script>
