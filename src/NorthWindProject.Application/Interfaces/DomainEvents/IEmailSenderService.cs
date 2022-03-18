@@ -5,6 +5,6 @@ namespace NorthWindProject.Application.Interfaces.DomainEvents
 {
     public interface IEmailSenderService
     {
-        void SendEmailAsync(EmailBodyModel emailBodyModel);
+        Task SendEmailAsync(EmailBodyModel emailBodyModel);
     }
 }

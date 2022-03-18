@@ -47,6 +47,7 @@
               <v-col cols="12">
                 <v-text-field
                     label="Email"
+                    v-model="localData.email"
                     required
                 />
               </v-col>
@@ -100,24 +101,26 @@
 </template>
 
 <script lang="ts">
-
-
 import {Vue, Component, Ref, PropSync, Watch, Mixins} from "vue-property-decorator";
 import {RegisterModel} from "@/services/AccountService/RequestsAccountService";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
+import {namespace} from "vuex-class";
+
+const Alert = namespace('AlertStore');
 
 @Component
 export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
   @PropSync('isActive') isConfirmActive!: boolean;
   @Ref('dialogRef') dialogRef!: any;
+  @Alert.Action('CALL_ALERT') callAlert!: (data: { message: string, delay: number }) => void;
 
   localData: RegisterModel = {
-    email: '',
-    middleName: '',
-    name: '',
-    password: '',
-    phoneNumber: '',
-    surname: '',
+    email: 'sakhnikarseni@mail.ru',
+    middleName: 'Алексеевич',
+    name: 'Арсений',
+    password: 'gfhjkm2288',
+    phoneNumber: '89021945789',
+    surname: 'Сахник',
   }
 
   errorMessage: string = '';
@@ -127,9 +130,15 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
   }
 
   async register() {
-    // await this.accountService.Register(this.localData)
-    //     .then(() => this.toggleRegisterWindow(false))
-    //     .catch((errorMessage => this.errorMessage = errorMessage));
+    await this.accountService.Register(this.localData)
+        .then(() => {
+          this.callAlert({
+            message: 'Для завершения регистрации необходимо подтвердить адрес электронной почты',
+            delay: 7000
+          })
+          this.toggleRegisterWindow(false)
+        })
+        .catch(errorMessage => this.errorMessage = errorMessage.message)
   }
 
   toggleRegisterWindow(isOpen: boolean) {

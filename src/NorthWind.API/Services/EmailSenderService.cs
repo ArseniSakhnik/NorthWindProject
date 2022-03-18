@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper.Internal;
 using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using NorthWind.API.Configuration;
@@ -20,7 +21,7 @@ namespace NorthWind.API.Services
             _senderEmailPassword = emailOptions.Value.SenderEmailPassword;
         }
 
-        public async void SendEmailAsync(EmailBodyModel emailBodyModel)
+        public async Task SendEmailAsync(EmailBodyModel emailBodyModel)
         {
             var emailMessage = new MimeMessage();
 
@@ -39,7 +40,7 @@ namespace NorthWind.API.Services
 
             using var client = new SmtpClient();
 
-            await client.ConnectAsync("smtp.gmail.com", 587, false);
+            await client.ConnectAsync("smtp.mail.ru", 465);
             await client.AuthenticateAsync(_senderEmail, _senderEmailPassword);
             await client.SendAsync(emailMessage);
             await client.DisconnectAsync(true);

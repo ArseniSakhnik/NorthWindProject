@@ -73,6 +73,10 @@ namespace NorthWind.API
                     options.SignIn.RequireConfirmedEmail = true;
                     options.Lockout.AllowedForNewUsers = true;
                     options.User.RequireUniqueEmail = true;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
                 })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();

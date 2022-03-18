@@ -2,15 +2,17 @@
 import {AlertState} from "@/store/Alert/AlertStoreTypes";
 
 export const AlertStore: Module<AlertState, any> = {
+    namespaced: true,
     state: {
         isActive: false,
         alertMessage: '',
         timeoutId: 0
     },
     actions: {
-        CALL_ALERT: function({state}, delay: number) {
+        CALL_ALERT: function ({state}, data: { message: string, delay: number }) {
             state.isActive = true;
-            state.timeoutId = setTimeout(() => state.isActive = false, delay)
+            state.alertMessage = data.message;
+            state.timeoutId = setTimeout(() => state.isActive = false, data.delay)
         }
     }
 }

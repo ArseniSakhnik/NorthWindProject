@@ -61,7 +61,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 var callbackUrl =
                     $"{StringExtensions.GetCallbackUrl(registerRequest)}/confirm-email?userId={user.Id}&code={code}";
 
-                _emailSenderService.SendEmailAsync(new EmailBodyModel
+                await _emailSenderService.SendEmailAsync(new EmailBodyModel
                 {
                     ToEmail = request.Email,
                     Username = "Здравствуйте!",
@@ -71,7 +71,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 });
 
                 await _userManager.AddToRoleAsync(user, RolesEnum.Client.ToString());
-                await _signInManager.SignInAsync(user, false);
+                // await _signInManager.SignInAsync(user, false);
 
                 return new RegisterResultDto
                 {
