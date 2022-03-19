@@ -134,17 +134,16 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
       message: 'Для завершения регистрации необходимо подтвердить адрес электронной почты',
       delay: 7000
     };
-
-    console.log(0);
-
     await this.accountService.Register(this.localData)
         .then(() => {
           console.log(1);
           this.callAlert(alertData)
           this.toggleRegisterWindow(false)
         })
-        .catch(errorMessage => this.errorMessage = errorMessage.message)
-    console.log(1);
+        .catch(errorMessage => {
+          console.log(this.errorMessage);
+          this.errorMessage = errorMessage.message
+        })
   }
 
   toggleRegisterWindow(isOpen: boolean) {

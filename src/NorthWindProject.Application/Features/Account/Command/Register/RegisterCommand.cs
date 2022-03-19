@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -26,7 +27,6 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
     {
         private readonly IEmailSenderService _emailSenderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public RegisterCommandHandler(UserManager<ApplicationUser> userManager, IEmailSenderService emailSenderService,
@@ -34,7 +34,6 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         {
             _userManager = userManager;
             _emailSenderService = emailSenderService;
-            _signInManager = signInManager;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -83,7 +82,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
             return new RegisterResultDto
             {
                 IsSucceed = false,
-                Errors = result.Errors
+                Message = "Не удалось зарегестрироваться"
             };
         }
     }
