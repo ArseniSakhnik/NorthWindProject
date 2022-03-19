@@ -118,7 +118,7 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
     email: 'sakhnikarseni@mail.ru',
     middleName: 'Алексеевич',
     name: 'Арсений',
-    password: 'gfhjkm2288',
+    password: 'парольДаЯ',
     phoneNumber: '89021945789',
     surname: 'Сахник',
   }
@@ -130,15 +130,21 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
   }
 
   async register() {
+    const alertData = {
+      message: 'Для завершения регистрации необходимо подтвердить адрес электронной почты',
+      delay: 7000
+    };
+
+    console.log(0);
+
     await this.accountService.Register(this.localData)
         .then(() => {
-          this.callAlert({
-            message: 'Для завершения регистрации необходимо подтвердить адрес электронной почты',
-            delay: 7000
-          })
+          console.log(1);
+          this.callAlert(alertData)
           this.toggleRegisterWindow(false)
         })
         .catch(errorMessage => this.errorMessage = errorMessage.message)
+    console.log(1);
   }
 
   toggleRegisterWindow(isOpen: boolean) {

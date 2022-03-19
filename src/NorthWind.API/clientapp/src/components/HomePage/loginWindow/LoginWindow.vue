@@ -48,12 +48,12 @@ const User = namespace('CurrentUserStore');
 export default class LoginWindow extends Mixins(HttpServiceMixin) {
   @PropSync('isDialogOpened', {type: Boolean, required: true}) isDialogOpenedSync!: boolean
   @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => void;
+  
 
-
-  private email: string = ''
-  private password: string = ''
-  private rememberMe: boolean = false
-  private errorMsg: string = '';
+  private email: string = 'sakhnikarseni@mail.ru'
+  private password: string = 'парольДаЯ'
+  private rememberMe: boolean = true
+  private errorMsg: string = ''
 
   private async authenticate() {
     await this.accountService.Login({

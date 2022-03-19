@@ -28,7 +28,7 @@ namespace NorthWind.API.Controllers
 
             if (result.IsSucceed) return Ok();
 
-            return BadRequest(result.Message);
+            return BadRequest();
         }
 
         [HttpPost("register")]
@@ -36,9 +36,9 @@ namespace NorthWind.API.Controllers
         {
             var result = await Mediator.Send(command, cancellationToken);
 
-            if (result.IsSucceed) return Ok(result.Message);
+            if (result.IsSucceed) return Ok();
 
-            return BadRequest(result.Errors);
+            return BadRequest();
         }
 
         [HttpPost("logout")]
@@ -54,9 +54,9 @@ namespace NorthWind.API.Controllers
             var result = await Mediator.Send(command, cancellationToken);
 
             if (!result.IsSucceed)
-                return BadRequest(result.Message);
+                return BadRequest();
 
-            return Ok(result.Message);
+            return Ok();
         }
     }
 }
