@@ -48,7 +48,7 @@ namespace NorthWind.API.Controllers
         }
 
         [HttpPost("confirm-email")]
-        public async Task<IActionResult> ConfirmEmailAsync(ConfirmEmailAndPurchasesCommand command,
+        public async Task<IActionResult> ConfirmEmailAsync(ConfirmEmailCommand command,
             CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(command, cancellationToken);

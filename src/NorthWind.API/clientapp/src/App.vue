@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import MainLayout from '@/layouts/MainLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import SystemLayout from "@/layouts/SystemLayout.vue"

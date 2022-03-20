@@ -1,29 +1,17 @@
 using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
 using NorthWind.API.Configuration;
-using NorthWind.API.Models;
 using NorthWind.API.Services;
 using NorthWindProject.Application.Common.Access;
-using NorthWindProject.Application.Common.Exceptions;
 using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Entities.User;
-using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
 using NorthWindProject.Application.Interfaces;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 using NorthWindProject.Application.Middlewares;
@@ -47,7 +35,8 @@ namespace NorthWind.API
             services.Configure<AppSettings>(appSettingsSection);
             var emailSenderService = Configuration.GetSection("EmailSettings");
             services.Configure<EmailSettings>(emailSenderService);
-            
+            var secretSection = Configuration.GetSection("SecretSettings");
+            services.Configure<SecretSettings>(secretSection);
             
             var appSettings = appSettingsSection.Get<AppSettings>();
 
@@ -88,8 +77,7 @@ namespace NorthWind.API
 
             services.AddScoped<IDomainEventService, DomainEventService>();
             services.AddScoped<IEmailSenderService, EmailSenderService>();
-            services.AddScoped<IPurchaseService, PurchaseService>();
-            
+            services.AddScoped<IEncryptionService, EncryptionService>();
             services.AddTransient<ExceptionHandlingMiddleware>();
         }
 
@@ -125,10 +113,7 @@ namespace NorthWind.API
                 {
                     spa.Options.SourcePath = env.IsDevelopment() ? "clientapp" : "dist";
 
-                    if (env.IsDevelopment())
-                    {
-                        spa.UseVueCli(npmScript: "serve");
-                    }
+                    if (env.IsDevelopment()) spa.UseVueCli("serve");
                 });
             });
         }

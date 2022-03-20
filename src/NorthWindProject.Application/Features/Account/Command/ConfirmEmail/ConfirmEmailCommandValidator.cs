@@ -2,9 +2,9 @@
 
 namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndPurchases
 {
-    public class ConfirmEmailAndPurchasesCommandValidator : AbstractValidator<ConfirmEmailAndPurchasesCommand>
+    public class ConfirmEmailCommandValidator : AbstractValidator<ConfirmEmailCommand>
     {
-        public ConfirmEmailAndPurchasesCommandValidator()
+        public ConfirmEmailCommandValidator()
         {
             RuleFor(command => command)
                 .Must(command => command.UserId != null && command.Code != null)

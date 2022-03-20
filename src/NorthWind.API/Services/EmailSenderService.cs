@@ -21,7 +21,7 @@ namespace NorthWind.API.Services
             _senderEmailPassword = emailOptions.Value.SenderEmailPassword;
         }
 
-        public async Task SendEmailAsync(EmailBodyModel emailBodyModel)
+        public async void SendEmailAsync(EmailBodyModel emailBodyModel)
         {
             var emailMessage = new MimeMessage();
 

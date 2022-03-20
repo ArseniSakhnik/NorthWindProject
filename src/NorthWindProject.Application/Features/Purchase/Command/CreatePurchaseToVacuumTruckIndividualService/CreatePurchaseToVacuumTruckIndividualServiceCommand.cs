@@ -6,147 +6,102 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.API.Models;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Common.Extensions;
-using NorthWindProject.Application.Entities.Purchase;
+using NorthWindProject.Application.Entities.Services.VacuumTruckYurService;
 using NorthWindProject.Application.Enums;
-using NorthWindProject.Application.Enums.VacuumTruckServiceEnums;
+using NorthWindProject.Application.Features.ExportDocument.Query.ExportVacuumTruckPurchase;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
-using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
+using NorthWindProject.Application.Interfaces.DomainEvents;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckIndividualService
 {
-    public class CreatePurchaseToVacuumTruckIndividualServiceCommand : BaseCreatePurchaseCommand,
-        IRequest<PurchaseCreateResponseDto>
+    public class CreatePurchaseToVacuumTruckIndividualServiceCommand : BaseCreatePurchaseCommand, IRequest
     {
-        #region Данные для заявки
-
-        public DateTime Date { get; set; } = DateTime.Now;
+        //Серия паспорта
         public string PassportSerialNumber { get; set; }
-        public string PassportNumber { get; set; }
+
+        //Номер паспорта
+        public string PassportId { get; set; }
+
+        //Паспорт выдан
         public string PassportIssued { get; set; }
-        public DateTime PassportIssueDate { get; set; } = DateTime.Now;
-        public string TerritoryAddress { get; set; }
-        public string PassportDivisionNumber { get; set; }
+
+        //Код подразделения
+        public string DivisionCode { get; set; }
+
+        //Адрес регистрации
         public string RegistrationAddress { get; set; }
 
-        public double PriceNumber { get; set; }
-        // public string PriceString { get; set; }
+        //Адрес территории
+        public string TerritoryAddress { get; set; }
 
-        #endregion
+        //Цена
+        public double Price { get; set; }
+
+        //ДоговорДействуетДо
+        public DateTime ContractValidDate { get; set; }
     }
 
     public class
-        CreatePurchaseToVacuumTruckIndividualServiceCommandHandler
-        : IRequestHandler<CreatePurchaseToVacuumTruckIndividualServiceCommand, PurchaseCreateResponseDto>
+        CreatePurchaseToVacuumTruckIndividualServiceCommandHandler : IRequestHandler<
+            CreatePurchaseToVacuumTruckIndividualServiceCommand>
     {
-        private const string ServiceName = "Ассенизатор";
         private readonly AppDbContext _context;
         private readonly IMediator _mediator;
-        private readonly IPurchaseService _purchaseService;
+        private readonly IEmailSenderService _emailSenderService;
 
-        public CreatePurchaseToVacuumTruckIndividualServiceCommandHandler(IMediator mediator, AppDbContext context,
-            IPurchaseService purchaseService)
+        private const string ServiceName = "Ассенизатор";
+
+        public CreatePurchaseToVacuumTruckIndividualServiceCommandHandler(AppDbContext context,
+            IEmailSenderService emailSenderService,
+            IMediator mediator)
         {
-            _mediator = mediator;
             _context = context;
-            _purchaseService = purchaseService;
+            _emailSenderService = emailSenderService;
         }
 
-        public async Task<PurchaseCreateResponseDto> Handle(CreatePurchaseToVacuumTruckIndividualServiceCommand request,
+        public async Task<Unit> Handle(CreatePurchaseToVacuumTruckIndividualServiceCommand request,
             CancellationToken cancellationToken)
-            => await _purchaseService.CreateService(ServiceName, request, CreatePurchase, cancellationToken);
-
-
-        private async Task<Entities.Purchase.Purchase> CreatePurchase(
-            CreatePurchaseToVacuumTruckIndividualServiceCommand data, CancellationToken cancellationToken)
         {
-            var vacuumTruckService = await _context.Services
-                .Include(service => service.DocumentServices)
-                .ThenInclude(service => service.FieldServices)
-                .Where(service => service.Id == (int) ServicesEnum.Ассенизатор)
-                .SingleOrDefaultAsync(cancellationToken);
-
-            var documentService = vacuumTruckService.DocumentServices
-                .SingleOrDefault();
-
-            var fieldsDictionary = documentService.FieldServices
-                .ToDictionary(field => field.FieldTypeId, field => field);
-
-            return new Entities.Purchase.Purchase
+            var date = DateTime.Now;
+            var purchase = new VacuumTruckPurchaseFiz
             {
-                ServiceId = vacuumTruckService.Id,
-                Service = vacuumTruckService,
-                IsConfirmed = false,
-                Fields = new List<FieldPurchase>
-                {
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.День].Id,
-                        Value = data.Date.Day.ToString()
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.Месяц].Id,
-                        Value = data.Date.GetNumberOfMonthInDativeCase()
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.Год].Id,
-                        Value = data.Date.Year.ToString()
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ФИО].Id,
-                        Value = $"{data.Name} {data.Surname} {data.MiddleName}"
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ПаспортСерия].Id,
-                        Value = data.PassportSerialNumber
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ПаспортНомер].Id,
-                        Value = data.PassportNumber
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ПаспортВыдан].Id,
-                        Value = data.PassportIssued
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ПаспортДатаВыдачи].Id,
-                        Value = data.PassportIssueDate.GetFormattedToBlankDate()
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.АдресТерритории].Id,
-                        Value = data.TerritoryAddress
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ПаспортКП].Id,
-                        Value = data.PassportDivisionNumber
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.АдресРегистрации].Id,
-                        Value = data.RegistrationAddress
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ЦенаЧисло].Id,
-                        Value = data.PriceNumber.ToString(CultureInfo.InvariantCulture)
-                    },
-                    new()
-                    {
-                        FieldServiceId = fieldsDictionary[VacuumTruckServiceFieldsTypeEnum.ЦенаСтрока].Id,
-                        Value = ""
-                    }
-                }
+                Day = date.Day.ToString(),
+                Month = date.GetNumberOfMonthInDativeCase(),
+                Year = date.Year.ToString(),
+                FullName = $"{request.Surname} {request.Name} {request.MiddleName}",
+                PassportSerialNumber = request.PassportSerialNumber,
+                PassportId = request.PassportId,
+                PassportIssued = request.PassportIssued,
+                DivisionCode = request.DivisionCode,
+                TerritoryAddress = request.TerritoryAddress,
+                Price = request.Price.ToString(CultureInfo.InvariantCulture),
+                RegistrationAddress = request.RegistrationAddress,
+                PriceString = "Заполнение пока не реализовано",
+                PhoneNumber = request.PhoneNumber,
+                ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate()
             };
+
+            await _context.VacuumTruckPurchases.AddAsync(purchase, cancellationToken);
+
+            var file = await _mediator.Send(new ExportVacuumTruckPurchaseQuery
+            {
+                PurchaseId = purchase.Id
+            }, cancellationToken);
+
+            _emailSenderService.SendEmailAsync(new EmailBodyModel
+            {
+                ToEmail = request.Email,
+                Username = "Здравствуйте!",
+                Subject = "Подтверждение аккаунта",
+                HtmlBody =
+                    $"<div>Договор</div>",
+                Files = new List<FileModel> {file}, 
+            });
+            
+            return Unit.Value;
         }
     }
 }

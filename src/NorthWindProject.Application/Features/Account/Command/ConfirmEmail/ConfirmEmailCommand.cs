@@ -12,34 +12,34 @@ using NorthWindProject.Application.Entities.User;
 
 namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndPurchases
 {
-    public class ConfirmEmailAndPurchasesCommand : IRequest<ConfirmEmailAndPurchasesDto>
+    public class ConfirmEmailCommand : IRequest<ConfirmEmailDto>
     {
         public string UserId { get; set; }
         public string Code { get; set; }
     }
 
     public class
-        ConfirmEmailAndPurchasesCommandHandler : IRequestHandler<ConfirmEmailAndPurchasesCommand,
-            ConfirmEmailAndPurchasesDto>
+        ConfirmEmailCommandHandler : IRequestHandler<ConfirmEmailCommand,
+            ConfirmEmailDto>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public ConfirmEmailAndPurchasesCommandHandler(UserManager<ApplicationUser> userManager,
+        public ConfirmEmailCommandHandler(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        public async Task<ConfirmEmailAndPurchasesDto> Handle(ConfirmEmailAndPurchasesCommand request,
+        public async Task<ConfirmEmailDto> Handle(ConfirmEmailCommand request,
             CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(request.UserId);
 
             if (user is null)
             {
-                return new ConfirmEmailAndPurchasesDto
+                return new ConfirmEmailDto
                 {
                     IsSucceed = false,
                     Message = "Пользователь не найден"
@@ -50,7 +50,7 @@ namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndP
             var result = await _userManager.ConfirmEmailAsync(user, code);
 
             if (!result.Succeeded)
-                return new ConfirmEmailAndPurchasesDto
+                return new ConfirmEmailDto
                 {
                     IsSucceed = false,
                     Message = "Аккаунт подтвержден"
@@ -58,7 +58,7 @@ namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndP
 
             await _signInManager.SignInAsync(user, true);
 
-            return new ConfirmEmailAndPurchasesDto
+            return new ConfirmEmailDto
             {
                 IsSucceed = true,
                 Message = "Не удалось подтвердить аккаунт"

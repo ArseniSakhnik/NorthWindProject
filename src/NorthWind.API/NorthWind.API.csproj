@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BlowFish" Version="1.0.3-preview-99679781" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
     <PackageReference Include="MailKit" Version="3.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />

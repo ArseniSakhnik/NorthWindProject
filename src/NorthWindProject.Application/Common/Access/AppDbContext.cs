@@ -10,8 +10,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Configuration.ConfigurationEntities;
 using NorthWindProject.Application.Common.Services;
-using NorthWindProject.Application.Entities.Purchase;
-using NorthWindProject.Application.Entities.Service;
+using NorthWindProject.Application.Entities.Services.VacuumTruckYurService;
 using NorthWindProject.Application.Entities.Test;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -25,20 +24,14 @@ namespace NorthWindProject.Application.Common.Access
         public DbSet<Test> Tests { get; set; }
 
         #region Service
-
-        public DbSet<DocumentService> DocumentServices { get; set; }
-        public DbSet<FieldService> FieldServices { get; set; }
-        public DbSet<FieldTypeService> FieldTypeServices { get; set; }
-        public DbSet<Service> Services { get; set; }
+        
+        public DbSet<VacuumTruckServiceYur> VacuumTruckServices { get; set; }
 
         #endregion
 
         #region Purchase
 
-        public DbSet<Purchase> Purchases { get; set; }
-        public DbSet<FieldPurchase> FieldPurchases { get; set; }
-        
-        public DbSet<ConfirmPurchase> ConfirmPurchases { get; set; }
+        public DbSet<VacuumTruckPurchaseFiz> VacuumTruckPurchases { get; set; }
 
         #endregion
         
@@ -83,8 +76,6 @@ namespace NorthWindProject.Application.Common.Access
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var hasher = new PasswordHasher<ApplicationUser>();
-
-            builder.ApplyConfiguration(new PurchaseConfiguration());
 
             var assemblyWithConfigurations = GetType().Assembly; //get whatever assembly you want
             builder.ApplyConfigurationsFromAssembly(assemblyWithConfigurations);
