@@ -1,8 +1,10 @@
-﻿using NorthWindProject.Application.Entities.Services.BaseService;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using NorthWindProject.Application.Entities.Services.BaseService;
 
-namespace NorthWindProject.Application.Entities.Services.VacuumTruckYurService
+namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz
 {
-    public class VacuumTruckPurchaseFiz : BasePurchase
+    [Table("VacuumTruckFizPurchase")]
+    public class VacuumTruckFizPurchase : BasePurchase
     {
         //День
         public string Day { get; set; }
@@ -27,13 +29,13 @@ namespace NorthWindProject.Application.Entities.Services.VacuumTruckYurService
 
         //Паспорт дата выдачи 
         public string PassportIssueDate { get; set; }
-        
+
         //КП
-        public string DivisionCode { get; set; } 
+        public string DivisionCode { get; set; }
 
         //Адрес территории
         public string TerritoryAddress { get; set; }
-        
+
         //Адрес регистрации
         public string RegistrationAddress { get; set; }
 
@@ -45,6 +47,7 @@ namespace NorthWindProject.Application.Entities.Services.VacuumTruckYurService
 
         //Номер телефона
         public string PhoneNumber { get; set; }
+
         //Контракт действует до
         public string ContractValidDate { get; set; }
     }

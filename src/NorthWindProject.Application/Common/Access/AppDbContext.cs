@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using NorthWindProject.Application.Common.Configuration.ConfigurationEntities;
 using NorthWindProject.Application.Common.Services;
-using NorthWindProject.Application.Entities.Services.VacuumTruckYurService;
+using NorthWindProject.Application.Entities.Purchases.KgoPurchase;
+using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz;
+using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur;
+using NorthWindProject.Application.Entities.Services.KGOService;
+using NorthWindProject.Application.Entities.Services.VacuumTruckFizServiceFiz;
+using NorthWindProject.Application.Entities.Services.VacuumTruckServiceYur;
 using NorthWindProject.Application.Entities.Test;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -21,27 +24,15 @@ namespace NorthWindProject.Application.Common.Access
     {
         private readonly DomainEventService _domainEventService;
 
-        public DbSet<Test> Tests { get; set; }
-
-        #region Service
-        
-        public DbSet<VacuumTruckServiceYur> VacuumTruckServices { get; set; }
-
-        #endregion
-
-        #region Purchase
-
-        public DbSet<VacuumTruckPurchaseFiz> VacuumTruckPurchases { get; set; }
-
-        #endregion
-        
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
             : base(options)
         {
             _domainEventService = new DomainEventService(mediator);
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public DbSet<Test> Tests { get; set; }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             var result = await base.SaveChangesAsync(cancellationToken);
 
@@ -137,5 +128,21 @@ namespace NorthWindProject.Application.Common.Access
 
             base.OnModelCreating(builder);
         }
+
+        #region Service
+
+        public DbSet<VacuumTruckFizService> FizVacuumTruckServices { get; set; }
+        public DbSet<VacuumTruckYurService> YurVacuumTruckServices { get; set; }
+        public DbSet<KGOService> KgoServices { get; set; }
+
+        #endregion
+
+        #region Purchase
+
+        public DbSet<VacuumTruckFizPurchase> FizVacuumTruckPurchases { get; set; }
+        public DbSet<VacuumTruckYurPurchase> YurVacuumTruckPurchases { get; set; }
+        public DbSet<KGOPurchase> KgoPurchases { get; set; }
+
+        #endregion
     }
 }

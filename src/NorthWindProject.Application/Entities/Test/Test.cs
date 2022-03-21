@@ -8,6 +8,8 @@ namespace NorthWindProject.Application.Entities.Test
     {
         public int TestId { get; set; }
         public string Name { get; set; }
+        
+        public string IgnoreValue { get; set; }
         [NotMapped] public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
     }
 }

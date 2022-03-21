@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NorthWindProject.Application.Entities.Services.BaseService
 {
@@ -9,6 +10,5 @@ namespace NorthWindProject.Application.Entities.Services.BaseService
         public string Description { get; set; }
 
         public List<DocumentService.DocumentService> DocumentServices { get; set; } = new();
-
     }
 }

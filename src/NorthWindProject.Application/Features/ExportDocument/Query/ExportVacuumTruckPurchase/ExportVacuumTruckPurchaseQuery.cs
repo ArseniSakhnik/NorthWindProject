@@ -27,7 +27,7 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportVacuu
 
         public async Task<FileModel> Handle(ExportVacuumTruckPurchaseQuery request, CancellationToken cancellationToken)
         {
-            var purchase = await _context.VacuumTruckPurchases
+            var purchase = await _context.FizVacuumTruckPurchases
                 .Where(purchase => purchase.Id == request.PurchaseId)
                 .SingleOrDefaultAsync(cancellationToken);
 

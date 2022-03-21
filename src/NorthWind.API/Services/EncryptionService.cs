@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-using Elskom.Generic.Libs;
+﻿using Elskom.Generic.Libs;
 using Microsoft.Extensions.Options;
 using NorthWind.API.Configuration;
 using NorthWindProject.Application.Interfaces;

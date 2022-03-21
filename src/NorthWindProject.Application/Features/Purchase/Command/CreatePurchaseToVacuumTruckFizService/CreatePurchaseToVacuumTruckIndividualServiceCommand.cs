@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using NorthWind.API.Models;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Common.Extensions;
-using NorthWindProject.Application.Entities.Services.VacuumTruckYurService;
-using NorthWindProject.Application.Enums;
+using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz;
 using NorthWindProject.Application.Features.ExportDocument.Query.ExportVacuumTruckPurchase;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
-namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckIndividualService
+namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckFizService
 {
     public class CreatePurchaseToVacuumTruckIndividualServiceCommand : BaseCreatePurchaseCommand, IRequest
     {
@@ -66,7 +63,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
             CancellationToken cancellationToken)
         {
             var date = DateTime.Now;
-            var purchase = new VacuumTruckPurchaseFiz
+            var purchase = new VacuumTruckFizPurchase
             {
                 Day = date.Day.ToString(),
                 Month = date.GetNumberOfMonthInDativeCase(),
@@ -84,7 +81,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate()
             };
 
-            await _context.VacuumTruckPurchases.AddAsync(purchase, cancellationToken);
+            await _context.FizVacuumTruckPurchases.AddAsync(purchase, cancellationToken);
 
             var file = await _mediator.Send(new ExportVacuumTruckPurchaseQuery
             {
