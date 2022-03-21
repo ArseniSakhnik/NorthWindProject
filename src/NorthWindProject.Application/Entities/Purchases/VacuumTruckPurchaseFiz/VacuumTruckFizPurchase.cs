@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using NorthWindProject.Application.Entities.Services.BaseService;
+using NorthWindProject.Application.Entities.Services.VacuumTruckFizServiceFiz;
+using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz
 {
     [Table("VacuumTruckFizPurchase")]
-    public class VacuumTruckFizPurchase : BasePurchase
+    public class VacuumTruckFizPurchase : BasePurchase, IEncryptObject
     {
         //День
         public string Day { get; set; }
@@ -50,5 +52,26 @@ namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz
 
         //Контракт действует до
         public string ContractValidDate { get; set; }
+        
+        public int VacuumTruckFizServiceId { get; set; }
+        public VacuumTruckFizService VacuumTruckFizService { get; set; }
+
+        public void DecryptObject(IEncryptionService encryptionService)
+        {
+            PassportSerialNumber = encryptionService.Decipher(PassportSerialNumber);
+            PassportId = encryptionService.Decipher(PassportId);
+            PassportIssued = encryptionService.Decipher(PassportIssued);
+            PassportIssueDate = encryptionService.Decipher(PassportIssueDate);
+            DivisionCode = encryptionService.Decipher(DivisionCode);
+        }
+
+        public void EncryptObject(IEncryptionService encryptionService)
+        {
+            PassportSerialNumber = encryptionService.Decipher(PassportSerialNumber);
+            PassportId = encryptionService.Decipher(PassportId);
+            PassportIssued = encryptionService.Decipher(PassportIssued);
+            PassportIssueDate = encryptionService.Decipher(PassportIssueDate);
+            DivisionCode = encryptionService.Decipher(DivisionCode);
+        }
     }
 }

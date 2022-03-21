@@ -5,6 +5,6 @@ namespace NorthWindProject.Application.Entities.Services.KGOService
 {
     public class KGOService : BaseService.BaseService
     {
-        // public List<KGOPurchase> KgoPurchases { get; set; }
+        public List<KGOPurchase> KgoPurchases { get; set; }
     }
 }

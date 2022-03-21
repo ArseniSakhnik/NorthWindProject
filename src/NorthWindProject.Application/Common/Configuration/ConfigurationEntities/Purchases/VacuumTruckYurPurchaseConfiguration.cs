@@ -4,10 +4,8 @@ using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchases
 {
-    public class VacuumTruckYurPurchaseConfiguration : IEntityTypeConfiguration<VacuumTruckYurPurchase>
+    public class VacuumTruckYurPurchaseConfiguration : BasePurchaseConfiguration<VacuumTruckYurPurchase>
     {
-        public void Configure(EntityTypeBuilder<VacuumTruckYurPurchase> builder)
-        {
-        }
+        
     }
 }

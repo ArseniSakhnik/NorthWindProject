@@ -4,10 +4,7 @@ using NorthWindProject.Application.Entities.Purchases.KgoPurchase;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchases
 {
-    public class KgoPurchaseConfiguration : IEntityTypeConfiguration<KGOPurchase>
+    public class KgoPurchaseConfiguration : BasePurchaseConfiguration<KGOPurchase>
     {
-        public void Configure(EntityTypeBuilder<KGOPurchase> builder)
-        {
-        }
     }
 }

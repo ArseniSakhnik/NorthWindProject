@@ -5,6 +5,6 @@ namespace NorthWindProject.Application.Entities.Services.VacuumTruckFizServiceFi
 {
     public class VacuumTruckFizService : BaseService.BaseService
     {
-        // public List<VacuumTruckPurchaseFiz> VacuumTruckPurchases { get; set; }
+        public List<VacuumTruckFizPurchase> VacuumTruckFizPurchases { get; set; }
     }
 }
