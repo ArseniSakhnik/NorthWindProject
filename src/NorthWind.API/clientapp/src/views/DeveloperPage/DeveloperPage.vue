@@ -1,17 +1,31 @@
 <template>
   <div>
-    <!--    загрузка ассенизатора-->
-    <!--    <div style="height: 500px"></div>-->
-    <!--    <DxFileUploader-->
-    <!--        select-button-text="Select file"-->
-    <!--        label-text=""-->
-    <!--        upload-mode="instantly"-->
-    <!--        :uploadUrl="uploadUrl"-->
-    <!--        upload-method="POST"-->
-    <!--    />-->
-
-    <map-svg/>
-
+    загрузка ассенизатора
+    <div style="height: 500px"></div>
+    Ассенизатор Юридическ
+    <DxFileUploader
+        select-button-text="Select file"
+        label-text=""
+        upload-mode="instantly"
+        :uploadUrl="uploadUrlYur"
+        upload-method="POST"
+    />
+    Ассенизатор Физическ
+    <DxFileUploader
+        select-button-text="Select file"
+        label-text=""
+        upload-mode="instantly"
+        :uploadUrl="uploadUrlFiz"
+        upload-method="POST"
+    />
+    КГО
+    <DxFileUploader
+        select-button-text="Select file"
+        label-text=""
+        upload-mode="instantly"
+        :uploadUrl="uploadUrlKgo"
+        upload-method="POST"
+    />
   </div>
 </template>
 
@@ -34,6 +48,9 @@ import MapSvg from "@/icons/Map.vue";
     }
 )
 export default class DeveloperPage extends Vue {
+  uploadUrlYur: string = 'api/service/load-template/1'
+  uploadUrlFiz: string = 'api/service/load-template/2'
+  uploadUrlKgo: string = 'api/service/load-template/3'
 
 }
 </script>
