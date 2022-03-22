@@ -15,7 +15,7 @@ namespace NorthWindProject.Application.Entities.Services.BaseService
         public ApplicationUser User { get; set; }
 
         public int ServiceId { get; set; }
-        public BaseService Service { get; set; }
+        public Service Service { get; set; }
 
         public IDictionary<string, string> GetNameAndValuesDictionary
         {

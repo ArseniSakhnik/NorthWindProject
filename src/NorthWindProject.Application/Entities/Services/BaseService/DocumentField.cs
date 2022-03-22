@@ -2,7 +2,13 @@
 {
     public class DocumentField
     {
-        public string Name { get; set; }
+        public string PropertyName { get; set; }
         public string BookMarkName { get; set; }
+
+        public DocumentField(string propertyName, string bookMarkName)
+        {
+            PropertyName = propertyName;
+            BookMarkName = bookMarkName;
+        }
     }
 }

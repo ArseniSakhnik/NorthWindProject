@@ -10,5 +10,15 @@ namespace NorthWindProject.Application.Entities.User
         public string Surname { get; set; }
         public string MiddleName { get; set; }
         public List<BasePurchase> Purchases { get; set; } = new();
+
+        public string FullName
+        {
+            get => $"{Surname} {Name} {MiddleName}";
+        }
+
+        public string FullNameShort
+        {
+            get => $"{Surname} {Name[..1]} {MiddleName[..1]}";
+        }
     }
 }

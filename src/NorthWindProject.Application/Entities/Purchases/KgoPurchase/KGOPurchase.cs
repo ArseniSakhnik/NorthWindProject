@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using NorthWindProject.Application.Entities.Services.BaseService;
-using NorthWindProject.Application.Entities.Services.KGOService;
 
 namespace NorthWindProject.Application.Entities.Purchases.KgoPurchase
 {
@@ -90,8 +89,5 @@ namespace NorthWindProject.Application.Entities.Purchases.KgoPurchase
 
         //(ВремяОказанияУслугДо)
         public string EndTime { get; set; }
-        
-        public int KgoServiceId { get; set; }
-        public KGOService KgoService { get; set; }
     }
 }

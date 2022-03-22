@@ -15,6 +15,5 @@ namespace NorthWind.API.Controllers
             CreatePurchaseToVacuumTruckIndividualServiceCommand command, CancellationToken cancellationToken)
             => Ok(await Mediator.Send(command, cancellationToken));
         
-        
     }
 }

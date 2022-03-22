@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using NorthWindProject.Application.Entities.Services.BaseService;
-using NorthWindProject.Application.Entities.Services.VacuumTruckServiceYur;
 
 namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur
 {
@@ -57,9 +56,5 @@ namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur
         
         //(КороткоеИмяЗаказчика)
         public string ShortNameClient { get; set; }
-
-        
-        public int VacuumTruckYurPurchaseId { get; set; }
-        public VacuumTruckYurService VacuumTruckYurService { get; set; } 
     }
 }

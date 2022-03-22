@@ -48,7 +48,7 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportPurch
                 }
                 
                 booksMarkNavigator.MoveToBookmark(mark.Name);
-                booksMarkNavigator.InsertText(namesAndValues[documentField.Name]);
+                booksMarkNavigator.InsertText(namesAndValues[documentField.PropertyName]);
             }
             
             document.SaveToStream(stream, FileFormat.Doc);

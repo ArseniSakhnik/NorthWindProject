@@ -1,20 +1,34 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Newtonsoft.Json;
 
 namespace NorthWindProject.Application.Common.Extensions
 {
     public static class PropertyBuilderExtension
     {
-        public static PropertyBuilder<string> HasEncryptDecrypt(
-            this PropertyBuilder<string> extension,
-            Func<string, string> encrypt,
-            Func<string, string> decrypt)
+        public static PropertyBuilder<T> HasJsonConversion<T>(this PropertyBuilder<T> propertyBuilder) where T : class, new()
         {
-            return extension.HasConversion
+            var converter = new ValueConverter<T, string>
             (
-                v => encrypt(v),
-                v => decrypt(v)
+                v => JsonConvert.SerializeObject(v),
+                v => JsonConvert.DeserializeObject<T>(v) ?? new T()
             );
+
+            var comparer = new ValueComparer<T>
+            (
+                (l, r) => JsonConvert.SerializeObject(l) == JsonConvert.SerializeObject(r),
+                v => v == null ? 0 : JsonConvert.SerializeObject(v).GetHashCode(),
+                v => JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(v))
+            );
+
+            propertyBuilder.HasConversion(converter);
+            propertyBuilder.Metadata.SetValueConverter(converter);
+            propertyBuilder.Metadata.SetValueComparer(comparer);
+
+            return propertyBuilder;
         }
     }
 }
