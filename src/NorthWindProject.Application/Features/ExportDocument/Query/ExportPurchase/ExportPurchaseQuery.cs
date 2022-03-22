@@ -3,10 +3,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NorthWind.API.Models;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Entities.Purchases.BasePurchase;
 using NorthWindProject.Application.Entities.Services.BaseService;
+using NorthWindProject.Application.Interfaces;
 using Spire.Doc;
 using Spire.Doc.Documents;
 
@@ -14,29 +16,41 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportPurch
 {
     public class ExportPurchaseQuery : IRequest<FileModel>
     {
-        public BasePurchase Purchase { get; set; }
+        public int PurchaseId { get; set; }
     }
     
     public class ExportPurchaseQueryHandler : IRequestHandler<ExportPurchaseQuery, FileModel>
     {
         private readonly AppDbContext _context;
+        private readonly IEncryptionService _encryptionService;
 
-        public ExportPurchaseQueryHandler(AppDbContext context)
+        public ExportPurchaseQueryHandler(AppDbContext context, IEncryptionService encryptionService)
         {
             _context = context;
+            _encryptionService = encryptionService;
         }
 
         public async Task<FileModel> Handle(ExportPurchaseQuery request, CancellationToken cancellationToken)
         {
+            var purchase = await _context.Purchases
+                .Include(purchase => purchase.Service)
+                .ThenInclude(service => service.DocumentServices)
+                .SingleOrDefaultAsync(purchase => purchase.Id == request.PurchaseId, cancellationToken);
+
+            if (purchase is IEncryptObject encryptObject)
+            {
+                encryptObject.DecryptObject(_encryptionService);
+            }
+            
             //todo возможно появление дополнительных документов
-            var documentData = request.Purchase.Service.DocumentServices.First();
+            var documentData = purchase.Service.DocumentServices.First();
             var documentContent = documentData.Content;
 
             await using var stream = new MemoryStream(documentContent);
             var document = new Document(stream);
             var booksMarkNavigator = new BookmarksNavigator(document);
             var bookMarks = booksMarkNavigator.Document.Bookmarks;
-            var namesAndValues = request.Purchase.GetNameAndValuesDictionary;
+            var namesAndValues = purchase.GetNameAndValuesDictionary;
             
             foreach (Bookmark mark in bookMarks)
             {

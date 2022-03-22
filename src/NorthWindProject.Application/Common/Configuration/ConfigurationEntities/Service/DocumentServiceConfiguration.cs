@@ -14,6 +14,11 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
         public void Configure(EntityTypeBuilder<Entities.Services.DocumentService.DocumentService> builder)
         {
             builder
+                .HasMany(service => service.Purchases)
+                .WithOne(purchase => purchase.DocumentService)
+                .HasForeignKey(purchase => purchase.DocumentServiceId);
+
+            builder
                 .Property(e => e.DocumentFields)
                 .HasJsonConversion();
 

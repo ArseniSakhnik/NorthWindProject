@@ -5,7 +5,7 @@ using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchases
 {
-    public class VacuumTruckFizPurchaseConfiguration : BasePurchaseConfiguration<VacuumTruckFizPurchase>
+    public class VacuumTruckFizPurchaseConfiguration : PurchaseConfiguration<VacuumTruckFizPurchase>
     {
         
     }

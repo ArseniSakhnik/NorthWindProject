@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using NorthWind.API.Configuration;
 using NorthWind.API.Services;
 using NorthWindProject.Application.Common.Access;
@@ -38,7 +39,7 @@ namespace NorthWind.API
             services.Configure<EmailSettings>(emailSenderService);
             var secretSection = Configuration.GetSection("SecretSettings");
             services.Configure<SecretSettings>(secretSection);
-            
+
             var appSettings = appSettingsSection.Get<AppSettings>();
 
             var connectionString = appSettings.Connection;
@@ -80,6 +81,9 @@ namespace NorthWind.API
             services.AddScoped<IEmailSenderService, EmailSenderService>();
             services.AddScoped<IEncryptionService, EncryptionService>();
             services.AddTransient<ExceptionHandlingMiddleware>();
+
+            services.AddControllers();
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Kal", Version = "v1"}); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,11 +92,10 @@ namespace NorthWind.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Kal"));
             }
 
             app.UseRouting();
@@ -113,7 +116,7 @@ namespace NorthWind.API
                 app.UseSpa(spa =>
                 {
                     spa.Options.SourcePath = env.IsDevelopment() ? "clientapp" : "dist";
-
+            
                     if (env.IsDevelopment()) spa.UseVueCli("serve");
                 });
             });

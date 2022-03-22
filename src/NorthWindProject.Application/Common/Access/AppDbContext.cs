@@ -77,12 +77,6 @@ namespace NorthWindProject.Application.Common.Access
                     Id = 1,
                     Name = "Admin",
                     NormalizedName = "Admin".ToUpper()
-                },
-                new()
-                {
-                    Id = 2,
-                    Name = "Client",
-                    NormalizedName = "Client".ToUpper()
                 }
             });
 
@@ -97,17 +91,6 @@ namespace NorthWindProject.Application.Common.Access
                     PasswordHash = hasher.HashPassword(null, "admin"),
                     LockoutEnabled = true,
                     SecurityStamp = Guid.NewGuid().ToString("D")
-                },
-                new()
-                {
-                    Id = 2,
-                    UserName = "Client",
-                    NormalizedUserName = "Client".ToUpper(),
-                    EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "client"),
-                    LockoutEnabled = true,
-                    SecurityStamp = Guid.NewGuid().ToString("D"),
-                    Email = "sakhnikarseni@Mail.ru"
                 }
             });
 
@@ -117,11 +100,6 @@ namespace NorthWindProject.Application.Common.Access
                 {
                     RoleId = 1,
                     UserId = 1
-                },
-                new()
-                {
-                    RoleId = 2,
-                    UserId = 2
                 }
             });
 
@@ -136,7 +114,7 @@ namespace NorthWindProject.Application.Common.Access
 
         #region Purchase
 
-        public DbSet<BasePurchase> BasePurchases { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
         public DbSet<VacuumTruckFizPurchase> FizVacuumTruckPurchases { get; set; }
         public DbSet<VacuumTruckYurPurchase> YurVacuumTruckPurchases { get; set; }
         public DbSet<KGOPurchase> KgoPurchases { get; set; }

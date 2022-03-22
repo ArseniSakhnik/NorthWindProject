@@ -15,7 +15,7 @@ namespace NorthWindProject.Application.Features.Purchase.Events
 {
     public class SendEmailPurchaseAlertEvent : DomainEvent
     {
-        public BasePurchase Purchase { get; set; }
+        public Entities.Purchases.BasePurchase.Purchase Purchase { get; set; }
         public string Email { get; set; }
     }
 
@@ -41,7 +41,7 @@ namespace NorthWindProject.Application.Features.Purchase.Events
 
             var purchaseFile = await _mediator.Send(new ExportPurchaseQuery
             {
-                Purchase = purchase,
+                PurchaseId = purchase.Id,
             }, cancellationToken);
 
             _emailSenderService.SendEmailAsync(new EmailBodyModel

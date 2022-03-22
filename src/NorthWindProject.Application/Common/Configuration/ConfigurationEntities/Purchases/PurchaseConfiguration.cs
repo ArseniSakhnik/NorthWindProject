@@ -5,12 +5,11 @@ using NorthWindProject.Application.Entities.Services.BaseService;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchases
 {
-    public abstract class BasePurchaseConfiguration<TBase> : IEntityTypeConfiguration<TBase> where TBase : BasePurchase
+    public abstract class PurchaseConfiguration<TBase> : IEntityTypeConfiguration<TBase> where TBase : Purchase
     {
         public virtual void Configure(EntityTypeBuilder<TBase> builder)
         {
             builder.Ignore(purchase => purchase.GetNameAndValuesDictionary);
-            builder.Ignore(purchase => purchase.DomainEvents);
         }
     }
 }

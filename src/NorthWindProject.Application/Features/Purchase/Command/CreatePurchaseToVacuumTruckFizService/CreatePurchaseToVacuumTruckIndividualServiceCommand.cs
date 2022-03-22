@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Common.Extensions;
 using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz;
+using NorthWindProject.Application.Enums;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
 using NorthWindProject.Application.Features.Purchase.Events;
 using NorthWindProject.Application.Interfaces;
@@ -65,10 +67,18 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
             CancellationToken cancellationToken)
         {
             var date = DateTime.Now;
-            
+
             var currentUser = await _context.Users
+                .AsNoTracking()
                 .SingleOrDefaultAsync(user => user.Id == _currentUserService.UserId, cancellationToken);
-            
+
+            //todo пока что один сервис
+            var service =
+                await _context.Services
+                    .AsNoTracking()
+                    .Include(service => service.DocumentServices)
+                    .SingleOrDefaultAsync(service => service.Id == ServicesEnum.АссенизаторФиз, cancellationToken);
+
             var purchase = new VacuumTruckFizPurchase
             {
                 Day = date.Day.ToString(),
@@ -86,7 +96,11 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 //todo реализовать
                 PriceString = "",
                 PhoneNumber = request.PhoneNumber,
-                ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate()
+                ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate(),
+
+                UserId = currentUser.Id,
+                ServiceId = service.Id,
+                DocumentServiceId = service.DocumentServices.First().Id
             };
 
             purchase.EncryptObject(_encryptionService);
@@ -96,8 +110,8 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 Purchase = purchase,
             });
             currentUser.Purchases.Add(purchase);
-            
-            
+
+
             await _context.FizVacuumTruckPurchases.AddAsync(purchase, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 

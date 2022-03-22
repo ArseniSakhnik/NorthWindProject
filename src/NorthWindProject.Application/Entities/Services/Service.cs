@@ -9,7 +9,7 @@ namespace NorthWindProject.Application.Entities.Services
     {
         public ServicesEnum Id { get; set; }
         
-        public List<BasePurchase> Purchases { get; set; }
+        public List<Purchase> Purchases { get; set; }
         public List<DocumentService.DocumentService> DocumentServices { get; set; }
     }
 }

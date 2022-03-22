@@ -12,7 +12,7 @@ namespace NorthWindProject.Application.Entities.Services.DocumentService
         public ServicesEnum ServiceId { get; set; }
         public Service Service { get; set; }
         
-        public List<BasePurchase> Purchases { get; set; }
+        public List<Purchase> Purchases { get; set; }
         public byte[] Content { get; set; }
         public List<DocumentField> DocumentFields { get; set; }
     }

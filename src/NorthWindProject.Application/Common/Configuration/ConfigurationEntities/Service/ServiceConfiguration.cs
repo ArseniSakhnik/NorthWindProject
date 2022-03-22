@@ -9,6 +9,11 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
     {
         public void Configure(EntityTypeBuilder<Entities.Services.Service> builder)
         {
+            builder
+                .HasMany(service => service.Purchases)
+                .WithOne(purchase => purchase.Service)
+                .HasForeignKey(purchase => purchase.ServiceId);
+            
             builder.HasData(new List<Entities.Services.Service>
             {
                 new()

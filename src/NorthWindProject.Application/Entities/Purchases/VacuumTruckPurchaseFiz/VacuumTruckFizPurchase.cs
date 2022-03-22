@@ -5,7 +5,7 @@ using NorthWindProject.Application.Interfaces;
 namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz
 {
     [Table("VacuumTruckFizPurchase")]
-    public class VacuumTruckFizPurchase : BasePurchase.BasePurchase, IEncryptObject
+    public class VacuumTruckFizPurchase : BasePurchase.Purchase, IEncryptObject
     {
         //День
         public string Day { get; set; }
