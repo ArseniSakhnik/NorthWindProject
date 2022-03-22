@@ -11,9 +11,9 @@ namespace NorthWind.API.Controllers
     public class PurchaseController : ApiController
     {
         [HttpPost("create-vacuum-truck-fiz-individual-purchase")]
-        public async Task<IActionResult> CreatePurchaseToVacuumTruckIndividualService(
+        public async Task<IActionResult> CreatePurchaseToVacuumTruckFizService(
             CreatePurchaseToVacuumTruckIndividualServiceCommand command, CancellationToken cancellationToken)
             => Ok(await Mediator.Send(command, cancellationToken));
-        
+
     }
 }

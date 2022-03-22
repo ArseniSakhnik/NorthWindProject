@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using NorthWindProject.Application.Entities.Purchases.BasePurchase;
 using NorthWindProject.Application.Entities.Services.BaseService;
 
 namespace NorthWindProject.Application.Entities.User

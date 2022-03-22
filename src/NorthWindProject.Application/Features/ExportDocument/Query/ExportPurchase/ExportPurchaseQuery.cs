@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NorthWind.API.Models;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Entities.Purchases.BasePurchase;
 using NorthWindProject.Application.Entities.Services.BaseService;
 using Spire.Doc;
 using Spire.Doc.Documents;

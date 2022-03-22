@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Services;
+using NorthWindProject.Application.Entities.Purchases.BasePurchase;
 using NorthWindProject.Application.Entities.Purchases.KgoPurchase;
 using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz;
 using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur;
@@ -135,6 +136,7 @@ namespace NorthWindProject.Application.Common.Access
 
         #region Purchase
 
+        public DbSet<BasePurchase> BasePurchases { get; set; }
         public DbSet<VacuumTruckFizPurchase> FizVacuumTruckPurchases { get; set; }
         public DbSet<VacuumTruckYurPurchase> YurVacuumTruckPurchases { get; set; }
         public DbSet<KGOPurchase> KgoPurchases { get; set; }

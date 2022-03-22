@@ -4,7 +4,7 @@ using NorthWindProject.Application.Entities.Services.BaseService;
 namespace NorthWindProject.Application.Entities.Purchases.KgoPurchase
 {
     [Table("KGOPurchase")]
-    public class KGOPurchase : BasePurchase
+    public class KGOPurchase : BasePurchase.BasePurchase
     {
         //(День)
         public string Day { get; set; }

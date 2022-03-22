@@ -4,7 +4,7 @@ using NorthWindProject.Application.Entities.Services.BaseService;
 namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur
 {
     [Table("VacuumTruckYurPurchase")]
-    public class VacuumTruckYurPurchase : BasePurchase
+    public class VacuumTruckYurPurchase : BasePurchase.BasePurchase
     {
         //День (День)
         public string Day { get; set; }

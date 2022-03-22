@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using NorthWindProject.Application.Entities.Purchases.BasePurchase;
 using NorthWindProject.Application.Entities.Services.BaseService;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchases
@@ -9,6 +10,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
         public virtual void Configure(EntityTypeBuilder<TBase> builder)
         {
             builder.Ignore(purchase => purchase.GetNameAndValuesDictionary);
+            builder.Ignore(purchase => purchase.DomainEvents);
         }
     }
 }

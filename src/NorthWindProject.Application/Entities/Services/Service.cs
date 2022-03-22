@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NorthWindProject.Application.Entities.Purchases.BasePurchase;
 using NorthWindProject.Application.Entities.Services.BaseService;
 using NorthWindProject.Application.Enums;
 

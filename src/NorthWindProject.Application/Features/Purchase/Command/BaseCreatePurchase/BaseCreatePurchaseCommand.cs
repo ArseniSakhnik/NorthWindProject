@@ -2,6 +2,7 @@
 {
     public abstract class BaseCreatePurchaseCommand
     {
+        //Email
         public string Email { get; set; }
         //Номер телефона
         public string PhoneNumber { get; set; }

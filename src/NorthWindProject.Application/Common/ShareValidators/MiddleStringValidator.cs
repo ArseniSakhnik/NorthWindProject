@@ -7,7 +7,7 @@ namespace NorthWindProject.Application.Common.ShareValidators
         public MiddleStringValidator()
         {
             RuleFor(str => str.Length)
-                .LessThanOrEqualTo(50);
+                .LessThanOrEqualTo(80);
         }
     }
 }
