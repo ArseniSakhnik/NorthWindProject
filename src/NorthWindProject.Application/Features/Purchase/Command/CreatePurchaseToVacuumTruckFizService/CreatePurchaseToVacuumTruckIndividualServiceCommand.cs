@@ -72,7 +72,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 .AsNoTracking()
                 .SingleOrDefaultAsync(user => user.Id == _currentUserService.UserId, cancellationToken);
 
-            //todo пока что один сервис
+            //todo пока что один документсервис
             var service =
                 await _context.Services
                     .AsNoTracking()
