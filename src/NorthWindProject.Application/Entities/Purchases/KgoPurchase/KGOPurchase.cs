@@ -6,14 +6,7 @@ namespace NorthWindProject.Application.Entities.Purchases.KgoPurchase
     [Table("KGOPurchase")]
     public class KGOPurchase : BasePurchase.Purchase
     {
-        //(День)
-        public string Day { get; set; }
-
-        //(Месяц)
-        public string Month { get; set; }
-
-        //(Год)
-        public string Year { get; set; }
+        
 
         ////(Заказчик)
         public string FullNameClient { get; set; }

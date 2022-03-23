@@ -6,15 +6,6 @@ namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur
     [Table("VacuumTruckYurPurchase")]
     public class VacuumTruckYurPurchase : BasePurchase.Purchase
     {
-        //День (День)
-        public string Day { get; set; }
-
-        //Месяц (Месяц)
-        public string Month { get; set; }
-
-        //Год (Год)
-        public string Year { get; set; }
-
         //Например ИП Морозов А.Д. (заказчик) individual entrepreneur (КороткоеИмяПредпринимателя)
         public string IndividualEntrepreneurShortName { get; set; }
 

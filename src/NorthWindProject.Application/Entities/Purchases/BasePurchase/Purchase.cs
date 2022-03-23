@@ -17,6 +17,15 @@ namespace NorthWindProject.Application.Entities.Purchases.BasePurchase
     public abstract class Purchase : IHasDomainEvent
     {
         public int Id { get; set; }
+        
+        //(День)
+        public string Day { get; set; }
+
+        //(Месяц)
+        public string Month { get; set; }
+
+        //(Год)
+        public string Year { get; set; }
 
         public int UserId { get; set; }
         public ApplicationUser User { get; set; }

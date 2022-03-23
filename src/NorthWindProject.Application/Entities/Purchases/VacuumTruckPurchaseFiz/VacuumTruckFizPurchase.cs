@@ -7,15 +7,6 @@ namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz
     [Table("VacuumTruckFizPurchase")]
     public class VacuumTruckFizPurchase : BasePurchase.Purchase, IEncryptObject
     {
-        //День
-        public string Day { get; set; }
-
-        //Месяц
-        public string Month { get; set; }
-
-        //Год
-        public string Year { get; set; }
-
         //Физическое лицо
         public string FullName { get; set; }
 
