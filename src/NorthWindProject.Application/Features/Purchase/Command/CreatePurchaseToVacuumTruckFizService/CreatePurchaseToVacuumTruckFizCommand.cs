@@ -16,7 +16,7 @@ using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckFizService
 {
-    public class CreatePurchaseToVacuumTruckIndividualServiceCommand : BaseCreatePurchaseCommand, IRequest
+    public class CreatePurchaseToVacuumTruckFizCommand : BaseCreatePurchaseCommand, IRequest
     {
         //Серия паспорта
         public string PassportSerialNumber { get; set; } = "МЕСТО ДЛЯ ЗАПОЛНЕНИЯ";
@@ -47,17 +47,17 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
     }
 
     public class
-        CreatePurchaseToVacuumTruckIndividualServiceCommandHandler : IRequestHandler<
-            CreatePurchaseToVacuumTruckIndividualServiceCommand>
+        CreatePurchaseToVacuumTruckFizCommandHandler : IRequestHandler<
+            CreatePurchaseToVacuumTruckFizCommand>
     {
         private readonly IPurchaseService _purchaseService;
 
-        public CreatePurchaseToVacuumTruckIndividualServiceCommandHandler(IPurchaseService purchaseService)
+        public CreatePurchaseToVacuumTruckFizCommandHandler(IPurchaseService purchaseService)
         {
             _purchaseService = purchaseService;
         }
 
-        public async Task<Unit> Handle(CreatePurchaseToVacuumTruckIndividualServiceCommand request,
+        public async Task<Unit> Handle(CreatePurchaseToVacuumTruckFizCommand request,
             CancellationToken cancellationToken)
         {
             await _purchaseService.CreatePurchaseAsync(
@@ -70,7 +70,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
         }
 
         private VacuumTruckFizPurchase CreateVacuumTruckFizPurchase(
-            CreatePurchaseToVacuumTruckIndividualServiceCommand request)
+            CreatePurchaseToVacuumTruckFizCommand request)
         {
             return new VacuumTruckFizPurchase
             {

@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using NorthWindProject.Application.Entities.Services.BaseService;
+using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur
 {
     [Table("VacuumTruckYurPurchase")]
-    public class VacuumTruckYurPurchase : BasePurchase.Purchase
+    public class VacuumTruckYurPurchase : BasePurchase.Purchase, IEncryptObject
     {
         //Например ИП Морозов А.Д. (заказчик) individual entrepreneur (КороткоеИмяПредпринимателя)
         public string IndividualEntrepreneurShortName { get; set; }
@@ -47,5 +48,18 @@ namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur
         
         //(КороткоеИмяЗаказчика)
         public string ShortNameClient { get; set; }
+        public void DecryptObject(IEncryptionService encryptionService)
+        {
+            OGRN = encryptionService.Encrypt(OGRN);
+            INN = encryptionService.Encrypt(INN);
+            KPP = encryptionService.Encrypt(KPP);
+        }
+
+        public void EncryptObject(IEncryptionService encryptionService)
+        {
+            OGRN = encryptionService.Decipher(OGRN);
+            INN = encryptionService.Decipher(INN);
+            KPP = encryptionService.Decipher(KPP);
+        }
     }
 }

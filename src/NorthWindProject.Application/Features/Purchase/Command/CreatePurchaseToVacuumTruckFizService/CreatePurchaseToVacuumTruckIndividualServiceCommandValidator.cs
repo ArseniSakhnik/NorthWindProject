@@ -4,7 +4,7 @@ using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckFizService
 {
-    public class CreatePurchaseToVacuumTruckIndividualServiceCommandValidator : AbstractValidator<CreatePurchaseToVacuumTruckIndividualServiceCommand>
+    public class CreatePurchaseToVacuumTruckIndividualServiceCommandValidator : AbstractValidator<CreatePurchaseToVacuumTruckFizCommand>
     {
         public CreatePurchaseToVacuumTruckIndividualServiceCommandValidator(ICurrentUserService currentUserService)
         {
@@ -13,32 +13,25 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 .WithMessage("Необходимо аутентифицироваться для отправки заявки");
 
             RuleFor(command => command.PassportSerialNumber)
-                .SetValidator(new ShortStringValidator())
-                .WithMessage("Недопустимая длина символов");
+                .SetValidator(new StringValidator());
 
             RuleFor(command => command.PassportId)
-                .SetValidator(new ShortStringValidator())
-                .WithMessage("Недопустимая длина символов");
+                .SetValidator(new StringValidator());
 
             RuleFor(command => command.PassportIssued)
-                .SetValidator(new ShortStringValidator())
-                .WithMessage("Недопустимая длина символов");
+                .SetValidator(new StringValidator());
 
             RuleFor(command => command.PassportIssueDate)
-                .SetValidator(new ShortStringValidator())
-                .WithMessage("Недопустимая длина символов");
+                .SetValidator(new StringValidator());
 
             RuleFor(command => command.DivisionCode)
-                .SetValidator(new ShortStringValidator())
-                .WithMessage("Недопустимая длина символов");
+                .SetValidator(new StringValidator());
 
             RuleFor(command => command.RegistrationAddress)
-                .SetValidator(new LongStringValidator())
-                .WithMessage("Недопустимая длина символов");
+                .SetValidator(new StringValidator());
 
             RuleFor(command => command.TerritoryAddress)
-                .SetValidator(new LongStringValidator())
-                .WithMessage("Недопустимая длина символов");
+                .SetValidator(new StringValidator());
         }
     }
 }
