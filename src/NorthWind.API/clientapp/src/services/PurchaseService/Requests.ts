@@ -1,18 +1,19 @@
 ﻿export interface BaseCreatePurchaseDto {
-	email: string,
-	phoneNumber: string
+    email: string
+    phoneNumber: string
+    name: string
+    surname: string
+    middleName: string
 }
 
 export interface PurchaseToVacuumTruckIndividualDto extends BaseCreatePurchaseDto {
-	name: string,
-	surname: string,
-	middleName: string,
-	passportSerialNumber: string,
-	passportNumber: string,
-	passportIssued: string,
-	passportIssueDate: string,
-	territoryAddress: string,
-	passportDivisionNumber: string,
-	registrationAddress: string,
-	distance: number
+    passportSerialNumber: string
+    passportId: string
+    passportIssued: string
+    passportIssueDate: string
+    divisionCode: string
+    registrationAddress: string
+    territoryAddress: string
+    price: string
+    contractValidDate: string
 }
