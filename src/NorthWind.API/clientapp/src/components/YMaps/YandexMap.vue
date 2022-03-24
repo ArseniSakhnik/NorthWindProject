@@ -67,10 +67,10 @@ export default class YandexMap extends Vue {
     })
 
     // Если вы хотите задать неизменяемую точку "откуда", раскомментируйте код ниже.
-    /*routePanelControl.routePanel.state.set({
+    routePanelControl.routePanel.state.set({
         fromEnabled: false,
-        from: 'Москва, Льва Толстого 16'
-     });*/
+        from: 'Республика Крым, г. Симферополь, ул. Буденного д.32, литера "Ф"'
+     });
 
     routePanelControl.routePanel.options.set({
       types: {auto: true}

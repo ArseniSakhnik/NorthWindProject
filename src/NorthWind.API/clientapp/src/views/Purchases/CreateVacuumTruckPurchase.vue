@@ -15,37 +15,33 @@
                 :surname.sync="localData.surname"
                 :middleName.sync="localData.middleName"
             />
-            <!--            <full-name-fields-->
-            <!--                :name.sync="localData.name"-->
-            <!--                :surname.sync="localData.surname"-->
-            <!--                :middle-name.sync="localData.middleName"-->
-            <!--                :phone-number.sync="localData.phoneNumber"-->
-            <!--                :email.sync="localData.email"-->
-            <!--            />-->
-            <!--            <passport-fields-->
-            <!--                :passport-serial-number.sync="localData.passportSerialNumber"-->
-            <!--                :passport-number.sync="localData.passportNumber"-->
-            <!--                :passport-issued.sync="localData.passportIssued"-->
-            <!--                :passport-issue-date.sync="localData.passportIssueDate"-->
-            <!--                :passport-division-number.sync="localData.passportDivisionNumber"-->
-            <!--                :registration-address.sync="localData.registrationAddress"-->
-            <!--            />-->
-            <!--            <price-fields-->
-            <!--                :distance="localData.distance"-->
-            <!--                :price="priceNumber"-->
-            <!--            />-->
+            <v-expansion-panels>
+              <v-expansion-panel>
+                <v-expansion-panel-header>Я ознакомился с персональными данными (ссылка)</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <passport-information
+                      :passport-id.sync="localData.passportId"
+                      :passport-serial-number.sync="localData.passportSerialNumber"
+                      :passport-issued.sync="localData.passportIssued"
+                      :passport-issue-date.sync="localData.passportIssueDate"
+                  />
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+            
+            
           </v-col>
           <v-col
               cols="12"
               md="6"
           >
-            <!--            <div class="yandex-map">-->
-            <!--              <yandex-map-->
-            <!--                  :calculate-function="calculate"-->
-            <!--                  :distance.sync="localData.distance"-->
-            <!--                  :price-number.sync="priceNumber"-->
-            <!--              />-->
-            <!--            </div>-->
+            <div class="yandex-map">
+              <yandex-map
+                  :calculate-function="calculate"
+                  :distance.sync="localData.distance"
+                  :price-number.sync="priceNumber"
+              />
+            </div>
           </v-col>
         </v-row>
       </v-container>
@@ -59,27 +55,31 @@ import {PurchaseToVacuumTruckIndividualDto} from "@/services/PurchaseService/Req
 import YandexMap from "@/components/YMaps/YandexMap.vue"
 import PriceFields from "@/components/PriceFields/PriceFields.vue";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
+import PassportInformation from "@/components/FieldSections/PassportInformation.vue";
 
-@Component({components: {PriceFields, YandexMap, PersonalInformationInfo}})
+@Component({components: {PassportInformation, PriceFields, YandexMap, PersonalInformationInfo}})
 export default class CreateVacuumTruckPurchase extends Vue {
 
   private priceNumber: number = 0;
 
   localData: PurchaseToVacuumTruckIndividualDto = {
+    email: "", //
+    middleName: "", //
+    name: "", //
+    phoneNumber: "", //
+    surname: "", //
+
+    passportId: "", //
+    passportIssueDate: "", //
+    passportIssued: "", // 
+    passportSerialNumber: "", //
+
+    registrationAddress: "",
+    territoryAddress: "",
     contractValidDate: "",
     divisionCode: "",
-    email: "",
-    middleName: "",
-    name: "",
-    passportId: "",
-    passportIssueDate: "",
-    passportIssued: "",
-    passportSerialNumber: "",
-    phoneNumber: "",
     price: "",
-    registrationAddress: "",
-    surname: "",
-    territoryAddress: ""
+
   }
 
   calculate(routeLength: number): number {
