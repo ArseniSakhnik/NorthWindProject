@@ -77,6 +77,12 @@ namespace NorthWindProject.Application.Common.Access
                     Id = 1,
                     Name = "Admin",
                     NormalizedName = "Admin".ToUpper()
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "Client",
+                    NormalizedName = "Client".ToUpper()
                 }
             });
 
