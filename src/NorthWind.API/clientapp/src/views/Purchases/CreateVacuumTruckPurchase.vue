@@ -25,12 +25,17 @@
                       :passport-issued.sync="localData.passportIssued"
                       :passport-issue-date.sync="localData.passportIssueDate"
                       :division-code.sync="localData.divisionCode"
+                      :registration-address.sync="localData.registrationAddress"
                   />
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
             
-            
+            <vacuum-truck-purchase-info
+              :territory-address="localData.territoryAddress"
+              :contract-valid-date="localData.contractValidDate"
+              :price="localData.price"
+            />
           </v-col>
           <v-col
               cols="12"
@@ -40,6 +45,7 @@
               <yandex-map
                   :calculate-function="calculate"
                   :price-number.sync="localData.price"
+                  :territory-address.sync="localData.territoryAddress"
               />
             </div>
           </v-col>
@@ -56,12 +62,11 @@ import YandexMap from "@/components/YMaps/YandexMap.vue"
 import PriceFields from "@/components/PriceFields/PriceFields.vue";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
 import PassportInformation from "@/components/FieldSections/PassportInformation.vue";
+import VacuumTruckPurchaseInfo from "@/components/FieldSections/VacuumTruckPurchaseInfo.vue";
 
-@Component({components: {PassportInformation, PriceFields, YandexMap, PersonalInformationInfo}})
+@Component({components: {VacuumTruckPurchaseInfo, PassportInformation, PriceFields, YandexMap, PersonalInformationInfo}})
 export default class CreateVacuumTruckPurchase extends Vue {
-
-  private priceNumber: number = 0;
-
+  
   localData: PurchaseToVacuumTruckIndividualDto = {
     email: "", //
     middleName: "", //
@@ -74,10 +79,10 @@ export default class CreateVacuumTruckPurchase extends Vue {
     passportIssued: "", // 
     passportSerialNumber: "", //
     divisionCode: "", //
-
-    registrationAddress: "",
-    territoryAddress: "",
-    contractValidDate: "",
+    registrationAddress: "",//
+    
+    territoryAddress: "",//
+    contractValidDate: "", //
     
     price: 0,
   }

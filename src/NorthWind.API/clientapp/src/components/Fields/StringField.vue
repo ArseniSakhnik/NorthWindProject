@@ -7,8 +7,8 @@
       :prefix="prefix"
       :suffix="suffix"
       :rules="rules"
+      :disabled="isDisabled"
       @input="valueChangeHandler"
-
       outlined
       dense
   />
@@ -36,6 +36,8 @@ export default class StringField extends Vue {
   rules!: any[];
   @Prop({type: String, required: false, default: ''})
   prefix!: string;
+  @Prop({type: Boolean, required: false, default: false})
+  isDisabled!: boolean;
 
   valueChangeHandler(value: string) {
     this.valueSync = value;

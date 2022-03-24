@@ -67,6 +67,7 @@ export default class PersonalInformationInfo extends Vue {
   @PropSync('name') nameSynced!: string;
   @PropSync('surname') surnameSynced!: string;
   @PropSync('middleName') middleNameSynced!: string;
+  
 
   emailRules(value: string): any {
     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

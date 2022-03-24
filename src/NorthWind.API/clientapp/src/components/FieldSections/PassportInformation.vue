@@ -55,6 +55,15 @@
         />
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <string-field
+          v-model="registrationAddressSynced"
+          :counter="250"
+          label="Адрес регистрации"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -69,6 +78,7 @@ export default class PassportInformation extends Vue {
   @PropSync('passportIssued') passportIssuedSynced!: string;
   @PropSync('passportSerialNumber') passportSerialNumberSynced!: string;
   @PropSync('divisionCode') divisionCodeSynced!: string;
+  @PropSync('registrationAddress') registrationAddressSynced!: string;
 }
 </script>
 <style scoped lang="scss">

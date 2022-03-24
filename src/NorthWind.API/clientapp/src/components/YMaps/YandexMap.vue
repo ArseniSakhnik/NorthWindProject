@@ -2,6 +2,7 @@
   <div
       id="map"
       class="ymap"
+      ref="map"
   />
 </template>
 
@@ -22,6 +23,9 @@ export default class YandexMap extends Vue {
   @PropSync('priceNumber')
   priceNumberSynced!: number;
 
+  @PropSync('territoryAddress')
+  territoryAddressSynced!: string;
+
   isMapLoaded: boolean = false
 
   settings = {
@@ -35,11 +39,10 @@ export default class YandexMap extends Vue {
 
   private init() {
     this.isMapLoaded = true
-
     //@ts-ignore
     const myMap = new ymaps.Map('map', {
-      center: [60.906882, 30.067233],
-      zoom: 9,
+      center: [44.959240, 34.131166],
+      zoom: 12,
       controls: []
     })
 
@@ -65,9 +68,9 @@ export default class YandexMap extends Vue {
 
     // Если вы хотите задать неизменяемую точку "откуда", раскомментируйте код ниже.
     routePanelControl.routePanel.state.set({
-        fromEnabled: false,
-        from: 'Республика Крым, г. Симферополь, ул. Буденного д.32, литера "Ф"'
-     });
+      fromEnabled: false,
+      from: 'Республика Крым, г. Симферополь, ул. Буденного д.32, литера "Ф"'
+    });
 
     routePanelControl.routePanel.options.set({
       types: {auto: true}
@@ -86,7 +89,17 @@ export default class YandexMap extends Vue {
             if (activeRoute) {
               const length = route.getActiveRoute().properties.get('distance');
 
+              const geoInfo = route.getActiveRoute().properties.getAll();
+              const coords = geoInfo.rawProperties.boundedBy[1];
               const price = this.calculate(Math.round(length.value / 1000));
+
+              //@ts-ignore
+              ymaps.geocode(coords.reverse())
+                  .then((res: any) => {
+                    const geoObject = res.geoObjects.get(0);
+                    const geoInfo = geoObject.properties.getAll()
+                    this.territoryAddressSynced = geoInfo.text
+                  })
 
               //@ts-ignore
               const balloonContentLayout = ymaps.templateLayoutFactory.createClass(
@@ -94,13 +107,15 @@ export default class YandexMap extends Vue {
                   '<span style="font-weight: bold; font-style: italic">Стоимость перевозки: ' + price + ' р.</span>');
 
               route.options.set('routeBalloonContentLayout', balloonContentLayout);
-
               activeRoute.ballom.open()
+
             }
+
 
           })
         })
   }
+
 
   private calculate(routeLength: number) {
     // return (Math.max(routeLength) * this.DELIVERY_TARIFF, this.MINIMUM_COST);
