@@ -59,6 +59,9 @@
 <script lang="ts">
 import {Vue, Component, PropSync, Watch} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
+import {namespace} from "vuex-class";
+
+const User = namespace('CurrentUserStore')
 
 @Component({components: {StringField}})
 export default class PersonalInformationInfo extends Vue {
@@ -67,7 +70,24 @@ export default class PersonalInformationInfo extends Vue {
   @PropSync('name') nameSynced!: string;
   @PropSync('surname') surnameSynced!: string;
   @PropSync('middleName') middleNameSynced!: string;
+
+  @User.State('email') emailUser!: string;
+  @User.State('phoneNumber') phoneNumberUser!: string;
+  @User.State('name') nameUser!: string;
+  @User.State('surname') surnameUser!: string;
+  @User.State('middleName') middleNameUser!: string;
   
+  mounted() {
+    this.initialData();
+  }
+  
+  initialData() {
+    this.emailSynced = this.emailUser;
+    this.phoneNumberSynced = this.phoneNumberUser;
+    this.nameSynced = this.nameUser;
+    this.surnameSynced = this.surnameUser;
+    this.middleNameSynced = this.middleNameUser;
+  }
 
   emailRules(value: string): any {
     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

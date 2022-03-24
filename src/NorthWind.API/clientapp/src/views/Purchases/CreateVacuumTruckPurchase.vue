@@ -84,7 +84,7 @@ export default class CreateVacuumTruckPurchase extends Vue {
     territoryAddress: "",//
     contractValidDate: "", //
     
-    price: 0,
+    price: 0, //
   }
 
   calculate(routeLength: number): number {

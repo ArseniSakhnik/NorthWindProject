@@ -29,6 +29,7 @@
             label="Приблизительная цена"
             v-model="price.toString()"
             :is-disabled="true"
+            suffix="Руб."
         />
       </v-col>
     </v-row>
