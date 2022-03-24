@@ -24,6 +24,7 @@
                       :passport-serial-number.sync="localData.passportSerialNumber"
                       :passport-issued.sync="localData.passportIssued"
                       :passport-issue-date.sync="localData.passportIssueDate"
+                      :division-code.sync="localData.divisionCode"
                   />
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -38,8 +39,7 @@
             <div class="yandex-map">
               <yandex-map
                   :calculate-function="calculate"
-                  :distance.sync="localData.distance"
-                  :price-number.sync="priceNumber"
+                  :price-number.sync="localData.price"
               />
             </div>
           </v-col>
@@ -73,13 +73,13 @@ export default class CreateVacuumTruckPurchase extends Vue {
     passportIssueDate: "", //
     passportIssued: "", // 
     passportSerialNumber: "", //
+    divisionCode: "", //
 
     registrationAddress: "",
     territoryAddress: "",
     contractValidDate: "",
-    divisionCode: "",
-    price: "",
-
+    
+    price: 0,
   }
 
   calculate(routeLength: number): number {

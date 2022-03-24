@@ -14,12 +14,22 @@
       </v-col>
       <v-col
           cols="12"
-          sm="6"
+          sm="5"
       >
         <string-field
-          v-model="passportIdSynced"
-          :mask="'######'"
-          label="Номер паспорта"
+            v-model="passportIdSynced"
+            :mask="'######'"
+            label="Номер паспорта"
+        />
+      </v-col>
+      <v-col
+          cols="12"
+          sm="3"
+      >
+        <string-field
+            v-model="divisionCodeSynced"
+            :mask="'###-###'"
+            label="Номер подразделения"
         />
       </v-col>
     </v-row>
@@ -29,9 +39,9 @@
           sm="3"
       >
         <string-field
-          v-model="passportIssueDateSynced"
-          :mask="'##-##-####'"
-          label="Дата выдачи в формате 28-12-2000"
+            v-model="passportIssueDateSynced"
+            :mask="'##-##-####'"
+            label="Дата выдачи в формате 28-12-2000"
         />
       </v-col>
       <v-col
@@ -39,9 +49,9 @@
           sm="9"
       >
         <string-field
-          v-model="passportIssuedSynced"
-          :counter="150"
-          label="Место выдачи паспорта"
+            v-model="passportIssuedSynced"
+            :counter="150"
+            label="Место выдачи паспорта"
         />
       </v-col>
     </v-row>
@@ -58,6 +68,7 @@ export default class PassportInformation extends Vue {
   @PropSync('passportIssueDate') passportIssueDateSynced!: string;
   @PropSync('passportIssued') passportIssuedSynced!: string;
   @PropSync('passportSerialNumber') passportSerialNumberSynced!: string;
+  @PropSync('divisionCode') divisionCodeSynced!: string;
 }
 </script>
 <style scoped lang="scss">

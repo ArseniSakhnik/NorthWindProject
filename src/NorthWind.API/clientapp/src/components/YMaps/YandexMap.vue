@@ -22,9 +22,6 @@ export default class YandexMap extends Vue {
   @PropSync('priceNumber')
   priceNumberSynced!: number;
 
-  @PropSync('distance')
-  distanceSynced!: number;
-
   isMapLoaded: boolean = false
 
   settings = {
@@ -109,7 +106,6 @@ export default class YandexMap extends Vue {
     // return (Math.max(routeLength) * this.DELIVERY_TARIFF, this.MINIMUM_COST);
     const price = this.calculateFunction(routeLength);
     this.priceNumberSynced = price;
-    this.distanceSynced = routeLength;
     return price;
   }
 

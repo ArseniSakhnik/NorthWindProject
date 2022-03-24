@@ -14,6 +14,6 @@ export interface PurchaseToVacuumTruckIndividualDto extends BaseCreatePurchaseDt
     divisionCode: string
     registrationAddress: string
     territoryAddress: string
-    price: string
+    price: number
     contractValidDate: string
 }
