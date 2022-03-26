@@ -1,5 +1,5 @@
 ﻿import HttpService from "@/services/HttpService"
-import {PurchaseToVacuumTruckIndividualDto} from "@/services/PurchaseService/Requests"
+import {PurchaseToVacuumTruckFizIndividualDto} from "@/services/PurchaseService/Requests"
 
 export default class PurchaseService extends HttpService {
 	
@@ -7,8 +7,12 @@ export default class PurchaseService extends HttpService {
 		super('purchase');
 	}
 	
-	public SendVacuumTruckPurchase(data: PurchaseToVacuumTruckIndividualDto) {
+	public SendVacuumTruckFizPurchase(data: PurchaseToVacuumTruckFizIndividualDto) {
 		return this._post('create-vacuum-truck-individual-purchase', data);
+	}
+	
+	public SendVacuumTruckYurPurchase(data: PurchaseToVacuumTruckFizIndividualDto) {
+		return this._post('/create-vacuum-truck-yur-purchase', data);
 	}
 	
 }

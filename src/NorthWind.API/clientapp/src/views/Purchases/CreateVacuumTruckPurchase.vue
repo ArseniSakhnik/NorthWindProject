@@ -7,7 +7,7 @@
               cols="12"
               md="6"
           >
-            <h1 class="text-center">Заявка на вакуум трак</h1>
+            <h1 class="text-center">Заявка на вывоз строительного и крупногабаритного мусора</h1>
             <personal-information-info
                 :email.sync="localData.email"
                 :phoneNumber.sync="localData.phoneNumber"
@@ -30,11 +30,11 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
-            
+
             <vacuum-truck-purchase-info
-              :territory-address="localData.territoryAddress"
-              :contract-valid-date="localData.contractValidDate"
-              :price="localData.price"
+                :territory-address="localData.territoryAddress"
+                :contract-valid-date="localData.contractValidDate"
+                :price="localData.price"
             />
           </v-col>
           <v-col
@@ -57,17 +57,25 @@
 
 <script lang="ts">
 import {Vue, Component, Watch} from 'vue-property-decorator'
-import {PurchaseToVacuumTruckIndividualDto} from "@/services/PurchaseService/Requests"
+import {PurchaseToVacuumTruckFizIndividualDto} from "@/services/PurchaseService/Requests"
 import YandexMap from "@/components/YMaps/YandexMap.vue"
 import PriceFields from "@/components/PriceFields/PriceFields.vue";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
 import PassportInformation from "@/components/FieldSections/PassportInformation.vue";
 import VacuumTruckPurchaseInfo from "@/components/FieldSections/VacuumTruckPurchaseInfo.vue";
 
-@Component({components: {VacuumTruckPurchaseInfo, PassportInformation, PriceFields, YandexMap, PersonalInformationInfo}})
+@Component({
+  components: {
+    VacuumTruckPurchaseInfo,
+    PassportInformation,
+    PriceFields,
+    YandexMap,
+    PersonalInformationInfo
+  }
+})
 export default class CreateVacuumTruckFizPurchase extends Vue {
-  
-  localData: PurchaseToVacuumTruckIndividualDto = {
+
+  localData: PurchaseToVacuumTruckFizIndividualDto = {
     email: "", //
     middleName: "", //
     name: "", //
@@ -80,10 +88,10 @@ export default class CreateVacuumTruckFizPurchase extends Vue {
     passportSerialNumber: "", //
     divisionCode: "", //
     registrationAddress: "",//
-    
+
     territoryAddress: "",//
     contractValidDate: "", //
-    
+
     price: 0, //
   }
 
