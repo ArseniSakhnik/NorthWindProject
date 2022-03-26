@@ -7,6 +7,22 @@
           v-model="individualEntrepreneurShortNameSynced"
       />
     </v-col>
+    <v-col
+        v-if="clientCompanySynced !== null"
+    >
+      <string-field
+          label="Имя компания клиента"
+          v-model="clientCompanySynced"
+      />
+    </v-col>
+    <v-col
+        v-if="customerContactPersonAndJobTitleSynced !== null"
+    >
+      <string-field
+          label="Контактное имя и должность"
+          v-model="customerContactPersonAndJobTitleSynced"
+      />
+    </v-col>
     <v-col>
       <string-field
           label="ИНН"
@@ -36,6 +52,15 @@
           prefix="ОГРН"
       />
     </v-col>
+    <v-col
+        v-if="oKPOSynced !== null"
+    >
+      <string-field
+          label="ОКРО"
+          v-model="oKPOSynced"
+          prefix="OKPO"
+      />
+    </v-col>
   </div>
 </template>
 
@@ -52,6 +77,12 @@ export default class IndividualEntrepreneurInfo extends Vue {
   @PropSync('kPP') kPPSynced!: string;
   @PropSync('legalAddress') legalAddressSynced!: string;
   @PropSync('oGRN') oGRNSynced!: string;
+  @PropSync('clientCompany', {required: false, default: () => null}) clientCompanySynced!: string | null;
+  @PropSync('customerContactPersonAndJobTitle', {
+    required: false,
+    default: () => null
+  }) customerContactPersonAndJobTitleSynced!: string | null;
+  @PropSync('oKPO', {required: false, default: () => null}) oKPOSynced!: string | null;
 }
 </script>
 <style scoped lang="scss">

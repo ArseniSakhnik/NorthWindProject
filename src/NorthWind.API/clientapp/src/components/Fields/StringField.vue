@@ -11,6 +11,7 @@
       @input="valueChangeHandler"
       outlined
       dense
+      :type="fieldType"
   />
 </template>
 
@@ -19,7 +20,7 @@ import {Vue, Component, ModelSync, Prop, Watch} from "vue-property-decorator";
 
 @Component
 export default class StringField extends Vue {
-  @ModelSync('value', 'change', {type: String})
+  @ModelSync('value', 'change')
   valueSync!: string;
 
   @Prop({type: String, required: false, default: null})
@@ -38,6 +39,8 @@ export default class StringField extends Vue {
   prefix!: string;
   @Prop({type: Boolean, required: false, default: false})
   isDisabled!: boolean;
+  @Prop({type: String, required: false, default: () => 'text'})
+  fieldType!: string;
 
   valueChangeHandler(value: string) {
     this.valueSync = value;

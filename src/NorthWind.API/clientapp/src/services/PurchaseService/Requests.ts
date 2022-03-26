@@ -38,18 +38,17 @@ export interface PurchaseToKGOYurIndividualDto extends BaseCreatePurchaseDto {
     machineReload: string
     coastPrice: string
     contractValidDate: string
-    price: string
+    price: number
     iNN: string
     kPP: string
     oGRN: string
     oKPO: string
     legalAddress: string
     phoneNumber: string
-    shortNameClient: string
     clientCompany: string
     customerContactPersonAndJobTitle: string
     phoneNumberOrFax: string
-    vehiclesNumber: string
+    vehiclesNumber: number,
     startDate: string
     endDate: string
     startTime: string

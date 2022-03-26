@@ -27,7 +27,6 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
         public string OKPO { get; set; }
         public string LegalAddress { get; set; }
         public string PhoneNumber { get; set; }
-        public string ShortNameClient { get; set; }
         public string ClientCompany { get; set; }
         public string CustomerContactPersonAndJobTitle { get; set; }
         public string PhoneNumberOrFax { get; set; }
@@ -78,7 +77,8 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 OKPO = request.OKPO,
                 LegalAddress = request.LegalAddress,
                 PhoneNumber = request.PhoneNumber,
-                ShortNameClient = request.ShortNameClient,
+                //todo реализовать
+                ShortNameClient = "",
                 ClientCompany = request.ClientCompany,
                 CustomerContactPersonAndJobTitle = request.CustomerContactPersonAndJobTitle,
                 PhoneNumberOrFax = request.PhoneNumberOrFax,

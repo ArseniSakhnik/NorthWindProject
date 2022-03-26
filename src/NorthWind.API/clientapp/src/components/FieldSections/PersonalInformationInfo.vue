@@ -53,6 +53,17 @@
         />
       </v-col>
     </v-row>
+    <v-row v-if="phoneNumberOrFaxSynced !== null">
+      <v-col
+          cols="12"
+          sm="6"
+      >
+        <string-field
+            label="Номер телефона или факс"
+            v-model="phoneNumberOrFaxSynced"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -70,17 +81,18 @@ export default class PersonalInformationInfo extends Vue {
   @PropSync('name') nameSynced!: string;
   @PropSync('surname') surnameSynced!: string;
   @PropSync('middleName') middleNameSynced!: string;
+  @PropSync('phoneNumberOrFax', {required: false, default: () => null}) phoneNumberOrFaxSynced!: string | null
 
   @User.State('email') emailUser!: string;
   @User.State('phoneNumber') phoneNumberUser!: string;
   @User.State('name') nameUser!: string;
   @User.State('surname') surnameUser!: string;
   @User.State('middleName') middleNameUser!: string;
-  
+
   mounted() {
     this.initialData();
   }
-  
+
   initialData() {
     this.emailSynced = this.emailUser;
     this.phoneNumberSynced = this.phoneNumberUser;
