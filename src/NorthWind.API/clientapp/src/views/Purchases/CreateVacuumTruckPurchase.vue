@@ -65,7 +65,7 @@ import PassportInformation from "@/components/FieldSections/PassportInformation.
 import VacuumTruckPurchaseInfo from "@/components/FieldSections/VacuumTruckPurchaseInfo.vue";
 
 @Component({components: {VacuumTruckPurchaseInfo, PassportInformation, PriceFields, YandexMap, PersonalInformationInfo}})
-export default class CreateVacuumTruckPurchase extends Vue {
+export default class CreateVacuumTruckFizPurchase extends Vue {
   
   localData: PurchaseToVacuumTruckIndividualDto = {
     email: "", //

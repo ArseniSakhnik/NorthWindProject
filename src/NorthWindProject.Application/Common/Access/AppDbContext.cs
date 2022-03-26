@@ -13,6 +13,7 @@ using NorthWindProject.Application.Entities.Purchases.KgoPurchase;
 using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz;
 using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur;
 using NorthWindProject.Application.Entities.Services;
+using NorthWindProject.Application.Entities.Services.Files;
 using NorthWindProject.Application.Entities.Test;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Interfaces.DomainEvents;
@@ -115,6 +116,7 @@ namespace NorthWindProject.Application.Common.Access
         #region Service
 
         public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceFile> ServiceFiles { get; set; } 
 
         #endregion
 

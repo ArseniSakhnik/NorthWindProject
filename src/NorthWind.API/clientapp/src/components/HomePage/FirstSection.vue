@@ -35,7 +35,7 @@ import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import TransparentButton from "@/components/Buttons/TransparentButton.vue";
 
 
-type Slide = { title: string; to: string; image: string }
+type Slide = { title: string; to: string; image: string, requireChoose: boolean }
 @Component({
   components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton}
 })
@@ -49,17 +49,14 @@ export default class FirstSection extends Mixins(BreakPointsMixin) {
     {
       title: 'Вывоз строительного и крупногабаритного мусора',
       to: '/',
-      image: 'services1.png'
+      image: 'services1.png',
+      requireChoose: false
     },
     {
       title: 'Откачка жидких бытовых отходов',
       to: '/create-vacuum-truck-purchase',
-      image: 'services2.png'
-    },
-    {
-      title: 'Полив и очистка территории',
-      to: '/',
-      image: 'services3.png'
+      image: 'services2.png',
+      requireChoose: true
     },
   ];
 

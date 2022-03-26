@@ -54,7 +54,6 @@
           :is-active.sync="isRegisterDialogOpened"
       />
     </template>
-    <router-link to="/test">TEST</router-link>
   </vs-navbar>
 </template>
 

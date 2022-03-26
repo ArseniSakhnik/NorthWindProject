@@ -6,7 +6,10 @@ import Admin from '../views/Admin.vue'
 import CreateServicePage from '@/components/Admin/views/Services/CreateServicePage.vue'
 import DeveloperPage from "@/views/DeveloperPage/DeveloperPage.vue"
 import ConfirmEmail from "@/views/System/ConfirmEmail.vue"
-import CreateVacuumTruckPurchase from "@/views/Purchases/CreateVacuumTruckPurchase.vue"
+import CreateVacuumTruckFizPurchase from "@/views/Purchases/CreateVacuumTruckPurchase.vue"
+import CreateVacuumTruckYurPurchase from "@/views/Purchases/CreateVacuumTruckYurPurchase.vue";
+import CreateKgoPurchase from "@/views/Purchases/CreateKgoPurchase.vue";
+import Test from "@/views/Test/Test.vue";
 
 Vue.use(VueRouter)
 
@@ -60,13 +63,37 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/create-vacuum-truck-purchase',
-    name: 'CreateVacuumTruckPurchase',
-    component: CreateVacuumTruckPurchase,
+    path: '/create-vacuum-truck-fiz-purchase',
+    name: 'CreateVacuumTruckFizPurchase',
+    component: CreateVacuumTruckFizPurchase,
     meta: {
       layout: 'Action'
     }
   },
+  {
+    path: '/create-vacuum-truck-yur-purchase',
+    name: 'CreateVacuumTruckPurchase',
+    component: CreateVacuumTruckYurPurchase,
+    meta: {
+      layout: 'Action'
+    }
+  },
+  {
+    path: '/create-kgo-purchase',
+    name: 'CreateKgoPurchase',
+    component: CreateKgoPurchase,
+    meta: {
+      layout: 'Action'
+    }
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test,
+    meta: {
+      layout: 'system'   
+    }
+  }
 ]
 
 const router = new VueRouter({

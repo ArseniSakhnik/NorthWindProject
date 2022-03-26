@@ -50,7 +50,7 @@
 
   <ItemGroup>
     <Folder Include="clientapp\src\assets\cars" />
-    <Folder Include="wwwroot" />
+    <Folder Include="wwwroot\serviceimage" />
   </ItemGroup>
 
 </Project>
