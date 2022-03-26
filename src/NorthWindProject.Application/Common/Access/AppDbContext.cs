@@ -29,9 +29,7 @@ namespace NorthWindProject.Application.Common.Access
         {
             _domainEventService = new DomainEventService(mediator);
         }
-
-        public DbSet<Test> Tests { get; set; }
-
+        
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             var result = await base.SaveChangesAsync(cancellationToken);
@@ -115,8 +113,11 @@ namespace NorthWindProject.Application.Common.Access
 
         #region Service
 
+        public DbSet<ServiceView> ServiceViews { get; set; }
+        
+        public DbSet<ServiceViewSettings> ServiceViewSettings { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<ServiceFile> ServiceFiles { get; set; } 
+        
 
         #endregion
 
@@ -126,6 +127,13 @@ namespace NorthWindProject.Application.Common.Access
         public DbSet<VacuumTruckFizPurchase> FizVacuumTruckPurchases { get; set; }
         public DbSet<VacuumTruckYurPurchase> YurVacuumTruckPurchases { get; set; }
         public DbSet<KGOPurchase> KgoPurchases { get; set; }
+
+        #endregion
+
+        #region Test
+
+        public DbSet<ServiceFile> ServiceFiles { get; set; }
+        public DbSet<Test> Tests { get; set; }
 
         #endregion
     }

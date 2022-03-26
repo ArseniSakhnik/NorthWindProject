@@ -13,20 +13,23 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 .HasMany(service => service.Purchases)
                 .WithOne(purchase => purchase.Service)
                 .HasForeignKey(purchase => purchase.ServiceId);
-            
+
             builder.HasData(new List<Entities.Services.Service>
             {
                 new()
                 {
                     Id = ServicesEnum.АссенизаторФиз,
+                    Route = "/create-vacuum-truck-fiz-purchase"
                 },
                 new()
                 {
-                    Id = ServicesEnum.АссенизаторЮр
+                    Id = ServicesEnum.АссенизаторЮр,
+                    Route = "/create-vacuum-truck-yur-purchase"
                 },
                 new()
                 {
-                    Id = ServicesEnum.КГО
+                    Id = ServicesEnum.КГОЮр,
+                    Route = "/create-kgo-purchase"
                 }
             });
         }

@@ -2,6 +2,7 @@
   <section
       :style="`background-image: url(${slideImage})`"
       class="service-list flex-container-slides"
+      v-if="isDataLoad"
   >
     <div class="arrow-container">
       <div class="arrow left" @click="previousSlide"/>
@@ -33,35 +34,41 @@ import SlidesNavigation from "@/components/HomePage/firstSection/SlidesNavigatio
 import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import TransparentButton from "@/components/Buttons/TransparentButton.vue";
+import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 
 
-type Slide = { title: string; to: string; image: string, requireChoose: boolean }
+type Slide = { title: string; image: string }
 @Component({
   components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton}
 })
-export default class FirstSection extends Mixins(BreakPointsMixin) {
-  private currentSlide: number = 0;
+export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMixin) {
   @Ref('first-section') private firstSection!: HTMLElement;
-
   @Prop({type: Boolean}) isSecondSectionOpened!: boolean;
+
+  isDataLoad: boolean = false;
+  private currentSlide: number = 0;
+
+  async created() {
+    const serviceViews = await this.serviceViewService.GetServiceViews();
+    console.log(serviceViews);
+
+    this.slideItems = serviceViews.map(item => ({
+      image: `/ServiceImage/${item.mainImageName}`,
+      title: item.title,
+    }))
+    
+    this.isDataLoad = true;
+  }
 
   private slideItems: Slide[] = [
     {
-      title: 'Вывоз строительного и крупногабаритного мусора',
-      to: '/',
-      image: 'services1.png',
-      requireChoose: false
-    },
-    {
-      title: 'Откачка жидких бытовых отходов',
-      to: '/create-vacuum-truck-purchase',
-      image: 'services2.png',
-      requireChoose: true
+      title: '',
+      image: '',
     },
   ];
 
   get slideImage() {
-    return require(`../../assets/homePage/firstSection/${this.slideItems[this.currentSlide].image}`);
+    return this.slideItems[this.currentSlide].image;
   }
 
   get slidesLength() {

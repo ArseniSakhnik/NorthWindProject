@@ -118,8 +118,8 @@ namespace NorthWind.API
             
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/serviceimage")),
-                RequestPath = "/serviceimg"
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/ServiceImage")),
+                RequestPath = "/ServiceImage"
             });
             
             app.UseStaticFiles(new StaticFileOptions

@@ -46,11 +46,12 @@
     <None Remove="clientapp\src\views\DocumentsPage.vue" />
     <None Remove="clientapp\src\views\VacanciesPage.vue" />
     <None Remove="clientapp\src\views\ContactsPage.vue" />
+    <None Include="wwwroot\ServiceImage\KGO.png" />
+    <None Include="wwwroot\ServiceImage\Assenizator.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="clientapp\src\assets\cars" />
-    <Folder Include="wwwroot\serviceimage" />
   </ItemGroup>
 
 </Project>

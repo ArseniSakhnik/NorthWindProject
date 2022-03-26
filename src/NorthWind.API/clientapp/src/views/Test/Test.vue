@@ -7,7 +7,7 @@
         :uploadUrl="uploadUrl"
         upload-method="POST"
     />
-    <img src="api/image/image" alt="Картинки нэма">
+    <img src="api/ServiceView/mainimage/1" alt="Картинки нэма">
   </div>
 </template>
 

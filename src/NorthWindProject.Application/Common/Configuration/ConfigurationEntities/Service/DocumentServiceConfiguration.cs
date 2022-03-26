@@ -75,7 +75,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 new()
                 {
                     Id = 3,
-                    ServiceId = ServicesEnum.КГО,
+                    ServiceId = ServicesEnum.КГОЮр,
                     DocumentFields = new List<DocumentField>
                     {
                         new("day", "День"),
