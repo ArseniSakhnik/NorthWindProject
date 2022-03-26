@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Elskom.Generic.Libs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NorthWind.API.Configuration;
@@ -19,7 +21,6 @@ using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
 using NorthWindProject.Application.Interfaces;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 using NorthWindProject.Application.Middlewares;
-using VueCliMiddleware;
 
 namespace NorthWind.API
 {
@@ -77,7 +78,6 @@ namespace NorthWind.API
 
             services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddRazorPages();
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "clientapp"; });
 
             services.AddScoped<IDomainEventService, DomainEventService>();
             services.AddScoped<IEmailSenderService, EmailSenderService>();
@@ -103,26 +103,25 @@ namespace NorthWind.API
 
             app.UseRouting();
             app.UseHttpsRedirection();
-            // app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            app.UseStaticFiles();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-
-
-            app.MapWhen(x => !x.Request.Path.Value.StartsWith("/api"), builder =>
+            app.UseEndpoints(endpoints =>
             {
-                app.UseSpa(spa =>
-                {
-                    spa.Options.SourcePath = env.IsDevelopment() ? "clientapp" : "dist";
-            
-                    if (env.IsDevelopment()) spa.UseVueCli("serve");
-                });
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
+            
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/img")),
+                RequestPath = "/img"
+            });
+            
         }
     }
 }
