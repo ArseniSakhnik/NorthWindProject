@@ -32,7 +32,7 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceView
                     MainImageName = view.ServiceViewSettings.MainImageName,
                     Title = view.ServiceViewSettings.Title,
                     FizServiceRoute = view.FizService == null ? null : view.FizService.Route,
-                    YurServiceRoute = view.FizService == null ? null : view.YurService.Route
+                    YurServiceRoute = view.YurService == null ? null : view.YurService.Route
                 })
                 .ToListAsync(cancellationToken);
         }

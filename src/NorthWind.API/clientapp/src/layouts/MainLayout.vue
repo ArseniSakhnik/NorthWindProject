@@ -37,4 +37,29 @@ export default class MainLayout extends Vue {
   top: 80vh;
   z-index: 2;
 }
+
+
+@media screen and (max-width: 600px) {
+  .text-block-setting {
+    font-size: 26px
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 960px) {
+  .text-block-setting {
+    font-size: 34px;
+  }
+}
+
+@media screen and (min-width: 961px) and (max-width: 1264px) {
+  .text-block-setting {
+    font-size: 40px;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .text-block-setting {
+    font-size: 48px;
+  }
+}
 </style>

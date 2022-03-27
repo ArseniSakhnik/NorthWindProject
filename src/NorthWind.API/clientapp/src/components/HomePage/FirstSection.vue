@@ -12,10 +12,10 @@
         <v-col v-if="isComputer"/>
         <v-col>
           <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
-          <orange-button
-              title="Заказать услугу"
-              style="margin-right: 1em"
-              @action="goToPurchase(slideItems[currentSlide].to)"
+          <purchase-opener
+              :fiz-route="slideItems[currentSlide].fizRoute"
+              :yur-route="slideItems[currentSlide].yurRoute"
+              style="display: inline-block"
           />
           <transparent-button/>
         </v-col>
@@ -35,11 +35,12 @@ import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import TransparentButton from "@/components/Buttons/TransparentButton.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
+import PurchaseOpener from "@/components/SystemComponents/PurchaseOpener.vue";
 
 
-type Slide = { title: string; image: string }
+type Slide = { title: string; image: string, fizRoute: string, yurRoute: string }
 @Component({
-  components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton}
+  components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton, PurchaseOpener}
 })
 export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMixin) {
   @Ref('first-section') private firstSection!: HTMLElement;
@@ -50,13 +51,14 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
 
   async created() {
     const serviceViews = await this.serviceViewService.GetServiceViews();
-    console.log(serviceViews);
 
     this.slideItems = serviceViews.map(item => ({
       image: `/ServiceImage/${item.mainImageName}`,
       title: item.title,
+      fizRoute: item.fizServiceRoute,
+      yurRoute: item.yurServiceRoute
     }))
-    
+
     this.isDataLoad = true;
   }
 
@@ -64,6 +66,8 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
     {
       title: '',
       image: '',
+      fizRoute: '',
+      yurRoute: ''
     },
   ];
 
@@ -92,7 +96,6 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
   }
 
   goToPurchase(link: string) {
-    console.log(1)
     this.$router.push(link);
   }
 }

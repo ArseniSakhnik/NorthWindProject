@@ -7,8 +7,13 @@
       square
       center-collapsed>
     <template #left>
-      <v-img src="../assets/small_logo.png"/>
-      <span>
+      <v-img
+          src="../assets/small_logo.png"
+          @click="gotoMainPage"
+      />
+      <span
+          @click="gotoMainPage"
+      >
         Северный Ветер
       </span>
     </template>
@@ -105,6 +110,10 @@ export default class Navbar extends Mixins(HttpServiceMixin) {
         .then(async () => {
           await this.getCurrentUserInfo()
         });
+  }
+
+  gotoMainPage() {
+    this.$router.push('/')
   }
 }
 </script>

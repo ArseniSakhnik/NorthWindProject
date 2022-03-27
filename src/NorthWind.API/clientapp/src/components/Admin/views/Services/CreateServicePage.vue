@@ -16,7 +16,6 @@ import DocumentLoader from '@/components/Admin/views/Services/DocumentLoader/Doc
 export default class CreateServicePage extends Vue {
   private step: number = 1;
   created() {
-    console.log(1)
   }
 }
 </script>

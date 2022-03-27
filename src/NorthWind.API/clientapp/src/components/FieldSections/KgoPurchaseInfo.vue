@@ -50,6 +50,7 @@
         <string-field
           v-model="actOnTheBasisSynced"
           :disabled="true"
+          label="Устава"
           type="number"
         />
       </v-col>

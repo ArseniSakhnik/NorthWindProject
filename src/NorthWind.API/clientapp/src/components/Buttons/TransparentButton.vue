@@ -1,15 +1,18 @@
 ﻿<template>
-  <button class="button">
+  <button class="button" @click="action">
     Подробнее
   </button>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Vue, Component, Emit} from "vue-property-decorator";
 
 @Component
 export default class TransparentButton extends Vue {
-
+  @Emit()
+  action(e: any) {
+    return e;
+  }
 }
 </script>
 <style scoped lang="scss">

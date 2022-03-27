@@ -57,8 +57,9 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
                 var registerRequest = _httpContextAccessor.HttpContext.Request;
+                //todo убрать решетку если потребуется
                 var callbackUrl =
-                    $"{StringExtensions.GetCallbackUrl(registerRequest)}/confirm-email?userId={user.Id}&code={code}";
+                    $"{StringExtensions.GetCallbackUrl(registerRequest)}/#/confirm-email?userId={user.Id}&code={code}";
 
                 _emailSenderService.SendEmailAsync(new EmailBodyModel
                 {

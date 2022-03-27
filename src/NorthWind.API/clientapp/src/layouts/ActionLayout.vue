@@ -11,13 +11,15 @@
 import {Vue, Component} from 'vue-property-decorator'
 import Navbar from "@/components/Navbar.vue"
 import ActionBar from "@/components/ActionBars/ActionBar.vue";
+import {namespace} from "vuex-class";
+
 
 @Component({components: {ActionBar, Navbar}})
 export default class ActionLayout extends Vue {
-
+  
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 .background-color {
   background-color: rgba(242, 246, 255, 255);
 }
@@ -32,5 +34,29 @@ export default class ActionLayout extends Vue {
   background-repeat: no-repeat;
   width: 100%;
   height: 15vh;
+}
+
+@media screen and (max-width: 600px) {
+  .text-block-setting {
+    font-size: 26px
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 960px) {
+  .text-block-setting {
+    font-size: 34px;
+  }
+}
+
+@media screen and (min-width: 961px) and (max-width: 1264px) {
+  .text-block-setting {
+    font-size: 40px;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .text-block-setting {
+    font-size: 48px;
+  }
 }
 </style>

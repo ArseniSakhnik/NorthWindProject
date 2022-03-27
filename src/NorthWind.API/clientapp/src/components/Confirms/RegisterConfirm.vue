@@ -130,22 +130,16 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
   }
 
   async register() {
-    console.log(0);
     const alertData = {
       message: 'Для завершения регистрации необходимо подтвердить адрес электронной почты',
       delay: 7000
     };
-    console.log(1);
     await this.accountService.Register(this.localData)
         .then(() => {
-          console.log(2);
           this.callAlert(alertData)
-          console.log(3);
           this.toggleRegisterWindow(false)
-          console.log(4);
         })
         .catch(errorMessage => {
-          console.log(5);
           this.errorMessage = errorMessage.message
         })
   }

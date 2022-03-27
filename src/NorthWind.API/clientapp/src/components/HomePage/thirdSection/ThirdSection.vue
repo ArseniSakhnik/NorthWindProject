@@ -30,7 +30,10 @@
         <v-col v-if="isComputer"/>
       </v-row>
     </v-container>
-    <div class="background-img">
+    <div
+        class="background-img"
+        :style="`background-image: url(${getImage()})`"
+    >
       <v-container class="contact-us-section-container">
         <contact-us-section class="contact-us-section"/>
       </v-container>
@@ -48,7 +51,9 @@ import ContactUsSection from "@/components/HomePage/ContactUsSection/ContactUsSe
   components: {MapSvg, ContactUsSection}
 })
 export default class ThirdSection extends Mixins(BreakPointsMixin) {
-
+  getImage() {
+    return require(`/src/assets/Frame30.png`)
+  }
 }
 </script>
 <style scoped lang="scss">
@@ -62,10 +67,10 @@ export default class ThirdSection extends Mixins(BreakPointsMixin) {
   background-color: rgba(#1b3648, 0.35);
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('/../src/assets/Frame 30.png');
-  
+  background-image: url('/../src/assets/Frame30.png');
+
   position: relative;
-  
+
   .contact-us-section {
     position: absolute;
     top: -170px;
@@ -74,7 +79,7 @@ export default class ThirdSection extends Mixins(BreakPointsMixin) {
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   @media screen and (max-width: 1264px) {
     .contact-us-section {
       left: 1em;

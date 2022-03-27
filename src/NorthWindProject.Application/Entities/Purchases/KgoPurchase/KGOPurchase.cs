@@ -6,8 +6,6 @@ namespace NorthWindProject.Application.Entities.Purchases.KgoPurchase
     [Table("KGOPurchase")]
     public class KGOPurchase : BasePurchase.Purchase
     {
-        
-
         ////(Заказчик)
         public string FullNameClient { get; set; }
 
