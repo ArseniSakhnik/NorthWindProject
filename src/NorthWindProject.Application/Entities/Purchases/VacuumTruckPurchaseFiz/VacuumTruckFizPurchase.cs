@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using NorthWindProject.Application.Common.Attributes;
 using NorthWindProject.Application.Entities.Services.BaseService;
 using NorthWindProject.Application.Interfaces;
 
@@ -7,40 +8,40 @@ namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz
     [Table("VacuumTruckFizPurchase")]
     public class VacuumTruckFizPurchase : BasePurchase.Purchase, IEncryptObject
     {
-        //Физическое лицо
+        [DocumentProp("ФизическоеЛицо")]
         public string FullName { get; set; }
 
-        //Паспорта серия
+        [DocumentProp("ПаспортСерия")]
         public string PassportSerialNumber { get; set; }
 
-        //Паспорт номер
+        [DocumentProp("ПаспортНомер")]
         public string PassportId { get; set; }
-
-        //Паспорт выдан
+        
+        [DocumentProp("ПаспортВыдан")]
         public string PassportIssued { get; set; }
 
-        //Паспорт дата выдачи 
+        [DocumentProp("ПаспортДатаВыдачи")]
         public string PassportIssueDate { get; set; }
 
-        //КП
+        [DocumentProp("КП")]
         public string DivisionCode { get; set; }
 
-        //Адрес территории
+        [DocumentProp("АдресТерритории")]
         public string TerritoryAddress { get; set; }
 
-        //Адрес регистрации
+        [DocumentProp("АдресРегистрации")]
         public string RegistrationAddress { get; set; }
 
-        //Цена
+        [DocumentProp("ЦенаЧисло")]
         public string Price { get; set; }
 
-        //ЦенаСтрока
+        [DocumentProp("ЦенаСтрока")]
         public string PriceString { get; set; }
 
-        //Номер телефона
+        [DocumentProp("НомерТелефона")]
         public string PhoneNumber { get; set; }
 
-        //Контракт действует до
+        [DocumentProp("ДоговорДействуетДо")]
         public string ContractValidDate { get; set; }
 
         public void DecryptObject(IEncryptionService encryptionService)

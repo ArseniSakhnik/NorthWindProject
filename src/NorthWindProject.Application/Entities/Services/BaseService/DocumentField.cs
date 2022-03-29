@@ -7,8 +7,11 @@
 
         public DocumentField(string propertyName, string bookMarkName)
         {
-            PropertyName = propertyName.ToLower();
-            BookMarkName = bookMarkName;
+            PropertyName = propertyName
+                .ToLower()
+                .Trim();
+            BookMarkName = bookMarkName
+                .Trim();
         }
     }
 }

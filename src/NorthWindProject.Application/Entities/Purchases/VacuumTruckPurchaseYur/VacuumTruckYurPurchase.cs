@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using NorthWindProject.Application.Common.Attributes;
 using NorthWindProject.Application.Entities.Services.BaseService;
 using NorthWindProject.Application.Interfaces;
 
@@ -7,46 +8,46 @@ namespace NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur
     [Table("VacuumTruckYurPurchase")]
     public class VacuumTruckYurPurchase : BasePurchase.Purchase, IEncryptObject
     {
-        //Например ИП Морозов А.Д. (заказчик) individual entrepreneur (КороткоеИмяПредпринимателя)
+        [DocumentProp("КороткоеИмяПредпринимателя")]
         public string IndividualEntrepreneurShortName { get; set; }
 
-        //(Заказчик)
+        [DocumentProp("Заказчик")]
         public string FullNameClient { get; set; }
 
-        //(ДействуетНаОсновании)
+        [DocumentProp("ДействуетНаОсновании")]
         public string ActOnTheBasis { get; set; }
         
-        //(АдресТерритории)
+        [DocumentProp("АдресТерритории")]
         public string TerritoryAddress { get; set; }
         
-        //(Цена)
+        [DocumentProp("Цена")]
         public string Price { get; set; }
         
-        //(ЦенаСтрока)
+        [DocumentProp("ЦенаСтрока")]
         public string PriceString { get; set; }
         
-        //(КонтрактДействуетДо)
+        [DocumentProp("КонтрактДействуетДо")]
         public string ContractValidDate { get; set; }
         
-        //(ОГРН)
+        [DocumentProp("ОГРН")]
         public string OGRN { get; set; }
         
-        //(ИНН)
+        [DocumentProp("ИНН")]
         public string INN { get; set; }
         
-        //(КПП)
+        [DocumentProp("КПП")]
         public string KPP { get; set; }
         
-        //(ЮридическийАдресс)
+        [DocumentProp("ЮридическийАдресс")]
         public string LegalAddress { get; set; }
         
-        //(Телефон)
+        [DocumentProp("Телефон")]
         public string PhoneNumber { get; set; }
         
-        //(Email)
+        [DocumentProp("Email")]
         public string Email { get; set; }
         
-        //(КороткоеИмяЗаказчика)
+        [DocumentProp("КороткоеИмяЗаказчика")]
         public string ShortNameClient { get; set; }
         public void DecryptObject(IEncryptionService encryptionService)
         {

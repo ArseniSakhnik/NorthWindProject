@@ -5,10 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using Microsoft.VisualBasic.CompilerServices;
+using NorthWindProject.Application.Common.Attributes;
 using NorthWindProject.Application.Entities.Services;
+using NorthWindProject.Application.Entities.Services.BaseService;
 using NorthWindProject.Application.Entities.Services.DocumentService;
 using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Enums;
+using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
 using NorthWindProject.Application.Interfaces.DomainEvents;
 
 namespace NorthWindProject.Application.Entities.Purchases.BasePurchase
@@ -17,14 +20,14 @@ namespace NorthWindProject.Application.Entities.Purchases.BasePurchase
     public abstract class Purchase : IHasDomainEvent
     {
         public int Id { get; set; }
-        
-        //(День)
+
+        [DocumentProp("День")]
         public string Day { get; set; }
 
-        //(Месяц)
+        [DocumentProp("Месяц")]
         public string Month { get; set; }
 
-        //(Год)
+        [DocumentProp("Год")]
         public string Year { get; set; }
 
         public int UserId { get; set; }
@@ -49,6 +52,20 @@ namespace NorthWindProject.Application.Entities.Purchases.BasePurchase
                             ? ""
                             : prop.GetValue(this, null)?.ToString());
             }
+        }
+
+        public static List<DocumentField> GetDocumentFields<T>()
+        {
+            return typeof(T)
+                .GetProperties()
+                .Where(propInfo => Attribute.IsDefined(propInfo, typeof(DocumentProp)))
+                .Select(propInfo => new
+                {
+                    PropertyName = propInfo.Name,
+                    BookMarkName = propInfo.GetCustomAttributes<DocumentProp>().First().BookMarkName
+                })
+                .Select(bookMarkInfo => new DocumentField(bookMarkInfo.PropertyName, bookMarkInfo.BookMarkName))
+                .ToList();
         }
 
         [NotMapped] public List<DomainEvent> DomainEvents { get; set; } = new();

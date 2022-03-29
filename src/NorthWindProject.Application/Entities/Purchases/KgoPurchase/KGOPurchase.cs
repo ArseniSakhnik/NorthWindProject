@@ -1,84 +1,85 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using NorthWindProject.Application.Entities.Services.BaseService;
+using NorthWindProject.Application.Common.Attributes;
+using NorthWindProject.Application.Entities.Purchases.BasePurchase;
 
 namespace NorthWindProject.Application.Entities.Purchases.KgoPurchase
 {
     [Table("KGOPurchase")]
-    public class KGOPurchase : BasePurchase.Purchase
+    public class KGOPurchase : Purchase
     {
-        ////(Заказчик)
+        [DocumentProp("Заказчик")]
         public string FullNameClient { get; set; }
 
-        //(ДействуетНаОсновании)
+        [DocumentProp("ДействуетНаОсновании")]
         public string ActOnTheBasis { get; set; }
 
-        //(Объем)
+        [DocumentProp("Объем")]
         public string Volume { get; set; }
 
-        //(АдресТерритории)
+        [DocumentProp("АдресТерритории")]
         public string TerritoryAddress { get; set; }
 
-        //(Перегруз)
+        [DocumentProp("Перегруз")]
         public string MachineReload { get; set; }
 
-        //(ЦенаШтрафа)
+        [DocumentProp("ЦенаШтрафа")]
         public string CoastPrice { get; set; }
 
-        //(ЦенаШтрафаСтрока)
+        [DocumentProp("ЦенаШтрафаСтрока")]
         public string CoastPriceString { get; set; }
 
-        //(КонтрактДействуетДо)
+        [DocumentProp("КонтрактДействуетДо")]
         public string ContractValidDate { get; set; }
 
-        //(Цена)
+        [DocumentProp("Цена")]
         public string Price { get; set; }
 
-        //(ЦенаСтрока)
+        [DocumentProp("ЦенаСтрока")]
         public string PriceString { get; set; }
 
-        //(ИНН)
+        [DocumentProp("ИНН")]
         public string INN { get; set; }
 
-        //(КПП)
+        [DocumentProp("КПП")]
         public string KPP { get; set; }
 
-        //(ОГРН)
+        [DocumentProp("ОГРН")]
         public string OGRN { get; set; }
 
-        //(ОКПО)
+        [DocumentProp("ОКПО")]
         public string OKPO { get; set; }
 
-        //(ЮридическийАдресс)
+        [DocumentProp("ЮридическийАдресс")]
         public string LegalAddress { get; set; }
 
-        //(ТелефонныйНомер)
+        [DocumentProp("ТелефонныйНомер")]
         public string PhoneNumber { get; set; }
 
-        //(КороткоеИмяЗаказчика)
+        [DocumentProp("КороткоеИмяЗаказчика")]
         public string ShortNameClient { get; set; }
 
-        //(КомпанияЗаказчик) 
+        [DocumentProp("КомпанияЗаказчик")]
         public string ClientCompany { get; set; }
 
-        //(КонтактноеЛицоЗаказчика)
+        [DocumentProp("КонтактноеЛицоЗаказчика")]
         public string CustomerContactPersonAndJobTitle { get; set; }
 
-        //(КонтактныйТелефонИлиФакс)
+        [DocumentProp("КонтактныйТелефонИлиФакс")]
         public string PhoneNumberOrFax { get; set; }
 
-        //(КоличествоТехники)
+        [DocumentProp("КоличествоТехники")]
         public string VehiclesNumber { get; set; }
 
-        //(ДатаОкозанияУслугC)
+        [DocumentProp("ДатаОкозанияУслугC")]
         public string StartDate { get; set; }
 
-        //(ДатаОкозанияУслугДо)
+        [DocumentProp("ДатаОкозанияУслугДо")]
         public string EndDate { get; set; }
 
-        //(ВремяОказанияУслугС)
+        [DocumentProp("ВремяОказанияУслугС")]
         public string StartTime { get; set; }
 
-        //(ВремяОказанияУслугДо)
+        [DocumentProp("ВремяОказанияУслугДо")]
         public string EndTime { get; set; }
     }
 }

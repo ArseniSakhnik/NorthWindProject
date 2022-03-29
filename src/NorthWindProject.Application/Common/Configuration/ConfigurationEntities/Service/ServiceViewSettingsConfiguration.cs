@@ -16,15 +16,15 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 {
                     Id = 1,
                     ServiceViewId = ServiceViewEnum.Ассенизатор,
-                    Title = "ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА".ToUpper(),
-                    MainImageName = "KGO.png"
+                    Title = "Откачка жидких бытовых отходов".ToUpper(),
+                    MainImageName = "Assenizator.png"
                 },
                 new()
                 {
                     Id = 2,
                     ServiceViewId = ServiceViewEnum.КГО,
-                    Title = "Откачка жидких бытовых отходов".ToUpper(),
-                    MainImageName = "Assenizator.png"
+                    Title = "ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА".ToUpper(),
+                    MainImageName = "KGO.png"
                 }
             });
         }
