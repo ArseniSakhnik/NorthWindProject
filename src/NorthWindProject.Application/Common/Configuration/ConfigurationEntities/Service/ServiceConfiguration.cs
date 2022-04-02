@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NorthWindProject.Application.Enums;
+using NorthWind.Core.Enums;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Service
 {
-    public class ServiceConfiguration : IEntityTypeConfiguration<Entities.Services.Service>
+    public class ServiceConfiguration : IEntityTypeConfiguration<NorthWind.Core.Entities.Services.Service>
     {
-        public void Configure(EntityTypeBuilder<Entities.Services.Service> builder)
+        public void Configure(EntityTypeBuilder<NorthWind.Core.Entities.Services.Service> builder)
         {
             builder
                 .HasMany(service => service.Purchases)
                 .WithOne(purchase => purchase.Service)
                 .HasForeignKey(purchase => purchase.ServiceId);
 
-            builder.HasData(new List<Entities.Services.Service>
+            builder.HasData(new List<NorthWind.Core.Entities.Services.Service>
             {
                 new()
                 {

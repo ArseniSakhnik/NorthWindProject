@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
-using NorthWindProject.Application.Entities.Services.BaseService;
+using NorthWind.Core.Entities.Services.BaseService;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.DocumentService
 {
-    public class DocumentServiceConfiguration : IEntityTypeConfiguration<Entities.Services.DocumentService.DocumentService>
+    public class DocumentServiceConfiguration : IEntityTypeConfiguration<NorthWind.Core.Entities.Services.DocumentService.DocumentService>
     {
-        public void Configure(EntityTypeBuilder<Entities.Services.DocumentService.DocumentService> builder)
+        public void Configure(EntityTypeBuilder<NorthWind.Core.Entities.Services.DocumentService.DocumentService> builder)
         {
             builder.Property(document => document.DocumentFields)
                 .HasConversion(

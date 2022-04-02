@@ -2,17 +2,14 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using NorthWindProject.Application.Common.Access;
-using NorthWindProject.Application.Entities.User;
-using NorthWindProject.Application.Interfaces;
+using NorthWindProject.Application.Common.UserModel;
 
 namespace NorthWindProject.Application.Features.Account.Command.Logout
 {
     public class LogoutCommand : IRequest
     {
-        
     }
-    
+
     public class LogoutCommandHandler : IRequestHandler<LogoutCommand>
     {
         private readonly SignInManager<ApplicationUser> _signInManager;

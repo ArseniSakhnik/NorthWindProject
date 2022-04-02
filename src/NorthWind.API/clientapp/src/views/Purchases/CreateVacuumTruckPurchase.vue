@@ -7,7 +7,7 @@
               cols="12"
               md="6"
           >
-            <h1 class="text-center">Заявка на вывоз строительного и крупногабаритного мусора</h1>
+            <h1 class="text-center">Заявка на откачку жидких бытовых отходов</h1>
             <personal-information-info
                 :email.sync="localData.email"
                 :phoneNumber.sync="localData.phoneNumber"
@@ -33,7 +33,7 @@
 
             <vacuum-truck-purchase-info
                 :territory-address="localData.territoryAddress"
-                :contract-valid-date="localData.contractValidDate"
+                :contract-valid-date.sync="localData.contractValidDate"
                 :price="localData.price"
             />
           </v-col>
@@ -52,17 +52,23 @@
         </v-row>
       </v-container>
     </v-container>
+    <action-bar
+        :is-disabled="isSendButtonDisabled"
+        @send="sendPurchase"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Watch} from 'vue-property-decorator'
+import {Vue, Component, Watch, Mixins} from 'vue-property-decorator'
 import {PurchaseToVacuumTruckFizIndividualDto} from "@/services/PurchaseService/Requests"
 import YandexMap from "@/components/YMaps/YandexMap.vue"
 import PriceFields from "@/components/PriceFields/PriceFields.vue";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
 import PassportInformation from "@/components/FieldSections/PassportInformation.vue";
 import VacuumTruckPurchaseInfo from "@/components/FieldSections/VacuumTruckPurchaseInfo.vue";
+import ActionBar from "@/components/ActionBars/ActionBar.vue";
+import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 
 @Component({
   components: {
@@ -70,10 +76,13 @@ import VacuumTruckPurchaseInfo from "@/components/FieldSections/VacuumTruckPurch
     PassportInformation,
     PriceFields,
     YandexMap,
-    PersonalInformationInfo
+    PersonalInformationInfo,
+    ActionBar
   }
 })
-export default class CreateVacuumTruckFizPurchase extends Vue {
+export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixin) {
+
+  isSendButtonDisabled: boolean = false;
 
   localData: PurchaseToVacuumTruckFizIndividualDto = {
     email: "", //
@@ -93,6 +102,14 @@ export default class CreateVacuumTruckFizPurchase extends Vue {
     contractValidDate: "", //
 
     price: 0, //
+  }
+
+  async sendPurchase() {
+    this.isSendButtonDisabled = true;
+    await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
+        .then(() => {
+          this.isSendButtonDisabled = false;
+        });
   }
 
   calculate(routeLength: number): number {

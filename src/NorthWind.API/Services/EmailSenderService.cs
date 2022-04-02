@@ -1,12 +1,10 @@
-﻿using System.Threading.Tasks;
-using AutoMapper.Internal;
+﻿using AutoMapper.Internal;
 using MailKit.Net.Smtp;
-using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using NorthWind.API.Configuration;
-using NorthWind.API.Models;
-using NorthWindProject.Application.Interfaces.DomainEvents;
+using NorthWindProject.Application.Common.Interfaces.DomainEvents;
+using NorthWindProject.Application.Common.Models;
 
 namespace NorthWind.API.Services
 {

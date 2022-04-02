@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using NorthWindProject.Application.Entities.User;
+using NorthWindProject.Application.Common.UserModel;
 
 namespace NorthWindProject.Application.Features.Account.Command.Login
 {

@@ -32,13 +32,13 @@ namespace NorthWindProject.Application.Features.Services.Command.LoadServiceDocu
 
             await using var stream = new MemoryStream();
             await request.File.OpenReadStream().CopyToAsync(stream, cancellationToken);
-            
+
             //TODO пока что по умолчанию один файл
             var documentService = service.DocumentServices.First();
             documentService.Content = stream.ToArray();
 
             await _context.SaveChangesAsync(cancellationToken);
-            
+
             return Unit.Value;
         }
     }

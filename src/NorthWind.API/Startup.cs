@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Elskom.Generic.Libs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -12,14 +11,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NorthWind.API.Configuration;
 using NorthWind.API.Services;
+using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.Interfaces;
+using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 using NorthWindProject.Application.Common.Services;
+using NorthWindProject.Application.Common.UserModel;
 using NorthWindProject.Application.DependencyInjection;
-using NorthWindProject.Application.Entities.Purchases.BasePurchase;
-using NorthWindProject.Application.Entities.User;
 using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
-using NorthWindProject.Application.Interfaces;
-using NorthWindProject.Application.Interfaces.DomainEvents;
 using NorthWindProject.Application.Middlewares;
 
 namespace NorthWind.API
@@ -115,21 +114,18 @@ namespace NorthWind.API
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
-            
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/ServiceImage")),
                 RequestPath = "/ServiceImage"
             });
-            
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/img")),
                 RequestPath = "/img"
             });
-
-            
-
         }
     }
 }

@@ -16,11 +16,14 @@ import {VueMaskDirective} from 'v-mask';
 
 // @ts-ignore
 import Vuesax from 'vuesax'
+import moment from 'moment'
 import 'vuesax/dist/vuesax.css'
 
 Vue.config.productionTip = false
 
 Vue.directive('mask', VueMaskDirective);
+
+Vue.prototype.$moment = moment;
 
 Vue.use(Vuesax, {})
 

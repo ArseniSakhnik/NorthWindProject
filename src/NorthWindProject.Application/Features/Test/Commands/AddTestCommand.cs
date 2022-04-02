@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using MediatR;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Features.Test.Events;
-using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Features.Test.Commands
 {
@@ -15,15 +14,15 @@ namespace NorthWindProject.Application.Features.Test.Commands
     public class AddTestCommandHandler : IRequestHandler<AddTestCommand>
     {
         private readonly AppDbContext _context;
-        
+
         public AddTestCommandHandler(AppDbContext context)
         {
             _context = context;
         }
-        
+
         public async Task<Unit> Handle(AddTestCommand request, CancellationToken cancellationToken)
         {
-            var test = new Entities.Test.Test
+            var test = new NorthWind.Core.Entities.Test.Test
             {
                 Name = request.Name
             };
@@ -31,7 +30,7 @@ namespace NorthWindProject.Application.Features.Test.Commands
 
             await _context.Tests.AddAsync(test, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            
+
             return Unit.Value;
         }
     }

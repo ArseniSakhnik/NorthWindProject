@@ -1,16 +1,14 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using NorthWindProject.Application.Interfaces;
-using NorthWindProject.Application.Interfaces.DomainEvents;
+using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 
 namespace NorthWindProject.Application.Features.Test.Commands
 {
     public class EmailTestCommand : IRequest
     {
-        
     }
-    
+
     public class EmailTestRequestHandler : IRequestHandler<EmailTestCommand>
     {
         private IEmailSenderService _emailSenderService;

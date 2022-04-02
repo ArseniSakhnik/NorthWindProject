@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
+using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.ShareValidators;
-using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckFizService
 {
-    public class CreatePurchaseToVacuumTruckIndividualServiceCommandValidator : AbstractValidator<CreatePurchaseToVacuumTruckFizCommand>
+    public class
+        CreatePurchaseToVacuumTruckIndividualServiceCommandValidator : AbstractValidator<
+            CreatePurchaseToVacuumTruckFizCommand>
     {
         public CreatePurchaseToVacuumTruckIndividualServiceCommandValidator(ICurrentUserService currentUserService)
         {

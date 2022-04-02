@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseYur;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Extensions;
-using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur;
-using NorthWindProject.Application.Enums;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
 using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
 
@@ -22,7 +22,6 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
         public string INN { get; set; }
         public string KPP { get; set; }
         public string LegalAddress { get; set; }
-
     }
 
     public class
@@ -40,11 +39,11 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
             CancellationToken cancellationToken)
         {
             await _purchaseService.CreatePurchaseAsync(
-                CreateVacuumTruckYurPurchase, 
+                CreateVacuumTruckYurPurchase,
                 request,
-                ServicesEnum.АссенизаторЮр, 
+                ServicesEnum.АссенизаторЮр,
                 cancellationToken);
-            
+
             return Unit.Value;
         }
 

@@ -1,4 +1,4 @@
-﻿namespace NorthWind.API.Models
+﻿namespace NorthWindProject.Application.Common.Models
 {
     public class FileModel
     {

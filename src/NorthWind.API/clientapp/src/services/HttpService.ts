@@ -62,7 +62,6 @@ export default abstract class HttpService {
                 })
             })
             .catch(e => {
-                console.log(e)
                 if (e.response.data.status === 403) {
                     const errorMessage = convert403ErrorArrayToMessage(e);
                     throw new Error(errorMessage);

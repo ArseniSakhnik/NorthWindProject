@@ -1,12 +1,9 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Features.Test.Commands;
-using NorthWindProject.Application.Interfaces;
 
 namespace NorthWind.API.Controllers
 {
@@ -14,7 +11,6 @@ namespace NorthWind.API.Controllers
     [Route("api/[controller]")]
     public class TestController : ApiController
     {
-
         private readonly AppDbContext _dbContext;
 
         public TestController(AppDbContext dbContext)

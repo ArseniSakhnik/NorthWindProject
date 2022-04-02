@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using NorthWind.Core.Entities.Purchases.KgoPurchase;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Extensions;
-using NorthWindProject.Application.Entities.Purchases.KgoPurchase;
-using NorthWindProject.Application.Enums;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
 using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
 
@@ -39,7 +39,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
 
     public class CreatePurchaseToKgoCommandHandler : IRequestHandler<CreatePurchaseToKgoCommand>
     {
-        private IPurchaseService _purchaseService;
+        private readonly IPurchaseService _purchaseService;
 
         public CreatePurchaseToKgoCommandHandler(IPurchaseService purchaseService)
         {
@@ -50,7 +50,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
         {
             await _purchaseService.CreatePurchaseAsync(CreateKGOPurchase, request, ServicesEnum.КГОЮр,
                 cancellationToken);
-            
+
             return Unit.Value;
         }
 
@@ -86,7 +86,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 StartDate = request.StartDate.GetFormattedToBlankDate(),
                 EndDate = request.EndDate.GetFormattedToBlankDate(),
                 StartTime = request.StartTime.GetFormattedToBlankDate(),
-                EndTime = request.EndTime.GetFormattedToBlankDate(),
+                EndTime = request.EndTime.GetFormattedToBlankDate()
             };
         }
     }

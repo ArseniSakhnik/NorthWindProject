@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using NorthWindProject.Application.Common.Access;
+using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseFiz;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Extensions;
-using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz;
-using NorthWindProject.Application.Enums;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
-using NorthWindProject.Application.Features.Purchase.Events;
 using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
-using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckFizService
 {
@@ -61,11 +56,11 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
             CancellationToken cancellationToken)
         {
             await _purchaseService.CreatePurchaseAsync(
-                CreateVacuumTruckFizPurchase, 
+                CreateVacuumTruckFizPurchase,
                 request,
                 ServicesEnum.АссенизаторФиз,
                 cancellationToken);
-            
+
             return Unit.Value;
         }
 
@@ -86,7 +81,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 //todo реализовать
                 PriceString = "",
                 PhoneNumber = request.PhoneNumber,
-                ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate(),
+                ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate()
             };
         }
     }

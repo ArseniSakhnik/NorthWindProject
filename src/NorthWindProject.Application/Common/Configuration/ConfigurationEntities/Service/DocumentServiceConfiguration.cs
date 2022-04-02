@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Newtonsoft.Json;
+using NorthWind.Core.Entities.Purchases.BasePurchase;
+using NorthWind.Core.Entities.Purchases.KgoPurchase;
+using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseFiz;
+using NorthWind.Core.Entities.Services.BaseService;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Extensions;
-using NorthWindProject.Application.Entities.Purchases.BasePurchase;
-using NorthWindProject.Application.Entities.Purchases.KgoPurchase;
-using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz;
-using NorthWindProject.Application.Entities.Services.BaseService;
-using NorthWindProject.Application.Enums;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Service
 {
     public class
-        DocumentServiceConfiguration : IEntityTypeConfiguration<Entities.Services.DocumentService.DocumentService>
+        DocumentServiceConfiguration : IEntityTypeConfiguration<
+            NorthWind.Core.Entities.Services.DocumentService.DocumentService>
     {
-        public void Configure(EntityTypeBuilder<Entities.Services.DocumentService.DocumentService> builder)
+        public void Configure(
+            EntityTypeBuilder<NorthWind.Core.Entities.Services.DocumentService.DocumentService> builder)
         {
             builder
                 .HasMany(service => service.Purchases)
@@ -25,7 +26,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 .Property(e => e.DocumentFields)
                 .HasJsonConversion();
 
-            builder.HasData(new List<Entities.Services.DocumentService.DocumentService>
+            builder.HasData(new List<NorthWind.Core.Entities.Services.DocumentService.DocumentService>
             {
                 new()
                 {

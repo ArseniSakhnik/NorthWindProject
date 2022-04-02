@@ -5,17 +5,26 @@
         x-large
         color="warning"
         dark
-    >Отправить
+        :disabled="isDisabled"
+        @click="send"
+    >
+      Отправить
     </v-btn>
   </v-container>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Vue, Component, Emit, Prop} from "vue-property-decorator";
 
 @Component
 export default class ActionBar extends Vue {
+  @Prop()
+  isDisabled!: boolean;
 
+  @Emit()
+  send(e: any) {
+    return e;
+  }
 }
 </script>
 <style scoped lang="scss">

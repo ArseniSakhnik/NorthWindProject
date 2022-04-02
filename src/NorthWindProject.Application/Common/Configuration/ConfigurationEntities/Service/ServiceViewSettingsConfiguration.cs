@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NorthWindProject.Application.Entities.Services;
-using NorthWindProject.Application.Enums;
+using NorthWind.Core.Entities.Services;
+using NorthWind.Core.Enums;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Service
 {

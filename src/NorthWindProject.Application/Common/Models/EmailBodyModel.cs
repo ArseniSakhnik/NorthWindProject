@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NorthWind.API.Models
+namespace NorthWindProject.Application.Common.Models
 {
     public class EmailBodyModel
     {

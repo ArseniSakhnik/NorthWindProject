@@ -1,4 +1,4 @@
-﻿using NorthWindProject.Application.Enums;
+﻿using NorthWind.Core.Enums;
 
 namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceViews
 {
@@ -8,7 +8,7 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceView
         public string Title { get; set; }
         public string FizServiceRoute { get; set; }
         public string YurServiceRoute { get; set; }
-        
+
         public string MainImageName { get; set; }
     }
 }

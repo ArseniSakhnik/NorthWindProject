@@ -26,7 +26,6 @@
     <v-col>
       <string-field
           label="ИНН"
-          prefix="ИНН"
           v-model="iNNSynced"
           mask="############"
       />
@@ -35,7 +34,6 @@
       <string-field
           label="КПП"
           mask="#########"
-          prefix="КПП"
       />
     </v-col>
     <v-col>
@@ -49,7 +47,6 @@
       <string-field
           label="ОГРН"
           mask="#############"
-          prefix="ОГРН"
       />
     </v-col>
     <v-col
@@ -58,7 +55,6 @@
       <string-field
           label="ОКРО"
           v-model="oKPOSynced"
-          prefix="OKPO"
       />
     </v-col>
   </div>

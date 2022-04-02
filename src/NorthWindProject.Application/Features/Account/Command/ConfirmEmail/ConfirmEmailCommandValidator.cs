@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmailAndPurchases
+namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmail
 {
     public class ConfirmEmailCommandValidator : AbstractValidator<ConfirmEmailCommand>
     {

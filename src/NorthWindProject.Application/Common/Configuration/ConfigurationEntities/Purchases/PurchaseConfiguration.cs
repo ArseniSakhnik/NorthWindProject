@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NorthWindProject.Application.Entities.Purchases.BasePurchase;
-using NorthWindProject.Application.Entities.Services.BaseService;
+using NorthWind.Core.Entities.Purchases.BasePurchase;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.Purchases
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NorthWindProject.Application.Entities.Test;
+using NorthWind.Core.Entities.Test;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities
 {

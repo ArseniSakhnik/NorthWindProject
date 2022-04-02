@@ -7,16 +7,16 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Entities.Purchases.BasePurchase;
+using NorthWind.Core.Entities.Purchases.KgoPurchase;
+using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseFiz;
+using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseYur;
+using NorthWind.Core.Entities.Services;
+using NorthWind.Core.Entities.Services.Files;
+using NorthWind.Core.Entities.Test;
+using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Services;
-using NorthWindProject.Application.Entities.Purchases.BasePurchase;
-using NorthWindProject.Application.Entities.Purchases.KgoPurchase;
-using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseFiz;
-using NorthWindProject.Application.Entities.Purchases.VacuumTruckPurchaseYur;
-using NorthWindProject.Application.Entities.Services;
-using NorthWindProject.Application.Entities.Services.Files;
-using NorthWindProject.Application.Entities.Test;
-using NorthWindProject.Application.Entities.User;
-using NorthWindProject.Application.Interfaces.DomainEvents;
+using NorthWindProject.Application.Common.UserModel;
 
 namespace NorthWindProject.Application.Common.Access
 {
@@ -29,7 +29,7 @@ namespace NorthWindProject.Application.Common.Access
         {
             _domainEventService = new DomainEventService(mediator);
         }
-        
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             var result = await base.SaveChangesAsync(cancellationToken);
@@ -114,10 +114,9 @@ namespace NorthWindProject.Application.Common.Access
         #region Service
 
         public DbSet<ServiceView> ServiceViews { get; set; }
-        
+
         public DbSet<ServiceViewSettings> ServiceViewSettings { get; set; }
         public DbSet<Service> Services { get; set; }
-        
 
         #endregion
 

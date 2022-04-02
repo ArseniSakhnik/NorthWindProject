@@ -6,7 +6,7 @@
             cols="12"
             md="6"
         >
-          <h1 class="text-center">Заявка на вывоз строительного и крупногабаритного мусора</h1>
+          <h1 class="text-center">Заявка на откачку жидких бытовых отходов</h1>
           <personal-information-info
               :email.sync="localData.email"
               :phoneNumber.sync="localData.phoneNumber"

@@ -2,7 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using NorthWindProject.Application.Interfaces.DomainEvents;
+using NorthWind.Core.Interfaces;
+using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 
 namespace NorthWindProject.Application.Features.Test.Events
 {

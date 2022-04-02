@@ -3,9 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using NorthWind.API.Models;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Access;
-using NorthWindProject.Application.Enums;
 
 namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceImage
 {
@@ -16,7 +15,7 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceImag
 
     public class GetServiceImageQueryHandler : IRequestHandler<GetServiceImageQuery, string>
     {
-        private AppDbContext _context;
+        private readonly AppDbContext _context;
 
         public GetServiceImageQueryHandler(AppDbContext context)
         {

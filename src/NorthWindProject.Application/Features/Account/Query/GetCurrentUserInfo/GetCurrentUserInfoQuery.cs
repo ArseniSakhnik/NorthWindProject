@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
-using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo
 {

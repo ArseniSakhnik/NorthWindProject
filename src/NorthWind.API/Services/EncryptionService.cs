@@ -1,7 +1,8 @@
 ﻿using Elskom.Generic.Libs;
 using Microsoft.Extensions.Options;
 using NorthWind.API.Configuration;
-using NorthWindProject.Application.Interfaces;
+using NorthWind.Core.Interfaces;
+using NorthWindProject.Application.Common.Interfaces;
 
 namespace NorthWind.API.Services
 {
@@ -14,8 +15,14 @@ namespace NorthWind.API.Services
             _blowFish = new BlowFish(secretOptions.Value.SecretKey);
         }
 
-        public string Encrypt(string str) => _blowFish.EncryptCBC(str);
-        
-        public string Decipher(string str) => _blowFish.DecryptCBC(str);
+        public string Encrypt(string str)
+        {
+            return _blowFish.EncryptCBC(str);
+        }
+
+        public string Decipher(string str)
+        {
+            return _blowFish.DecryptCBC(str);
+        }
     }
 }

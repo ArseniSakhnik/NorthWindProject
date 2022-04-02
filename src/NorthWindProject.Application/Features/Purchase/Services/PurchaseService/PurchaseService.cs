@@ -4,11 +4,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Enums;
+using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
-using NorthWindProject.Application.Enums;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
 using NorthWindProject.Application.Features.Purchase.Events;
-using NorthWindProject.Application.Interfaces;
 
 namespace NorthWindProject.Application.Features.Purchase.Services.PurchaseService
 {
@@ -19,16 +19,16 @@ namespace NorthWindProject.Application.Features.Purchase.Services.PurchaseServic
             TData purchaseData,
             ServicesEnum serviceTypeId,
             CancellationToken cancellationToken)
-            where TPurchase : Entities.Purchases.BasePurchase.Purchase
+            where TPurchase : NorthWind.Core.Entities.Purchases.BasePurchase.Purchase
             where TData : BaseCreatePurchaseCommand;
     }
 
     public class PurchaseService : IPurchaseService
     {
-        private readonly IMediator _mediator;
         private readonly AppDbContext _context;
         private readonly ICurrentUserService _currentUserService;
         private readonly IEncryptionService _encryptionService;
+        private readonly IMediator _mediator;
 
         public PurchaseService(IMediator mediator,
             AppDbContext context,
@@ -46,7 +46,7 @@ namespace NorthWindProject.Application.Features.Purchase.Services.PurchaseServic
             TData purchaseData,
             ServicesEnum serviceTypeId,
             CancellationToken cancellationToken)
-            where TPurchase : Entities.Purchases.BasePurchase.Purchase
+            where TPurchase : NorthWind.Core.Entities.Purchases.BasePurchase.Purchase
             where TData : BaseCreatePurchaseCommand
 
         {
@@ -71,15 +71,12 @@ namespace NorthWindProject.Application.Features.Purchase.Services.PurchaseServic
             purchase.ServiceId = service.Id;
             purchase.DocumentServiceId = service.DocumentServices.First().Id;
 
-            if (purchase is IEncryptObject purchaseEncrypt)
-            {
-                purchaseEncrypt.EncryptObject(_encryptionService);
-            }
+            if (purchase is IEncryptObject purchaseEncrypt) purchaseEncrypt.EncryptObject(_encryptionService);
 
             purchase.DomainEvents.Add(new SendEmailPurchaseAlertEvent
             {
                 Email = purchaseData.Email,
-                Purchase = purchase,
+                Purchase = purchase
             });
             currentUser.Purchases.Add(purchase);
 

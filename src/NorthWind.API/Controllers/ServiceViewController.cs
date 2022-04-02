@@ -1,10 +1,7 @@
-﻿using System.IO;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using NorthWindProject.Application.Enums;
-using NorthWindProject.Application.Features.ServiceView.Query.GetServiceImage;
 using NorthWindProject.Application.Features.ServiceView.Query.GetServiceViews;
 
 namespace NorthWind.API.Controllers

@@ -3,7 +3,6 @@
     <navbar/>
     <div class="background-image"/>
     <router-view/>
-    <action-bar/>
   </v-app>
 </template>
 

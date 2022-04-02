@@ -22,7 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Common\Interfaces" />
+    <Folder Include="Common\UserModel" />
     <Folder Include="Features\Services\Query" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NorthWind.Core\NorthWind.Core.csproj" />
   </ItemGroup>
 
 </Project>

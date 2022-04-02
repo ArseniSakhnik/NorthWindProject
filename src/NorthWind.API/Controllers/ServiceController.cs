@@ -10,11 +10,12 @@ namespace NorthWind.API.Controllers
     {
         [HttpPost("load-template/{serviceId:int}")]
         public async Task<IActionResult> LoadTemplate(int serviceId, CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(new LoadServiceDocumentTemplateCommand
+        {
+            return Ok(await Mediator.Send(new LoadServiceDocumentTemplateCommand
             {
                 ServiceId = serviceId,
                 File = Request.Form.Files.SingleOrDefault()
             }, cancellationToken));
-
+        }
     }
 }

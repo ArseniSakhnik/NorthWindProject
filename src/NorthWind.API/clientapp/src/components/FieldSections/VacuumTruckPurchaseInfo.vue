@@ -5,6 +5,7 @@
       <v-col
       >
         <string-field
+            label="Адрес"
             v-model="territoryAddress"
             :is-disabled="true"
         />
@@ -13,17 +14,15 @@
     <v-row>
       <v-col
           cols="12"
-          sm="4"
+          sm="6"
       >
-        <string-field
-            v-model="contractValidDateSynced"
-            :mask="'##-##-####'"
-            label="Период оказания услуг в формате 28-12-2000"
+        <time-picker
+            :date.sync="contractValidDateSynced"
         />
       </v-col>
       <v-col
           cols="12"
-          sm="4"
+          sm="6"
       >
         <string-field
             label="Приблизительная цена"
@@ -39,14 +38,15 @@
 <script lang="ts">
 import {Vue, Component, Prop, PropSync} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
+import TimePicker from "@/components/Fields/TimePicker.vue";
 
 @Component({
-  components: {StringField}
+  components: {StringField, TimePicker}
 })
 export default class VacuumTruckPurchaseInfo extends Vue {
+  @PropSync('contractValidDate') contractValidDateSynced!: string;
   @Prop() territoryAddress!: string;
   @Prop() price!: number;
-  @PropSync('contractValidDate') contractValidDateSynced!: string;
 }
 </script>
 <style scoped lang="scss">
