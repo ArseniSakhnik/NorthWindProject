@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.Extensions;
 using NorthWindProject.Application.Common.Models;
 using Spire.Doc;
 using Spire.Doc.Documents;
@@ -47,15 +48,31 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportPurch
             var bookMarks = booksMarkNavigator.Document.Bookmarks;
             var namesAndValues = purchase.GetNameAndValuesDictionary;
 
+            var index = 0;
             foreach (Bookmark mark in bookMarks)
             {
-                var documentField = documentData.DocumentFields
-                    .SingleOrDefault(field => mark.Name.Contains(field.BookMarkName));
+                index++;
 
-                if (documentField is null) continue;
+                try
+                {
+                    var documentField = documentData.DocumentFields
+                        .SingleOrDefault(field => mark.Name.Contains(field.BookMarkName));
 
-                booksMarkNavigator.MoveToBookmark(mark.Name);
-                booksMarkNavigator.InsertText(namesAndValues[documentField.PropertyName]);
+                    if (documentField is null) continue;
+
+                    booksMarkNavigator.MoveToBookmark(mark.Name);
+
+                    if (!namesAndValues[documentField.PropertyName].IsEmpty())
+                    {
+                        // booksMarkNavigator.InsertText(namesAndValues[documentField.PropertyName]);
+                        booksMarkNavigator.ReplaceBookmarkContent(namesAndValues[documentField.PropertyName], true);
+                    }
+                }
+                catch
+                {
+                    
+                }
+                
             }
 
             document.SaveToStream(stream, FileFormat.Doc);

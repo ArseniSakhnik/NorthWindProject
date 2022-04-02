@@ -8,30 +8,28 @@ namespace NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseFiz
     [Table("VacuumTruckFizPurchase")]
     public class VacuumTruckFizPurchase : Purchase, IEncryptObject
     {
-        [DocumentProp("ФизическоеЛицо")] public string FullName { get; set; }
+        [DocumentProp("физическоелицополностью")] public string FullName { get; set; }
 
-        [DocumentProp("ПаспортСерия")] public string PassportSerialNumber { get; set; }
+        [DocumentProp("паспортсерия")] public string PassportSerialNumber { get; set; }
 
-        [DocumentProp("ПаспортНомер")] public string PassportId { get; set; }
+        [DocumentProp("паспортномер")] public string PassportId { get; set; }
 
-        [DocumentProp("ПаспортВыдан")] public string PassportIssued { get; set; }
+        [DocumentProp("паспортвыдан")] public string PassportIssued { get; set; }
 
-        [DocumentProp("ПаспортДатаВыдачи")] public string PassportIssueDate { get; set; }
+        [DocumentProp("паспортдатавыдачи")] public string PassportIssueDate { get; set; }
 
-        [DocumentProp("КП")] public string DivisionCode { get; set; }
+        [DocumentProp("кп")] public string DivisionCode { get; set; }
 
-        [DocumentProp("АдресТерритории")] public string TerritoryAddress { get; set; }
+        [DocumentProp("адрестерритории")] public string TerritoryAddress { get; set; }
 
-        [DocumentProp("АдресРегистрации")] public string RegistrationAddress { get; set; }
+        [DocumentProp("адресрегистрации")] public string RegistrationAddress { get; set; }
 
-        [DocumentProp("ЦенаЧисло")] public string Price { get; set; }
+        [DocumentProp("ценачисло")] public string Price { get; set; }
 
-        [DocumentProp("ЦенаСтрока")] public string PriceString { get; set; }
+        [DocumentProp("ценастрока")] public string PriceString { get; set; }
 
-        [DocumentProp("НомерТелефона")] public string PhoneNumber { get; set; }
-
-        [DocumentProp("ДоговорДействуетДо")] public string ContractValidDate { get; set; }
-
+        [DocumentProp("номертелефона")] public string PhoneNumber { get; set; }
+        
         public void DecryptObject(IEncryptionService encryptionService)
         {
             PassportSerialNumber = encryptionService.Decipher(PassportSerialNumber);

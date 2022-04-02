@@ -81,7 +81,6 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 //todo реализовать
                 PriceString = "",
                 PhoneNumber = request.PhoneNumber,
-                ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate()
             };
         }
     }

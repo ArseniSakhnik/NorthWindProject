@@ -18,11 +18,11 @@ namespace NorthWind.Core.Entities.Purchases.BasePurchase
     {
         public int Id { get; set; }
 
-        [DocumentProp("День")] public string Day { get; set; }
+        [DocumentProp("день")] public string Day { get; set; }
 
-        [DocumentProp("Месяц")] public string Month { get; set; }
+        [DocumentProp("месяц")] public string Month { get; set; }
 
-        [DocumentProp("Год")] public string Year { get; set; }
+        [DocumentProp("год")] public string Year { get; set; }
 
         public int UserId { get; set; }
         public ApplicationUser User { get; set; }

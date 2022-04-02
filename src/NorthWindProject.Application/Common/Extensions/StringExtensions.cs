@@ -22,5 +22,10 @@ namespace NorthWindProject.Application.Common.Extensions
         {
             return $"{request.Scheme}://{request.Host.Value}";
         }
+
+        public static bool IsEmpty(this string str)
+        {
+            return str is not null && string.IsNullOrEmpty(str.Trim());
+        }
     }
 }
