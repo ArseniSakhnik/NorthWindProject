@@ -9,11 +9,13 @@
           >
             <h1 class="text-center">Заявка на откачку жидких бытовых отходов</h1>
             <personal-information-info
+                ref="personalInformationInfo"
                 :email.sync="localData.email"
                 :phoneNumber.sync="localData.phoneNumber"
                 :name.sync="localData.name"
                 :surname.sync="localData.surname"
                 :middleName.sync="localData.middleName"
+
             />
             <v-expansion-panels>
               <v-expansion-panel>
@@ -60,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Watch, Mixins} from 'vue-property-decorator'
+import {Vue, Component, Watch, Mixins, Ref} from 'vue-property-decorator'
 import {PurchaseToVacuumTruckFizIndividualDto} from "@/services/PurchaseService/Requests"
 import YandexMap from "@/components/YMaps/YandexMap.vue"
 import PriceFields from "@/components/PriceFields/PriceFields.vue";
@@ -81,6 +83,7 @@ import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
   }
 })
 export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixin) {
+  @Ref('personalInformationInfo') personalInformationInfo!: any;
 
   isSendButtonDisabled: boolean = false;
 
@@ -108,8 +111,13 @@ export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixi
     this.isSendButtonDisabled = true;
     await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
         .then(() => {
-          this.isSendButtonDisabled = false;
-        });
+          console.log('todo')
+        })
+        .finally(() => this.isSendButtonDisabled = false);
+  }
+
+  validate(): boolean {
+    return this.personalInformationInfo.validateComponent();
   }
 
   calculate(routeLength: number): number {

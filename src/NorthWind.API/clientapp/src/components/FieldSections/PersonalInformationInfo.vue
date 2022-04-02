@@ -7,8 +7,10 @@
           sm="4"
       >
         <string-field
+            ref="1"
             label="Фамилия"
             v-model="surnameSynced"
+            :rules="[isStringNotEmpty]"
         />
       </v-col>
       <v-col
@@ -16,8 +18,10 @@
           sm="4"
       >
         <string-field
+            ref="2"
             label="Имя"
             v-model="nameSynced"
+            :rules="[isStringNotEmpty]"
         />
       </v-col>
       <v-col
@@ -25,8 +29,10 @@
           sm="4"
       >
         <string-field
+            ref="3"
             label="Отчество"
             v-model="middleNameSynced"
+            :rules="[isStringNotEmpty]"
         />
       </v-col>
     </v-row>
@@ -36,10 +42,12 @@
           sm="6"
       >
         <string-field
+            ref="4"
             label="Номер телефона"
             v-model="phoneNumberSynced"
             prefix="+7"
             v-mask="'(###)-###-##-##'"
+            :rules="[isStringNotEmpty]"
         />
       </v-col>
       <v-col
@@ -47,9 +55,10 @@
           sm="6"
       >
         <string-field
+            ref="5"
             label="Email"
             v-model="emailSynced"
-            :rules="[emailRules]"
+            :rules="[emailRules, isStringNotEmpty]"
         />
       </v-col>
     </v-row>
@@ -59,8 +68,10 @@
           sm="6"
       >
         <string-field
+            ref="7"
             label="Номер телефона или факс"
             v-model="phoneNumberOrFaxSynced"
+            :rules="[isStringNotEmpty]"
         />
       </v-col>
     </v-row>
@@ -68,14 +79,15 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, PropSync, Watch} from "vue-property-decorator";
+import {Component, PropSync, Mixins} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
 import {namespace} from "vuex-class";
+import ValidationMixin from "@/mixins/ValidationMixin.vue";
 
 const User = namespace('CurrentUserStore')
 
 @Component({components: {StringField}})
-export default class PersonalInformationInfo extends Vue {
+export default class PersonalInformationInfo extends Mixins(ValidationMixin) {
   @PropSync('email') emailSynced!: string;
   @PropSync('phoneNumber') phoneNumberSynced!: string;
   @PropSync('name') nameSynced!: string;

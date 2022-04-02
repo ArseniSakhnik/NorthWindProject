@@ -1,25 +1,29 @@
 ﻿<template>
-  <v-text-field
-      v-mask="mask"
-      :value="valueSync"
-      :counter="counter"
-      :label="label"
-      :prefix="prefix"
-      :suffix="suffix"
-      :rules="rules"
-      :disabled="isDisabled"
-      @input="valueChangeHandler"
-      outlined
-      dense
-      :type="fieldType"
-  />
+  <v-form ref="formRef">
+    <v-text-field
+        v-mask="mask"
+        :value="valueSync"
+        :counter="counter"
+        :label="label"
+        :prefix="prefix"
+        :suffix="suffix"
+        :rules="rules"
+        :disabled="isDisabled"
+        @input="valueChangeHandler"
+        outlined
+        dense
+        :type="fieldType"
+    />
+  </v-form>
 </template>
 
 <script lang="ts">
-import {Vue, Component, ModelSync, Prop, Watch} from "vue-property-decorator";
+import {Vue, Component, ModelSync, Prop, Ref} from "vue-property-decorator";
 
 @Component
 export default class StringField extends Vue {
+  @Ref('formRef') formRef!: any;
+
   @ModelSync('value', 'change')
   valueSync!: string;
 
@@ -44,6 +48,14 @@ export default class StringField extends Vue {
 
   valueChangeHandler(value: string) {
     this.valueSync = value;
+  }
+
+  validate(): boolean {
+    this.formRef.validate();
+    return this.rules.some(rule => {
+      const result = rule(this.valueSync);
+      return Boolean(result.length)
+    })
   }
 }
 </script>
