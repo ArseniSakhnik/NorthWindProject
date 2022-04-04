@@ -1,62 +1,78 @@
 ﻿<template>
   <div>
     <h2 class="headline font-weight-bold mb-3">Юр данные</h2>
-    <v-col>
-      <string-field
-          label="Сторона ФИО"
-          v-model="individualEntrepreneurShortNameSynced"
-      />
-    </v-col>
-    <v-col
-        v-if="clientCompanySynced !== null"
-    >
-      <string-field
-          label="Имя компания клиента"
-          v-model="clientCompanySynced"
-      />
-    </v-col>
-    <v-col
-        v-if="customerContactPersonAndJobTitleSynced !== null"
-    >
-      <string-field
-          label="Контактное имя и должность"
-          v-model="customerContactPersonAndJobTitleSynced"
-      />
-    </v-col>
-    <v-col>
-      <string-field
-          label="ИНН"
-          v-model="iNNSynced"
-          mask="############"
-      />
-    </v-col>
-    <v-col>
-      <string-field
-          label="КПП"
-          mask="#########"
-      />
-    </v-col>
-    <v-col>
-      <string-field
-          label="Юридический адрес"
-          v-model="legalAddressSynced"
-          :counter="250"
-      />
-    </v-col>
-    <v-col>
-      <string-field
-          label="ОГРН"
-          mask="#############"
-      />
-    </v-col>
-    <v-col
-        v-if="oKPOSynced !== null"
-    >
-      <string-field
-          label="ОКРО"
-          v-model="oKPOSynced"
-      />
-    </v-col>
+    <v-row>
+      <v-col>
+        <string-field
+            label="Сторона ФИО"
+            v-model="individualEntrepreneurShortNameSynced"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col
+          v-if="clientCompanySynced !== null"
+      >
+        <string-field
+            label="Имя компания клиента"
+            v-model="clientCompanySynced"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col
+          v-if="customerContactPersonAndJobTitleSynced !== null"
+      >
+        <string-field
+            label="Контактное имя и должность"
+            v-model="customerContactPersonAndJobTitleSynced"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <string-field
+            label="ИНН"
+            v-model="iNNSynced"
+            mask="############"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <string-field
+            label="КПП"
+            mask="#########"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <string-field
+            label="Юридический адрес"
+            v-model="legalAddressSynced"
+            :counter="250"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <string-field
+            label="ОГРН"
+            mask="#############"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col
+          v-if="oKPOSynced !== null"
+      >
+        <string-field
+            label="ОКРО"
+            v-model="oKPOSynced"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 

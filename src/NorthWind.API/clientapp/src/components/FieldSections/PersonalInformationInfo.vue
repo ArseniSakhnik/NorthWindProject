@@ -68,7 +68,7 @@
           sm="6"
       >
         <string-field
-            ref="7"
+            ref="6"
             label="Номер телефона или факс"
             v-model="phoneNumberOrFaxSynced"
             :rules="[isStringNotEmpty]"

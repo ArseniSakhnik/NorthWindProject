@@ -8,6 +8,7 @@
         >
           <h1 class="text-center">Заявка на откачку жидких бытовых отходов</h1>
           <personal-information-info
+              ref="personalInformationInfoRef"
               :email.sync="localData.email"
               :phoneNumber.sync="localData.phoneNumber"
               :name.sync="localData.name"
@@ -23,7 +24,7 @@
           />
           <vacuum-truck-purchase-info
               :territory-address="localData.territoryAddress"
-              :contract-valid-date="localData.contractValidDate"
+              :contract-valid-date.sync="localData.contractValidDate"
               :price="localData.price"
           />
         </v-col>
@@ -41,20 +42,34 @@
         </v-col>
       </v-row>
     </v-container>
+    <action-bar
+        @send="sendPurchase"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Vue, Component, Ref} from "vue-property-decorator";
 import {PurchaseToVacuumTruckYurIndividualDto} from "@/services/PurchaseService/Requests";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
 import VacuumTruckPurchaseInfo from "@/components/FieldSections/VacuumTruckPurchaseInfo.vue";
 import IndividualEntrepreneurInfo from "@/components/FieldSections/IndividualEntrepreneurInfo.vue";
 import YandexMap from "@/components/YMaps/YandexMap.vue";
+import ActionBar from "@/components/ActionBars/ActionBar.vue";
 
 
-@Component({components: {PersonalInformationInfo, VacuumTruckPurchaseInfo, IndividualEntrepreneurInfo, YandexMap}})
+@Component({
+  components: {
+    PersonalInformationInfo,
+    VacuumTruckPurchaseInfo,
+    IndividualEntrepreneurInfo,
+    YandexMap,
+    ActionBar
+  }
+})
 export default class CreateVacuumTruckYurPurchase extends Vue {
+  @Ref('personalInformationInfoRef') personalInformationInfoRef!: any;
+
   localData: PurchaseToVacuumTruckYurIndividualDto = {
     act: 0,
     iNN: "",
@@ -71,6 +86,16 @@ export default class CreateVacuumTruckYurPurchase extends Vue {
     price: 0,//
     contractValidDate: "",//
   }
+
+  sendPurchase() {
+    const hasErrors = this.validate();
+    console.log(hasErrors)
+  }
+
+  validate(): boolean {
+    return this.personalInformationInfoRef.validateComponent();
+  }
+
 
   calculate(routeLength: number) {
     return routeLength;

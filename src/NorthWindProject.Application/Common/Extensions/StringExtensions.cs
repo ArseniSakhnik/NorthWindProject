@@ -27,5 +27,10 @@ namespace NorthWindProject.Application.Common.Extensions
         {
             return str is not null && string.IsNullOrEmpty(str.Trim());
         }
+
+        public static string GetFirstLetter(this string str)
+        {
+            return $"{str[..1]}.";
+        }
     }
 }

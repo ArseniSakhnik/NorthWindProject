@@ -13,14 +13,11 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
 {
     public class CreatePurchaseToVacuumTruckYurPurchaseCommand : BaseCreatePurchaseCommand, IRequest
     {
-        public string IndividualEntrepreneurShortName { get; set; }
-        public ActEnum Act { get; set; }
         public string TerritoryAddress { get; set; }
         public double Price { get; set; }
-        public DateTime ContractValidDate { get; set; }
-        public string OGRN { get; set; }
-        public string INN { get; set; }
-        public string KPP { get; set; }
+        public string oGRN { get; set; }
+        public string iNN { get; set; }
+        public string kPP { get; set; }
         public string LegalAddress { get; set; }
     }
 
@@ -52,16 +49,16 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
         {
             return new VacuumTruckYurPurchase
             {
-                IndividualEntrepreneurShortName = request.IndividualEntrepreneurShortName,
-                FullNameClient = $"{request.Surname} {request.Name} {request.MiddleName}",
-                ActOnTheBasis = "Устава",
+                ClientShortName =
+                    $"{request.Surname} {request.Name.GetFirstLetter()} {request.MiddleName.GetFirstLetter()}",
+                PersonalNameEntrepreneur = "Макаров А. А.",
+                ActsOnBasis = "Устава",
                 TerritoryAddress = request.TerritoryAddress,
                 Price = request.Price.ToString(CultureInfo.InvariantCulture),
-                PriceString = "Не реализовано",
-                ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate(),
-                OGRN = request.OGRN,
-                INN = request.INN,
-                KPP = request.KPP,
+                PriceString = "",
+                OGRN = request.oGRN,
+                INN = request.iNN,
+                KPP = request.kPP,
                 LegalAddress = request.LegalAddress,
                 PhoneNumber = request.PhoneNumber,
                 Email = request.Email

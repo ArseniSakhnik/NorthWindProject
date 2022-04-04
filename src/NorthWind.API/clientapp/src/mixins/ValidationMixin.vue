@@ -8,7 +8,7 @@ export default class ValidationMixin extends Vue {
 
   isStringNotEmpty(value: string | null) {
     if (value === null) {
-      return false;
+      return true;
     }
 
     const string = value.trim();

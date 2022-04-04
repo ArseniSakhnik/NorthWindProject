@@ -32,7 +32,6 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
-
             <vacuum-truck-purchase-info
                 :territory-address="localData.territoryAddress"
                 :contract-valid-date.sync="localData.contractValidDate"
@@ -93,27 +92,27 @@ export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixi
     name: "", //
     phoneNumber: "", //
     surname: "", //
-
     passportId: "", //
     passportIssueDate: "", //
     passportIssued: "", // 
     passportSerialNumber: "", //
     divisionCode: "", //
     registrationAddress: "",//
-
     territoryAddress: "",//
     contractValidDate: "", //
-
     price: 0, //
   }
 
   async sendPurchase() {
     this.isSendButtonDisabled = true;
-    await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
-        .then(() => {
-          console.log('todo')
-        })
-        .finally(() => this.isSendButtonDisabled = false);
+    const hasErrors = this.validate();
+    if (hasErrors) {
+      await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
+          .then(() => {
+            console.log('todo')
+          })
+          .finally(() => this.isSendButtonDisabled = false);
+    }
   }
 
   validate(): boolean {
