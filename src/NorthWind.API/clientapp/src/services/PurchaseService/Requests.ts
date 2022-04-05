@@ -19,15 +19,17 @@ export interface PurchaseToVacuumTruckFizIndividualDto extends BaseCreatePurchas
 }
 
 export interface PurchaseToVacuumTruckYurIndividualDto extends BaseCreatePurchaseDto {
-    individualEntrepreneurShortName: string,
-    act: number,
+    clientShortName: string,
+    personalNameEntrepreneur: string,
+    actsOnBasis: string,
     territoryAddress: string,
-    price: number,
-    contractValidDate: string,
-    oGRN: string
+    price: string,
+    priceString: string,
+    oGRN: string,
     iNN: string,
     kPP: string,
-    legalAddress: string
+    legalAddress: string,
+    phoneNumber: string,
 }
 
 export interface PurchaseToKGOYurIndividualDto extends BaseCreatePurchaseDto {

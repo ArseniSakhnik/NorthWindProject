@@ -106,13 +106,17 @@ export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixi
   async sendPurchase() {
     this.isSendButtonDisabled = true;
     const hasErrors = this.validate();
-    if (hasErrors) {
-      await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
-          .then(() => {
-            console.log('todo')
-          })
-          .finally(() => this.isSendButtonDisabled = false);
+    if (!hasErrors) {
+      
     }
+    // console.log(hasErrors);
+    // if (hasErrors) {
+    //   await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
+    //       .then(() => {
+    //         console.log('todo')
+    //       })
+    //       .finally(() => this.isSendButtonDisabled = false);
+    // }
   }
 
   validate(): boolean {
