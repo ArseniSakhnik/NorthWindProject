@@ -13,12 +13,16 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
 {
     public class CreatePurchaseToVacuumTruckYurPurchaseCommand : BaseCreatePurchaseCommand, IRequest
     {
+        public string ClientShortName { get; set; }
+        public string PersonalNameEntrepreneur { get; set; }
+        public string ActsOnBasis { get; set; }
         public string TerritoryAddress { get; set; }
         public double Price { get; set; }
-        public string oGRN { get; set; }
-        public string iNN { get; set; }
-        public string kPP { get; set; }
+        public string OGRN { get; set; }
+        public string INN { get; set; }
+        public string KPP { get; set; }
         public string LegalAddress { get; set; }
+        public string PhoneNumber { get; set; }
     }
 
     public class
@@ -49,19 +53,17 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
         {
             return new VacuumTruckYurPurchase
             {
-                ClientShortName =
-                    $"{request.Surname} {request.Name.GetFirstLetter()} {request.MiddleName.GetFirstLetter()}",
-                PersonalNameEntrepreneur = "Макаров А. А.",
+                ClientShortName = request.ClientShortName,
+                PersonalNameEntrepreneur = request.PersonalNameEntrepreneur,
                 ActsOnBasis = "Устава",
                 TerritoryAddress = request.TerritoryAddress,
                 Price = request.Price.ToString(CultureInfo.InvariantCulture),
                 PriceString = "",
-                OGRN = request.oGRN,
-                INN = request.iNN,
-                KPP = request.kPP,
+                OGRN = request.OGRN,
+                INN = request.INN,
+                KPP = request.KPP,
                 LegalAddress = request.LegalAddress,
                 PhoneNumber = request.PhoneNumber,
-                Email = request.Email
             };
         }
     }

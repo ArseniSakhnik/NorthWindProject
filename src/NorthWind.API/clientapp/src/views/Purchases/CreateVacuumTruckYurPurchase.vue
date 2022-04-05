@@ -16,7 +16,7 @@
               :middleName.sync="localData.middleName"
           />
           <individual-entrepreneur-info
-              :individual-entrepreneur-short-name.sync="localData.individualEntrepreneurShortName"
+              :individual-entrepreneur-short-name.sync="localData.clientShortName"
               :i-n-n.sync="localData.iNN"
               :k-p-p.sync="localData.kPP"
               :legalAddress.sync="localData.legalAddress"
@@ -24,7 +24,6 @@
           />
           <vacuum-truck-purchase-info
               :territory-address="localData.territoryAddress"
-              :contract-valid-date.sync="localData.contractValidDate"
               :price="localData.price"
           />
         </v-col>
@@ -71,20 +70,21 @@ export default class CreateVacuumTruckYurPurchase extends Vue {
   @Ref('personalInformationInfoRef') personalInformationInfoRef!: any;
 
   localData: PurchaseToVacuumTruckYurIndividualDto = {
-    act: 0,
+    actsOnBasis: "",
+    clientShortName: "",
+    email: "",
     iNN: "",
-    individualEntrepreneurShortName: "",
     kPP: "",
     legalAddress: "",
+    middleName: "",
+    name: "",
     oGRN: "",
-    phoneNumber: "",//
-    surname: "",//
-    name: "",//
-    email: "",//
-    middleName: "",//
-    territoryAddress: "",//
-    price: 0,//
-    contractValidDate: "",//
+    personalNameEntrepreneur: "",
+    phoneNumber: "",
+    price: 0,
+    priceString: "",
+    surname: "",
+    territoryAddress: ""
   }
 
   sendPurchase() {

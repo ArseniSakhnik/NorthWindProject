@@ -34,7 +34,6 @@
             </v-expansion-panels>
             <vacuum-truck-purchase-info
                 :territory-address="localData.territoryAddress"
-                :contract-valid-date.sync="localData.contractValidDate"
                 :price="localData.price"
             />
           </v-col>
@@ -99,7 +98,6 @@ export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixi
     divisionCode: "", //
     registrationAddress: "",//
     territoryAddress: "",//
-    contractValidDate: "", //
     price: 0, //
   }
 

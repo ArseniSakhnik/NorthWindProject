@@ -12,14 +12,14 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col
-          cols="12"
-          sm="6"
-      >
-        <time-picker
-            :date.sync="contractValidDateSynced"
-        />
-      </v-col>
+<!--      <v-col-->
+<!--          cols="12"-->
+<!--          sm="6"-->
+<!--      >-->
+<!--        <time-picker-->
+<!--            :date.sync="contractValidDateSynced"-->
+<!--        />-->
+<!--      </v-col>-->
       <v-col
           cols="12"
           sm="6"

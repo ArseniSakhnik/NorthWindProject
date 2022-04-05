@@ -36,9 +36,6 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
 
         //Цена
         public double Price { get; set; }
-
-        //ДоговорДействуетДо
-        public DateTime ContractValidDate { get; set; }
     }
 
     public class
