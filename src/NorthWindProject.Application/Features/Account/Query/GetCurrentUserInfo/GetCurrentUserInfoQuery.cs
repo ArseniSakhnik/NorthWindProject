@@ -38,7 +38,11 @@ namespace NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo
                         Name = user.Name,
                         Surname = user.Surname,
                         MiddleName = user.MiddleName,
-                        FullName = $"{user.Name} {user.MiddleName} {user.Surname}"
+                        FullName = $"{user.Name} {user.MiddleName} {user.Surname}",
+                        Roles = _context.UserRoles
+                            .Where(usr => usr.UserId == _currentUserService.UserId)
+                            .Select(usr => usr.RoleId)
+                            .ToList()
                     })
                     .SingleOrDefaultAsync(cancellationToken);
         }

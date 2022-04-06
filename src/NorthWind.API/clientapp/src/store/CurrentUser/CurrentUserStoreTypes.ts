@@ -9,5 +9,6 @@ export type CurrentUserStoreTypes = {
     surname: string,
     middleName: string,
     fullName: string,
-    accountService: AccountService
+    accountService: AccountService,
+    
 }

@@ -1,4 +1,6 @@
-﻿namespace NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo
+﻿using System.Collections.Generic;
+
+namespace NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo
 {
     public class UserDto
     {
@@ -10,5 +12,6 @@
         public string Surname { get; set; } = "";
         public string MiddleName { get; set; } = "";
         public string FullName { get; set; } = "";
+        public List<int> Roles { get; set; } = new();
     }
 }

@@ -14,6 +14,7 @@ using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseYur;
 using NorthWind.Core.Entities.Services;
 using NorthWind.Core.Entities.Services.Files;
 using NorthWind.Core.Entities.Test;
+using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.Common.UserModel;
@@ -90,7 +91,11 @@ namespace NorthWindProject.Application.Common.Access
                 new()
                 {
                     Id = 1,
+                    Name = "Admin",
+                    Surname = "Admin",
+                    MiddleName = "Admin",
                     UserName = "Admin",
+                    Email = "Admin@admin.ru",
                     NormalizedUserName = "Admin".ToUpper(),
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, "admin"),
@@ -107,6 +112,7 @@ namespace NorthWindProject.Application.Common.Access
                     UserId = 1
                 }
             });
+            
 
             base.OnModelCreating(builder);
         }
