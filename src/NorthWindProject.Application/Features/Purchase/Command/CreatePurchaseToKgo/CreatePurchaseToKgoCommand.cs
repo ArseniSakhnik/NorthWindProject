@@ -68,7 +68,9 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 //todo реализовать
                 CoastPriceString = "",
                 ContractValidDate = request.ContractValidDate.GetFormattedToBlankDate(),
-                Price = request.Price.ToString(CultureInfo.InvariantCulture),
+                Price = request.Price == 0
+                    ? null
+                    : request.Price.ToString(CultureInfo.InvariantCulture),
                 //todo реализовать
                 PriceString = "",
                 INN = request.INN,

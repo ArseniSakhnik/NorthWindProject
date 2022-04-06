@@ -14,25 +14,25 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
     public class CreatePurchaseToVacuumTruckFizCommand : BaseCreatePurchaseCommand, IRequest
     {
         //Серия паспорта
-        public string PassportSerialNumber { get; set; } = "МЕСТО ДЛЯ ЗАПОЛНЕНИЯ";
+        public string PassportSerialNumber { get; set; }
 
         //Номер паспорта
-        public string PassportId { get; set; } = "МЕСТО ДЛЯ ЗАПОЛНЕНИЯ";
+        public string PassportId { get; set; }
 
         //Паспорт выдан
-        public string PassportIssued { get; set; } = "МЕСТО ДЛЯ ЗАПОЛНЕНИЯ";
+        public string PassportIssued { get; set; }
 
         //Дата выдачи
-        public string PassportIssueDate { get; set; } = "МЕСТО ДЛЯ ЗАПОЛНЕНИЯ";
+        public string PassportIssueDate { get; set; }
 
         //Код подразделения
-        public string DivisionCode { get; set; } = "МЕСТО ДЛЯ ЗАПОЛНЕНИЯ";
+        public string DivisionCode { get; set; }
 
         //Адрес регистрации
-        public string RegistrationAddress { get; set; } = "МЕСТО ДЛЯ ЗАПОЛНЕНИЯ";
+        public string RegistrationAddress { get; set; }
 
         //Адрес территории
-        public string TerritoryAddress { get; set; } = "МЕСТО ДЛЯ ЗАПОЛНЕНИЯ";
+        public string TerritoryAddress { get; set; }
 
         //Цена
         public double Price { get; set; }
@@ -74,7 +74,9 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 DivisionCode = request.DivisionCode,
                 TerritoryAddress = request.TerritoryAddress,
                 RegistrationAddress = request.RegistrationAddress,
-                Price = request.Price.ToString(CultureInfo.InvariantCulture),
+                Price = request.Price == 0
+                    ? null
+                    : request.Price.ToString(CultureInfo.InvariantCulture),
                 //todo реализовать
                 PriceString = "",
                 PhoneNumber = request.PhoneNumber,

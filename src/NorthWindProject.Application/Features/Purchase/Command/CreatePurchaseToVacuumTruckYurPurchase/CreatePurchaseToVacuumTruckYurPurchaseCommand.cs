@@ -57,7 +57,9 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseT
                 PersonalNameEntrepreneur = request.PersonalNameEntrepreneur,
                 ActsOnBasis = "Устава",
                 TerritoryAddress = request.TerritoryAddress,
-                Price = request.Price.ToString(CultureInfo.InvariantCulture),
+                Price = request.Price == 0
+                    ? null
+                    : request.Price.ToString(CultureInfo.InvariantCulture),
                 PriceString = "",
                 OGRN = request.OGRN,
                 INN = request.INN,

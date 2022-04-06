@@ -69,6 +69,9 @@ import PassportInformation from "@/components/FieldSections/PassportInformation.
 import VacuumTruckPurchaseInfo from "@/components/FieldSections/VacuumTruckPurchaseInfo.vue";
 import ActionBar from "@/components/ActionBars/ActionBar.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
+import {namespace} from "vuex-class";
+
+const Alert = namespace('AlertStore')
 
 @Component({
   components: {
@@ -82,7 +85,8 @@ import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 })
 export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixin) {
   @Ref('personalInformationInfo') personalInformationInfo!: any;
-
+  @Alert.Action('CALL_ALERT') callAlert!: (data: { message: string, delay: number }) => void; 
+  
   isSendButtonDisabled: boolean = false;
 
   localData: PurchaseToVacuumTruckFizIndividualDto = {
@@ -104,9 +108,22 @@ export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixi
   async sendPurchase() {
     this.isSendButtonDisabled = true;
     const hasErrors = this.validate();
-    if (!hasErrors) {
-      
-    }
+    // if (!hasErrors) {
+    //  
+    // }
+
+    if (hasErrors) return;
+
+    await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
+        .then(() => {
+          this.$router.push('/');
+          this.callAlert({
+            message: 'Ваша заявка была отправлена',
+            delay: 20000
+          });
+        })
+        .finally(() => this.isSendButtonDisabled = false);
+
     // console.log(hasErrors);
     // if (hasErrors) {
     //   await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)

@@ -7,9 +7,10 @@
       square
       center-collapsed>
     <template #left>
-      <v-img
+      <img
           src="../assets/small_logo.png"
           @click="gotoMainPage"
+          alt="Logo"
       />
       <span
           @click="gotoMainPage"
