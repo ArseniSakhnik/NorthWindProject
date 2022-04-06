@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Purchases.BasePurchase;
 using NorthWind.Core.Entities.Purchases.KgoPurchase;
 using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseFiz;
@@ -24,16 +25,46 @@ namespace NorthWindProject.Application.Common.Access
     public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
         private readonly DomainEventService _domainEventService;
+        private readonly ICurrentUserService _currentUserService;
 
-        public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator)
+        public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator,
+            ICurrentUserService currentUserService)
             : base(options)
         {
             _domainEventService = new DomainEventService(mediator);
+            _currentUserService = currentUserService;
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             var result = await base.SaveChangesAsync(cancellationToken);
+
+            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedByUsername = _currentUserService.UserName;
+                        entry.Entity.CreatedByUserId = _currentUserService.UserId == 0
+                            ? null
+                            : _currentUserService.UserId;
+                        entry.Entity.Created = DateTime.Now;
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.LasModifiedById = _currentUserService.UserId;
+                        entry.Entity.LastModifiedByUsername = _currentUserService.UserName;
+                        entry.Entity.LastModified = DateTime.Now;
+                        break;
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    case EntityState.Deleted:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
 
             var events = GetDomainEvents().ToList();
             await DispatchEventAsync(events);
@@ -112,7 +143,7 @@ namespace NorthWindProject.Application.Common.Access
                     UserId = 1
                 }
             });
-            
+
 
             base.OnModelCreating(builder);
         }
