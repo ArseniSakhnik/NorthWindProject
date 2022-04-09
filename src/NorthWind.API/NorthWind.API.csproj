@@ -48,6 +48,7 @@
     <None Remove="clientapp\src\views\ContactsPage.vue" />
     <None Include="wwwroot\ServiceImage\KGO.png" />
     <None Include="wwwroot\ServiceImage\Assenizator.png" />
+    <None Remove="clientapp\src\components\Admin\AdminSidebar.vue" />
   </ItemGroup>
 
   <ItemGroup>

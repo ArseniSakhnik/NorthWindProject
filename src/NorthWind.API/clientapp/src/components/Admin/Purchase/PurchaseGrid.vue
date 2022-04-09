@@ -1,22 +1,17 @@
-﻿<template>
+<template>
+  <div>
     
+  </div>
 </template>
 
 <script lang="ts">
 import {Vue, Component} from "vue-property-decorator";
 
 @Component
-export default class Admin extends Vue {
-
+export default class PurchaseGrid extends Vue {
+  
 }
 </script>
 <style scoped lang="scss">
-.sidebar {
-  height: 1vh;
-}
 
-.mainBlock {
-  height: 1vh;
-  width: 1vw;
-}
 </style>
