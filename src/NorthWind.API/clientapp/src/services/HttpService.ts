@@ -1,4 +1,5 @@
 ﻿import {convert400ErrorArrayToMessage, convert403ErrorArrayToMessage} from "@/utils/errorConvertFunctions";
+import * as AspNetData from 'devextreme-aspnet-data-nojquery'
 
 type MethodType = 'GET' | 'POST' | 'PUT' | 'DELETE';
 type ContentType = 'application/json'
@@ -87,5 +88,15 @@ export default abstract class HttpService {
 
     protected _delete<TResponse>(path: string) {
         return this.baseRequest(path, 'DELETE');
+    }
+
+    protected _createStore(path: string, id_name: string = 'id') {
+        return AspNetData.createStore({
+            key: id_name,
+            loadUrl: `${this.basePath}/${path}`,
+            onBeforeSend(_, ajaxOptions) {
+                ajaxOptions.xhrFields = {withCredentials: true};
+            }
+        })
     }
 }
