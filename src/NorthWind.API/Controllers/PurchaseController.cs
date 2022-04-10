@@ -11,14 +11,14 @@ namespace NorthWind.API.Controllers
 {
     public class PurchaseController : ApiController
     {
-        // [HttpGet]
-        // public async Task<IActionResult> GetPurchases(DataSourceLoadOptions options,
-        //     CancellationToken cancellationToken)
-        // {
-        //     var query = await Mediator.Send(new GetPurchasesQuery(), cancellationToken);
-        //     options.RequireTotalCount = true;
-        //     return Ok(await DataSourceLoader.LoadAsync(query, options, cancellationToken));
-        // }
+        [HttpGet]
+        public async Task<IActionResult> GetPurchases(DataSourceLoadOptions options,
+            CancellationToken cancellationToken)
+        {
+            var query = await Mediator.Send(new GetPurchasesQuery(), cancellationToken);
+            options.RequireTotalCount = true;
+            return Ok(await DataSourceLoader.LoadAsync(query, options, cancellationToken));
+        }
 
         [HttpPost("create-vacuum-truck-fiz-purchase")]
         public async Task<IActionResult> CreatePurchaseToVacuumTruckFizPurchase(

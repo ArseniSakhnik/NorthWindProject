@@ -10,6 +10,10 @@ export default class PurchaseService extends HttpService {
 		super('purchase');
 	}
 	
+	public GetPurchases() {
+		return this._createStore('')
+	}
+	
 	public SendVacuumTruckFizPurchase(data: PurchaseToVacuumTruckFizIndividualDto) {
 		return this._post('create-vacuum-truck-fiz-purchase', data);
 	}

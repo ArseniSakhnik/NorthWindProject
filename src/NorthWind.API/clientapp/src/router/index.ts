@@ -10,6 +10,7 @@ import CreateVacuumTruckFizPurchase from "@/views/Purchases/CreateVacuumTruckPur
 import CreateVacuumTruckYurPurchase from "@/views/Purchases/CreateVacuumTruckYurPurchase.vue";
 import CreateKgoPurchase from "@/views/Purchases/CreateKgoPurchase.vue";
 import Test from "@/views/Test/Test.vue";
+import AdminPurchases from "@/views/AdminPurchases.vue";
 
 Vue.use(VueRouter)
 
@@ -33,7 +34,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/admin',
     name: 'Admin',
-    component: Admin,
+    component: AdminPurchases,
     meta: {
       layout: 'Admin'
     }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using NorthWind.Core.Attributes;
+using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Services;
 using NorthWind.Core.Entities.Services.BaseService;
 using NorthWind.Core.Entities.Services.DocumentService;
@@ -14,7 +15,7 @@ using NorthWindProject.Application.Common.UserModel;
 namespace NorthWind.Core.Entities.Purchases.BasePurchase
 {
     [NotMapped]
-    public abstract class Purchase : IHasDomainEvent
+    public abstract class Purchase : AuditableEntity, IHasDomainEvent
     {
         public int Id { get; set; }
 
