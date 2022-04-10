@@ -22,12 +22,22 @@ namespace NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseYur
         [DocumentProp("email")] public string Email { get; set; }
         public void DecryptObject(IEncryptionService encryptionService)
         {
-            throw new System.NotImplementedException();
+            OGRN = encryptionService.Decipher(OGRN);
+            INN = encryptionService.Decipher(INN);
+            KPP = encryptionService.Decipher(KPP);
+            LegalAddress = encryptionService.Decipher(LegalAddress);
+            PhoneNumber = encryptionService.Decipher(PhoneNumber);
+            PersonalNameEntrepreneur = encryptionService.Decipher(PersonalNameEntrepreneur);
         }
 
         public void EncryptObject(IEncryptionService encryptionService)
         {
-            throw new System.NotImplementedException();
+            OGRN = encryptionService.Encrypt(OGRN);
+            INN = encryptionService.Encrypt(INN);
+            KPP = encryptionService.Encrypt(KPP);
+            LegalAddress = encryptionService.Encrypt(LegalAddress);
+            PhoneNumber = encryptionService.Encrypt(PhoneNumber);
+            PersonalNameEntrepreneur = encryptionService.Encrypt(PersonalNameEntrepreneur);
         }
     }
 }

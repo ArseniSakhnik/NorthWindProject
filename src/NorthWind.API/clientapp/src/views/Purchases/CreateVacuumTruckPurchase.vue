@@ -85,8 +85,8 @@ const Alert = namespace('AlertStore')
 })
 export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixin) {
   @Ref('personalInformationInfo') personalInformationInfo!: any;
-  @Alert.Action('CALL_ALERT') callAlert!: (data: { message: string, delay: number }) => void; 
-  
+  @Alert.Action('CALL_ALERT') callAlert!: (data: { message: string, delay: number }) => void;
+
   isSendButtonDisabled: boolean = false;
 
   localData: PurchaseToVacuumTruckFizIndividualDto = {
@@ -106,14 +106,12 @@ export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixi
   }
 
   async sendPurchase() {
-    this.isSendButtonDisabled = true;
     const hasErrors = this.validate();
-    // if (!hasErrors) {
-    //  
-    // }
 
     if (hasErrors) return;
 
+    this.isSendButtonDisabled = true;
+    
     await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
         .then(() => {
           this.$router.push('/');
@@ -123,15 +121,6 @@ export default class CreateVacuumTruckFizPurchase extends Mixins(HttpServiceMixi
           });
         })
         .finally(() => this.isSendButtonDisabled = false);
-
-    // console.log(hasErrors);
-    // if (hasErrors) {
-    //   await this.purchaseService.SendVacuumTruckFizPurchase(this.localData)
-    //       .then(() => {
-    //         console.log('todo')
-    //       })
-    //       .finally(() => this.isSendButtonDisabled = false);
-    // }
   }
 
   validate(): boolean {

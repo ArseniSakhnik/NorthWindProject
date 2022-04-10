@@ -8,7 +8,7 @@
       >
         <string-field
             ref="1"
-            label="Фамилия"
+            label="Фамилия*"
             v-model="surnameSynced"
             :rules="[isStringNotEmpty]"
         />
@@ -19,7 +19,7 @@
       >
         <string-field
             ref="2"
-            label="Имя"
+            label="Имя*"
             v-model="nameSynced"
             :rules="[isStringNotEmpty]"
         />
@@ -30,7 +30,7 @@
       >
         <string-field
             ref="3"
-            label="Отчество"
+            label="Отчество*"
             v-model="middleNameSynced"
             :rules="[isStringNotEmpty]"
         />
@@ -43,7 +43,7 @@
       >
         <string-field
             ref="4"
-            label="Номер телефона"
+            label="Номер телефона*"
             v-model="phoneNumberSynced"
             prefix="+7"
             v-mask="'(###)-###-##-##'"
@@ -56,7 +56,7 @@
       >
         <string-field
             ref="5"
-            label="Email"
+            label="Email*"
             v-model="emailSynced"
             :rules="[emailRules, isStringNotEmpty]"
         />
@@ -69,7 +69,7 @@
       >
         <string-field
             ref="6"
-            label="Номер телефона или факс"
+            label="Номер телефона или факс*"
             v-model="phoneNumberOrFaxSynced"
             :rules="[isStringNotEmpty]"
         />

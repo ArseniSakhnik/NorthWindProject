@@ -37,6 +37,7 @@ namespace NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseFiz
             PassportIssued = encryptionService.Decipher(PassportIssued);
             PassportIssueDate = encryptionService.Decipher(PassportIssueDate);
             DivisionCode = encryptionService.Decipher(DivisionCode);
+            PhoneNumber = encryptionService.Decipher(PhoneNumber);
         }
 
         public void EncryptObject(IEncryptionService encryptionService)
