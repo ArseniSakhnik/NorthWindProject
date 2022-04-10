@@ -1,4 +1,5 @@
 ﻿import AccountService from "@/services/AccountService/AccountService";
+import {RolesEnum} from "@/enums/Enums";
 
 export type CurrentUserStoreTypes = {
     userId: number,
@@ -10,5 +11,5 @@ export type CurrentUserStoreTypes = {
     middleName: string,
     fullName: string,
     accountService: AccountService,
-    
+    roles: RolesEnum[]
 }

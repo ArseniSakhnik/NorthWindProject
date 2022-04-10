@@ -8,3 +8,8 @@ export enum ServiceViewEnum {
     Assenizator = 1,
     KGO = 2
 }
+
+export enum RolesEnum {
+    Admin = 1,
+    Client = 2
+}

@@ -2,6 +2,7 @@
 import {CurrentUserStoreTypes} from "@/store/CurrentUser/CurrentUserStoreTypes";
 import AccountService from "@/services/AccountService/AccountService";
 import {UserDto} from "@/services/AccountService/ResponsesAccountService";
+import {RolesEnum} from "@/enums/Enums";
 
 export const CurrentUserStore: Module<CurrentUserStoreTypes, any> = {
     namespaced: true,
@@ -14,7 +15,8 @@ export const CurrentUserStore: Module<CurrentUserStoreTypes, any> = {
         surname: '',
         middleName: '',
         fullName: '',
-        accountService: new AccountService()
+        accountService: new AccountService(),
+        roles: []
     },
     mutations: {
         SET_CURRENT_USER_INFO(state, userInfo: UserDto) {
@@ -26,6 +28,7 @@ export const CurrentUserStore: Module<CurrentUserStoreTypes, any> = {
             state.surname = userInfo.surname;
             state.middleName = userInfo.middleName;
             state.fullName = userInfo.fullName;
+            state.roles = userInfo.roles;
         }
     },
     actions: {
@@ -35,8 +38,11 @@ export const CurrentUserStore: Module<CurrentUserStoreTypes, any> = {
         }
     },
     getters: {
-        IS_USER_AUTHENTICATED(state) {
+        IS_USER_AUTHENTICATED(state): boolean {
             return state.userId !== 0;
+        },
+        IS_USER_ADMIN(state): boolean {
+            return state.roles.some(role => role == RolesEnum.Admin);
         }
     }
 }

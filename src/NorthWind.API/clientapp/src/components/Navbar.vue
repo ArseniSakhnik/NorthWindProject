@@ -87,7 +87,7 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   @User.Getter('IS_USER_AUTHENTICATED') isUserAuthenticated!: boolean;
   @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => void;
   @User.State('fullName') fullName!: string;
-
+  @User.Getter('IS_USER_ADMIN') isUserAdmin!: boolean;
 
   goToUserInfo() {
     this.$router.push('/user-info')
@@ -96,24 +96,36 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   isRegisterDialogOpened: boolean = false;
   isLogInDialogOpened: boolean = false
   dialog: boolean = false;
-  private menuItems: object[] = [
-    {
-      title: 'Услуги',
-      to: '/'
-    },
-    {
-      title: 'Документы',
-      to: '/'
-    },
-    {
-      title: 'Вакансии',
-      to: '/'
-    },
-    {
-      title: 'Контакты',
-      to: '/'
-    },
-  ]
+
+  get menuItems(): any[] {
+    const items = [
+      {
+        title: 'Услуги',
+        to: '/'
+      },
+      {
+        title: 'Документы',
+        to: '/'
+      },
+      {
+        title: 'Вакансии',
+        to: '/'
+      },
+      {
+        title: 'Контакты',
+        to: '/'
+      },
+    ]
+    
+    if (this.isUserAdmin) {
+      items.push({
+        title: 'Панель администрирования',
+        to: '/admin'
+      })
+    }
+    
+    return items;
+  }
 
   openRegisterWindow() {
     this.isRegisterDialogOpened = true;

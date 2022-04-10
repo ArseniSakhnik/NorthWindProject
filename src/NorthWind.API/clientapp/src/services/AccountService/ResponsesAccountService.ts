@@ -1,3 +1,5 @@
+import {RolesEnum} from "@/enums/Enums";
+
 export type UserDto = {
     userId: number,
     email: string,
@@ -7,4 +9,5 @@ export type UserDto = {
     surname: string,
     middleName: string,
     fullName: string,
+    roles: RolesEnum[]
 }

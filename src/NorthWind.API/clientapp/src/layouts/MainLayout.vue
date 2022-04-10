@@ -1,5 +1,5 @@
 ﻿<template>
-  <v-app>
+  <v-app v-if="isDataLoaded">
     <div class="alert-section" v-if="isActive">
       <success-alert
           :message="alertMessage"
@@ -19,15 +19,20 @@ import SuccessAlert from "@/components/Alerts/SuccessAlert.vue";
 import {namespace} from "vuex-class";
 
 const Alert = namespace('AlertStore')
+const User = namespace('CurrentUserStore')
 
 @Component({components: {Navbar, FooterSection, SuccessAlert}})
 export default class MainLayout extends Vue {
   @Alert.Action('CALL_ALERT') callAlert!: () => void;
   @Alert.State('isActive') isActive!: boolean;
   @Alert.State('alertMessage') alertMessage!: string;
+  @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => Promise<void>;
 
-  updated() {
-    console.log(this.isActive)
+  isDataLoaded: boolean = false;
+
+  async created() {
+    await this.getCurrentUserInfo()
+        .then(() => this.isDataLoaded = true);
   }
 }
 </script>
