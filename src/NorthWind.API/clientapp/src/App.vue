@@ -10,10 +10,11 @@ import AdminLayout from '@/layouts/AdminLayout.vue'
 import SystemLayout from "@/layouts/SystemLayout.vue"
 import ActionLayout from "@/layouts/ActionLayout.vue"
 import {namespace} from "vuex-class";
+import UserLayout from "@/layouts/UserLayout.vue";
 
 const User = namespace('CurrentUserStore');
 
-@Component({components: {MainLayout, AdminLayout, SystemLayout, ActionLayout}})
+@Component({components: {MainLayout, AdminLayout, SystemLayout, ActionLayout, UserLayout}})
 export default class App extends Vue {
   @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => Promise<void>;
   isDataLoaded: boolean = false;

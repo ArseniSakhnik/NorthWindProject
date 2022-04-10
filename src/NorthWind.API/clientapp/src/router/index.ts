@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import VueRouter, {RouteConfig} from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Admin from '../views/Admin.vue'
@@ -11,96 +11,105 @@ import CreateVacuumTruckYurPurchase from "@/views/Purchases/CreateVacuumTruckYur
 import CreateKgoPurchase from "@/views/Purchases/CreateKgoPurchase.vue";
 import Test from "@/views/Test/Test.vue";
 import AdminPurchases from "@/views/AdminPurchases.vue";
+import UserInfo from "@/views/UserInfo.vue";
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-    meta: {
-      layout: 'Main'
+    {
+        path: '/',
+        name: 'Home',
+        component: Home,
+        meta: {
+            layout: 'Main'
+        }
+    },
+    {
+        path: '/about',
+        name: 'About',
+        component: About,
+        meta: {
+            layout: 'Main'
+        }
+    },
+    {
+        path: '/user-info',
+        name: 'UserInfo',
+        component: UserInfo,
+        meta: {
+            layout: 'User'
+        }
+    },
+    {
+        path: '/admin',
+        name: 'Admin',
+        component: AdminPurchases,
+        meta: {
+            layout: 'Admin'
+        }
+    },
+    {
+        path: '/confirm-email',
+        name: 'ConfirmEmail',
+        component: ConfirmEmail,
+        meta: {
+            layout: 'System'
+        }
+    },
+    {
+        path: '/create-service',
+        name: 'CreateService',
+        component: CreateServicePage,
+        meta: {
+            layout: 'Admin'
+        }
+    },
+    {
+        path: '/developer-page',
+        name: 'DeveloperPage',
+        component: DeveloperPage,
+        meta: {
+            layout: 'Main'
+        }
+    },
+    {
+        path: '/create-vacuum-truck-fiz-purchase',
+        name: 'CreateVacuumTruckFizPurchase',
+        component: CreateVacuumTruckFizPurchase,
+        meta: {
+            layout: 'Action'
+        }
+    },
+    {
+        path: '/create-vacuum-truck-yur-purchase',
+        name: 'CreateVacuumTruckPurchase',
+        component: CreateVacuumTruckYurPurchase,
+        meta: {
+            layout: 'Action'
+        }
+    },
+    {
+        path: '/create-kgo-purchase',
+        name: 'CreateKgoPurchase',
+        component: CreateKgoPurchase,
+        meta: {
+            layout: 'Action'
+        }
+    },
+    {
+        path: '/test',
+        name: 'Test',
+        component: Test,
+        meta: {
+            layout: 'system'
+        }
     }
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: About,
-    meta: {
-      layout: 'Main'
-    }
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: AdminPurchases,
-    meta: {
-      layout: 'Admin'
-    }
-  },
-  {
-    path: '/confirm-email',
-    name: 'ConfirmEmail',
-    component: ConfirmEmail,
-    meta: {
-      layout: 'System'
-    }
-  },
-  {
-    path: '/create-service',
-    name: 'CreateService',
-    component: CreateServicePage,
-    meta: {
-      layout: 'Admin'
-    }
-  },
-  {
-    path: '/developer-page',
-    name: 'DeveloperPage',
-    component: DeveloperPage,
-    meta: {
-      layout: 'Main'
-    }
-  },
-  {
-    path: '/create-vacuum-truck-fiz-purchase',
-    name: 'CreateVacuumTruckFizPurchase',
-    component: CreateVacuumTruckFizPurchase,
-    meta: {
-      layout: 'Action'
-    }
-  },
-  {
-    path: '/create-vacuum-truck-yur-purchase',
-    name: 'CreateVacuumTruckPurchase',
-    component: CreateVacuumTruckYurPurchase,
-    meta: {
-      layout: 'Action'
-    }
-  },
-  {
-    path: '/create-kgo-purchase',
-    name: 'CreateKgoPurchase',
-    component: CreateKgoPurchase,
-    meta: {
-      layout: 'Action'
-    }
-  },
-  {
-    path: '/test',
-    name: 'Test',
-    component: Test,
-    meta: {
-      layout: 'system'   
-    }
-  }
 ]
 
 const router = new VueRouter({
-  // mode: 'history',
-  // base: process.env.BASE_URL,
-  routes
+    // mode: 'history',
+    // base: process.env.BASE_URL,
+    routes
 })
 
 export default router

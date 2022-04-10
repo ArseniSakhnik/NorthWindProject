@@ -5,7 +5,9 @@
       fixed
       text-white
       square
-      center-collapsed>
+      center-collapsed
+      color="primary"
+  >
     <template #left>
       <img
           src="../assets/small_logo.png"
@@ -40,10 +42,15 @@
       >
         Регистрация
       </vs-button>
-
-      <div v-if="isUserAuthenticated"
-      >
-        {{ fullName }}
+      <div>
+        <vs-button
+            v-if="isUserAuthenticated"
+            color="#fff"
+            flat
+            @click="goToUserInfo"
+        >
+          Личный кабинет
+        </vs-button>
       </div>
       <div v-if="isUserAuthenticated">
         <vs-button
@@ -55,7 +62,7 @@
         </vs-button>
       </div>
       <login-window :is-dialog-opened.sync="isLogInDialogOpened"/>
-      <vs-button color="#fff" border>Оставить заявку</vs-button>
+      <!--      <vs-button color="#fff" border>Оставить заявку</vs-button>-->
       <register-confirm
           :is-active.sync="isRegisterDialogOpened"
       />
@@ -69,16 +76,22 @@ import LoginWindow from "@/components/HomePage/loginWindow/LoginWindow.vue"
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue"
 import {namespace} from "vuex-class";
 import RegisterConfirm from "@/components/Confirms/RegisterConfirm.vue";
+import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 
 const User = namespace('CurrentUserStore');
 
 @Component({
   components: {RegisterConfirm, LoginWindow}
 })
-export default class Navbar extends Mixins(HttpServiceMixin) {
+export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   @User.Getter('IS_USER_AUTHENTICATED') isUserAuthenticated!: boolean;
   @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => void;
   @User.State('fullName') fullName!: string;
+
+
+  goToUserInfo() {
+    this.$router.push('/user-info')
+  }
 
   isRegisterDialogOpened: boolean = false;
   isLogInDialogOpened: boolean = false
