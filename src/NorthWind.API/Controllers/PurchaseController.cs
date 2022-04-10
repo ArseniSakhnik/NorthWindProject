@@ -6,6 +6,8 @@ using NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToKgo
 using NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckFizService;
 using NorthWindProject.Application.Features.Purchase.Command.CreatePurchaseToVacuumTruckYurPurchase;
 using NorthWindProject.Application.Features.Purchase.Query.GetPurchases;
+using NorthWindProject.Application.Features.Purchase.Query.GetVacuumTruckFizPurchase;
+using NorthWindProject.Application.Features.Purchase.Query.GetVacuumTruckYurPurchase;
 
 namespace NorthWind.API.Controllers
 {
@@ -19,6 +21,20 @@ namespace NorthWind.API.Controllers
             options.RequireTotalCount = true;
             return Ok(await DataSourceLoader.LoadAsync(query, options, cancellationToken));
         }
+
+        [HttpGet("vacuum-truck-fiz-purchase/{purchaseId:int}")]
+        public async Task<IActionResult> GetVacuumTruckFizPurchase(int purchaseId, CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(new GetVacuumTruckFizPurchaseQuery
+            {
+                PurchaseId = purchaseId
+            }, cancellationToken));
+
+        [HttpGet("vacuum-truck-yur-purchase/{purchaseId:int}")]
+        public async Task<IActionResult> GetVacuumTruckYurPurchase(int purchaseId, CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(new GetVacuumTruckYurPurchaseQuery
+            {
+                PurchaseId = purchaseId
+            }, cancellationToken));
 
         [HttpPost("create-vacuum-truck-fiz-purchase")]
         public async Task<IActionResult> CreatePurchaseToVacuumTruckFizPurchase(

@@ -33,6 +33,8 @@ namespace NorthWind.Core.Entities.Purchases.BasePurchase
 
         public int DocumentServiceId { get; set; }
         public DocumentService DocumentService { get; set; }
+        
+        [NotMapped] public List<DomainEvent> DomainEvents { get; set; } = new();
 
         public IDictionary<string, string> GetNameAndValuesDictionary
         {
@@ -48,8 +50,6 @@ namespace NorthWind.Core.Entities.Purchases.BasePurchase
                             : prop.GetValue(this, null)?.ToString());
             }
         }
-
-        [NotMapped] public List<DomainEvent> DomainEvents { get; set; } = new();
 
         public static List<DocumentField> GetDocumentFields<T>()
         {

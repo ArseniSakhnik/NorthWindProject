@@ -29,7 +29,8 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetPurchases
                     PhoneNumber = purchase.User.PhoneNumber,
                     Email = purchase.User.Email,
                     Created = purchase.Created,
-                    ClientFullName = purchase.User.FullName
+                    ClientFullName = purchase.User.FullName,
+                    ServiceTypeId = purchase.ServiceId
                 }));
     }
 }

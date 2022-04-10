@@ -1,4 +1,5 @@
 ﻿using System;
+using NorthWind.Core.Enums;
 
 namespace NorthWindProject.Application.Features.Purchase.Query.GetPurchases
 {
@@ -9,5 +10,6 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetPurchases
         public string Email { get; set; }
         public DateTime Created { get; set; }
         public string ClientFullName { get; set; }
+        public ServicesEnum ServiceTypeId { get; set; }
     }
 }
