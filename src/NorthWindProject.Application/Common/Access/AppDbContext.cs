@@ -15,10 +15,10 @@ using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseYur;
 using NorthWind.Core.Entities.Services;
 using NorthWind.Core.Entities.Services.Files;
 using NorthWind.Core.Entities.Test;
+using NorthWind.Core.Entities.User;
 using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Services;
-using NorthWindProject.Application.Common.UserModel;
 
 namespace NorthWindProject.Application.Common.Access
 {

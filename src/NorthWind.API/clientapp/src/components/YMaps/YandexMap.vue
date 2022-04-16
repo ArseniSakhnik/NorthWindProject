@@ -10,6 +10,8 @@
 import {Vue, Component, Ref, Prop, PropSync} from 'vue-property-decorator'
 //@ts-ignore
 import {yandexMap, ymapMarker, loadYmap} from 'vue-yandex-maps'
+import {getCoordinates} from '../../data/CityCoordinates';
+import LoginWindow from "@/components/HomePage/loginWindow/LoginWindow.vue";
 
 
 @Component({components: {yandexMap, ymapMarker}})
@@ -38,6 +40,49 @@ export default class YandexMap extends Vue {
 
 
   private init() {
+
+    const coordinatesData = getCoordinates();
+
+    //@ts-ignore
+    const coordinatesMap = coordinatesData.geometries[0].coordinates[0].map(item => item.reverse());
+
+    const cityAreaStyle = {
+      // Описываем опции геообъекта.
+      // Цвет заливки.
+      fillColor: '#00FF00',
+      // Цвет обводки.
+      strokeColor: '#0000FF',
+      // Общая прозрачность (как для заливки, так и для обводки).
+      opacity: 0.5,
+      // Ширина обводки.
+      strokeWidth: 2,
+      // Стиль обводки.
+      strokeStyle: 'shortdash'
+    };
+
+    const cityAreaObject = {
+      // Описываем геометрию геообъекта.
+      geometry: {
+        // Тип геометрии - "Многоугольник".
+        type: "Polygon",
+        // Указываем координаты вершин многоугольника.
+        coordinates: [coordinatesMap],
+        // Задаем правило заливки внутренних контуров по алгоритму "nonZero".
+        fillRule: "nonZero"
+      },
+      // Описываем свойства геообъекта.
+      properties: {
+        // Содержимое балуна.
+        balloonContent: "Многоугольник"
+      }
+    }
+
+    //@ts-ignore
+    const myGeoObject = new ymaps.GeoObject(cityAreaObject, cityAreaStyle);
+
+    // Добавляем многоугольник на карту.
+
+
     this.isMapLoaded = true
     //@ts-ignore
     const myMap = new ymaps.Map('map', {
@@ -46,6 +91,9 @@ export default class YandexMap extends Vue {
       controls: []
     })
 
+    myMap.geoObjects.add(myGeoObject);
+    
+    
     //@ts-ignore
     const routePanelControl = new ymaps.control.RoutePanel({
       options: {
@@ -88,7 +136,6 @@ export default class YandexMap extends Vue {
 
             if (activeRoute) {
               const length = route.getActiveRoute().properties.get('distance');
-
               const geoInfo = route.getActiveRoute().properties.getAll();
               const coords = geoInfo.rawProperties.boundedBy[1];
               const price = this.calculate(Math.round(length.value / 1000));
@@ -107,11 +154,7 @@ export default class YandexMap extends Vue {
                   '<span style="font-weight: bold; font-style: italic">Стоимость перевозки: ' + price + ' р.</span>');
 
               route.options.set('routeBalloonContentLayout', balloonContentLayout);
-              activeRoute.ballom.open()
-
             }
-
-
           })
         })
   }

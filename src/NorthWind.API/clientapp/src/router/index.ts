@@ -9,9 +9,10 @@ import ConfirmEmail from "@/views/System/ConfirmEmail.vue"
 import CreateVacuumTruckFizPurchase from "@/views/Purchases/CreateVacuumTruckPurchase.vue"
 import CreateVacuumTruckYurPurchase from "@/views/Purchases/CreateVacuumTruckYurPurchase.vue";
 import CreateKgoPurchase from "@/views/Purchases/CreateKgoPurchase.vue";
-import Test from "@/views/Test/Test.vue";
 import AdminPurchases from "@/views/AdminPurchases.vue";
+import AdminPurchase from "@/views/AdminPurchase.vue";
 import UserInfo from "@/views/UserInfo.vue";
+import Purchase from "@/components/Purchase.vue";
 
 Vue.use(VueRouter)
 
@@ -97,18 +98,16 @@ const routes: Array<RouteConfig> = [
         }
     },
     {
-        path: '/test',
-        name: 'Test',
-        component: Test,
+        path: '/purchase',
+        name: 'Purchase',
+        component: AdminPurchase,
         meta: {
-            layout: 'system'
+            layout: 'Admin'
         }
     }
 ]
 
 const router = new VueRouter({
-    // mode: 'history',
-    // base: process.env.BASE_URL,
     routes
 })
 

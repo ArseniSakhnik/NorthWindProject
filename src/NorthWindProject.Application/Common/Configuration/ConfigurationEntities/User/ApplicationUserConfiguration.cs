@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NorthWindProject.Application.Common.UserModel;
+using NorthWind.Core.Entities.User;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities.User
 {

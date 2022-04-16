@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
-using NorthWindProject.Application.Common.UserModel;
+using NorthWind.Core.Entities.User;
 
 namespace NorthWindProject.Application.Features.Account.Command.ConfirmEmail
 {

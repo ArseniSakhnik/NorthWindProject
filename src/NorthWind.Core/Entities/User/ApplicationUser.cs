@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using NorthWind.Core.Entities.Purchases.BasePurchase;
 
-namespace NorthWindProject.Application.Common.UserModel
+namespace NorthWind.Core.Entities.User
 {
     public class ApplicationUser : IdentityUser<int>
     {
@@ -10,6 +10,12 @@ namespace NorthWindProject.Application.Common.UserModel
         public string Surname { get; set; }
         public string MiddleName { get; set; }
         public List<Purchase> Purchases { get; set; } = new();
+
+        public ApplicationUser GetUser()
+        {
+            return this;
+        }
+        
 
         public string FullName
         {

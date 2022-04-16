@@ -8,9 +8,9 @@ using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Services;
 using NorthWind.Core.Entities.Services.BaseService;
 using NorthWind.Core.Entities.Services.DocumentService;
+using NorthWind.Core.Entities.User;
 using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
-using NorthWindProject.Application.Common.UserModel;
 
 namespace NorthWind.Core.Entities.Purchases.BasePurchase
 {

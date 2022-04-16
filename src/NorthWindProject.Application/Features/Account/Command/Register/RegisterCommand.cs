@@ -6,10 +6,10 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
+using NorthWind.Core.Entities.User;
 using NorthWindProject.Application.Common.Extensions;
 using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 using NorthWindProject.Application.Common.Models;
-using NorthWindProject.Application.Common.UserModel;
 using NorthWindProject.Application.Entities.User;
 
 namespace NorthWindProject.Application.Features.Account.Command.Register
