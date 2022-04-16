@@ -38,13 +38,20 @@ export default class YandexMap extends Vue {
     version: '2.1'
   }
 
-
   private init() {
+    const cityArea = this.getCityPolygon();
+    this.isMapLoaded = true;
+    const myMap = this.getGeneratedMap();
+    myMap.geoObjects.add(cityArea);
+    const {routePanelControl, zoomControl} = this.getRouteAbdZoomMap();
+    myMap.controls.add(routePanelControl).add(zoomControl)
+    this.setRouteSettings(myMap, routePanelControl, cityArea);
+  }
 
-    const coordinatesData = getCoordinates();
-
-    //@ts-ignore
-    const coordinatesMap = coordinatesData.geometries[0].coordinates[0].map(item => item.reverse());
+  getCityPolygon() {
+    const cityCoordinates = getCoordinates();
+    //@ts-ignore()
+    const coordinatesMap = cityCoordinates.geometries[0].coordinates[0].map(item => item.reverse());
 
     const cityAreaStyle = {
       // Описываем опции геообъекта.
@@ -58,7 +65,7 @@ export default class YandexMap extends Vue {
       strokeWidth: 2,
       // Стиль обводки.
       strokeStyle: 'shortdash'
-    };
+    }
 
     const cityAreaObject = {
       // Описываем геометрию геообъекта.
@@ -69,31 +76,25 @@ export default class YandexMap extends Vue {
         coordinates: [coordinatesMap],
         // Задаем правило заливки внутренних контуров по алгоритму "nonZero".
         fillRule: "nonZero"
-      },
-      // Описываем свойства геообъекта.
-      properties: {
-        // Содержимое балуна.
-        balloonContent: "Многоугольник"
       }
     }
 
     //@ts-ignore
     const myGeoObject = new ymaps.GeoObject(cityAreaObject, cityAreaStyle);
 
-    // Добавляем многоугольник на карту.
+    return myGeoObject;
+  }
 
-
-    this.isMapLoaded = true
+  getGeneratedMap() {
     //@ts-ignore
-    const myMap = new ymaps.Map('map', {
+    return new ymaps.Map('map', {
       center: [44.959240, 34.131166],
       zoom: 12,
       controls: []
     })
+  }
 
-    myMap.geoObjects.add(myGeoObject);
-    
-    
+  getRouteAbdZoomMap() {
     //@ts-ignore
     const routePanelControl = new ymaps.control.RoutePanel({
       options: {
@@ -117,15 +118,17 @@ export default class YandexMap extends Vue {
     // Если вы хотите задать неизменяемую точку "откуда", раскомментируйте код ниже.
     routePanelControl.routePanel.state.set({
       fromEnabled: false,
-      from: 'Республика Крым, г. Симферополь, ул. Буденного д.32, литера "Ф"'
+      from: 'Республика Крым, г. Симферополь, ул. Буденного д.32, литера "Ф"',
     });
 
     routePanelControl.routePanel.options.set({
       types: {auto: true}
     });
 
-    myMap.controls.add(routePanelControl).add(zoomControl)
+    return {routePanelControl, zoomControl};
+  }
 
+  setRouteSettings(myMap: any, routePanelControl: any, polygon: any) {
     routePanelControl.routePanel.getRouteAsync()
         .then((route: any) => {
           route.model.setParams({results: 1}, true);
@@ -133,7 +136,7 @@ export default class YandexMap extends Vue {
           route.model.events.add('requestsuccess', () => {
 
             const activeRoute = route.getActiveRoute();
-
+            
             if (activeRoute) {
               const length = route.getActiveRoute().properties.get('distance');
               const geoInfo = route.getActiveRoute().properties.getAll();
@@ -147,6 +150,22 @@ export default class YandexMap extends Vue {
                     const geoInfo = geoObject.properties.getAll()
                     this.territoryAddressSynced = geoInfo.text
                   })
+
+              //@ts-ignore
+              const pathsObjects = ymaps.geoQuery(myMap.geoObjects);
+              const edges = [];
+
+              //@ts-ignore
+              pathsObjects.each(function (path) {
+                const coordinates = path.geometry.getCoordinates();
+                for (let i = 1, l = coordinates.length; i < l; i++) {
+                  edges.push({
+                    type: 'LineString',
+                    coordinates: [coordinates[i], coordinates[i - 1]]
+                  });
+                }
+              });
+
 
               //@ts-ignore
               const balloonContentLayout = ymaps.templateLayoutFactory.createClass(
@@ -171,7 +190,6 @@ export default class YandexMap extends Vue {
     await loadYmap({...this.settings, debug: true})
     //@ts-ignore
     ymaps.ready(this.init)
-
   }
 }
 </script>
