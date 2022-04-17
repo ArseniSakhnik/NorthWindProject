@@ -138,67 +138,113 @@ export default class YandexMap extends Vue {
             const activeRoute = route.getActiveRoute();
 
             if (activeRoute) {
+
               const length = route.getActiveRoute().properties.get('distance');
               const geoInfo = route.getActiveRoute().properties.getAll();
               const coords = geoInfo.rawProperties.boundedBy[1];
               const price = this.calculate(Math.round(length.value / 1000));
 
-              console.log(geoInfo.boundedBy);
+              const edges = [];
 
-              //@ts-ignore
-              ymaps.route(geoInfo.boundedBy).then(res => {
-                console.log(res.getPath());
-                
-                //@ts-ignore
-                const pathsObjects = ymaps.geoQuery(res.getPath())
-                console.log(pathsObjects)
-                const edges: any[] = [];
+              for (let i = 0; i < activeRoute.getPaths().getLength(); i++) {
+                const way = activeRoute.getPaths().get(i);
+                const segments = way.getSegments();
 
-                //@ts-ignore
-                pathsObjects.each(function (path) {
-                  const coordinates = path.geometry.getCoordinates();
-                  for (let i = 1, l = coordinates.length; i < l; i++) {
+                for (let j = 0; j < segments.getLength(); j++) {
+                  // console.log(segments.get(j).geometry.getCoordinates())
+                  const coordinates = segments.get(j).geometry.getCoordinates();
+                  console.log(segments.get(j).properties.getAll())
+                  for (let k = 1, l = coordinates.length; k < l; k++) {
                     edges.push({
                       type: 'LineString',
-                      coordinates: [coordinates[i], coordinates[i - 1]]
-                    });
+                      coordinates: [coordinates[k], coordinates[k - 1]]
+                    })
                   }
-                });
-                
+                }
+              }
 
-                // Создадим новую выборку, содержащую:
-                // - отрезки, описываюшие маршрут;
-                // - начальную и конечную точки;
-                // - промежуточные точки.
-                //@ts-ignore
-                const routeObjects = ymaps.geoQuery(edges)
-                    .add(res.getWayPoints())
-                    .add(res.getViaPoints())
-                    .setOptions('strokeWidth', 3)
-                    .addToMap(myMap);
+              //@ts-ignore
+              const routeObjects = ymaps.geoQuery(edges)
+                  .addToMap(myMap);
 
-                // Найдем все объекты, попадающие внутрь МКАД.
-                const objectsInMoscow = routeObjects.searchInside(polygon)
-                // Найдем объекты, пересекающие МКАД.
-                const boundaryObjects = routeObjects.searchIntersect(polygon);
-                // Раскрасим в разные цвета объекты внутри, снаружи и пересекающие МКАД.
-                boundaryObjects.setOptions({
-                  strokeColor: '#06ff00',
-                  preset: 'islands#greenIcon'
-                });
-                objectsInMoscow.setOptions({
-                  strokeColor: '#ff0005',
-                  preset: 'islands#redIcon'
-                });
-                // Объекты за пределами МКАД получим исключением полученных выборок из
-                // исходной.
-                routeObjects.remove(objectsInMoscow).remove(boundaryObjects).setOptions({
-                  strokeColor: '#0010ff',
-                  preset: 'islands#blueIcon'
-                });
-
-              })
+              const objectsInCity = routeObjects.searchInside(polygon);
+              // Найдем объекты, пересекающие МКАД.
+              const boundaryObjects = routeObjects.searchIntersect(polygon);
               
+              boundaryObjects.setOptions({
+                strokeColor: '#ff0000', //красный не в городе
+              });
+              
+              objectsInCity.setOptions({
+                strokeColor: '#0000ff', //синий в городе
+              });
+              
+              routeObjects.remove(objectsInCity).remove(boundaryObjects).setOptions({
+                strokeColor: '#ff00e1', //фиолетовый на пересечении
+              });
+
+              
+              
+
+              // //@ts-ignore
+              // ymaps.route(coordinates).then(
+              //     //@ts-ignore
+              //     function (res) {
+              //       // Объединим в выборку все сегменты маршрута.
+              //       //@ts-ignore
+              //       const pathsObjects = ymaps.geoQuery(res.getPaths());
+              //       const edges: any[] = [];
+              //
+              //       console.log(pathsObjects)
+
+              // //Переберем все сегменты и разобьем их на отрезки.
+              // //@ts-ignore
+              // pathsObjects.each(function (path) {
+              //   const coordinates = path.geometry.getCoordinates();
+              //   for (let i = 1, l = coordinates.length; i < l; i++) {
+              //     edges.push({
+              //       type: 'LineString',
+              //       coordinates: [coordinates[i], coordinates[i - 1]]
+              //     });
+              //   }
+              // });
+              //
+              // console.log(edges);
+
+              //
+              // // Создадим новую выборку, содержащую:
+              // // - отрезки, описываюшие маршрут;
+              // // - начальную и конечную точки;
+              // // - промежуточные точки.
+              // //@ts-ignore
+              // const routeObjects = ymaps.geoQuery(edges)
+              //     .add(res.getWayPoints())
+              //     .add(res.getViaPoints())
+              //     .setOptions('strokeWidth', 3)
+              //     .addToMap(myMap);
+              // // Найдем все объекты, попадающие внутрь МКАД.
+              // const objectsInMoscow = routeObjects.searchInside(polygon);
+              // // Найдем объекты, пересекающие МКАД.
+              // const boundaryObjects = routeObjects.searchIntersect(polygon);
+              // // Раскрасим в разные цвета объекты внутри, снаружи и пересекающие МКАД.
+              // boundaryObjects.setOptions({
+              //   strokeColor: '#06ff00',
+              //   preset: 'islands#greenIcon'
+              // });
+              // objectsInMoscow.setOptions({
+              //   strokeColor: '#ff0005',
+              //   preset: 'islands#redIcon'
+              // });
+              // // Объекты за пределами МКАД получим исключением полученных выборок из
+              // // исходной.
+              // routeObjects.remove(objectsInMoscow).remove(boundaryObjects).setOptions({
+              //   strokeColor: '#0010ff',
+              //   preset: 'islands#blueIcon'
+              // });
+              // }
+              // );
+
+
             }
           })
         })
