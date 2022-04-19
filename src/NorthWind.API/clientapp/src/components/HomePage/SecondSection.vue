@@ -91,9 +91,7 @@
           </h3>
         </v-col>
       </v-row>
-      <div class="slider-auto-section">
-        <slider-auto/>
-      </div>
+      <slider-auto/>
     </v-container>
   </div>
 </template>
@@ -128,7 +126,6 @@ export default class SecondSection extends Vue {
   height: auto;
   background: linear-gradient(180deg, #003366 0%, #002347 100%),
   radial-gradient(21.56% 41.41% at 17.53% 51.62%, #003F7D 0%, rgba(0, 63, 125, 0) 100%);
-  padding-bottom: 240px;
 }
 
 .about-font {
@@ -195,10 +192,6 @@ export default class SecondSection extends Vue {
 
 .about-company-icon {
   height: 10vh;
-}
-
-.section-padding {
-  padding-top: 2em;
 }
 
 

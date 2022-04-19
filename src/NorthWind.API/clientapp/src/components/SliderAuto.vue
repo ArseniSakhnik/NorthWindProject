@@ -1,42 +1,42 @@
 ﻿<template>
-  <div class="slider-section">
-    <div class="auto-section">
-      <div ref="sliderContainer" class="slider-container">
-        <div ref="slider" class="slider">
-          <div v-for="index in 4">
-            <div
-                class="block"
-                :style="`background-image: url(${getImage(index)})`"
-            >
-              <h5 class="text-white">БУНКЕРОВОЗЫ</h5>
-              <div class="price-block">₽ 2 000/час</div>
-              <ul>
-                <li>
-                  <h5>Мощность двигателя</h5>
-                  <p>240 ед.</p>
-                </li>
-                <li>
-                  <h5>Вместимость кузова</h5>
-                  <p>8 м³</p>
-                </li>
-                <li>
-                  <h5>Мощность двигателя</h5>
-                  <p>МАЗ-5337</p>
-                </li>
-              </ul>
-            </div>
-          </div>
+  <hooper :itemsToShow="numberOfSlides" :infiniteScroll="isComputer" class="slider-section">
+    <slide v-for="index in 4" class="slider">
+      <div
+          class="block"
+          :style="`background-image: url(${getImage(index)})`"
+      >
+        <div class="bottom-card">
+          <h5 class="text-white">БУНКЕРОВОЗЫ</h5>
+          <div class="price-block">₽ 2 000/час</div>
+          <ul>
+            <li>
+              <h5>Мощность двигателя</h5>
+              <p>240 ед.</p>
+            </li>
+            <li>
+              <h5>Вместимость кузова</h5>
+              <p>8 м³</p>
+            </li>
+            <li>
+              <h5>Мощность двигателя</h5>
+              <p>МАЗ-5337</p>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
-  </div>
+    </slide>
+  </hooper>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Ref} from "vue-property-decorator";
+import {Component, Ref, Mixins} from "vue-property-decorator";
+//@ts-ignore
+import {Hooper, Slide} from 'hooper/dist/hooper.js'
+import 'hooper/dist/hooper.css';
+import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 
-@Component
-export default class SliderAuto extends Vue {
+@Component({components: {Hooper, Slide}})
+export default class SliderAuto extends Mixins(BreakPointsMixin) {
   @Ref('sliderContainer') sliderContainer!: HTMLElement;
   @Ref('slider') slider!: HTMLElement;
   clicked: boolean = false;
@@ -45,6 +45,10 @@ export default class SliderAuto extends Vue {
 
   getImage(index: number) {
     return require(`../assets/cars/car${index}.png`)
+  }
+
+  get numberOfSlides() {
+    return this.isComputer ? 3 : 1;
   }
 
   mounted() {
@@ -92,92 +96,57 @@ export default class SliderAuto extends Vue {
 }
 </script>
 <style scoped lang="scss">
+.slider-section {
+  width: 100%;
+  height: 100%;
+}
 
 .block {
   height: 438px;
   width: 360px;
-  padding: 0.5em;
-  
-  ul {
-    display: flex;
-    padding-left: 0;
-    
-    li {
-      padding: 0.4em 0.4em 0.4em 0.1em;
 
-      h5 {
-        font-family: Montserrat, sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 0.3em;
+  position: relative;
+  cursor: pointer;
 
-        color: rgba(242, 246, 255, 0.75);
-      }
-      
-      p {
-        font-family: Montserrat, sans-serif;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 0.3em;
-        color: #FFFFFF;
+  .bottom-card {
+    position: absolute;
+    bottom: 0;
+
+    .text-white {
+      font-size: 20px; //24px
+      padding: 0;
+      margin-left: 10px;
+    }
+
+    .price-block {
+      background-color: #FF782E;
+      padding-right: 10px;
+      padding-left: 10px;
+      font-size: 20px;
+      color: white;
+      width: 40%;
+      margin-left: 10px;
+    }
+
+    ul {
+      display: flex;
+      padding-left: 10px;
+
+      li {
+        font-size: 15px;
+
+        h5 {
+          color: #F2F6FF;
+        }
+
+        p {
+          color: #F2F6FF;
+        }
       }
     }
-  }
 
-  h5 {
-    font-family: Raleway, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 0.4em;
-    letter-spacing: 0.05em;
-  }
 
-  .price-block {
-    background-color: #FF782E;
-    font-family: Raleway, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 0.5em;
-    letter-spacing: 0.05em;
-    
-    width: 7em;
-    
-    color: #FFFFFF;
   }
 }
 
-.slider-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 500px;
-  overflow: hidden;
-  cursor: grab;
-}
-
-.slider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: auto;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr); /*we have 10 imgs so repeat 10 times 1 fr*/
-  column-gap: 2rem;
-  pointer-events: none;
-}
-
-.slider-item {
-  width: 300px;
-  height: 100%;
-}
-
-.slider-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  user-select: none;
-}
 </style>

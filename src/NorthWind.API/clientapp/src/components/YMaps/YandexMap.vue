@@ -161,9 +161,6 @@ export default class YandexMap extends Vue {
 
               const cityDistance = this.getSegmentDuration(citySegments._objects)
               const boundDistance = this.getSegmentDuration(boundSegments._objects);
-
-              console.log(cityDistance)
-              console.log(boundDistance)
             }
           })
         })
