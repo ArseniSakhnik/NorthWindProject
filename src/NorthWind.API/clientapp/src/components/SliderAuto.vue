@@ -104,6 +104,9 @@ export default class SliderAuto extends Mixins(BreakPointsMixin) {
 .block {
   height: 438px;
   width: 360px;
+  
+  font-family: Raleway, sans-serif;
+  font-weight: bold;
 
   position: relative;
   cursor: pointer;
@@ -126,6 +129,8 @@ export default class SliderAuto extends Mixins(BreakPointsMixin) {
       color: white;
       width: 40%;
       margin-left: 10px;
+      font-family: Raleway, sans-serif;
+      font-weight: bold;
     }
 
     ul {
@@ -134,6 +139,8 @@ export default class SliderAuto extends Mixins(BreakPointsMixin) {
 
       li {
         font-size: 15px;
+        font-family: Montserrat, sans-serif;
+        font-weight: bold;
 
         h5 {
           color: #F2F6FF;
