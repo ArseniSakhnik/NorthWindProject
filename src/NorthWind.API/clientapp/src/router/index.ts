@@ -13,6 +13,7 @@ import AdminPurchases from "@/views/AdminPurchases.vue";
 import AdminPurchase from "@/views/AdminPurchase.vue";
 import UserInfo from "@/views/UserInfo.vue";
 import Purchase from "@/components/Purchase.vue";
+import AboutCar from "@/views/AboutCar.vue";
 
 Vue.use(VueRouter)
 
@@ -103,6 +104,14 @@ const routes: Array<RouteConfig> = [
         component: AdminPurchase,
         meta: {
             layout: 'Admin'
+        }
+    },
+    {
+        path: '/about-car',
+        name: 'AboutCar',
+        component: AboutCar,
+        meta: {
+            layout: 'Main'
         }
     }
 ]
