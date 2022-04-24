@@ -40,6 +40,11 @@ namespace NorthWindProject.Application.Middlewares
 
                 errorMessage = $"Произошла одна или несколько ошибок: {validateErrorMessage}";
             }
+            else if (exception is ClientValidationException clientValidationException)
+            {
+                statusCode = StatusCodes.Status400BadRequest;
+                errorMessage = clientValidationException.Message;
+            }
             else
             {
                 statusCode = StatusCodes.Status500InternalServerError;

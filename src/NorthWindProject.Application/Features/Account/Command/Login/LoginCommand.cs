@@ -3,17 +3,18 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using NorthWind.Core.Entities.User;
+using NorthWindProject.Application.Common.Exceptions;
 
 namespace NorthWindProject.Application.Features.Account.Command.Login
 {
-    public class LoginCommand : IRequest<LoginResultDto>
+    public class LoginCommand : IRequest<string>
     {
         public string Email { get; set; }
         public string Password { get; set; }
         public bool RememberMe { get; set; }
     }
 
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResultDto>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
 
@@ -22,7 +23,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Login
             _signInManager = signInManager;
         }
 
-        public async Task<LoginResultDto> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var result =
                 await _signInManager.PasswordSignInAsync(
@@ -32,24 +33,12 @@ namespace NorthWindProject.Application.Features.Account.Command.Login
                     true);
 
             if (result.Succeeded)
-                return new LoginResultDto
-                {
-                    IsSucceed = true,
-                    Message = ""
-                };
+                return "";
 
             if (result.IsNotAllowed)
-                return new LoginResultDto
-                {
-                    IsSucceed = false,
-                    Message = "Аккаунт не подтвержден"
-                };
+                throw new ClientValidationException("Аккаунт не подтвержден");
 
-            return new LoginResultDto
-            {
-                IsSucceed = false,
-                Message = "Неверное имя пользователя или пароль"
-            };
+            throw new ClientValidationException("Неверное имя пользователя или пароль");
         }
     }
 }
