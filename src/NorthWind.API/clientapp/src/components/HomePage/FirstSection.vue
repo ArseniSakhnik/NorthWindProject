@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Ref, Mixins, Prop} from 'vue-property-decorator'
+import {Component, Mixins, Prop, Ref} from 'vue-property-decorator'
 import SlideContent from "@/components/HomePage/firstSection/SlideContent.vue";
 import SlidesNavigation from "@/components/HomePage/firstSection/SlidesNavigation.vue";
 import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
@@ -50,9 +50,9 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
   private currentSlide: number = 0;
 
   async created() {
-    const serviceViews = await this.serviceViewService.GetServiceViews();
+    const {data: serviceView} = await this.serviceViewService.GetServiceViews();
 
-    this.slideItems = serviceViews.map(item => ({
+    this.slideItems = serviceView.map(item => ({
       image: `/ServiceImage/${item.mainImageName}`,
       title: item.title,
       fizRoute: item.fizServiceRoute,

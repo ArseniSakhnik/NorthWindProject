@@ -31,6 +31,18 @@ namespace NorthWind.API.Controllers
             return Ok(await Mediator.Send(new AddTestCommand()));
         }
 
+        [HttpGet("success-message")]
+        public async Task<IActionResult> Success()
+        {
+            return Ok("успешно");
+        }
+
+        [HttpGet("success-object")]
+        public async Task<IActionResult> SuccsessObject()
+        {
+            return Ok(new {message = "Успешно"});
+        }
+
         // [Authorize(Roles = "Admin")]
         // [HttpGet]
         // public IActionResult Test()

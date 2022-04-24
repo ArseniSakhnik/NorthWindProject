@@ -59,7 +59,8 @@ export default class AboutCar extends Mixins(HttpServiceMixin) {
   }
 
   async created() {
-    this.cars = await this.carsService.getCars();
+    const {data} = await this.carsService.getCars();
+    this.cars = data
     this.isDataLoaded = true;
   }
 

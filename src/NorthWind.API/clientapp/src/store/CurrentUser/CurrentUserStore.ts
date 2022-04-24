@@ -33,8 +33,8 @@ export const CurrentUserStore: Module<CurrentUserStoreTypes, any> = {
     },
     actions: {
         async GET_CURRENT_USER_INFO({state, commit}) {
-            const userInfo = await state.accountService.GetCurrentUserInfo();
-            commit('SET_CURRENT_USER_INFO', userInfo);
+            const {data} = await state.accountService.GetCurrentUserInfo();
+            commit('SET_CURRENT_USER_INFO', data);
         }
     },
     getters: {

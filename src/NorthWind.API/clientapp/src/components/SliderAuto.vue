@@ -51,48 +51,6 @@ export default class SliderAuto extends Mixins(BreakPointsMixin) {
     return this.isComputer ? 3 : 1;
   }
 
-  mounted() {
-
-    this.sliderContainer.addEventListener('mouseup', () => {
-      this.sliderContainer.style.cursor = 'grab';
-    })
-
-    this.sliderContainer.addEventListener('mousedown', e => {
-
-      this.clicked = true;
-      this.xAxis = e.offsetX - this.slider.offsetLeft;
-
-      this.sliderContainer.style.cursor = 'grabbing';
-    })
-
-    window.addEventListener('mouseup', () => {
-      this.clicked = false;
-    })
-
-    this.sliderContainer.addEventListener('mousemove', e => {
-
-      if (!this.clicked) return;
-
-      e.preventDefault();
-
-      this.x = e.offsetX;
-      this.slider.style.left = `${this.x - this.xAxis}px`;
-
-      this.checkSize()
-    })
-  }
-
-  checkSize() {
-    let sliderContainerOut = this.sliderContainer.getBoundingClientRect();
-    let sliderIn = this.slider.getBoundingClientRect();
-
-    if (parseInt(this.slider.style.left) > 0) {
-      this.slider.style.left = `0px`;
-    } else if (sliderIn.right < sliderContainerOut.right) {
-      this.slider.style.left = `-${sliderIn.width - sliderContainerOut.width}px`
-    }
-  }
-
 }
 </script>
 <style scoped lang="scss">
@@ -104,7 +62,7 @@ export default class SliderAuto extends Mixins(BreakPointsMixin) {
 .block {
   height: 438px;
   width: 360px;
-  
+
   font-family: Raleway, sans-serif;
   font-weight: bold;
 

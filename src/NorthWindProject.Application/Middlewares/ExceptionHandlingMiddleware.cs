@@ -53,12 +53,12 @@ namespace NorthWindProject.Application.Middlewares
 
             var response = new
             {
-                StatusCode = statusCode,
-                ErrorMessage = errorMessage
+                statusCode,
+                errorMessage
             };
 
             httpContext.Response.ContentType = "application/json";
-            httpContext.Response.StatusCode = response.StatusCode;
+            httpContext.Response.StatusCode = response.statusCode;
             await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(response));
         }
     }

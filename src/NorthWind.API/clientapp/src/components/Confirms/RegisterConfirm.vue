@@ -70,11 +70,6 @@
               <v-col>
                 <div v-if="errorMessage.length" class="error-message">{{ errorMessage }}</div>
               </v-col>
-              <v-col cols="12">
-                <v-checkbox
-                    label="Запоменить меня"
-                />
-              </v-col>
             </v-row>
           </v-container>
         </v-card-text>
@@ -134,13 +129,14 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
       message: 'Для завершения регистрации необходимо подтвердить адрес электронной почты',
       delay: 7000
     };
+
     await this.accountService.Register(this.localData)
         .then(() => {
           this.callAlert(alertData)
           this.toggleRegisterWindow(false)
         })
-        .catch(errorMessage => {
-          this.errorMessage = errorMessage.message
+        .catch(error => {
+          this.errorMessage = this.getErrorMessage(error);
         })
   }
 

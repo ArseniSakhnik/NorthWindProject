@@ -7,7 +7,7 @@ namespace NorthWindProject.Application.Common.ShareValidators
         public StringValidator()
         {
             RuleFor(str => str.Length)
-                .LessThanOrEqualTo(250)
+                .LessThanOrEqualTo(500)
                 .WithMessage("Недопустимая длина символов");
         }
     }

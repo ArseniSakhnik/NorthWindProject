@@ -1,6 +1,7 @@
 ﻿import HttpService from "@/services/HttpService"
 import {ConfirmEmailModel, LoginModel, RegisterModel} from "@/services/AccountService/RequestsAccountService"
 import {UserDto} from "@/services/AccountService/ResponsesAccountService"
+import {AxiosResponse} from "axios";
 
 export default class AccountService extends HttpService {
 
@@ -8,15 +9,15 @@ export default class AccountService extends HttpService {
 		super('account')
 	}
 
-	GetCurrentUserInfo(): Promise<UserDto> {
+	GetCurrentUserInfo(): Promise<AxiosResponse<UserDto>> {
 		return this._get('')
 	}
 
-	Login(loginModel: LoginModel): Promise<void> {
+	Login(loginModel: LoginModel): Promise<AxiosResponse<void>> {
 		return this._post('login', loginModel)
 	}
 
-	Register(registerModel: RegisterModel): Promise<void> {
+	Register(registerModel: RegisterModel): Promise<AxiosResponse<void>> {
 		return this._post('register', registerModel)
 	}
 
@@ -24,7 +25,7 @@ export default class AccountService extends HttpService {
 		return this._post('logout', {})
 	}
 
-	ConfirmEmail(confirmEmailModel: ConfirmEmailModel): Promise<void> {
+	ConfirmEmail(confirmEmailModel: ConfirmEmailModel): Promise<AxiosResponse<void>> {
 		return this._post('confirm-email', confirmEmailModel)
 	}
 }

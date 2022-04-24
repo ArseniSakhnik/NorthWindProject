@@ -26,6 +26,10 @@
         :uploadUrl="uploadUrlKgo"
         upload-method="POST"
     />
+    <v-btn @click="test">Ошибка в строке</v-btn>
+    <v-btn>Ошибка валидации</v-btn>
+    <v-btn>Успешно строка</v-btn>
+    <v-btn>Успешно объект</v-btn>
   </div>
 </template>
 
@@ -36,6 +40,7 @@ import {DxFileUploader} from 'devextreme-vue/file-uploader'
 import {DxTextBox} from 'devextreme-vue/text-box'
 import {DxButton} from 'devextreme-vue/button'
 import MapSvg from "@/icons/Map.vue";
+import axios from "axios";
 
 @Component(
     {
@@ -51,7 +56,6 @@ export default class DeveloperPage extends Vue {
   uploadUrlYur: string = 'api/service/load-template/1'
   uploadUrlFiz: string = 'api/service/load-template/2'
   uploadUrlKgo: string = 'api/service/load-template/3'
-
 }
 </script>
 <style scoped>

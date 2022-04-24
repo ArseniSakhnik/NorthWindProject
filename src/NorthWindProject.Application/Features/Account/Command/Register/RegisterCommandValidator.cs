@@ -1,8 +1,10 @@
-﻿using System.Threading;
+﻿using System.Data;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.ShareValidators;
 
 namespace NorthWindProject.Application.Features.Account.Command.Register
 {
@@ -13,7 +15,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         public RegisterCommandValidator(AppDbContext context)
         {
             _context = context;
-            
+
             RuleFor(command => command.Email)
                 .NotEmpty()
                 .WithMessage("Введите email")
@@ -21,6 +23,24 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 .WithMessage("Введите валидный email")
                 .MustAsync(IsEmailUnique)
                 .WithMessage("Пользователь с таким Email уже зарегестрирован");
+
+            RuleFor(command => command.Name)
+                .SetValidator(new StringValidator());
+
+            RuleFor(command => command.Surname)
+                .SetValidator(new StringValidator());
+
+            RuleFor(command => command.MiddleName)
+                .SetValidator(new StringValidator());
+
+            RuleFor(command => command.Email)
+                .SetValidator(new StringValidator());
+
+            RuleFor(command => command.PhoneNumber)
+                .SetValidator(new StringValidator());
+
+            RuleFor(command => command.Password)
+                .SetValidator(new StringValidator());
         }
 
         private async Task<bool> IsEmailUnique(string email, CancellationToken cancellationToken)

@@ -11,6 +11,10 @@ export default class HttpServiceMixin extends Vue {
   protected accountService: AccountService = new AccountService()
   protected serviceViewService: ServiceViewService = new ServiceViewService()
   protected purchaseService: PurchaseService = new PurchaseService()
+
+  getErrorMessage(error: any): string {
+    return error.response.data.errorMessage;
+  }
 }
 </script>
 <style scoped>

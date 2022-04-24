@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using NorthWind.Core.Entities.User;
+using NorthWindProject.Application.Common.Exceptions;
 using NorthWindProject.Application.Common.Extensions;
 using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 using NorthWindProject.Application.Common.Models;
@@ -14,7 +15,7 @@ using NorthWindProject.Application.Entities.User;
 
 namespace NorthWindProject.Application.Features.Account.Command.Register
 {
-    public class RegisterCommand : IRequest<RegisterResultDto>
+    public class RegisterCommand : IRequest<string>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -24,7 +25,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         public string Password { get; set; }
     }
 
-    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterResultDto>
+    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, string>
     {
         private readonly IEmailSenderService _emailSenderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -38,7 +39,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<RegisterResultDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             var user = new ApplicationUser
             {
@@ -52,40 +53,30 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded) throw new ClientValidationException("Не удалось зарегестрироваться");
+            
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
+            var registerRequest = _httpContextAccessor.HttpContext.Request;
+            //todo убрать решетку если потребуется
+            var callbackUrl =
+                $"{StringExtensions.GetCallbackUrl(registerRequest)}/#/confirm-email?userId={user.Id}&code={code}";
+
+            _emailSenderService.SendEmailAsync(new EmailBodyModel
             {
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                ToEmail = request.Email,
+                Username = "Здравствуйте!",
+                Subject = "Подтверждение аккаунта",
+                HtmlBody =
+                    $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>"
+            });
 
-                var registerRequest = _httpContextAccessor.HttpContext.Request;
-                //todo убрать решетку если потребуется
-                var callbackUrl =
-                    $"{StringExtensions.GetCallbackUrl(registerRequest)}/#/confirm-email?userId={user.Id}&code={code}";
+            await _userManager.AddToRoleAsync(user, RolesEnum.Client.ToString());
+            // await _signInManager.SignInAsync(user, false);
 
-                _emailSenderService.SendEmailAsync(new EmailBodyModel
-                {
-                    ToEmail = request.Email,
-                    Username = "Здравствуйте!",
-                    Subject = "Подтверждение аккаунта",
-                    HtmlBody =
-                        $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>"
-                });
+            return "Для завершения регистрации подтвердите аккаунт на электронной почте";
 
-                await _userManager.AddToRoleAsync(user, RolesEnum.Client.ToString());
-                // await _signInManager.SignInAsync(user, false);
-
-                return new RegisterResultDto
-                {
-                    IsSucceed = true,
-                    Message = "Для завершения регистрации подтвердите аккаунт на электронной почте"
-                };
-            }
-
-            return new RegisterResultDto
-            {
-                IsSucceed = false,
-                Message = "Не удалось зарегестрироваться"
-            };
         }
     }
 }
