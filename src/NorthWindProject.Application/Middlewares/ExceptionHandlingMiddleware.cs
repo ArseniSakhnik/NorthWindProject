@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -9,59 +10,51 @@ namespace NorthWindProject.Application.Middlewares
 {
     public class ExceptionHandlingMiddleware : IMiddleware
     {
-
-
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
             {
                 await next(context);
             }
-            catch (ValidationException e)
+            catch (Exception ex)
             {
-                //TODO добавить логгер
-                await HandleExceptionAsync(context, e);
+                //todo добавить логгер
+                await HandleExceptionAsync(context, ex);
             }
         }
 
         private static async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
         {
-            var statusCode = GetStatusCode(exception);
-            var response = new
-            {
-                title = GetTitle(exception),
-                status = statusCode,
-                detail = exception.Message,
-                errors = GetErrors(exception)
-            };
-            httpContext.Response.ContentType = "application/json";
-            httpContext.Response.StatusCode = statusCode;
-            await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(response));
-        }
+            int statusCode;
+            string errorMessage;
 
-        private static int GetStatusCode(Exception exception) =>
-            exception switch
-            {
-                ValidationException => StatusCodes.Status403Forbidden,
-                _ => StatusCodes.Status500InternalServerError
-            };
-
-        private static string GetTitle(Exception exception) =>
-            exception switch
-            {
-                ValidationException applicationException => applicationException.Message,
-                _ => "Ошибка сервера"
-            };
-
-        private static IDictionary<string, string[]> GetErrors(Exception exception)
-        {
-            IDictionary<string, string[]> errors = null;
             if (exception is ValidationException validationException)
             {
-                errors = validationException.Errors;
+                statusCode = StatusCodes.Status400BadRequest;
+
+                var validateErrorMessage = errorMessage = validationException
+                    .Errors
+                    .Values
+                    .SelectMany(value => value)
+                    .Aggregate((errorMsg1, errorMsg2) => errorMsg1 + ". " + errorMsg2);
+
+                errorMessage = $"Произошла одна или несколько ошибок: {validateErrorMessage}";
+            }
+            else
+            {
+                statusCode = StatusCodes.Status500InternalServerError;
+                errorMessage = "Произошла ошибка сервера";
             }
 
-            return errors;
+            var response = new
+            {
+                StatusCode = statusCode,
+                ErrorMessage = errorMessage
+            };
+
+            httpContext.Response.ContentType = "application/json";
+            httpContext.Response.StatusCode = response.StatusCode;
+            await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(response));
         }
     }
 }
