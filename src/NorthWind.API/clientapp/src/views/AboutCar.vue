@@ -1,58 +1,66 @@
 ﻿<template>
-  <div class="about-car">
+  <div class="about-car" v-if="isDataLoaded">
     <div class="background-image">
-      <h2>ОТКАЧКА ЖИДКИХ ОТХОДОВ</h2>
+      <h2>{{ cars[currentCarIndex].title }}</h2>
     </div>
-    <v-row>
-      <v-col
-          cols="12"
-          md="6"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda autem dignissimos dolor eius enim porro
-          saepe similique voluptatem voluptates! Ab commodi eveniet id perspiciatis rerum velit! Aut error illum iure
-          molestiae nobis rerum sit soluta. Adipisci consequatur dolor dolores expedita fugit illo, in, itaque iure,
-          labore laborum nam nisi non porro quaerat qui quibusdam ratione sapiente sit soluta voluptatem. Amet commodi
-          et labore maxime temporibus. Adipisci cum cumque cupiditate dignissimos fuga iusto minus molestias vel?
-          Distinctio itaque rerum veniam. Ad consectetur distinctio ea eveniet ipsa qui similique. Adipisci assumenda
-          commodi dicta, expedita inventore libero magnam, minus mollitia nostrum quam qui sapiente similique sint vero
-          voluptate! Cupiditate dolore ea error exercitationem ipsam minus nam neque, odit officiis omnis quasi
-          temporibus, voluptatum.
-        </div>
-      </v-col>
-      <v-col
-          cols="12"
-          md="6"
-      >
-        <v-container class="v-cnt">
-          <hooper style="height: 100%" :itemsToShow="1" ref="hooper" @afterSlide="afterSlideEvent">
-            <slide>
-              <img src="ServiceImage/Cars/pumpingOutSepticTanks.jpg" alt="Изображение не загружено"/>
-              <car-table/>
-            </slide>
-            <slide>
-              <img src="ServiceImage/Cars/pumpingOutSepticTanks.jpg" alt="Изображение не загружено"/>
-              <car-table/>
-            </slide>
-          </hooper>
-        </v-container>
-      </v-col>
-    </v-row>
+    <v-container>
+      <v-row>
+        <v-col
+            cols="12"
+            md="3"
+        >
+          <v-card>
+            <v-list dense>
+              <v-list-item-group
+                  v-model="currentCarIndex"
+                  color="primary"
+              >
+                <v-list-item v-for="(_, index) in cars">
+                  <v-list-item-content>
+                    <v-list-item-title v-text="cars[index].title"/>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+        </v-col>
+        <v-col cols="12" md="4" class="text-info">
+          <p>{{ cars[currentCarIndex].about }}</p>
+          <p>{{ cars[currentCarIndex].description }}</p>
+        </v-col>
+        <v-col cols="12" md="5">
+          <img :src="imageLink" alt="не удалось загрузить изображение" class="car-img">
+          <car-table
+              :cars-info-modes="cars[currentCarIndex].carModels"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Ref, Watch} from "vue-property-decorator";
+import {Vue, Component, Ref, Watch, Mixins} from "vue-property-decorator";
 import CarTable from "@/components/CarTable.vue";
-//@ts-ignore
-import {Hooper, Slide} from 'hooper/dist/hooper.js'
+import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
+import {Car} from "@/services/CarsService/Responses";
 
-@Component({components: {CarTable, Hooper, Slide}})
-export default class AboutCar extends Vue {
+@Component({components: {CarTable}})
+export default class AboutCar extends Mixins(HttpServiceMixin) {
   @Ref('hooper') hooperRef!: any;
 
-  afterSlideEvent() {
-    console.log(this.hooperRef)
+  cars: Car[] = [];
+
+  currentCarIndex: number = 0;
+  isDataLoaded: boolean = false;
+
+  get imageLink() {
+    return `ServiceImage/Cars/${this.cars[this.currentCarIndex].path}`
+  }
+
+  async created() {
+    this.cars = await this.carsService.getCars();
+    this.isDataLoaded = true;
   }
 
 }
@@ -67,14 +75,11 @@ export default class AboutCar extends Vue {
     justify-content: center;
     flex-direction: column;
 
-
-    img {
-      max-width: 50vw;
-      max-height: 50vh;
-      margin-bottom: 10vh;
-    }
-
   }
+}
+
+.car-img {
+  min-height: 50vh;
 }
 
 .background-image {
@@ -100,8 +105,19 @@ export default class AboutCar extends Vue {
   }
 }
 
-
 .v-cnt {
 
+}
+
+.text-info {
+  p {
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    /* or 27px */
+
+    letter-spacing: 0.1em;
+    color: black;
+  }
 }
 </style>

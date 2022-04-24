@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Entities.Car;
 using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Purchases.BasePurchase;
 using NorthWind.Core.Entities.Purchases.KgoPurchase;
@@ -163,6 +164,12 @@ namespace NorthWindProject.Application.Common.Access
         public DbSet<VacuumTruckFizPurchase> FizVacuumTruckPurchases { get; set; }
         public DbSet<VacuumTruckYurPurchase> YurVacuumTruckPurchases { get; set; }
         public DbSet<KGOPurchase> KgoPurchases { get; set; }
+
+        #endregion
+
+        #region AppCommon
+
+        public DbSet<Car> Cars { get; set; }
 
         #endregion
 
