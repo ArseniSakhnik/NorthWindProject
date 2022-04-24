@@ -25,7 +25,10 @@ export default class App extends Vue {
   }
 }
 </script>
-<style scoped>
-
+<style>
+@import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900";
+@import "https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css";
+@import "https://fonts.googleapis.com/css?family=Material+Icons";
+@import '~vuetify/dist/vuetify.css';
 </style>
 

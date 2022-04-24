@@ -100,13 +100,12 @@ import {Vue, Component, Ref, PropSync, Watch, Mixins} from "vue-property-decorat
 import {RegisterModel} from "@/services/AccountService/RequestsAccountService";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {namespace} from "vuex-class";
+import DialogWindowMixin from "@/mixins/DialogWindowMixin.vue";
 
 const Alert = namespace('AlertStore');
 
 @Component
-export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
-  @PropSync('isActive') isConfirmActive!: boolean;
-  @Ref('dialogRef') dialogRef!: any;
+export default class RegisterConfirm extends Mixins(HttpServiceMixin, DialogWindowMixin) {
   @Alert.Action('CALL_ALERT') callAlert!: (data: { message: string, delay: number }) => void;
 
   localData: RegisterModel = {
@@ -138,15 +137,6 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin) {
         .catch(error => {
           this.errorMessage = this.getErrorMessage(error);
         })
-  }
-
-  toggleRegisterWindow(isOpen: boolean) {
-    this.isConfirmActive = isOpen;
-  }
-
-  @Watch('isConfirmActive')
-  isConfirmActiveChangeHandler(value: boolean) {
-    this.dialogRef.isActive = value;
   }
 }
 </script>

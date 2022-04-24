@@ -1,7 +1,6 @@
 ﻿export type LoginModel = {
     email: string,
     password: string,
-    rememberMe: boolean
 }
 
 export type RegisterModel = {
