@@ -40,13 +40,5 @@ export default class DocumentsPage extends Vue {
 <style scoped lang="scss">
 .background-image {
   background-image: url('../assets/backgrounds/documents.jpg');
-  position: relative;
-  background-blend-mode: multiply;
-  background-position: center bottom;
-  background-color: rgba(#1b3648, 0.35);
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 40vh;
 }
 </style>
