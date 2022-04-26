@@ -46,6 +46,9 @@
     <None Remove="clientapp\src\views\DocumentsPage.vue" />
     <None Remove="clientapp\src\views\VacanciesPage.vue" />
     <None Remove="clientapp\src\views\ContactsPage.vue" />
+    <None Include="wwwroot\ServiceImage\Documents\License1.jpg" />
+    <None Include="wwwroot\ServiceImage\Documents\License2.jpg" />
+    <None Include="wwwroot\ServiceImage\Documents\Сertificate.jpg" />
     <None Include="wwwroot\ServiceImage\KGO.png" />
     <None Include="wwwroot\ServiceImage\Assenizator.png" />
     <None Remove="clientapp\src\components\Admin\AdminSidebar.vue" />
@@ -53,6 +56,11 @@
 
   <ItemGroup>
     <Folder Include="clientapp\src\assets\cars" />
+    <Folder Include="clientapp\src\assets\documents" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="clientapp\src\views\DocumentsPage.vue" />
   </ItemGroup>
 
 </Project>

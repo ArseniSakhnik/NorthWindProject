@@ -14,6 +14,7 @@ import AdminPurchase from "@/views/AdminPurchase.vue";
 import UserInfo from "@/views/UserInfo.vue";
 import Purchase from "@/components/Purchase.vue";
 import AboutCar from "@/views/AboutCar.vue";
+import DocumentsPage from "@/views/DocumentsPage.vue";
 
 Vue.use(VueRouter)
 
@@ -112,6 +113,14 @@ const routes: Array<RouteConfig> = [
         component: AboutCar,
         meta: {
             layout: 'Main'
+        }
+    },
+    {
+        path: '/documents',
+        name: 'Documents',
+        component: DocumentsPage,
+        meta: {
+            layout: 'main'
         }
     }
 ]
