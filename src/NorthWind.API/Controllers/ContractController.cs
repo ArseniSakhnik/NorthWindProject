@@ -11,7 +11,7 @@ using NorthWindProject.Application.Features.Contract.Query.GetVacuumTruckYurCont
 
 namespace NorthWind.API.Controllers
 {
-    public class PurchaseController : ApiController
+    public class ContractController : ApiController
     {
         [HttpGet]
         public async Task<IActionResult> GetContracts(DataSourceLoadOptions options,
@@ -22,40 +22,40 @@ namespace NorthWind.API.Controllers
             return Ok(await DataSourceLoader.LoadAsync(query, options, cancellationToken));
         }
 
-        [HttpGet("vacuum-truck-fiz-purchase/{purchaseId:int}")]
-        public async Task<IActionResult> GetVacuumTruckFizPurchase(int purchaseId, CancellationToken cancellationToken)
+        [HttpGet("vacuum-truck-fiz-contract/{contractId:int}")]
+        public async Task<IActionResult> GetVacuumTruckFizContract(int contractId, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(new GetVacuumTruckFizContractQuery
             {
-                ContractId = purchaseId
+                ContractId = contractId
             }, cancellationToken));
         }
 
-        [HttpGet("vacuum-truck-yur-purchase/{purchaseId:int}")]
-        public async Task<IActionResult> GetVacuumTruckYurPurchase(int purchaseId, CancellationToken cancellationToken)
+        [HttpGet("vacuum-truck-yur-contract/{contractId:int}")]
+        public async Task<IActionResult> GetVacuumTruckYurContract(int contractId, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(new GetVacuumTruckYurContractQuery
             {
-                ContractId = purchaseId
+                ContractId = contractId
             }, cancellationToken));
         }
 
-        [HttpPost("create-vacuum-truck-fiz-purchase")]
-        public async Task<IActionResult> CreatePurchaseToVacuumTruckFizPurchase(
+        [HttpPost("create-vacuum-truck-fiz-contract")]
+        public async Task<IActionResult> CreateContractToVacuumTruckFizContract(
             CreateVacuumTruckYurContractCommand contractCommand, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(contractCommand, cancellationToken));
         }
 
-        [HttpPost("create-vacuum-truck-yur-purchase")]
-        public async Task<IActionResult> CreatePurchaseToVacuumTruckYurPurchase(
+        [HttpPost("create-vacuum-truck-yur-contract")]
+        public async Task<IActionResult> CreateContractToVacuumTruckYurContract(
             CreateVacuumTruckFizContractCommand command, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(command, cancellationToken));
         }
 
-        [HttpPost("create-kgo-yur-purchase")]
-        public async Task<IActionResult> CreatePurchaseKgo(CreateKgoYurContractCommand command,
+        [HttpPost("create-kgo-yur-contract")]
+        public async Task<IActionResult> CreateContractKgo(CreateKgoYurContractCommand command,
             CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(command, cancellationToken));
