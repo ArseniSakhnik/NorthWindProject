@@ -2,23 +2,23 @@
   <v-form ref="formRef">
     <v-text-field
         v-mask="mask"
-        :value="valueSync"
         :counter="counter"
+        :disabled="isDisabled"
         :label="label"
         :prefix="prefix"
-        :suffix="suffix"
         :rules="rules"
-        :disabled="isDisabled"
-        @input="valueChangeHandler"
-        outlined
-        dense
+        :suffix="suffix"
         :type="fieldType"
+        :value="valueSync"
+        dense
+        outlined
+        @input="valueChangeHandler"
     />
   </v-form>
 </template>
 
 <script lang="ts">
-import {Vue, Component, ModelSync, Prop, Ref} from "vue-property-decorator";
+import {Component, ModelSync, Prop, Ref, Vue} from "vue-property-decorator";
 
 @Component
 export default class StringField extends Vue {
@@ -59,6 +59,6 @@ export default class StringField extends Vue {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

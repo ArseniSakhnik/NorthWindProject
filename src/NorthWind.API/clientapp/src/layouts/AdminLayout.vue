@@ -8,9 +8,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
-import AdminSidebar from "@/components/Admin/AdminSidebar.vue";
-import Navbar from "@/components/Navbar.vue";
+import {Component, Vue} from 'vue-property-decorator'
 import NavbarAdmin from "@/components/Admin/NavbarAdmin.vue";
 
 @Component({components: {NavbarAdmin}})

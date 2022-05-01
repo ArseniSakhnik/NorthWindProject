@@ -9,7 +9,7 @@ function init() {
         }),
         moscowPolygon;
 
-    function onPolygonLoad (json) {
+    function onPolygonLoad(json) {
         moscowPolygon = new ymaps.Polygon(json.coordinates);
         // Если мы не хотим, чтобы контур был виден, зададим соответствующую опцию.
         moscowPolygon.options.set('visible', false);
@@ -17,7 +17,7 @@ function init() {
         // над спроецированным многоугольником, его нужно добавить на карту.
         myMap.geoObjects.add(moscowPolygon);
 
-        ymaps.route([[55.654884,37.527034], [55.767305,37.976100]]).then(
+        ymaps.route([[55.654884, 37.527034], [55.767305, 37.976100]]).then(
             function (res) {
                 // Объединим в выборку все сегменты маршрута.
                 var pathsObjects = ymaps.geoQuery(res.getPaths()),

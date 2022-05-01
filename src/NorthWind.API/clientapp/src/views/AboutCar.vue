@@ -1,5 +1,5 @@
 ﻿<template>
-  <div class="about-car" v-if="isDataLoaded">
+  <div v-if="isDataLoaded" class="about-car">
     <div class="background-image">
       <h2>{{ cars[currentCarIndex].title }}</h2>
     </div>
@@ -24,7 +24,7 @@
             </v-list>
           </v-card>
         </v-col>
-        <v-col cols="12" md="4" class="text-info">
+        <v-col class="text-info" cols="12" md="4">
           <p>{{ cars[currentCarIndex].about }}</p>
           <p>{{ cars[currentCarIndex].description }}</p>
         </v-col>
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Ref, Watch, Mixins} from "vue-property-decorator";
+import {Component, Mixins, Ref} from "vue-property-decorator";
 import CarTable from "@/components/CarTable.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {Car} from "@/services/CarsService/Responses";
@@ -66,7 +66,7 @@ export default class AboutCar extends Mixins(HttpServiceMixin) {
 
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .about-car {
   height: auto;
 

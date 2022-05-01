@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import NavbarUser from "@/components/User/NavbarUser.vue";
 import {namespace} from "vuex-class";
 
@@ -23,6 +23,6 @@ export default class UserLayout extends Vue {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

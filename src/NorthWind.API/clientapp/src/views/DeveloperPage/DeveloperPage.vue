@@ -4,27 +4,27 @@
     <div style="height: 500px"></div>
     Ассенизатор Юридическ
     <DxFileUploader
-        select-button-text="Select file"
-        label-text=""
-        upload-mode="instantly"
         :uploadUrl="uploadUrlYur"
+        label-text=""
+        select-button-text="Select file"
         upload-method="POST"
+        upload-mode="instantly"
     />
     Ассенизатор Физическ
     <DxFileUploader
-        select-button-text="Select file"
-        label-text=""
-        upload-mode="instantly"
         :uploadUrl="uploadUrlFiz"
+        label-text=""
+        select-button-text="Select file"
         upload-method="POST"
+        upload-mode="instantly"
     />
     КГО
     <DxFileUploader
-        select-button-text="Select file"
-        label-text=""
-        upload-mode="instantly"
         :uploadUrl="uploadUrlKgo"
+        label-text=""
+        select-button-text="Select file"
         upload-method="POST"
+        upload-mode="instantly"
     />
     <v-btn @click="test">Ошибка в строке</v-btn>
     <v-btn>Ошибка валидации</v-btn>
@@ -34,13 +34,12 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Ref} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 
 import {DxFileUploader} from 'devextreme-vue/file-uploader'
 import {DxTextBox} from 'devextreme-vue/text-box'
 import {DxButton} from 'devextreme-vue/button'
 import MapSvg from "@/icons/Map.vue";
-import axios from "axios";
 
 @Component(
     {

@@ -16,7 +16,7 @@ export default abstract class HttpService {
         const requestConfig: AxiosRequestConfig = {
             withCredentials: true
         }
-        
+
         switch (methodType) {
             case "GET":
                 return axios.get(url, requestConfig);

@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, ModelSync} from 'vue-property-decorator'
+import {Component, ModelSync, Vue} from 'vue-property-decorator'
 
 @Component
 export default class CreateServiceStepper extends Vue {

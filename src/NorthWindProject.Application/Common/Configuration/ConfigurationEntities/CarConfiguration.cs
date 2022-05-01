@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using IdentityServer4.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
 using NorthWind.Core.Entities.Car;
-using Spire.Pdf.Exporting.XPS.Schema;
 
 namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntities
 {
@@ -95,7 +93,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                         new()
                         {
                             Indicator = "Длина, мм",
-                            Parameter = "8000-12100",
+                            Parameter = "8000-12100"
                         },
                         new()
                         {
@@ -264,7 +262,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                         new()
                         {
                             Indicator = "Базовое шасси",
-                            Parameter = "МАЗ-КО 523",
+                            Parameter = "МАЗ-КО 523"
                         },
                         new()
                         {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
-using NorthWind.Core.Entities.Purchases.BasePurchase;
+using NorthWind.Core.Entities.Contracts.BaseContract;
 
 namespace NorthWind.Core.Entities.User
 {
@@ -9,22 +9,16 @@ namespace NorthWind.Core.Entities.User
         public string Name { get; set; }
         public string Surname { get; set; }
         public string MiddleName { get; set; }
-        public List<Purchase> Purchases { get; set; } = new();
+        public List<Contract> Contracts { get; set; } = new();
+
+
+        public string FullName => $"{Surname} {Name} {MiddleName}";
+
+        public string FullNameShort => $"{Surname} {Name[..1]} {MiddleName[..1]}";
 
         public ApplicationUser GetUser()
         {
             return this;
-        }
-        
-
-        public string FullName
-        {
-            get => $"{Surname} {Name} {MiddleName}";
-        }
-
-        public string FullNameShort
-        {
-            get => $"{Surname} {Name[..1]} {MiddleName[..1]}";
         }
     }
 }

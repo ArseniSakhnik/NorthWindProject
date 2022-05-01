@@ -3,7 +3,7 @@
     <div class="footer-first-section">
       <div class="flex-container">
         <div class="about-company-column">
-          <img src="../assets/small_logo.png" alt="Не удалось загрузить изображение"><span>Северный Ветер</span>
+          <img alt="Не удалось загрузить изображение" src="../assets/small_logo.png"><span>Северный Ветер</span>
           <p class="position">295053, Республика Крым, г. Симферополь, ул. Буденного д.32, литера "Ф" </p>
           <p class="enity">ИНН: 9102241410 КПП: 910201001</p>
         </div>
@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 
 @Component
 export default class FooterSection extends Vue {
@@ -67,7 +67,7 @@ export default class FooterSection extends Vue {
   ]
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .footer-first-section {
   padding-top: 4em;
   padding-bottom: 4em;

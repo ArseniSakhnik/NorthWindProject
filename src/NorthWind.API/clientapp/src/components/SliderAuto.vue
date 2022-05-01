@@ -1,9 +1,9 @@
 ﻿<template>
-  <hooper :itemsToShow="numberOfSlides" :infiniteScroll="isComputer" class="slider-section">
+  <hooper :infiniteScroll="isComputer" :itemsToShow="numberOfSlides" class="slider-section">
     <slide v-for="index in 4" class="slider">
       <div
-          class="block"
           :style="`background-image: url(${getImage(index)})`"
+          class="block"
       >
         <div class="bottom-card">
           <h5 class="text-white">БУНКЕРОВОЗЫ</h5>
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Ref, Mixins} from "vue-property-decorator";
+import {Component, Mixins, Ref} from "vue-property-decorator";
 //@ts-ignore
 import {Hooper, Slide} from 'hooper/dist/hooper.js'
 import 'hooper/dist/hooper.css';
@@ -43,17 +43,17 @@ export default class SliderAuto extends Mixins(BreakPointsMixin) {
   xAxis: number = 0;
   x: number = 0;
 
-  getImage(index: number) {
-    return require(`../assets/cars/car${index}.png`)
-  }
-
   get numberOfSlides() {
     return this.isComputer ? 3 : 1;
   }
 
+  getImage(index: number) {
+    return require(`../assets/cars/car${index}.png`)
+  }
+
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .slider-section {
   width: 100%;
   height: 100%;

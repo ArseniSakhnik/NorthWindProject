@@ -1,67 +1,67 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\favicon.ico" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\index.html" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\js\app.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\js\chunk-vendors.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\img\logo.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\fonts\6c084270ccdeb72fd9f5a5144cea628f-Raleway-Light.ttf" />
-    <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.ttf" />
-    <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.[ttf]" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\backgrounds\services1.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\fonts\Raleway-Light.ttf" />
-    <_ContentIncludedByDefault Remove="wwwroot\bundles\img\services1.jpg" />
-    <_ContentIncludedByDefault Remove="clientapp\package-lock.json" />
-    <_ContentIncludedByDefault Remove="clientapp\package.json" />
-    <_ContentIncludedByDefault Remove="clientapp\tsconfig.json" />
-  </ItemGroup>
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\favicon.ico" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\index.html" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\js\app.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\js\chunk-vendors.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\logo.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\fonts\6c084270ccdeb72fd9f5a5144cea628f-Raleway-Light.ttf" />
+        <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.ttf" />
+        <_ContentIncludedByDefault Remove="wwwroot\fonts\Raleway-Light.[ttf]" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\backgrounds\services1.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\assets\fonts\Raleway-Light.ttf" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\services1.jpg" />
+        <_ContentIncludedByDefault Remove="clientapp\package-lock.json" />
+        <_ContentIncludedByDefault Remove="clientapp\package.json" />
+        <_ContentIncludedByDefault Remove="clientapp\tsconfig.json" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BlowFish" Version="1.0.3-preview-99679781" />
-    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
-    <PackageReference Include="MailKit" Version="3.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="MimeKit" Version="3.0.0" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="BlowFish" Version="1.0.3-preview-99679781" />
+        <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
+        <PackageReference Include="MailKit" Version="3.0.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="MimeKit" Version="3.0.0" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\NorthWindProject.Application\NorthWindProject.Application.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\NorthWindProject.Application\NorthWindProject.Application.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="clientapp\src\layouts\AdditionalViews.vue" />
-    <None Remove="clientapp\src\views\DocumentsPage.vue" />
-    <None Remove="clientapp\src\views\VacanciesPage.vue" />
-    <None Remove="clientapp\src\views\ContactsPage.vue" />
-    <None Include="wwwroot\ServiceImage\Documents\License1.jpg" />
-    <None Include="wwwroot\ServiceImage\Documents\License2.jpg" />
-    <None Include="wwwroot\ServiceImage\Documents\Сertificate.jpg" />
-    <None Include="wwwroot\ServiceImage\KGO.png" />
-    <None Include="wwwroot\ServiceImage\Assenizator.png" />
-    <None Remove="clientapp\src\components\Admin\AdminSidebar.vue" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="clientapp\src\layouts\AdditionalViews.vue" />
+        <None Remove="clientapp\src\views\DocumentsPage.vue" />
+        <None Remove="clientapp\src\views\VacanciesPage.vue" />
+        <None Remove="clientapp\src\views\ContactsPage.vue" />
+        <None Include="wwwroot\ServiceImage\Documents\License1.jpg" />
+        <None Include="wwwroot\ServiceImage\Documents\License2.jpg" />
+        <None Include="wwwroot\ServiceImage\Documents\Сertificate.jpg" />
+        <None Include="wwwroot\ServiceImage\KGO.png" />
+        <None Include="wwwroot\ServiceImage\Assenizator.png" />
+        <None Remove="clientapp\src\components\Admin\AdminSidebar.vue" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="clientapp\src\assets\cars" />
-    <Folder Include="clientapp\src\assets\documents" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="clientapp\src\assets\cars" />
+        <Folder Include="clientapp\src\assets\documents" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="clientapp\src\views\ContactsPage.vue" />
-    <Content Include="clientapp\src\views\DocumentsPage.vue" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="clientapp\src\views\ContactsPage.vue" />
+        <Content Include="clientapp\src\views\DocumentsPage.vue" />
+    </ItemGroup>
 
 </Project>

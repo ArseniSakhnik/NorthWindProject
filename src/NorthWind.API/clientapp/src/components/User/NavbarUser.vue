@@ -3,16 +3,16 @@
       class="navbar"
       color="#6A76AB"
       dark
-      shrink-on-scroll
-      prominent
-      src="https://picsum.photos/1920/1080?random"
       fade-img-on-scroll
+      prominent
       scroll-target="#scrolling-techniques-3"
+      shrink-on-scroll
+      src="https://picsum.photos/1920/1080?random"
   >
     <template v-slot:img="{ props }">
       <v-img
-          v-bind="props"
           gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
+          v-bind="props"
       ></v-img>
     </template>
 
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import {namespace} from "vuex-class";
 
 const User = namespace('CurrentUserStore')
@@ -42,6 +42,6 @@ export default class NavbarUser extends Vue {
   @User.State('fullName') fullName!: string;
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

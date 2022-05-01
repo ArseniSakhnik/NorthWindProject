@@ -9,6 +9,8 @@ namespace NorthWind.API.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetCars(CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(new GetCarsQuery(), cancellationToken));
+        {
+            return Ok(await Mediator.Send(new GetCarsQuery(), cancellationToken));
+        }
     }
 }

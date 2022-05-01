@@ -1,17 +1,16 @@
 ﻿<template>
   <div
       id="map"
-      class="ymap"
       ref="map"
+      class="ymap"
   />
 </template>
 
 <script lang="ts">
-import {Vue, Component, Ref, Prop, PropSync} from 'vue-property-decorator'
+import {Component, Prop, PropSync, Ref, Vue} from 'vue-property-decorator'
 //@ts-ignore
-import {yandexMap, ymapMarker, loadYmap} from 'vue-yandex-maps'
+import {loadYmap, yandexMap, ymapMarker} from 'vue-yandex-maps'
 import {getCoordinates} from '../../data/CityCoordinates';
-import LoginWindow from "@/components/HomePage/loginWindow/LoginWindow.vue";
 
 
 @Component({components: {yandexMap, ymapMarker}})
@@ -36,16 +35,6 @@ export default class YandexMap extends Vue {
     coordorder: 'latlong',
     enterprise: false,
     version: '2.1'
-  }
-
-  private init() {
-    const cityArea = this.getCityPolygon();
-    this.isMapLoaded = true;
-    const myMap = this.getGeneratedMap();
-    myMap.geoObjects.add(cityArea);
-    const {routePanelControl, zoomControl} = this.getRouteAbdZoomMap();
-    myMap.controls.add(routePanelControl).add(zoomControl)
-    this.setRouteSettings(myMap, routePanelControl, cityArea);
   }
 
   getCityPolygon() {
@@ -155,7 +144,7 @@ export default class YandexMap extends Vue {
               //@ts-ignore
               const routeSegments = ymaps.geoQuery(edgeAndSegments)
                   .addToMap(myMap);
-              
+
               const citySegments = routeSegments.searchInside(polygon);
               const boundSegments = routeSegments.remove(citySegments);
 
@@ -165,15 +154,31 @@ export default class YandexMap extends Vue {
           })
         })
   }
-  
+
+  async mounted() {
+    await loadYmap({...this.settings, debug: true})
+    //@ts-ignore
+    ymaps.ready(this.init)
+  }
+
+  private init() {
+    const cityArea = this.getCityPolygon();
+    this.isMapLoaded = true;
+    const myMap = this.getGeneratedMap();
+    myMap.geoObjects.add(cityArea);
+    const {routePanelControl, zoomControl} = this.getRouteAbdZoomMap();
+    myMap.controls.add(routePanelControl).add(zoomControl)
+    this.setRouteSettings(myMap, routePanelControl, cityArea);
+  }
+
   private getSegmentDuration(segments: any[]): number {
     let duration = 0;
-    
+
     for (let i = 0; i < segments.length; i++) {
       const segmentInfo = segments[i].properties.get('distance')
       duration += segmentInfo.value;
     }
-    
+
     return duration;
   }
 
@@ -182,12 +187,6 @@ export default class YandexMap extends Vue {
     const price = this.calculateFunction(routeLength);
     this.priceNumberSynced = price;
     return price;
-  }
-
-  async mounted() {
-    await loadYmap({...this.settings, debug: true})
-    //@ts-ignore
-    ymaps.ready(this.init)
   }
 }
 </script>

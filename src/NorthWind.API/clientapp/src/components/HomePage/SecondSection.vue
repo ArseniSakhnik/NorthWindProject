@@ -1,7 +1,7 @@
 <template>
   <div class="second-section">
     <v-container>
-      <v-btn text color="#FF9B52">
+      <v-btn color="#FF9B52" text>
         <v-icon left>
           mdi-arrow-up-left
         </v-icon>
@@ -26,9 +26,9 @@
       </v-row>
       <v-row>
         <v-col
-            style="width: 100%"
             cols="12"
             lg="4"
+            style="width: 100%"
         >
           <div class="about-company-block">
             <Time class="about-company-icon"/>
@@ -97,7 +97,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import AboutService from "@/components/HomePage/secondSection/AboutService.vue";
 import Customer from "@/icons/Customer.vue";
 import Land from "@/icons/Land.vue";
@@ -115,7 +115,7 @@ export default class SecondSection extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .slider-auto-section {
   position: absolute;
   width: calc(100% - 30px);

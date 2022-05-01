@@ -1,6 +1,6 @@
 ﻿<template>
   <v-app v-if="isDataLoaded">
-    <div class="alert-section" v-if="isActive">
+    <div v-if="isActive" class="alert-section">
       <success-alert
           :message="alertMessage"
       />
@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import Navbar from '@/components/Navbar.vue'
 import FooterSection from "@/components/Footer.vue";
 import SuccessAlert from "@/components/Alerts/SuccessAlert.vue";

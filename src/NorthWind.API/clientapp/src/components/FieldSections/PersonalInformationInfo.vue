@@ -8,9 +8,9 @@
       >
         <string-field
             ref="1"
-            label="Фамилия*"
             v-model="surnameSynced"
             :rules="[isStringNotEmpty]"
+            label="Фамилия*"
         />
       </v-col>
       <v-col
@@ -19,9 +19,9 @@
       >
         <string-field
             ref="2"
-            label="Имя*"
             v-model="nameSynced"
             :rules="[isStringNotEmpty]"
+            label="Имя*"
         />
       </v-col>
       <v-col
@@ -30,9 +30,9 @@
       >
         <string-field
             ref="3"
-            label="Отчество*"
             v-model="middleNameSynced"
             :rules="[isStringNotEmpty]"
+            label="Отчество*"
         />
       </v-col>
     </v-row>
@@ -43,11 +43,11 @@
       >
         <string-field
             ref="4"
-            label="Номер телефона*"
             v-model="phoneNumberSynced"
-            prefix="+7"
             v-mask="'(###)-###-##-##'"
             :rules="[isStringNotEmpty]"
+            label="Номер телефона*"
+            prefix="+7"
         />
       </v-col>
       <v-col
@@ -56,9 +56,9 @@
       >
         <string-field
             ref="5"
-            label="Email*"
             v-model="emailSynced"
             :rules="[emailRules, isStringNotEmpty]"
+            label="Email*"
         />
       </v-col>
     </v-row>
@@ -69,9 +69,9 @@
       >
         <string-field
             ref="6"
-            label="Номер телефона или факс*"
             v-model="phoneNumberOrFaxSynced"
             :rules="[isStringNotEmpty]"
+            label="Номер телефона или факс*"
         />
       </v-col>
     </v-row>
@@ -79,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import {Component, PropSync, Mixins} from "vue-property-decorator";
+import {Component, Mixins, PropSync} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
 import {namespace} from "vuex-class";
 import ValidationMixin from "@/mixins/ValidationMixin.vue";
@@ -119,6 +119,6 @@ export default class PersonalInformationInfo extends Mixins(ValidationMixin) {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

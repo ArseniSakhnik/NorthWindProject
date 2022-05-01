@@ -10,26 +10,26 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
         public void Configure(EntityTypeBuilder<NorthWind.Core.Entities.Services.Service> builder)
         {
             builder
-                .HasMany(service => service.Purchases)
-                .WithOne(purchase => purchase.Service)
-                .HasForeignKey(purchase => purchase.ServiceId);
+                .HasMany(service => service.Contracts)
+                .WithOne(contract => contract.Service)
+                .HasForeignKey(contract => contract.ServiceId);
 
             builder.HasData(new List<NorthWind.Core.Entities.Services.Service>
             {
                 new()
                 {
                     Id = ServicesEnum.АссенизаторФиз,
-                    Route = "/create-vacuum-truck-fiz-purchase"
+                    Route = "/create-vacuum-truck-fiz-contract"
                 },
                 new()
                 {
                     Id = ServicesEnum.АссенизаторЮр,
-                    Route = "/create-vacuum-truck-yur-purchase"
+                    Route = "/create-vacuum-truck-yur-contract"
                 },
                 new()
                 {
                     Id = ServicesEnum.КГОЮр,
-                    Route = "/create-kgo-purchase"
+                    Route = "/create-kgo-contract"
                 }
             });
         }

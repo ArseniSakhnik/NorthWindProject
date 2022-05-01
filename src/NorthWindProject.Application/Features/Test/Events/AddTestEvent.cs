@@ -9,14 +9,14 @@ namespace NorthWindProject.Application.Features.Test.Events
 {
     public class AddTestEvent : DomainEvent
     {
-        public int MissionId { get; }
-
         public AddTestEvent(int missionId)
         {
             MissionId = missionId;
         }
+
+        public int MissionId { get; }
     }
-    
+
     public class AddTestEventHandler : INotificationHandler<DomainEventNotification<AddTestEvent>>
     {
         public Task Handle(DomainEventNotification<AddTestEvent> notification, CancellationToken cancellationToken)

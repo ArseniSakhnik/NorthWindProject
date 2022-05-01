@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -54,7 +53,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded) throw new ClientValidationException("Не удалось зарегестрироваться");
-            
+
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
@@ -76,7 +75,6 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
             // await _signInManager.SignInAsync(user, false);
 
             return "Для завершения регистрации подтвердите аккаунт на электронной почте";
-
         }
     }
 }

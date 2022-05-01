@@ -5,27 +5,27 @@ import {AxiosResponse} from "axios";
 
 export default class AccountService extends HttpService {
 
-	constructor() {
-		super('account')
-	}
+    constructor() {
+        super('account')
+    }
 
-	GetCurrentUserInfo(): Promise<AxiosResponse<UserDto>> {
-		return this._get('')
-	}
+    GetCurrentUserInfo(): Promise<AxiosResponse<UserDto>> {
+        return this._get('')
+    }
 
-	Login(loginModel: LoginModel): Promise<AxiosResponse<void>> {
-		return this._post('login', loginModel)
-	}
+    Login(loginModel: LoginModel): Promise<AxiosResponse<void>> {
+        return this._post('login', loginModel)
+    }
 
-	Register(registerModel: RegisterModel): Promise<AxiosResponse<void>> {
-		return this._post('register', registerModel)
-	}
+    Register(registerModel: RegisterModel): Promise<AxiosResponse<void>> {
+        return this._post('register', registerModel)
+    }
 
-	Logout(): Promise<void> {
-		return this._post('logout', {})
-	}
+    Logout(): Promise<void> {
+        return this._post('logout', {})
+    }
 
-	ConfirmEmail(confirmEmailModel: ConfirmEmailModel): Promise<AxiosResponse<void>> {
-		return this._post('confirm-email', confirmEmailModel)
-	}
+    ConfirmEmail(confirmEmailModel: ConfirmEmailModel): Promise<AxiosResponse<void>> {
+        return this._post('confirm-email', confirmEmailModel)
+    }
 }

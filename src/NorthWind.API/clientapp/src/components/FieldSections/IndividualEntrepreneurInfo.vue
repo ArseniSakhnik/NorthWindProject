@@ -4,8 +4,8 @@
     <v-row>
       <v-col>
         <string-field
-            label="Сторона ФИО"
             v-model="individualEntrepreneurShortNameSynced"
+            label="Сторона ФИО"
         />
       </v-col>
     </v-row>
@@ -14,8 +14,8 @@
           v-if="clientCompanySynced !== null"
       >
         <string-field
-            label="Имя компания клиента"
             v-model="clientCompanySynced"
+            label="Имя компания клиента"
         />
       </v-col>
     </v-row>
@@ -24,16 +24,16 @@
           v-if="customerContactPersonAndJobTitleSynced !== null"
       >
         <string-field
-            label="Контактное имя и должность"
             v-model="customerContactPersonAndJobTitleSynced"
+            label="Контактное имя и должность"
         />
       </v-col>
     </v-row>
     <v-row>
       <v-col>
         <string-field
-            label="ИНН"
             v-model="iNNSynced"
+            label="ИНН"
             mask="############"
         />
       </v-col>
@@ -49,9 +49,9 @@
     <v-row>
       <v-col>
         <string-field
-            label="Юридический адрес"
             v-model="legalAddressSynced"
             :counter="250"
+            label="Юридический адрес"
         />
       </v-col>
     </v-row>
@@ -68,8 +68,8 @@
           v-if="oKPOSynced !== null"
       >
         <string-field
-            label="ОКРО"
             v-model="oKPOSynced"
+            label="ОКРО"
         />
       </v-col>
     </v-row>
@@ -77,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, PropSync} from "vue-property-decorator";
+import {Component, PropSync, Vue} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
 
 @Component({
@@ -97,6 +97,6 @@ export default class IndividualEntrepreneurInfo extends Vue {
   @PropSync('oKPO', {required: false, default: () => null}) oKPOSynced!: string | null;
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

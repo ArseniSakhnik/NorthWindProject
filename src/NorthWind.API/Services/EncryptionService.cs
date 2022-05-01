@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using NorthWind.API.Configuration;
 using NorthWind.Core.Interfaces;
-using NorthWindProject.Application.Common.Interfaces;
 
 namespace NorthWind.API.Services
 {

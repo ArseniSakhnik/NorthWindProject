@@ -6,13 +6,12 @@ import Admin from '../views/Admin.vue'
 import CreateServicePage from '@/components/Admin/views/Services/CreateServicePage.vue'
 import DeveloperPage from "@/views/DeveloperPage/DeveloperPage.vue"
 import ConfirmEmail from "@/views/System/ConfirmEmail.vue"
-import CreateVacuumTruckFizPurchase from "@/views/Purchases/CreateVacuumTruckPurchase.vue"
-import CreateVacuumTruckYurPurchase from "@/views/Purchases/CreateVacuumTruckYurPurchase.vue";
-import CreateKgoPurchase from "@/views/Purchases/CreateKgoPurchase.vue";
-import AdminPurchases from "@/views/AdminPurchases.vue";
-import AdminPurchase from "@/views/AdminPurchase.vue";
+import CreateVacuumTruckFizContract from "@/views/Contracts/CreateVacuumTruckContract.vue"
+import CreateVacuumTruckYurContract from "@/views/Contracts/CreateVacuumTruckYurContract.vue";
+import CreateKgoContract from "@/views/Contracts/CreateKgoContract.vue";
+import AdminContracts from "@/views/AdminContracts.vue";
+import AdminContract from "@/views/AdminContract.vue";
 import UserInfo from "@/views/UserInfo.vue";
-import Purchase from "@/components/Purchase.vue";
 import AboutCar from "@/views/AboutCar.vue";
 import DocumentsPage from "@/views/DocumentsPage.vue";
 import ContactsPage from "@/views/ContactsPage.vue";
@@ -47,7 +46,7 @@ const routes: Array<RouteConfig> = [
     {
         path: '/admin',
         name: 'Admin',
-        component: AdminPurchases,
+        component: AdminContracts,
         meta: {
             layout: 'Admin'
         }
@@ -77,33 +76,33 @@ const routes: Array<RouteConfig> = [
         }
     },
     {
-        path: '/create-vacuum-truck-fiz-purchase',
-        name: 'CreateVacuumTruckFizPurchase',
-        component: CreateVacuumTruckFizPurchase,
+        path: '/create-vacuum-truck-fiz-contract',
+        name: 'CreateVacuumTruckFizContract',
+        component: CreateVacuumTruckFizContract,
         meta: {
             layout: 'Action'
         }
     },
     {
-        path: '/create-vacuum-truck-yur-purchase',
-        name: 'CreateVacuumTruckPurchase',
-        component: CreateVacuumTruckYurPurchase,
+        path: '/create-vacuum-truck-yur-contract',
+        name: 'CreateVacuumTruckContract',
+        component: CreateVacuumTruckYurContract,
         meta: {
             layout: 'Action'
         }
     },
     {
-        path: '/create-kgo-purchase',
-        name: 'CreateKgoPurchase',
-        component: CreateKgoPurchase,
+        path: '/create-kgo-contract',
+        name: 'CreateKgoContract',
+        component: CreateKgoContract,
         meta: {
             layout: 'Action'
         }
     },
     {
-        path: '/purchase',
-        name: 'Purchase',
-        component: AdminPurchase,
+        path: '/contract',
+        name: 'Contract',
+        component: AdminContract,
         meta: {
             layout: 'Admin'
         }

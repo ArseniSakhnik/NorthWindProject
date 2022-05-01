@@ -1,6 +1,6 @@
 <template>
   <div class="home-page text-block-setting">
-    <div class="second-section-opened" v-if="isSecondSectionOpened"/>
+    <div v-if="isSecondSectionOpened" class="second-section-opened"/>
     <first-section/>
     <second-section/>
     <third-section/>
@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import FirstSection from "@/components/HomePage/FirstSection.vue";
 import SecondSection from "@/components/HomePage/SecondSection.vue";
 import ThirdSection from "@/components/HomePage/thirdSection/ThirdSection.vue";
@@ -21,7 +21,7 @@ export default class Home extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .second-section-opened {
   width: 100vw;
   height: 100vh;

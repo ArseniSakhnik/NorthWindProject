@@ -1,9 +1,9 @@
 ﻿<template>
-  <div class="text-center" v-show="false">
+  <div v-show="false" class="text-center">
     <v-dialog
-        width="500"
         ref="dialogRef"
         persistent
+        width="500"
         @click:outside="toggleRegisterWindow(false)"
     >
       <v-card>
@@ -15,56 +15,56 @@
             <v-row>
               <v-col
                   cols="12"
-                  sm="6"
                   md="4"
+                  sm="6"
               >
                 <v-text-field
-                    label="Фамилия"
                     v-model="localData.surname"
+                    label="Фамилия"
                     required
                 />
               </v-col>
               <v-col
                   cols="12"
-                  sm="6"
                   md="4"
+                  sm="6"
               >
                 <v-text-field
-                    label="Имя"
                     v-model="localData.name"
+                    label="Имя"
                 />
               </v-col>
               <v-col
                   cols="12"
-                  sm="6"
                   md="4"
+                  sm="6"
               >
                 <v-text-field
-                    label="Отчество"
                     v-model="localData.middleName"
+                    label="Отчество"
                 />
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                    label="Email"
                     v-model="localData.email"
+                    label="Email"
                     required
                 />
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                    label="Номер телефона"
-                    :value="localData.phoneNumber"
                     v-mask="'#(###)-###-##-##'"
+                    :value="localData.phoneNumber"
+                    label="Номер телефона"
                     @input="phoneNumberInputHandler"
                 />
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                    label="Пароль"
-                    type="password"
                     v-model="localData.password"
+                    label="Пароль"
                     required
+                    type="password"
                 />
               </v-col>
               <v-col>
@@ -96,7 +96,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Ref, PropSync, Watch, Mixins} from "vue-property-decorator";
+import {Component, Mixins} from "vue-property-decorator";
 import {RegisterModel} from "@/services/AccountService/RequestsAccountService";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {namespace} from "vuex-class";
@@ -140,7 +140,7 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin, DialogWind
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .error-message {
   color: red;
 }

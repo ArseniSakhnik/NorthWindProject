@@ -7,10 +7,10 @@
           sm="6"
       >
         <v-text-field
-            outlined
+            :value="distance"
             dense
             label="Расстояние"
-            :value="distance"
+            outlined
             readonly
         />
       </v-col>
@@ -19,10 +19,10 @@
           sm="6"
       >
         <v-text-field
-            outlined
+            :value="price"
             dense
             label="Приблизительная стоимость"
-            :value="price"
+            outlined
             readonly
         />
       </v-col>
@@ -31,17 +31,17 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 
 @Component
 export default class PriceFields extends Vue {
   @Prop({required: true, type: Number})
   price!: number;
-  
+
   @Prop({required: true, type: Number})
   distance!: number;
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

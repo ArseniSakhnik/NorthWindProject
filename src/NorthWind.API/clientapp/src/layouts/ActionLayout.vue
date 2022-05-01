@@ -7,15 +7,14 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import Navbar from "@/components/Navbar.vue"
 import ActionBar from "@/components/ActionBars/ActionBar.vue";
-import {namespace} from "vuex-class";
 
 
 @Component({components: {ActionBar, Navbar}})
 export default class ActionLayout extends Vue {
-  
+
 }
 </script>
 <style lang="scss">
@@ -24,7 +23,7 @@ export default class ActionLayout extends Vue {
 }
 
 .background-image {
-  background-image: url('../assets/purchases/vacuumTruck/insignts-1-1192699.jpg');
+  background-image: url('../assets/contracts/vacuumTruck/insignts-1-1192699.jpg');
   position: relative;
   background-blend-mode: multiply;
   background-position: center bottom;

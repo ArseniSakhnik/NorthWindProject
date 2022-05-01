@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NorthWind.Core.Entities.Purchases.BasePurchase;
-using NorthWind.Core.Entities.Purchases.KgoPurchase;
-using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseFiz;
+using NorthWind.Core.Entities.Contracts.BaseContract;
+using NorthWind.Core.Entities.Contracts.KgoYurContract;
+using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
 using NorthWind.Core.Entities.Services.BaseService;
 using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Extensions;
@@ -18,9 +18,9 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
             EntityTypeBuilder<NorthWind.Core.Entities.Services.DocumentService.DocumentService> builder)
         {
             builder
-                .HasMany(service => service.Purchases)
-                .WithOne(purchase => purchase.DocumentService)
-                .HasForeignKey(purchase => purchase.DocumentServiceId);
+                .HasMany(service => service.Contracts)
+                .WithOne(contract => contract.DocumentService)
+                .HasForeignKey(contract => contract.DocumentServiceId);
 
             builder
                 .Property(e => e.DocumentFields)
@@ -32,7 +32,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 {
                     Id = 1,
                     ServiceId = ServicesEnum.АссенизаторФиз,
-                    DocumentFields = Purchase.GetDocumentFields<VacuumTruckFizPurchase>()
+                    DocumentFields = Contract.GetDocumentFields<VacuumTruckFizContract>()
                 },
                 new()
                 {
@@ -60,7 +60,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 {
                     Id = 3,
                     ServiceId = ServicesEnum.КГОЮр,
-                    DocumentFields = Purchase.GetDocumentFields<KGOPurchase>()
+                    DocumentFields = Contract.GetDocumentFields<KGOYurContract>()
                 }
             });
         }

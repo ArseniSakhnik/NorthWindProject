@@ -1,7 +1,5 @@
 ﻿<script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
-import AccountService from "@/services/AccountService/AccountService"
-import ServiceViewService from "@/services/ServiceViewService/ServiceViewService";
+import {Component, Vue} from 'vue-property-decorator'
 
 @Component
 export default class MomentMixin extends Vue {

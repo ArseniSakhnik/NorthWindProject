@@ -2,10 +2,10 @@
   <v-container class="flex-container">
     <v-btn>Назад</v-btn>
     <v-btn
-        x-large
+        :disabled="isDisabled"
         color="warning"
         dark
-        :disabled="isDisabled"
+        x-large
         @click="send"
     >
       Отправить
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Emit, Prop} from "vue-property-decorator";
+import {Component, Emit, Prop, Vue} from "vue-property-decorator";
 
 @Component
 export default class ActionBar extends Vue {
@@ -27,7 +27,7 @@ export default class ActionBar extends Vue {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .flex-container {
   display: flex;
   align-items: center;

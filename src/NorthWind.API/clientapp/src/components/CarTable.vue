@@ -3,14 +3,14 @@
     <v-data-table
         :headers="headers"
         :items="carsInfoModes"
-        hide-default-footer
         class="table"
+        hide-default-footer
     />
   </v-card>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 import {CarInfoModel} from "@/services/CarsService/Responses";
 
 @Component
@@ -30,5 +30,5 @@ export default class CarTable extends Vue {
   ]
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 </style>

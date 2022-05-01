@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 
 @Component
 export default class Arrow extends Vue {
-  
+
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .arrow {
   /* Group 15 */
 
@@ -41,7 +41,6 @@ export default class Arrow extends Vue {
   position: absolute;
   width: 24px;
   height: 24px;
-
 
 
   /* Vector */

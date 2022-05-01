@@ -14,11 +14,10 @@ using NorthWind.API.Services;
 using NorthWind.Core.Entities.User;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
-using NorthWindProject.Application.Common.Interfaces;
 using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.DependencyInjection;
-using NorthWindProject.Application.Features.Purchase.Services.PurchaseService;
+using NorthWindProject.Application.Features.Contract.Services.ContractService;
 using NorthWindProject.Application.Middlewares;
 
 namespace NorthWind.API
@@ -81,7 +80,7 @@ namespace NorthWind.API
             services.AddScoped<IDomainEventService, DomainEventService>();
             services.AddScoped<IEmailSenderService, EmailSenderService>();
             services.AddScoped<IEncryptionService, EncryptionService>();
-            services.AddScoped<IPurchaseService, PurchaseService>();
+            services.AddScoped<IContractService, ContractService>();
             services.AddTransient<ExceptionHandlingMiddleware>();
 
             services.AddControllers();

@@ -15,7 +15,7 @@ const User = namespace('CurrentUserStore');
 @Component
 export default class ConfirmEmail extends Mixins(HttpServiceMixin) {
   @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => void;
-  
+
   async mounted() {
     const userId = this.$route.query.userId as string
     const code = this.$route.query.code as string

@@ -1,8 +1,8 @@
 <template>
   <section
+      v-if="isDataLoad"
       :style="`background-image: url(${slideImage})`"
       class="service-list flex-container-slides"
-      v-if="isDataLoad"
   >
     <div class="arrow-container">
       <div class="arrow left" @click="previousSlide"/>
@@ -12,7 +12,7 @@
         <v-col v-if="isComputer"/>
         <v-col>
           <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
-          <purchase-opener
+          <contract-opener
               :fiz-route="slideItems[currentSlide].fizRoute"
               :yur-route="slideItems[currentSlide].yurRoute"
               style="display: inline-block"
@@ -35,33 +35,18 @@ import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import TransparentButton from "@/components/Buttons/TransparentButton.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
-import PurchaseOpener from "@/components/SystemComponents/PurchaseOpener.vue";
+import ContractOpener from "@/components/SystemComponents/ContractOpener.vue";
 
 
 type Slide = { title: string; image: string, fizRoute: string, yurRoute: string }
 @Component({
-  components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton, PurchaseOpener}
+  components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton, ContractOpener}
 })
 export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMixin) {
-  @Ref('first-section') private firstSection!: HTMLElement;
   @Prop({type: Boolean}) isSecondSectionOpened!: boolean;
-
   isDataLoad: boolean = false;
+  @Ref('first-section') private firstSection!: HTMLElement;
   private currentSlide: number = 0;
-
-  async created() {
-    const {data: serviceView} = await this.serviceViewService.GetServiceViews();
-
-    this.slideItems = serviceView.map(item => ({
-      image: `/ServiceImage/${item.mainImageName}`,
-      title: item.title,
-      fizRoute: item.fizServiceRoute,
-      yurRoute: item.yurServiceRoute
-    }))
-
-    this.isDataLoad = true;
-  }
-
   private slideItems: Slide[] = [
     {
       title: '',
@@ -79,6 +64,23 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
     return this.slideItems.length
   }
 
+  async created() {
+    const {data: serviceView} = await this.serviceViewService.GetServiceViews();
+
+    this.slideItems = serviceView.map(item => ({
+      image: `/ServiceImage/${item.mainImageName}`,
+      title: item.title,
+      fizRoute: item.fizServiceRoute,
+      yurRoute: item.yurServiceRoute
+    }))
+
+    this.isDataLoad = true;
+  }
+
+  goToContract(link: string) {
+    this.$router.push(link);
+  }
+
   private nextSlide() {
     if (this.currentSlide >= this.slidesLength - 1) {
       this.currentSlide = 0
@@ -94,13 +96,9 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
       this.currentSlide--
     }
   }
-
-  goToPurchase(link: string) {
-    this.$router.push(link);
-  }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .service-list {
   position: relative;
   background-blend-mode: multiply;

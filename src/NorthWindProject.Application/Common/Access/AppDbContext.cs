@@ -9,15 +9,14 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Entities.Car;
 using NorthWind.Core.Entities.Common;
-using NorthWind.Core.Entities.Purchases.BasePurchase;
-using NorthWind.Core.Entities.Purchases.KgoPurchase;
-using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseFiz;
-using NorthWind.Core.Entities.Purchases.VacuumTruckPurchaseYur;
+using NorthWind.Core.Entities.Contracts.BaseContract;
+using NorthWind.Core.Entities.Contracts.KgoYurContract;
+using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
+using NorthWind.Core.Entities.Contracts.VacuumTruckYurContract;
 using NorthWind.Core.Entities.Services;
 using NorthWind.Core.Entities.Services.Files;
 using NorthWind.Core.Entities.Test;
 using NorthWind.Core.Entities.User;
-using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Services;
 
@@ -25,8 +24,8 @@ namespace NorthWindProject.Application.Common.Access
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
-        private readonly DomainEventService _domainEventService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly DomainEventService _domainEventService;
 
         public AppDbContext(DbContextOptions<AppDbContext> options, IPublisher mediator,
             ICurrentUserService currentUserService)
@@ -36,12 +35,17 @@ namespace NorthWindProject.Application.Common.Access
             _currentUserService = currentUserService;
         }
 
+        #region AppCommon
+
+        public DbSet<Car> Cars { get; set; }
+
+        #endregion
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             var result = await base.SaveChangesAsync(cancellationToken);
 
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
-            {
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -65,7 +69,6 @@ namespace NorthWindProject.Application.Common.Access
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-            }
 
             var events = GetDomainEvents().ToList();
             await DispatchEventAsync(events);
@@ -158,18 +161,12 @@ namespace NorthWindProject.Application.Common.Access
 
         #endregion
 
-        #region Purchase
+        #region Contract
 
-        public DbSet<Purchase> Purchases { get; set; }
-        public DbSet<VacuumTruckFizPurchase> FizVacuumTruckPurchases { get; set; }
-        public DbSet<VacuumTruckYurPurchase> YurVacuumTruckPurchases { get; set; }
-        public DbSet<KGOPurchase> KgoPurchases { get; set; }
-
-        #endregion
-
-        #region AppCommon
-
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+        public DbSet<VacuumTruckFizContract> VacuumTruckFizContracts { get; set; }
+        public DbSet<VacuumTruckYurContract> VacuumTruckYurContracts { get; set; }
+        public DbSet<KGOYurContract> KGOYurContracts { get; set; }
 
         #endregion
 

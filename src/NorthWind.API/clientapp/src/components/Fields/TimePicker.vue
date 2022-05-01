@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, PropSync, Watch, Mixins} from "vue-property-decorator";
+import {Component, Mixins, PropSync} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
 import MomentMixin from "@/mixins/MomentMixin.vue";
 
@@ -47,6 +47,6 @@ export default class TimePicker extends Mixins(MomentMixin) {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

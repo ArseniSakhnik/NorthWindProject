@@ -1,4 +1,4 @@
-﻿export type ServiceViewDto = { 
+﻿export type ServiceViewDto = {
     id: number,
     title: string
     fizServiceRoute: string

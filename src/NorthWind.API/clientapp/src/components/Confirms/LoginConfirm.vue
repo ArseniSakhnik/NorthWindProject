@@ -1,9 +1,9 @@
 ﻿<template>
-  <div class="text-center" v-show="false">
+  <div v-show="false" class="text-center">
     <v-dialog
-        width="500"
         ref="dialogRef"
         persistent
+        width="500"
         @click:outside="toggleRegisterWindow(false)"
     >
       <v-card>
@@ -23,9 +23,9 @@
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]"
                 :type="showPassword ? 'text' : 'password'"
-                name="input-10-1"
-                label="Пароль"
                 counter
+                label="Пароль"
+                name="input-10-1"
                 @click:append="showPassword = !showPassword"
             />
           </v-row>
@@ -94,7 +94,7 @@ export default class LoginConfirm extends Mixins(HttpServiceMixin, DialogWindowM
 
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .error-message {
   color: red;
 }

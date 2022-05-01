@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NorthWind.Core.Entities.Purchases.BasePurchase;
+using NorthWind.Core.Entities.Contracts.BaseContract;
 using NorthWind.Core.Entities.Services.BaseService;
 using NorthWind.Core.Enums;
 
@@ -12,7 +12,7 @@ namespace NorthWind.Core.Entities.Services.DocumentService
         public ServicesEnum ServiceId { get; set; }
         public Service Service { get; set; }
 
-        public List<Purchase> Purchases { get; set; }
+        public List<Contract> Contracts { get; set; }
         public byte[] Content { get; set; }
         public List<DocumentField> DocumentFields { get; set; }
     }

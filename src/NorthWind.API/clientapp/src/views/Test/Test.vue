@@ -1,18 +1,18 @@
 ﻿<template>
   <div>
     <DxFileUploader
-        select-button-text="Select file"
-        label-text=""
-        upload-mode="instantly"
         :uploadUrl="uploadUrl"
+        label-text=""
+        select-button-text="Select file"
         upload-method="POST"
+        upload-mode="instantly"
     />
-    <img src="api/ServiceView/mainimage/1" alt="Картинки нэма">
+    <img alt="Картинки нэма" src="api/ServiceView/mainimage/1">
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import {DxFileUploader} from 'devextreme-vue/file-uploader'
 
 @Component({components: {DxFileUploader}})
@@ -20,6 +20,6 @@ export default class Test extends Vue {
   uploadUrl: string = 'api/image/'
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

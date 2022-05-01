@@ -13,24 +13,34 @@ namespace NorthWind.API.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetCurrentUserInfo(CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(new GetCurrentUserInfoQuery(), cancellationToken));
+        {
+            return Ok(await Mediator.Send(new GetCurrentUserInfoQuery(), cancellationToken));
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand command, CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(command, cancellationToken));
+        {
+            return Ok(await Mediator.Send(command, cancellationToken));
+        }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterCommand command, CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(command, cancellationToken));
+        {
+            return Ok(await Mediator.Send(command, cancellationToken));
+        }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout(LogoutCommand command, CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(command, cancellationToken));
+        {
+            return Ok(await Mediator.Send(command, cancellationToken));
+        }
 
 
         [HttpPost("confirm-email")]
         public async Task<IActionResult> ConfirmEmailAsync(ConfirmEmailCommand command,
             CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(command, cancellationToken));
+        {
+            return Ok(await Mediator.Send(command, cancellationToken));
+        }
     }
 }

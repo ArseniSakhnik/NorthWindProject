@@ -5,13 +5,13 @@
     </h1>
     <div class="buttons">
       <vs-button color="#fff" flat>Заказать услугу</vs-button>
-      <vs-button color="#fff" border>Подробнее</vs-button>
+      <vs-button border color="#fff">Подробнее</vs-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-property-decorator'
 
 @Component({})
 export default class SlideContent extends Vue {
@@ -19,7 +19,7 @@ export default class SlideContent extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .service {
   height: 100%;
   display: flex;
@@ -27,11 +27,11 @@ export default class SlideContent extends Vue {
   justify-content: center;
   align-items: flex-end;
 
-  h1{
+  h1 {
     width: 50%;
   }
 
-  .buttons{
+  .buttons {
     width: 50%;
     display: flex;
   }

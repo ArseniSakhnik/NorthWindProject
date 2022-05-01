@@ -1,29 +1,29 @@
 <template>
-<!--  <div class="navigation">-->
-<!--    <v-item-group-->
-<!--        class="flex"-->
-<!--        :value="syncedCurrentItem">-->
-<!--      <v-item-->
-<!--          v-slot="{ active }"-->
-<!--          v-for="(item, index) in menuItems"-->
-<!--              :key="index">-->
-<!--        <v-card-->
-<!--            flat-->
-<!--            tile-->
-<!--            @click="setCurrentItem(index)"-->
-<!--            dark-->
-<!--            :color="active ? '#FF782E' : '#003366'">-->
-<!--          <v-icon>{{ item.icon }}</v-icon>-->
-<!--          <v-card-title>{{ item.title }}</v-card-title>-->
-<!--        </v-card>-->
-<!--      </v-item>-->
+  <!--  <div class="navigation">-->
+  <!--    <v-item-group-->
+  <!--        class="flex"-->
+  <!--        :value="syncedCurrentItem">-->
+  <!--      <v-item-->
+  <!--          v-slot="{ active }"-->
+  <!--          v-for="(item, index) in menuItems"-->
+  <!--              :key="index">-->
+  <!--        <v-card-->
+  <!--            flat-->
+  <!--            tile-->
+  <!--            @click="setCurrentItem(index)"-->
+  <!--            dark-->
+  <!--            :color="active ? '#FF782E' : '#003366'">-->
+  <!--          <v-icon>{{ item.icon }}</v-icon>-->
+  <!--          <v-card-title>{{ item.title }}</v-card-title>-->
+  <!--        </v-card>-->
+  <!--      </v-item>-->
 
-<!--    </v-item-group>-->
-<!--  </div>-->
+  <!--    </v-item-group>-->
+  <!--  </div>-->
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop, PropSync} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 
 type MenuItem = { title: string; icon: string }
 

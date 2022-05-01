@@ -16,9 +16,9 @@
           </div>
         </v-col>
         <v-col
+            class="svg-container"
             cols="12"
             lg="7"
-            class="svg-container"
         >
           <map-svg/>
         </v-col>
@@ -31,8 +31,8 @@
       </v-row>
     </v-container>
     <div
-        class="background-img"
         :style="`background-image: url(${getImage()})`"
+        class="background-img"
     >
       <v-container class="contact-us-section-container">
         <contact-us-section class="contact-us-section"/>
@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Mixins} from "vue-property-decorator";
+import {Component, Mixins} from "vue-property-decorator";
 import MapSvg from "@/icons/Map.vue";
 import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import ContactUsSection from "@/components/HomePage/ContactUsSection/ContactUsSection.vue";
@@ -56,7 +56,7 @@ export default class ThirdSection extends Mixins(BreakPointsMixin) {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .background-img {
   height: 564px;
   width: 100%;

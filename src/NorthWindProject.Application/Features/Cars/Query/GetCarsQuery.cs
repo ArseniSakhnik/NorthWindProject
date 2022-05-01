@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +22,8 @@ namespace NorthWindProject.Application.Features.Cars.Query
         }
 
         public async Task<IList<CarDto>> Handle(GetCarsQuery request, CancellationToken cancellationToken)
-            => await _context.Cars
+        {
+            return await _context.Cars
                 .Select(car => new CarDto
                 {
                     Id = car.Id,
@@ -34,5 +34,6 @@ namespace NorthWindProject.Application.Features.Cars.Query
                     CarModels = car.CarModels
                 })
                 .ToListAsync(cancellationToken);
+        }
     }
 }

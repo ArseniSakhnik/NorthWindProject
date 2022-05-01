@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using NorthWind.Core.Interfaces;
-using NorthWindProject.Application.Common.Interfaces;
 
 namespace NorthWind.API.Services
 {

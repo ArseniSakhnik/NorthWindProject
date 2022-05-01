@@ -4,7 +4,7 @@
 
 <script>
 export default {
-name: "VechileSlider"
+  name: "VechileSlider"
 }
 </script>
 

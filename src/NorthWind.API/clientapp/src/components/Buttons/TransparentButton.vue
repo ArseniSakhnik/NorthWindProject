@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Emit} from "vue-property-decorator";
+import {Component, Emit, Vue} from "vue-property-decorator";
 
 @Component
 export default class TransparentButton extends Vue {
@@ -15,7 +15,7 @@ export default class TransparentButton extends Vue {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .button {
   color: white;
   padding: 0.9em 3.6em;
