@@ -108,10 +108,10 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
         title: 'Документы',
         to: '/documents'
       },
-      {
-        title: 'Вакансии',
-        to: '/'
-      },
+      // {
+      //   title: 'Вакансии',
+      //   to: '/'
+      // },
       {
         title: 'Контакты',
         to: '/contacts'
