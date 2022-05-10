@@ -76,7 +76,7 @@
         />
       </template>
     </vs-navbar>
-    <div class="navigation-drawer">
+    <div class="navigation-drawer" v-if="drawer">
       <v-navigation-drawer
           v-model="drawer"
           bottom
