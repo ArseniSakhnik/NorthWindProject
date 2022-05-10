@@ -25,6 +25,13 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                     ServiceViewId = ServiceViewEnum.КГО,
                     Title = "ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА".ToUpper(),
                     MainImageName = "KGO.png"
+                },
+                new()
+                {
+                    Id = 3,
+                    ServiceViewId = ServiceViewEnum.ПоливИОчисткаТерриторий,
+                    Title = "Полив и очистка территорий".ToUpper(),
+                    MainImageName = "PolivIOchistkaTerrityriy.png"
                 }
             });
         }

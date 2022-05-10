@@ -19,15 +19,17 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 new()
                 {
                     Id = ServiceViewEnum.Ассенизатор,
-                    FizServiceId = ServicesEnum.АссенизаторФиз,
-                    YurServiceId = ServicesEnum.АссенизаторЮр,
                     ServiceViewSettingsId = 1
                 },
                 new()
                 {
                     Id = ServiceViewEnum.КГО,
-                    YurServiceId = ServicesEnum.КГОЮр,
                     ServiceViewSettingsId = 2
+                },
+                new()
+                {
+                    Id = ServiceViewEnum.ПоливИОчисткаТерриторий,
+                    ServiceViewSettingsId = 3
                 }
             });
         }
