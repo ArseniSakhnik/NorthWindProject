@@ -13,3 +13,9 @@ export enum RolesEnum {
     Admin = 1,
     Client = 2
 }
+
+export enum ServiceTypeEnum {
+    Assenizator = 1,
+    KGO = 2,
+    WaterCleaning = 3
+}

@@ -52,6 +52,7 @@
         <None Include="wwwroot\ServiceImage\KGO.png" />
         <None Include="wwwroot\ServiceImage\Assenizator.png" />
         <None Remove="clientapp\src\components\Admin\AdminSidebar.vue" />
+        <None Remove="clientapp\src\components\RegisterWindowContent.vue" />
     </ItemGroup>
 
     <ItemGroup>

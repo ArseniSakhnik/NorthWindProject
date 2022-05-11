@@ -1,88 +1,40 @@
 ﻿<template>
   <div>
-    <v-dialog
-        ref="dialogRef"
-        persistent
-        width="50%"
-        @click:outside="toggleContractWindow(false)"
-    >
-      <v-card>
-        <v-card-title>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row class="dialog-buttons">
-              <v-col
-                  class="rectangle-button"
-                  cols="12"
-                  sm="6"
-                  @click="pushToRoute(fizRoute)"
-              >
-                <span>Физическое лицо</span>
-              </v-col>
-              <v-col
-                  class="rectangle-button"
-                  cols="12"
-                  sm="6"
-                  @click="pushToRoute(yurRoute)"
-              >
-                <span>Юридическое лицо</span>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
     <orange-button
-        v-if="doNeedChoose"
         style="margin-right: 1em"
         title="Заказать услугу"
-        @action="openConfirm"
+        @action="openPurchase"
     />
-    <orange-button
-        v-else
-        style="margin-right: 1em"
-        title="Заказать услугу"
-        @action="pushToActiveRoute"
+    <purchase-dialog
+        :is-active.sync="isDialogActive"
+        :is-user-authenticated="isUserAuthenticated"
     />
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Ref, Vue} from "vue-property-decorator";
+import {Component, Prop, PropSync, Ref, Vue, Watch} from "vue-property-decorator";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
+import {ServiceTypeEnum} from "@/enums/Enums";
+import {namespace} from "vuex-class";
+import PurchaseDialog from "@/components/PurchaseDialog.vue";
 
-@Component({components: {OrangeButton}})
+const User = namespace('CurrentUserStore')
+
+@Component({components: {OrangeButton, PurchaseDialog}})
 export default class ContractOpener extends Vue {
   @Ref('dialogRef') dialogRef!: any;
-  @Prop({required: true}) fizRoute!: string | null;
-  @Prop({required: true}) yurRoute!: string | null;
-  isActiveSynced: boolean = false;
+  @Prop() serviceType!: ServiceTypeEnum;
+  @User.State('userId') userId!: number;
 
-  get doNeedChoose(): boolean {
-    return this.fizRoute !== null && this.yurRoute !== null;
+  get isUserAuthenticated(): boolean {
+    return this.userId !== 0;
   }
 
-  updated() {
-    console.log(this.fizRoute)
-    console.log(this.yurRoute)
-  }
+  isDialogActive: boolean = false;
 
-  toggleContractWindow(isOpen: boolean) {
-    this.dialogRef.isActive = isOpen;
-  }
-
-  pushToActiveRoute() {
-    const currentRoute: string = (this.fizRoute ?? this.yurRoute) as string;
-    this.$router.push(currentRoute);
-  }
-
-  pushToRoute(route: string) {
-    this.$router.push(route);
-  }
-
-  openConfirm() {
-    this.dialogRef.isActive = true;
+  openPurchase() {
+    this.isDialogActive = true;
   }
 }
 </script>
