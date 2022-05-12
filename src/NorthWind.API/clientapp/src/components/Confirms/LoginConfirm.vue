@@ -32,6 +32,9 @@
           <v-row>
             <div v-if="errorMsg.length" class="error-message">{{ errorMsg }}</div>
           </v-row>
+          <v-row>
+            <span class="registration-text" @click="closeLoginAndOpenRegisterForm">Регистрация</span>
+          </v-row>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -91,11 +94,18 @@ export default class LoginConfirm extends Mixins(HttpServiceMixin, DialogWindowM
     })
   }
 
-
+  closeLoginAndOpenRegisterForm() {
+    this.$emit('closeLoginAndOpenRegisterForm');
+  }
 }
 </script>
 <style lang="scss" scoped>
 .error-message {
   color: red;
+}
+
+.registration-text {
+  color: #0040ff;
+  cursor: pointer;
 }
 </style>

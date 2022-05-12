@@ -70,6 +70,7 @@
         </div>
         <login-confirm
             :is-active.sync="isLogInDialogOpened"
+            @closeLoginAndOpenRegisterForm="closeLoginAndOpenRegisterForm"
         />
         <register-confirm
             :is-active.sync="isRegisterDialogOpened"
@@ -180,6 +181,11 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
 
   gotoMainPage() {
     this.$router.push('/')
+  }
+  
+  closeLoginAndOpenRegisterForm() {
+    this.isLogInDialogOpened = false;
+    this.isRegisterDialogOpened = true;
   }
 }
 </script>
