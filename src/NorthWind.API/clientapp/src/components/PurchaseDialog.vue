@@ -1,9 +1,9 @@
 ﻿<template>
   <v-dialog
       ref="dialogRef"
-      persistent
       @click:outside="toggleRegisterWindow(false)"
       scrollable
+      persistent
   >
     <v-card>
       <v-card-title>
@@ -41,9 +41,14 @@
           </v-stepper-step>
           <v-stepper-content :step="2" ref="serviceBlock">
             <assenizator-purchase
+                v-if="serviceType === 1"
                 :waste-type.sync="localData.wasteType"
                 :pit-volume.sync="localData.pitVolume"
                 :distance-from-driveway.sync="localData.distanceFromDriveway"
+            />
+            <k-g-o-purchase
+                v-else-if="serviceType === 2"
+                :planned-waste-volume="localData.plannedWasteVolume"
             />
           </v-stepper-content>
 
@@ -56,8 +61,14 @@
           </v-stepper-step>
           <v-stepper-content :step="3" ref="priceBlock">
             <calculate-assenizator
+                v-if="serviceType === 1"
                 :distance-from-driveway="localData.distanceFromDriveway"
                 :place.sync="localData.place"
+            />
+            <calculate-k-g-o
+                v-else-if="serviceType === 2"
+                :place.sync="localData.place"
+                :planned-waste-volume="localData.plannedWasteVolume"
             />
           </v-stepper-content>
         </v-stepper>
@@ -78,7 +89,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins, Prop, Ref} from "vue-property-decorator";
+import {Component, Mixins, Prop, Ref, Watch} from "vue-property-decorator";
 import DialogWindowMixin from "@/mixins/DialogWindowMixin.vue";
 import AssenizatorPurchase from "@/components/Purchase/AssenizatorPurchase.vue";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
@@ -86,9 +97,19 @@ import {AssenizatorPurchaseDto, BasePurchaseDto, KDMDto, KGODto} from "@/service
 import {ServiceTypeEnum, WasteType} from "@/enums/Enums";
 import CalculateAssenizator from "@/components/Calculate/CalculateAssenizator.vue";
 import ValidationMixin from "@/mixins/ValidationMixin.vue";
+import KGOPurchase from "@/components/Purchase/KGOPurchase.vue";
+import CalculateKGO from "@/components/Calculate/CalculateKGO.vue";
 
 
-@Component({components: {CalculateAssenizator, AssenizatorPurchase, PersonalInformationInfo}})
+@Component({
+  components: {
+    CalculateKGO,
+    CalculateAssenizator,
+    AssenizatorPurchase,
+    PersonalInformationInfo,
+    KGOPurchase
+  }
+})
 export default class PurchaseDialog extends Mixins(DialogWindowMixin, ValidationMixin) {
   @Ref('personalInformationInfo') personalInformationInfoRef!: any;
   @Ref('serviceBlock') serviceBlock!: any;
@@ -135,9 +156,11 @@ export default class PurchaseDialog extends Mixins(DialogWindowMixin, Validation
         return 'В разработке'
     }
   }
-
-  created() {
-    switch (this.serviceType) {
+  
+  @Watch('serviceType')
+  serviceTypeChangeHandler(value: ServiceTypeEnum) {
+    console.log(value)
+    switch (value) {
       case ServiceTypeEnum.Assenizator:
         this.localData = {
           ...this.localData,
