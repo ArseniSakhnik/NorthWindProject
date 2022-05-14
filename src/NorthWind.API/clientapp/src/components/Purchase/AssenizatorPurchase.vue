@@ -1,0 +1,87 @@
+﻿<template>
+  <div>
+    <h2 class="headline font-weight-bold mb-3">Данные по заявке</h2>
+    <v-row>
+      <v-col
+          cols="12"
+          sm="4"
+      >
+        <v-select
+            :items="items"
+            item-text="name"
+            item-value="id"
+            v-model="wasteTypeSynced"
+            label="Тип отходов"
+            outlined
+            dense
+        ></v-select>
+      </v-col>
+      <v-col
+          cols="12"
+          sm="4"
+      >
+        <string-field
+            ref="1"
+            v-model="pitVolumeSynced"
+            :rules="[isStringNotEmpty]"
+            label="Примерный объем выгребной ямы*"
+            mask="####"
+            prefix="м³"
+            :is-number="true"
+        />
+      </v-col>
+      <v-col
+          cols="12"
+          sm="4"
+      >
+        <string-field
+            ref="1"
+            v-model="distanceFromDrivewaySynced"
+            :rules="[isStringNotEmpty]"
+            label="Расстояние от подъездных путей*"
+            mask="####"
+            prefix="м³"
+            :is-number="true"
+        />
+      </v-col>
+    </v-row>
+  </div>
+</template>
+
+<script lang="ts">
+import {Component, Mixins, PropSync} from "vue-property-decorator";
+import StringField from "@/components/Fields/StringField.vue";
+import ValidationMixin from "@/mixins/ValidationMixin.vue";
+import {WasteType} from "@/enums/Enums";
+
+@Component({
+  components: {StringField}
+})
+export default class AssenizatorPurchase extends Mixins(ValidationMixin) {
+  @PropSync('wasteType') wasteTypeSynced!: number;
+  @PropSync('pitVolume') pitVolumeSynced!: number;
+  @PropSync('distanceFromDriveway') distanceFromDrivewaySynced!: number;
+
+  items = [
+    {
+      id: WasteType.cessPool,
+      name: 'Выгребная яма'
+    },
+    {
+      id: WasteType.sewageCarWashes,
+      name: 'Уличный туалет'
+    },
+    {
+      id: WasteType.outdoorToilet,
+      name: 'Cточные воды автомоек'
+    },
+    {
+      id: WasteType.other,
+      name: 'Другое (Указать в комментарии)'
+    }
+  ]
+}
+</script>
+<style scoped lang="scss">
+
+</style>

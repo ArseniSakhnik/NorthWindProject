@@ -12,7 +12,7 @@
         <v-col v-if="isComputer"/>
         <v-col>
           <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
-          <contract-opener
+          <purchase-opener
               :service-type="slideItems[currentSlide].id"
               style="display: inline-block"
           />
@@ -34,13 +34,13 @@ import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import TransparentButton from "@/components/Buttons/TransparentButton.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
-import ContractOpener from "@/components/SystemComponents/ContractOpener.vue";
+import PurchaseOpener from "@/components/SystemComponents/PurchaseOpener.vue";
 import {ServiceTypeEnum} from "@/enums/Enums";
 
 
 type Slide = { id: ServiceTypeEnum, title: string; image: string }
 @Component({
-  components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton, ContractOpener}
+  components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton, PurchaseOpener}
 })
 export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMixin) {
   @Prop({type: Boolean}) isSecondSectionOpened!: boolean;

@@ -9,7 +9,7 @@
         :rules="rules"
         :suffix="suffix"
         :type="fieldType"
-        :value="valueSync"
+        :value="typedValue"
         dense
         outlined
         @input="valueChangeHandler"
@@ -25,7 +25,7 @@ export default class StringField extends Vue {
   @Ref('formRef') formRef!: any;
 
   @ModelSync('value', 'change')
-  valueSync!: string;
+  valueSync!: string | number;
 
   @Prop({type: String, required: false, default: null})
   mask!: string | null;
@@ -45,9 +45,26 @@ export default class StringField extends Vue {
   isDisabled!: boolean;
   @Prop({type: String, required: false, default: () => 'text'})
   fieldType!: string;
+  @Prop({type: Boolean, required: false, default: () => false})
+  isNumber!: boolean;
+
+
+  get typedValue() {
+    if (this.isNumber) {
+      return String(this.valueSync);
+    }
+    return this.valueSync;
+  }
+
+  set typedValue(value: string | number) {
+    if (this.isNumber) {
+      this.valueSync = Number(value);
+    }
+    this.valueSync = value;
+  }
 
   valueChangeHandler(value: string) {
-    this.valueSync = value;
+    this.typedValue = value;
   }
 
   validate(): boolean {

@@ -19,3 +19,13 @@ export enum ServiceTypeEnum {
     KGO = 2,
     WaterCleaning = 3
 }
+
+export enum WasteType {
+    //выгребная яма
+    cessPool = 1,
+    //уличный туалет
+    outdoorToilet = 2,
+    //сточные воды автомоек
+    sewageCarWashes = 3,
+    other = 4
+}

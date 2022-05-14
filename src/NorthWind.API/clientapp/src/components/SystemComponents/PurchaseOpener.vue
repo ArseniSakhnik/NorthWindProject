@@ -7,29 +7,22 @@
     />
     <purchase-dialog
         :is-active.sync="isDialogActive"
-        :is-user-authenticated="isUserAuthenticated"
+        :service-type="serviceType"
     />
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Prop, PropSync, Ref, Vue, Watch} from "vue-property-decorator";
+import {Component, Prop, Ref, Vue} from "vue-property-decorator";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import {ServiceTypeEnum} from "@/enums/Enums";
-import {namespace} from "vuex-class";
 import PurchaseDialog from "@/components/PurchaseDialog.vue";
 
-const User = namespace('CurrentUserStore')
 
 @Component({components: {OrangeButton, PurchaseDialog}})
-export default class ContractOpener extends Vue {
+export default class PurchaseOpener extends Vue {
   @Ref('dialogRef') dialogRef!: any;
   @Prop() serviceType!: ServiceTypeEnum;
-  @User.State('userId') userId!: number;
-
-  get isUserAuthenticated(): boolean {
-    return this.userId !== 0;
-  }
 
   isDialogActive: boolean = false;
 

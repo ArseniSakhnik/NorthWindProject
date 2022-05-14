@@ -5,6 +5,7 @@
         persistent
         width="500"
         @click:outside="toggleRegisterWindow(false)"
+        scrollable
     >
       <v-card>
         <v-card-title>
