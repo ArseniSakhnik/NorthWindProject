@@ -7,6 +7,7 @@
           sm="4"
       >
         <v-select
+            ref="1"
             :items="items"
             item-text="name"
             item-value="id"
@@ -21,9 +22,8 @@
           sm="4"
       >
         <string-field
-            ref="1"
+            ref="2"
             v-model="pitVolumeSynced"
-            :rules="[isStringNotEmpty]"
             label="Примерный объем выгребной ямы*"
             mask="####"
             prefix="м³"
@@ -35,12 +35,11 @@
           sm="4"
       >
         <string-field
-            ref="1"
+            ref="3"
             v-model="distanceFromDrivewaySynced"
-            :rules="[isStringNotEmpty]"
             label="Расстояние от подъездных путей*"
             mask="####"
-            prefix="м³"
+            prefix="м"
             :is-number="true"
         />
       </v-col>
@@ -49,15 +48,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins, PropSync} from "vue-property-decorator";
+import {Component, Mixins, PropSync, Vue} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
-import ValidationMixin from "@/mixins/ValidationMixin.vue";
 import {WasteType} from "@/enums/Enums";
 
 @Component({
   components: {StringField}
 })
-export default class AssenizatorPurchase extends Mixins(ValidationMixin) {
+export default class AssenizatorPurchase extends Vue {
   @PropSync('wasteType') wasteTypeSynced!: number;
   @PropSync('pitVolume') pitVolumeSynced!: number;
   @PropSync('distanceFromDriveway') distanceFromDrivewaySynced!: number;

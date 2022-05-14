@@ -18,14 +18,11 @@ export default class YandexMap extends Vue {
   @Ref('map')
   map!: any
 
-  @Prop({type: Function, required: true})
-  calculateFunction!: (routeLength: number) => number;
-
-  @PropSync('priceNumber')
-  priceNumberSynced!: number;
-
   @PropSync('territoryAddress')
   territoryAddressSynced!: string;
+
+  @PropSync('cityDistance', {required: false}) cityDistanceSynced!: number;
+  @PropSync('boundDistance', {required: false}) boundDistanceSynced!: number;
 
   isMapLoaded: boolean = false
 
@@ -127,11 +124,9 @@ export default class YandexMap extends Vue {
             const activeRoute = route.getActiveRoute();
 
             if (activeRoute) {
-
               const length = route.getActiveRoute().properties.get('distance');
               const geoInfo = route.getActiveRoute().properties.getAll();
               const coords = geoInfo.rawProperties.boundedBy[1];
-              const price = this.calculate(Math.round(length.value / 1000));
 
               const edgeAndSegments = [];
 
@@ -148,8 +143,13 @@ export default class YandexMap extends Vue {
               const citySegments = routeSegments.searchInside(polygon);
               const boundSegments = routeSegments.remove(citySegments);
 
-              const cityDistance = this.getSegmentDuration(citySegments._objects)
-              const boundDistance = this.getSegmentDuration(boundSegments._objects);
+              this.cityDistanceSynced = this.getSegmentDuration(citySegments._objects)
+              this.boundDistanceSynced = this.getSegmentDuration(boundSegments._objects);
+
+
+              const placeInput = this.map.querySelector('*[placeholder="Куда"]');
+
+              this.territoryAddressSynced = `Республика Крым, Россия, Симферополь, ${placeInput.value}`;
             }
           })
         })
@@ -180,13 +180,6 @@ export default class YandexMap extends Vue {
     }
 
     return duration;
-  }
-
-  private calculate(routeLength: number) {
-    // return (Math.max(routeLength) * this.DELIVERY_TARIFF, this.MINIMUM_COST);
-    const price = this.calculateFunction(routeLength);
-    this.priceNumberSynced = price;
-    return price;
   }
 }
 </script>

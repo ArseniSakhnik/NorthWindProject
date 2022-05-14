@@ -4,6 +4,7 @@
         v-mask="mask"
         :counter="counter"
         :disabled="isDisabled"
+        :readonly="isReadonly"
         :label="label"
         :prefix="prefix"
         :rules="rules"
@@ -47,6 +48,8 @@ export default class StringField extends Vue {
   fieldType!: string;
   @Prop({type: Boolean, required: false, default: () => false})
   isNumber!: boolean;
+  @Prop({type: Boolean, required: false, default: () => false})
+  isReadonly!: boolean;
 
 
   get typedValue() {
