@@ -11,6 +11,7 @@ namespace NorthWind.Core.Entities.User
         public string MiddleName { get; set; }
         public List<Contract> Contracts { get; set; } = new();
 
+        public List<Purchase.Purchase> Purchases { get; set; } = new();
 
         public string FullName => $"{Surname} {Name} {MiddleName}";
 

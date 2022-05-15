@@ -13,6 +13,7 @@ using NorthWind.Core.Entities.Contracts.BaseContract;
 using NorthWind.Core.Entities.Contracts.KgoYurContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckYurContract;
+using NorthWind.Core.Entities.Purchase;
 using NorthWind.Core.Entities.Services;
 using NorthWind.Core.Entities.Services.Files;
 using NorthWind.Core.Entities.Test;
@@ -174,6 +175,14 @@ namespace NorthWindProject.Application.Common.Access
 
         public DbSet<ServiceFile> ServiceFiles { get; set; }
         public DbSet<Test> Tests { get; set; }
+
+        #endregion
+
+        #region Purchases
+
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<AssenizatorPurchase> AssenizatorPurchases { get; set; }
+        public DbSet<KGOPurchase> KgoPurchases { get; set; }
 
         #endregion
     }

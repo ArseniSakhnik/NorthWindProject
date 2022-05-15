@@ -1,4 +1,4 @@
-﻿namespace NorthWind.API.Configuration
+﻿namespace NorthWindProject.Application.ConfigurationModels
 {
     public class SecretSettings
     {

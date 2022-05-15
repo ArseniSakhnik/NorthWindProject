@@ -6,6 +6,7 @@
         @action="openPurchase"
     />
     <purchase-dialog
+        :key="updateToken"
         :is-active.sync="isDialogActive"
         :service-type="serviceType"
     />
@@ -13,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Ref, Vue} from "vue-property-decorator";
+import {Component, Prop, Ref, Vue, Watch} from "vue-property-decorator";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import {ServiceTypeEnum} from "@/enums/Enums";
 import PurchaseDialog from "@/components/PurchaseDialog.vue";
@@ -23,11 +24,19 @@ import PurchaseDialog from "@/components/PurchaseDialog.vue";
 export default class PurchaseOpener extends Vue {
   @Ref('dialogRef') dialogRef!: any;
   @Prop() serviceType!: ServiceTypeEnum;
-
+  updateToken: number = 1;
+  
   isDialogActive: boolean = false;
 
   openPurchase() {
     this.isDialogActive = true;
+  }
+  
+  @Watch('isDialogActive')
+  isDialogActiveChangeHandler() {
+    if (!this.isDialogActive) {
+      this.updateToken++;
+    }
   }
 }
 </script>

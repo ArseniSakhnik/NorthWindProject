@@ -2,11 +2,11 @@
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using NorthWind.API.Configuration;
 using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 using NorthWindProject.Application.Common.Models;
+using NorthWindProject.Application.ConfigurationModels;
 
-namespace NorthWind.API.Services
+namespace NorthWindProject.Application.Services
 {
     public class EmailSenderService : IEmailSenderService
     {

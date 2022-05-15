@@ -29,9 +29,12 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         private readonly IEmailSenderService _emailSenderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
-
-        public RegisterCommandHandler(UserManager<ApplicationUser> userManager, IEmailSenderService emailSenderService,
-            SignInManager<ApplicationUser> signInManager, IHttpContextAccessor httpContextAccessor)
+        
+        public RegisterCommandHandler(
+            UserManager<ApplicationUser> userManager, 
+            IEmailSenderService emailSenderService,
+            SignInManager<ApplicationUser> signInManager, 
+            IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _emailSenderService = emailSenderService;

@@ -19,6 +19,14 @@
             label="Предварительная стоимость оказания услуги"
             prefix="Руб."
         />
+        <v-textarea
+            v-model="commentSync"
+            label="Комментарий"
+            counter
+            maxlength="120"
+            single-line
+            outlined
+        />
       </v-col>
       <v-col
           cols="12"
@@ -54,6 +62,7 @@ import StringField from "@/components/Fields/StringField.vue";
 export default class CalculateKGO extends Vue {
   @Prop() plannedWasteVolume!: number;
   @PropSync('place') placeSynced!: string;
+  @PropSync('comment') commentSync!: string;
 
   openedExpansionPanel: any[] = []
 

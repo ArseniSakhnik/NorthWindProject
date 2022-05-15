@@ -1,7 +1,7 @@
 ﻿using Elskom.Generic.Libs;
 using Microsoft.Extensions.Options;
-using NorthWind.API.Configuration;
 using NorthWind.Core.Interfaces;
+using NorthWindProject.Application.ConfigurationModels;
 
 namespace NorthWind.API.Services
 {

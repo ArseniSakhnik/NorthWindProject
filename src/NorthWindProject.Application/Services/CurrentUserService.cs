@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using NorthWind.Core.Interfaces;
 
-namespace NorthWind.API.Services
+namespace NorthWindProject.Application.Services
 {
     public class CurrentUserService : ICurrentUserService
     {
