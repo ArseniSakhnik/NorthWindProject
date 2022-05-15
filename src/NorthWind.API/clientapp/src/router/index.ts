@@ -40,7 +40,7 @@ const routes: Array<RouteConfig> = [
         name: 'UserInfo',
         component: UserInfo,
         meta: {
-            layout: 'User'
+            layout: 'Main'
         }
     },
     {

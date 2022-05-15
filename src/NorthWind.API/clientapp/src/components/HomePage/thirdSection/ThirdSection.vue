@@ -1,5 +1,5 @@
 ﻿<template>
-  <div>
+  <div style="background-color: #f2f6ff">
     <v-container style="margin-top: 250px; margin-bottom: 170px">
       <v-row>
         <v-col
