@@ -12,7 +12,11 @@
         :headers="headers"
         :items="desserts"
         :search="search"
+        @click:row="openPurchase"
     >
+      <template v-slot:item.controls="props">
+        <v-icon @click="openPurchase(props.item)">mdi-eye</v-icon>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -29,11 +33,16 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
   headers = [
     {
       text: 'Услуга',
-      value: 'serviceName'
+      value: 'serviceName',
     },
     {
       text: 'Место оказания услуги',
       value: 'place'
+    },
+    {
+      text: '',
+      value: 'controls',
+      sortable: false
     }
   ]
 
@@ -48,6 +57,10 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
             serviceName: getServiceName(item.serviceTypeId)
           }))
         })
+  }
+
+  openPurchase(e: any) {
+    
   }
 
 
