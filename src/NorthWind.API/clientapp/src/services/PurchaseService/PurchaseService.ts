@@ -30,4 +30,8 @@ export default class PurchaseService extends HttpService {
     private CreateKDM(kdmPurchase: KDMDto): Promise<AxiosResponse<string>> {
         return this._post('kdm', kdmPurchase);
     }
+    
+    public GetPurchases() : Promise<AxiosResponse> {
+        return this._get('')
+    }
 }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using NorthWind.Core.Entities.Purchase;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Services;
 
@@ -39,7 +40,8 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreateKGO
                 Place = request.Place,
                 Comment = request.Comment,
                 PlannedWasteVolume = request.PlannedWasteVolume,
-                DistanceFromDriveway = request.DistanceFromDriveway
+                DistanceFromDriveway = request.DistanceFromDriveway,
+                ServiceTypeId = ServiceViewEnum.КГО
             };
 
             await _purchaseService.CreatePurchase(_context, purchase, cancellationToken);
