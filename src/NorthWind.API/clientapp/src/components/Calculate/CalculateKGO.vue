@@ -7,14 +7,13 @@
           :sm="isView ? 12 : 6"
       >
         <string-field
-            v-if="!isView"
             ref="1"
             v-model="placeSynced"
             label="Место оказания услуги*"
             :is-readonly="isMapOpened"
         />
         <string-field
-            v-if="isView"
+            v-if="!isView"
             v-model="price"
             :is-number="true"
             :is-readonly="true"
