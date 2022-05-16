@@ -2,7 +2,7 @@
   <v-navigation-drawer
       permanent
       expand-on-hover
-      style="height: 100%"
+      style="background-color: #f2f6ff; max-height: 50vh;"
   >
     <v-list
         nav
