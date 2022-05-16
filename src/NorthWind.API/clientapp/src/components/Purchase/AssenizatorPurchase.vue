@@ -63,11 +63,6 @@ export default class AssenizatorPurchase extends Vue {
   @PropSync('wasteType') wasteTypeSynced!: number;
   @PropSync('pitVolume') pitVolumeSynced!: number;
   @PropSync('distanceFromDriveway') distanceFromDrivewaySynced!: number;
-  
-  mounted() {
-    console.log(this.pitVolumeSynced)
-    console.log(this.wasteTypeSynced)
-  }
 
   items = [
     {

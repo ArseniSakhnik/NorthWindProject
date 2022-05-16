@@ -2,7 +2,6 @@
   <v-card
       outlined
       tile
-      :key="updateToken"
   >
     <v-card-text>
       <personal-information-info
@@ -15,12 +14,14 @@
           :is-view="isView"
       />
       <assenizator-purchase
+          ref="purchase"
           :waste-type.sync="localDataInit.wasteType"
           :pit-volume.sync="localDataInit.pitVolume"
           :distance-from-driveway.sync="localDataInit.distanceFromDriveway"
           :is-view="isView"
       />
       <calculate-assenizator
+          ref="calculate"
           :distance-from-driveway="localDataInit.distanceFromDriveway"
           :place.sync="localDataInit.place"
           :comment.sync="localDataInit.comment"
@@ -35,14 +36,14 @@
       </div>
       <div v-else>
         <v-btn @click="cancelRedact">Отмена</v-btn>
-        <v-btn class="orange darken-3" style="color: white">Сохранить</v-btn>
+        <v-btn class="orange darken-3" style="color: white" @click="save(localData.serviceTypeId)">Сохранить</v-btn>
       </div>
     </v-card-actions>
   </v-card>
 </template>
 
 <script lang="ts">
-import {Vue, Component, PropSync, Mixins} from "vue-property-decorator";
+import {Vue, Component, PropSync, Mixins, Watch} from "vue-property-decorator";
 import {AssenizatorPurchaseDto} from "@/services/PurchaseService/Requests";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
 import AssenizatorPurchase from "@/components/Purchase/AssenizatorPurchase.vue";

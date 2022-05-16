@@ -10,7 +10,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.UpdateAssenizat
 {
     public class UpdateAssenizatorCommand : BasePurchaseCommand, IRequest
     {
-        public int PurchaseId { get; set; }
+        public int Id { get; set; }
 
         public WasteType WasteType { get; set; }
 
@@ -32,7 +32,8 @@ namespace NorthWindProject.Application.Features.Purchase.Command.UpdateAssenizat
 
         public async Task<Unit> Handle(UpdateAssenizatorCommand request, CancellationToken cancellationToken)
         {
-            await _purchaseService.UpdatePurchase(_context, request.PurchaseId, request, cancellationToken);
+            await _purchaseService.UpdatePurchase(_context, request.Id, request, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
     }

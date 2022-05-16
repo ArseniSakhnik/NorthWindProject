@@ -2,7 +2,6 @@
   <v-card
       outlined
       tile
-      :key="updateToken"
   >
     <v-card-text>
       <personal-information-info
@@ -15,10 +14,12 @@
           :is-view="isView"
       />
       <k-g-o-purchase
+          ref="purchase"
           :planned-waste-volume="localDataInit.plannedWasteVolume"
           :is-view="isView"
       />
       <calculate-k-g-o
+          ref="calculate"
           :place.sync="localDataInit.place"
           :planned-waste-volume="localDataInit.plannedWasteVolume"
           :comment.sync="localDataInit.comment"
@@ -33,7 +34,7 @@
       </div>
       <div v-else>
         <v-btn @click="cancelRedact">Отмена</v-btn>
-        <v-btn class="orange darken-3" style="color: white">Сохранить</v-btn>
+        <v-btn class="orange darken-3" style="color: white" @click="save(localData.serviceTypeId)">Сохранить</v-btn>
       </div>
     </v-card-actions>
   </v-card>

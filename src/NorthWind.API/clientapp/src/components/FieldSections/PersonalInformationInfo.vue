@@ -95,7 +95,7 @@ const User = namespace('CurrentUserStore')
 @Component({components: {StringField}})
 export default class PersonalInformationInfo extends Mixins(ValidationMixin) {
   @Prop({required: false, default: () => false}) isView!: boolean;
-  
+
   @PropSync('email') emailSynced!: string;
   @PropSync('phoneNumber') phoneNumberSynced!: string;
   @PropSync('name') nameSynced!: string;

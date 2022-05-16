@@ -77,7 +77,6 @@ export default class CalculateKGO extends Vue {
   boundDistance: number = 0;
 
   get price() {
-    console.log(this.plannedWasteVolume)
     const basePrice = this.plannedWasteVolume > 8 ? 18000 : 6000;
     const boundDistanceMetrs = Math.floor(this.boundDistance / 1000);
     return basePrice + boundDistanceMetrs * 2 * 60;

@@ -49,7 +49,6 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
   desserts = []
 
   async mounted() {
-    console.log(1)
     await this.purchaseService.GetPurchases()
         .then(response => {
           this.desserts = response.data.map((item: any) => ({

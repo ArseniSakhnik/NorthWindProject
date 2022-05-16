@@ -31,6 +31,29 @@ export default class PurchaseService extends HttpService {
         return this._post('kdm', kdmPurchase);
     }
 
+    public UpdatePurchase(serviceTypeId: ServiceTypeEnum, data: AssenizatorPurchaseDto | KGODto | KDMDto): Promise<AxiosResponse<string>> {
+        switch (serviceTypeId) {
+            case ServiceTypeEnum.Assenizator:
+                return this.UpdateAssenizator(data as AssenizatorPurchaseDto);
+            case ServiceTypeEnum.KGO:
+                return this.UpdateKGO(data as KGODto);
+            case ServiceTypeEnum.WaterCleaning:
+                return this.updateKDM(data as KDMDto);
+        }
+    }
+
+    private UpdateAssenizator(data: AssenizatorPurchaseDto): Promise<AxiosResponse<string>> {
+        return this._put('assenizator', data);
+    }
+
+    private UpdateKGO(data: KGODto): Promise<AxiosResponse<string>> {
+        return this._put('kgo', data);
+    }
+
+    private updateKDM(data: KDMDto): Promise<AxiosResponse<string>> {
+        return this._put('kdm', data);
+    }
+
     public GetPurchases(): Promise<AxiosResponse> {
         return this._get('')
     }

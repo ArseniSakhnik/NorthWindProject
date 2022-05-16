@@ -9,7 +9,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.UpdateKGO
 {
     public class UpdateKGOCommand : BasePurchaseCommand, IRequest
     {
-        public int PurchaseId { get; set; }
+        public int Id { get; set; }
         public int PlannedWasteVolume { get; set; }
         public int DistanceFromDriveway { get; set; }
     }
@@ -27,7 +27,8 @@ namespace NorthWindProject.Application.Features.Purchase.Command.UpdateKGO
 
         public async Task<Unit> Handle(UpdateKGOCommand request, CancellationToken cancellationToken)
         {
-            await _purchaseService.UpdatePurchase(_context, request.PurchaseId, request, cancellationToken);
+            await _purchaseService.UpdatePurchase(_context, request.Id, request, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
     }
