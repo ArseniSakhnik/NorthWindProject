@@ -1,29 +1,37 @@
 <template>
-  <section
-      v-if="isDataLoad"
-      :style="`background-image: url(${slideImage})`"
-      class="service-list flex-container-slides"
-  >
-    <div class="arrow-container">
-      <div class="arrow left" @click="previousSlide"/>
-    </div>
-    <div>
-      <v-row>
-        <v-col v-if="isComputer"/>
-        <v-col>
-          <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
-          <purchase-opener
-              :service-type="slideItems[currentSlide].id"
-              style="display: inline-block"
-          />
-          <transparent-button/>
-        </v-col>
-      </v-row>
-    </div>
-    <div class="arrow-container">
-      <div class="arrow right" @click="nextSlide"/>
-    </div>
-  </section>
+  <div>
+    <section
+        v-if="isDataLoad"
+        :style="`background-image: url(${slideImage})`"
+        class="service-list flex-container-slides"
+    >
+      <div class="arrow-container">
+        <div class="arrow left" @click="previousSlide"/>
+      </div>
+      <div>
+        <v-row>
+          <v-col v-if="isComputer"/>
+          <v-col>
+            <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
+            <purchase-opener
+                :service-type="slideItems[currentSlide].id"
+                style="display: inline-block"
+            />
+            <transparent-button/>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="arrow-container">
+        <div class="arrow right" @click="nextSlide"/>
+      </div>
+    </section>
+    <v-skeleton-loader
+        v-else
+        class="mx-auto"
+        height="100vh"
+        type="card"
+    />
+  </div>
 </template>
 
 <script lang="ts">
