@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NorthWindProject.Application.Features.Purchase.Command.CreateAssenizatorPurchase;
 using NorthWindProject.Application.Features.Purchase.Command.CreateKGO;
+using NorthWindProject.Application.Features.Purchase.Command.RemovePurchase;
 using NorthWindProject.Application.Features.Purchase.Command.UpdateAssenizator;
 using NorthWindProject.Application.Features.Purchase.Command.UpdateKGO;
 using NorthWindProject.Application.Features.Purchase.Query.GetPurchase;
@@ -40,5 +41,12 @@ namespace NorthWind.API.Controllers
         [HttpPut("kgo")]
         public async Task<IActionResult> UpdateKGO(UpdateKGOCommand command, CancellationToken cancellationToken)
             => Ok(await Mediator.Send(command, cancellationToken));
+
+        [HttpDelete("{purchaseId:int}")]
+        public async Task<IActionResult> RemovePurchase(int purchaseId, CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(new RemovePurchaseCommand
+            {
+                PurchaseId = purchaseId
+            }, cancellationToken));
     }
 }

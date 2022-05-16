@@ -12,10 +12,12 @@
         :headers="headers"
         :items="desserts"
         :search="search"
-        @click:row="openPurchase"
     >
-      <template v-slot:item.controls="props">
+      <template v-slot:item.open="props">
         <v-icon @click="openPurchase(props.item)">mdi-eye</v-icon>
+      </template>
+      <template v-slot:item.delete="props">
+        <v-icon @click="removePurchase(props.item)">mdi-trash-can-outline</v-icon>
       </template>
     </v-data-table>
   </div>
@@ -41,7 +43,12 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
     },
     {
       text: '',
-      value: 'controls',
+      value: 'open',
+      sortable: false
+    },
+    {
+      text: '',
+      value: 'delete',
       sortable: false
     }
   ]
@@ -49,6 +56,10 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
   desserts = []
 
   async mounted() {
+    await this.getPurchases();
+  }
+
+  async getPurchases() {
     await this.purchaseService.GetPurchases()
         .then(response => {
           this.desserts = response.data.map((item: any) => ({
@@ -60,6 +71,11 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
 
   openPurchase(e: any) {
     this.$router.push(`/purchase-info/${e.id}`);
+  }
+
+  async removePurchase(e: any) {
+    await this.purchaseService.DeletePurchase(e.id);
+    await this.getPurchases();
   }
 
 

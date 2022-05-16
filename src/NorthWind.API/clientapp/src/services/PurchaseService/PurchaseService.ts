@@ -61,4 +61,8 @@ export default class PurchaseService extends HttpService {
     public GetPurchase(purchaseId: number): Promise<AxiosResponse<AssenizatorPurchaseDto | KGODto | KDMDto>> {
         return this._get(`${purchaseId}`);
     }
+    
+    public DeletePurchase(purchaseId: number) {
+        return this._delete(`${purchaseId}`);
+    }
 }
