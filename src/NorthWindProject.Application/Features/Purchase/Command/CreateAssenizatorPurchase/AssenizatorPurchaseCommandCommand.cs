@@ -9,7 +9,7 @@ using NorthWindProject.Application.Services.PurchaseService;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreateAssenizatorPurchase
 {
-    public class CreateAssenizatorPurchaseCommandCommand : BaseCreatePurchase.BaseCreatePurchaseCommand, IRequest
+    public class AssenizatorPurchaseCommandCommand : BaseCreatePurchase.BasePurchaseCommand, IRequest
     {
         public WasteType WasteType { get; set; }
 
@@ -18,7 +18,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreateAssenizat
         public int DistanceFromDriveway { get; set; }
     }
 
-    public class CreateAssenizatorPurchaseCommandHandler : IRequestHandler<CreateAssenizatorPurchaseCommandCommand>
+    public class CreateAssenizatorPurchaseCommandHandler : IRequestHandler<AssenizatorPurchaseCommandCommand>
     {
         private readonly PurchaseService _purchaseService;
         private readonly AppDbContext _context;
@@ -29,7 +29,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreateAssenizat
             _context = context;
         }
 
-        public async Task<Unit> Handle(CreateAssenizatorPurchaseCommandCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(AssenizatorPurchaseCommandCommand request, CancellationToken cancellationToken)
         {
             var purchase = new AssenizatorPurchase
             {

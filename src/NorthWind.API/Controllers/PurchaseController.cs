@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NorthWindProject.Application.Features.Purchase.Command.CreateAssenizatorPurchase;
 using NorthWindProject.Application.Features.Purchase.Command.CreateKGO;
+using NorthWindProject.Application.Features.Purchase.Command.UpdateAssenizator;
+using NorthWindProject.Application.Features.Purchase.Command.UpdateKGO;
 using NorthWindProject.Application.Features.Purchase.Query.GetPurchase;
 using NorthWindProject.Application.Features.Purchase.Query.GetPurchases;
 
@@ -22,12 +24,21 @@ namespace NorthWind.API.Controllers
             }, cancellationToken));
 
         [HttpPost("assenizator")]
-        public async Task<IActionResult> CreateAssenizator(CreateAssenizatorPurchaseCommandCommand commandCommand,
+        public async Task<IActionResult> CreateAssenizator(AssenizatorPurchaseCommandCommand commandCommand,
             CancellationToken cancellationToken)
             => Ok(await Mediator.Send(commandCommand, cancellationToken));
 
         [HttpPost("kgo")]
-        public async Task<IActionResult> CreateKGO(CreateKGOCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateKGO(KgoCommand command, CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(command, cancellationToken));
+
+        [HttpPut("assenizator")]
+        public async Task<IActionResult> UpdateAssenizator(UpdateAssenizatorCommand command,
+            CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(command, cancellationToken));
+
+        [HttpPut("kgo")]
+        public async Task<IActionResult> UpdateKGO(UpdateKGOCommand command, CancellationToken cancellationToken)
             => Ok(await Mediator.Send(command, cancellationToken));
     }
 }

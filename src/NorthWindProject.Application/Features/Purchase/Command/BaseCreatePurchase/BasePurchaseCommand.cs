@@ -1,6 +1,6 @@
 ﻿namespace NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase
 {
-    public class BaseCreatePurchaseCommand
+    public class BasePurchaseCommand
     {
         public string Email { get; set; }
         public string PhoneNumber { get; set; }

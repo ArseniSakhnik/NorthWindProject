@@ -6,6 +6,9 @@ using NorthWind.Core.Entities.Purchase;
 using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
+using NorthWindProject.Application.Features.Purchase.Command.UpdateAssenizator;
+using NorthWindProject.Application.Features.Purchase.Command.UpdateKGO;
 
 namespace NorthWindProject.Application.Services.PurchaseService
 {
@@ -67,6 +70,49 @@ namespace NorthWindProject.Application.Services.PurchaseService
             }
 
             return response;
+        }
+
+        public async Task UpdatePurchase(AppDbContext context,
+            int purchaseId,
+            BasePurchaseCommand data,
+            CancellationToken cancellationToken)
+        {
+            if (data is UpdateAssenizatorCommand assenizatorCommand)
+            {
+                var purchase = await context.AssenizatorPurchases
+                    .Where(purchase => purchase.Id == purchaseId)
+                    .SingleOrDefaultAsync(cancellationToken);
+
+                purchase.Email = data.Email;
+                purchase.PhoneNumber = data.PhoneNumber;
+                purchase.Name = data.Name;
+                purchase.Surname = data.Surname;
+                purchase.MiddleName = data.MiddleName;
+                purchase.Place = data.Place;
+                purchase.Comment = data.Comment;
+
+                purchase.WasteTypeId = assenizatorCommand.WasteType;
+                purchase.PitVolume = assenizatorCommand.PitVolume;
+                purchase.DistanceFromDriveway = assenizatorCommand.DistanceFromDriveway;
+            }
+
+            if (data is UpdateKGOCommand kgoCommand)
+            {
+                var purchase = await context.KgoPurchases
+                    .Where(purchase => purchase.Id == purchaseId)
+                    .SingleOrDefaultAsync(cancellationToken);
+
+                purchase.Email = data.Email;
+                purchase.PhoneNumber = data.PhoneNumber;
+                purchase.Name = data.Name;
+                purchase.Surname = data.Surname;
+                purchase.MiddleName = data.MiddleName;
+                purchase.Place = data.Place;
+                purchase.Comment = data.Comment;
+
+                purchase.PlannedWasteVolume = kgoCommand.PlannedWasteVolume;
+                purchase.DistanceFromDriveway = kgoCommand.PlannedWasteVolume;
+            }
         }
     }
 }

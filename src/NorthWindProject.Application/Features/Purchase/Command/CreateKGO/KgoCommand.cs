@@ -9,7 +9,7 @@ using NorthWindProject.Application.Services.PurchaseService;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreateKGO
 {
-    public class CreateKGOCommand : BaseCreatePurchase.BaseCreatePurchaseCommand, IRequest
+    public class KgoCommand : BaseCreatePurchase.BasePurchaseCommand, IRequest
     {
         //какой объем мусора планируется вывозить 
         public int PlannedWasteVolume { get; set; }
@@ -18,7 +18,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreateKGO
         public int DistanceFromDriveway { get; set; }
     }
 
-    public class CreateKgoCommandHandler : IRequestHandler<CreateKGOCommand>
+    public class CreateKgoCommandHandler : IRequestHandler<KgoCommand>
     {
         private readonly AppDbContext _context;
         private readonly PurchaseService _purchaseService;
@@ -29,7 +29,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreateKGO
             _purchaseService = purchaseService;
         }
 
-        public async Task<Unit> Handle(CreateKGOCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(KgoCommand request, CancellationToken cancellationToken)
         {
             var purchase = new KGOPurchase
             {
