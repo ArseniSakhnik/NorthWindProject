@@ -44,10 +44,6 @@ import CalculateAssenizator from "@/components/Calculate/CalculateAssenizator.vu
 @Component({components: {PersonalInformationInfo, AssenizatorPurchase, CalculateAssenizator}})
 export default class AssenizatorPurchaseView extends Vue {
   @PropSync('localData') localDataSync!: AssenizatorPurchaseDto;
-
-  mounted() {
-    console.log(this.localDataSync)
-  }
 }
 </script>
 <style scoped lang="scss">

@@ -12,6 +12,7 @@
         <v-list-item
             v-for="item in views"
             :key="item.viewId"
+            @click="item.action"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -29,17 +30,19 @@ import {Vue, Component, PropSync} from "vue-property-decorator";
 @Component
 export default class UserSidebar extends Vue {
   @PropSync('currentView') currentViewSynced!: number;
-  
-  views: { viewId: number, icon: string, name: string } [] = [
+
+  views: { viewId: number, icon: string, name: string, action: () => void } [] = [
     {
       viewId: 0,
       icon: 'mdi-file-document-multiple-outline',
-      name: 'Мои заявки'
+      name: 'Мои заявки',
+      action: () => this.$router.push('/user-info')
     },
     {
       viewId: 1,
       icon: 'mdi-check-circle',
-      name: 'Мои контракты'
+      name: 'Мои контракты',
+      action: () => this.$router.push('/user-info')
     }
   ]
 }

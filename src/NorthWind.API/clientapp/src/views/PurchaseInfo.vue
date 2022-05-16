@@ -4,6 +4,10 @@
         v-if="serviceTypeId === 1"
         :local-data="localData"
     />
+    <k-g-o-purchase-view
+        v-else-if="serviceTypeId === 2"
+        :local-data="localData"
+    />
   </v-container>
 </template>
 
@@ -13,8 +17,9 @@ import {AssenizatorPurchaseDto, BasePurchaseDto} from "@/services/PurchaseServic
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {ServiceTypeEnum} from "@/enums/Enums";
 import AssenizatorPurchaseView from "@/components/Purchase/AssenizatorPurchaseView.vue";
+import KGOPurchaseView from "@/components/Purchase/KGOPurchaseView.vue";
 
-@Component({components: {AssenizatorPurchaseView}})
+@Component({components: {KGOPurchaseView, AssenizatorPurchaseView}})
 export default class PurchaseInfo extends Mixins(HttpServiceMixin) {
   isDataLoaded: boolean = false;
   purchaseId: number = 0;
@@ -41,8 +46,6 @@ export default class PurchaseInfo extends Mixins(HttpServiceMixin) {
 
     this.isDataLoaded = true;
     this.serviceTypeId = this.localData.serviceTypeId as ServiceTypeEnum;
-
-    console.log(this.localData);
   }
 }
 </script>

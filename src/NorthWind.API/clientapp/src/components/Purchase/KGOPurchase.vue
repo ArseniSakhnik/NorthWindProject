@@ -13,6 +13,7 @@
             mask="####"
             prefix="м³"
             :is-number="true"
+            :is-readonly="isView"
         />
       </v-col>
       <v-col
@@ -25,11 +26,12 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, PropSync} from "vue-property-decorator";
+import {Vue, Component, PropSync, Prop} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
 
 @Component({components: {StringField}})
 export default class KGOPurchase extends Vue {
+  @Prop() isView!: boolean;
   @PropSync('plannedWasteVolume') plannedWasteVolumeSynced!: number;
 }
 </script>
