@@ -21,6 +21,7 @@ using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Features.Contract.Services.ContractService;
 using NorthWindProject.Application.Middlewares;
 using NorthWindProject.Application.Services;
+using NorthWindProject.Application.Services.PurchaseService;
 
 namespace NorthWind.API
 {

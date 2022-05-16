@@ -4,15 +4,16 @@
     <v-row>
       <v-col
           cols="12"
-          sm="6"
+          :sm="isView ? 12 : 6"
       >
         <string-field
             ref="1"
             v-model="placeSynced"
             label="Место оказания услуги*"
-            :is-readonly="isMapOpened"
+            :is-readonly="isMapOpened || isView"
         />
         <string-field
+            v-if="!isView"
             v-model="price"
             :is-number="true"
             :is-readonly="true"
@@ -26,11 +27,13 @@
             maxlength="120"
             single-line
             outlined
+            :readonly="isView"
         />
       </v-col>
       <v-col
           cols="12"
           sm="6"
+          v-if="!isView"
       >
         <v-expansion-panels
             v-model="openedExpansionPanel"
@@ -60,6 +63,7 @@ import StringField from "@/components/Fields/StringField.vue";
 
 @Component({components: {YandexMap, StringField}})
 export default class CalculateAssenizator extends Vue {
+  @Prop({required: false, default: () => false}) isView!: boolean;
   @Prop() distanceFromDriveway!: number;
   @PropSync('place') placeSynced!: string;
   @PropSync('comment') commentSync!: string;

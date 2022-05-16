@@ -1,4 +1,4 @@
-﻿import {WasteType} from "@/enums/Enums";
+﻿import {ServiceTypeEnum, WasteType} from "@/enums/Enums";
 
 export interface BasePurchaseDto {
     email: string
@@ -8,7 +8,8 @@ export interface BasePurchaseDto {
     middleName: string
     //место оказания услуг
     place: string
-    comment: string
+    comment: string,
+    serviceTypeId: ServiceTypeEnum | undefined;
 }
 
 export interface AssenizatorPurchaseDto extends BasePurchaseDto {
@@ -28,5 +29,5 @@ export interface KGODto extends BasePurchaseDto {
 }
 
 export interface KDMDto extends BasePurchaseDto {
-    
+
 }

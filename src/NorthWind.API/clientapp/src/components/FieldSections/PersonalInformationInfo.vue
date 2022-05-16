@@ -11,6 +11,7 @@
             v-model="surnameSynced"
             :rules="[isStringNotEmpty]"
             label="Фамилия*"
+            :is-readonly="this.isView"
         />
       </v-col>
       <v-col
@@ -22,6 +23,7 @@
             v-model="nameSynced"
             :rules="[isStringNotEmpty]"
             label="Имя*"
+            :is-readonly="this.isView"
         />
       </v-col>
       <v-col
@@ -33,6 +35,7 @@
             v-model="middleNameSynced"
             :rules="[isStringNotEmpty]"
             label="Отчество*"
+            :is-readonly="this.isView"
         />
       </v-col>
     </v-row>
@@ -48,6 +51,7 @@
             :rules="[isStringNotEmpty]"
             label="Номер телефона*"
             prefix="+7"
+            :is-readonly="this.isView"
         />
       </v-col>
       <v-col
@@ -59,6 +63,7 @@
             v-model="emailSynced"
             :rules="[emailRules, isStringNotEmpty]"
             label="Email*"
+            :is-readonly="this.isView"
         />
       </v-col>
     </v-row>
@@ -72,6 +77,7 @@
             v-model="phoneNumberOrFaxSynced"
             :rules="[isStringNotEmpty]"
             label="Номер телефона или факс*"
+            :is-readonly="this.isView"
         />
       </v-col>
     </v-row>
@@ -79,7 +85,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins, PropSync} from "vue-property-decorator";
+import {Component, Mixins, Prop, PropSync} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
 import {namespace} from "vuex-class";
 import ValidationMixin from "@/mixins/ValidationMixin.vue";
@@ -88,6 +94,8 @@ const User = namespace('CurrentUserStore')
 
 @Component({components: {StringField}})
 export default class PersonalInformationInfo extends Mixins(ValidationMixin) {
+  @Prop({required: false, default: () => false}) isView!: boolean;
+  
   @PropSync('email') emailSynced!: string;
   @PropSync('phoneNumber') phoneNumberSynced!: string;
   @PropSync('name') nameSynced!: string;
@@ -106,6 +114,8 @@ export default class PersonalInformationInfo extends Mixins(ValidationMixin) {
   }
 
   initialData() {
+    if (this.isView) return;
+    
     this.emailSynced = this.emailUser;
     this.phoneNumberSynced = this.phoneNumberUser;
     this.nameSynced = this.nameUser;

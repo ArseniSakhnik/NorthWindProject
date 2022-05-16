@@ -139,6 +139,7 @@ export default class PurchaseDialog extends Mixins(DialogWindowMixin, Validation
     place: "",
     surname: "",
     comment: "",
+    serviceTypeId: undefined
   }
 
   async nextStep() {
@@ -196,9 +197,12 @@ export default class PurchaseDialog extends Mixins(DialogWindowMixin, Validation
     return this.currentStep === 3 ? 'Отправить' : 'Далее';
   }
 
-  @Watch('serviceType')
-  serviceTypeChangeHandler(value: ServiceTypeEnum) {
-    switch (value) {
+  created() {
+    this.serviceTypeChangeHandler();
+  }
+
+  serviceTypeChangeHandler() {
+    switch (this.serviceType) {
       case ServiceTypeEnum.Assenizator:
         this.localData = {
           ...this.localData,

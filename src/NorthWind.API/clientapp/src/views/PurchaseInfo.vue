@@ -1,17 +1,49 @@
 ﻿<template>
-  <div>
-    <div class="background-image">
-      <h2> Документы </h2>
-    </div>
-  </div>
+  <v-container v-if="isDataLoaded">
+    <assenizator-purchase-view
+        v-if="serviceTypeId === 1"
+        :local-data="localData"
+    />
+  </v-container>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Vue, Component, Mixins} from "vue-property-decorator";
+import {AssenizatorPurchaseDto, BasePurchaseDto} from "@/services/PurchaseService/Requests";
+import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
+import {ServiceTypeEnum} from "@/enums/Enums";
+import AssenizatorPurchaseView from "@/components/Purchase/AssenizatorPurchaseView.vue";
 
-@Component
-export default class PurchaseInfo extends Vue {
-  
+@Component({components: {AssenizatorPurchaseView}})
+export default class PurchaseInfo extends Mixins(HttpServiceMixin) {
+  isDataLoaded: boolean = false;
+  purchaseId: number = 0;
+  serviceTypeId!: ServiceTypeEnum;
+
+  localData: BasePurchaseDto = {
+    comment: "",
+    email: "",
+    middleName: "",
+    name: "",
+    phoneNumber: "",
+    place: "",
+    serviceTypeId: undefined,
+    surname: ""
+  }
+
+  created() {
+    this.purchaseId = Number(this.$route.params.id);
+  }
+
+  async mounted() {
+    this.localData = await this.purchaseService.GetPurchase(this.purchaseId)
+        .then(response => response.data);
+
+    this.isDataLoaded = true;
+    this.serviceTypeId = this.localData.serviceTypeId as ServiceTypeEnum;
+
+    console.log(this.localData);
+  }
 }
 </script>
 <style scoped lang="scss">

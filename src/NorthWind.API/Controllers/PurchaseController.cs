@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NorthWindProject.Application.Features.Purchase.Command.CreateAssenizatorPurchase;
 using NorthWindProject.Application.Features.Purchase.Command.CreateKGO;
+using NorthWindProject.Application.Features.Purchase.Query.GetPurchase;
 using NorthWindProject.Application.Features.Purchase.Query.GetPurchases;
 
 namespace NorthWind.API.Controllers
@@ -10,8 +11,15 @@ namespace NorthWind.API.Controllers
     public class PurchaseController : ApiController
     {
         [HttpGet]
-        public async Task<IActionResult> GetPurchase(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetPurchases(CancellationToken cancellationToken)
             => Ok(await Mediator.Send(new GetPurchasesQuery(), cancellationToken));
+
+        [HttpGet("{purchaseId:int}")]
+        public async Task<IActionResult> GetPurchase(int purchaseId, CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(new GetPurchaseQuery
+            {
+                PurchaseId = purchaseId
+            }, cancellationToken));
 
         [HttpPost("assenizator")]
         public async Task<IActionResult> CreateAssenizator(CreateAssenizatorPurchaseCommandCommand commandCommand,

@@ -5,6 +5,7 @@ using NorthWind.Core.Entities.Purchase;
 using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Services;
+using NorthWindProject.Application.Services.PurchaseService;
 
 namespace NorthWindProject.Application.Features.Purchase.Command.CreateKGO
 {

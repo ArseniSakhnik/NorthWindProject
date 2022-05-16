@@ -60,7 +60,7 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
   }
 
   openPurchase(e: any) {
-    
+    this.$router.push(`/purchase-info/${e.id}`);
   }
 
 

@@ -15,6 +15,7 @@
             label="Тип отходов"
             outlined
             dense
+            :readonly="isView"
         ></v-select>
       </v-col>
       <v-col
@@ -28,6 +29,7 @@
             mask="####"
             prefix="м³"
             :is-number="true"
+            :is-readonly="isView"
         />
       </v-col>
       <v-col
@@ -41,6 +43,7 @@
             mask="####"
             prefix="м"
             :is-number="true"
+            :is-readonly="isView"
         />
       </v-col>
     </v-row>
@@ -48,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins, PropSync, Vue} from "vue-property-decorator";
+import {Component, Mixins, Prop, PropSync, Vue} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
 import {WasteType} from "@/enums/Enums";
 
@@ -56,9 +59,15 @@ import {WasteType} from "@/enums/Enums";
   components: {StringField}
 })
 export default class AssenizatorPurchase extends Vue {
+  @Prop({required: false, default: () => false}) isView!: boolean;
   @PropSync('wasteType') wasteTypeSynced!: number;
   @PropSync('pitVolume') pitVolumeSynced!: number;
   @PropSync('distanceFromDriveway') distanceFromDrivewaySynced!: number;
+  
+  mounted() {
+    console.log(this.pitVolumeSynced)
+    console.log(this.wasteTypeSynced)
+  }
 
   items = [
     {

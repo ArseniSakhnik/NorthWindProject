@@ -41,7 +41,7 @@ const routes: Array<RouteConfig> = [
         name: 'UserInfo',
         component: UserInfo,
         meta: {
-            layout: 'Main'
+            layout: 'User'
         }
     },
     {
@@ -137,7 +137,7 @@ const routes: Array<RouteConfig> = [
         name: 'PurchaseInfo',
         component: PurchaseInfo,
         meta: {
-            layout: 'main'
+            layout: 'User'
         }
     }
 ]
