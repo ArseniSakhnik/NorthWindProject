@@ -1,12 +1,14 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NorthWindProject.Application.Features.Purchase.Command.ApprovePurchase;
 using NorthWindProject.Application.Features.Purchase.Command.CreateAssenizatorPurchase;
 using NorthWindProject.Application.Features.Purchase.Command.CreateKGO;
 using NorthWindProject.Application.Features.Purchase.Command.RemovePurchase;
 using NorthWindProject.Application.Features.Purchase.Command.UpdateAssenizator;
 using NorthWindProject.Application.Features.Purchase.Command.UpdateKGO;
 using NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases;
+using NorthWindProject.Application.Features.Purchase.Query.GetPages;
 using NorthWindProject.Application.Features.Purchase.Query.GetPurchase;
 using NorthWindProject.Application.Features.Purchase.Query.GetPurchases;
 
@@ -25,6 +27,10 @@ namespace NorthWind.API.Controllers
                 PurchaseId = purchaseId
             }, cancellationToken));
 
+        [HttpGet("pages")]
+        public async Task<IActionResult> GetPages(CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(new GetPagesQuery(), cancellationToken));
+
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllPurchases([FromQuery] GetAllPurchasesQuery query,
             CancellationToken cancellationToken)
@@ -41,6 +47,11 @@ namespace NorthWind.API.Controllers
 
         [HttpPut("assenizator")]
         public async Task<IActionResult> UpdateAssenizator(UpdateAssenizatorCommand command,
+            CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(command, cancellationToken));
+
+        [HttpPut("confirm")]
+        public async Task<IActionResult> ApprovePurchase(ConfirmPurchaseCommand command,
             CancellationToken cancellationToken)
             => Ok(await Mediator.Send(command, cancellationToken));
 

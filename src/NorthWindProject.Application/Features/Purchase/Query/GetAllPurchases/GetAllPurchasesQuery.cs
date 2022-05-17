@@ -48,8 +48,8 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
             }
 
             query = query
-                    .Take(10)
-                    .Skip((request.Page - 1) * 10);
+                    .Skip((request.Page - 1) * 10)
+                    .Take(10);
 
             return await query
                 .Select(purchase => new PurchaseDto
@@ -63,7 +63,8 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
                     Place = purchase.Place,
                     Comment = purchase.Comment,
                     ServiceTypeId = purchase.ServiceTypeId,
-                    UserFullName = purchase.User.FullName
+                    UserFullName = purchase.User.FullName,
+                    IsConfirmed = purchase.IsConfirmed
                 })
                 .ToListAsync(cancellationToken);
         }

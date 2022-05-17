@@ -68,6 +68,15 @@ export default class PurchaseService extends HttpService {
     }
 
     public GetAllPurchases(page: number, searchName: string, confirmedTypeId: ConfirmedType): Promise<AxiosResponse<PurchaseDto[]>> {
-        return this._get(`getAll?page=${page}&searchName=${searchName}&confirmedTypeId=${confirmedTypeId}`);
+        const search = searchName ? searchName : '';
+        return this._get(`getAll?page=${page}&searchName=${search}&confirmedTypeId=${confirmedTypeId}`);
+    }
+
+    public ConfirmPurchase(purchaseId: number, isConfirmed: boolean): Promise<AxiosResponse<string>> {
+        return this._put(`confirm`, {purchaseId, isConfirmed})
+    }
+
+    public GetPagesCount(): Promise<AxiosResponse<number>> {
+        return this._get('pages')
     }
 }

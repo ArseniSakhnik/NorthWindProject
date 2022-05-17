@@ -10,5 +10,6 @@ export type PurchaseDto = {
     place: string
     comment: string
     userFullName: string
+    isConfirmed: boolean
     serviceTypeId: ServiceTypeEnum
 }
