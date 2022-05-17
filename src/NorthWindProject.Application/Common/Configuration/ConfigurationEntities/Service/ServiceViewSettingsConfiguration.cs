@@ -15,21 +15,21 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 new()
                 {
                     Id = 1,
-                    ServiceViewId = ServiceViewEnum.Ассенизатор,
-                    Title = "Откачка жидких бытовых отходов".ToUpper(),
-                    MainImageName = "Assenizator.png"
-                },
-                new()
-                {
-                    Id = 2,
                     ServiceViewId = ServiceViewEnum.КГО,
                     Title = "ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА".ToUpper(),
                     MainImageName = "KGO.png"
                 },
                 new()
                 {
+                    Id = 2,
+                    ServiceViewId = ServiceViewEnum.Ассенизатор,
+                    Title = "Откачка жидких бытовых отходов".ToUpper(),
+                    MainImageName = "Assenizator.png"
+                },
+                new()
+                {
                     Id = 3,
-                    ServiceViewId = ServiceViewEnum.ПоливИОчисткаТерриторий,
+                    ServiceViewId = ServiceViewEnum.КДМ,
                     Title = "Полив и очистка территорий".ToUpper(),
                     MainImageName = "PolivIOchistkaTerrityriy.png"
                 }

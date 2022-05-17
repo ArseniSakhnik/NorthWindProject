@@ -7,10 +7,10 @@ namespace NorthWind.Core.Entities.Services
     public class Service
     {
         public ServicesEnum Id { get; set; }
-
-        public string Route { get; set; }
-
         public List<Contract> Contracts { get; set; }
+
+        public ServiceViewEnum ServiceViewId { get; set; }
+        public ServiceView ServiceView { get; set; }
         public List<DocumentService.DocumentService> DocumentServices { get; set; }
     }
 }

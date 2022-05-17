@@ -28,7 +28,7 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 },
                 new()
                 {
-                    Id = ServiceViewEnum.ПоливИОчисткаТерриторий,
+                    Id = ServiceViewEnum.КДМ,
                     ServiceViewSettingsId = 3
                 }
             });

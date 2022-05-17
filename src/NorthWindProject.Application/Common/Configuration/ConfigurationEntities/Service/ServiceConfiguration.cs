@@ -19,17 +19,32 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                 new()
                 {
                     Id = ServicesEnum.АссенизаторФиз,
-                    Route = "/create-vacuum-truck-fiz-contract"
+                    ServiceViewId = ServiceViewEnum.Ассенизатор
                 },
                 new()
                 {
                     Id = ServicesEnum.АссенизаторЮр,
-                    Route = "/create-vacuum-truck-yur-contract"
+                    ServiceViewId = ServiceViewEnum.Ассенизатор
+                },
+                new()
+                {
+                    Id = ServicesEnum.КГОФиз,
+                    ServiceViewId = ServiceViewEnum.КГО
                 },
                 new()
                 {
                     Id = ServicesEnum.КГОЮр,
-                    Route = "/create-kgo-contract"
+                    ServiceViewId = ServiceViewEnum.КГО
+                },
+                new()
+                {
+                    Id = ServicesEnum.КДМФиз,
+                    ServiceViewId = ServiceViewEnum.КДМ
+                },
+                new()
+                {
+                    Id = ServicesEnum.КДМЮр,
+                    ServiceViewId = ServiceViewEnum.КДМ
                 }
             });
         }
