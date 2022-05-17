@@ -144,10 +144,6 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
         title: 'Документы',
         to: '/documents'
       },
-      // {
-      //   title: 'Вакансии',
-      //   to: '/'
-      // },
       {
         title: 'Контакты',
         to: '/contacts'
@@ -157,7 +153,7 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
     if (this.isUserAdmin) {
       items.push({
         title: 'Панель администрирования',
-        to: '/admin'
+        to: '/admin-purchases'
       })
     }
 

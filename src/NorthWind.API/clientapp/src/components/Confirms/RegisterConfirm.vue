@@ -54,10 +54,11 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                    v-mask="'#(###)-###-##-##'"
+                    v-mask="'(###)-###-##-##'"
                     :value="localData.phoneNumber"
                     label="Номер телефона"
                     @input="phoneNumberInputHandler"
+                    prefix="+7"
                 />
               </v-col>
               <v-col cols="12">
@@ -114,7 +115,7 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin, DialogWind
     middleName: 'Алексеевич',
     name: 'Арсений',
     password: 'парольДаЯ',
-    phoneNumber: '89021945789',
+    phoneNumber: '9021945789',
     surname: 'Сахник',
   }
 

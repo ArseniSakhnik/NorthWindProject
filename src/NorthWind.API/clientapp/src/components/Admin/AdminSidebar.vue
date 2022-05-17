@@ -47,7 +47,7 @@ export default class AdminSidebar extends Vue {
       icon: 'mdi-check-circle',
       name: 'Контракты',
       route: '/user-info'
-    }
+    } 
   ]
 
   goTo(route: string) {
