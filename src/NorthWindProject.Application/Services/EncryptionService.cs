@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.ConfigurationModels;
 
-namespace NorthWind.API.Services
+namespace NorthWindProject.Application.Services
 {
     public class EncryptionService : IEncryptionService
     {

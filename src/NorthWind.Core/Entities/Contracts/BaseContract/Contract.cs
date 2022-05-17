@@ -18,19 +18,18 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
     public abstract class Contract : AuditableEntity, IHasDomainEvent
     {
         public int Id { get; set; }
-
         [DocumentProp("день")] public string Day { get; set; }
-
         [DocumentProp("месяц")] public string Month { get; set; }
-
         [DocumentProp("год")] public string Year { get; set; }
+        [DocumentProp("номертелефона")] public string PhoneNumber { get; set; }
+        [DocumentProp("адрестерритории")] public string PlaceName { get; set; }
+        
+        public string Email { get; set; }
 
         public int UserId { get; set; }
         public ApplicationUser User { get; set; }
-
         public ServicesEnum ServiceId { get; set; }
         public Service Service { get; set; }
-
         public int DocumentServiceId { get; set; }
         public DocumentService DocumentService { get; set; }
 

@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using NorthWind.API.Services;
 using NorthWind.Core.Entities.User;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
@@ -18,9 +16,9 @@ using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 using NorthWindProject.Application.Common.Services;
 using NorthWindProject.Application.ConfigurationModels;
 using NorthWindProject.Application.DependencyInjection;
-using NorthWindProject.Application.Features.Contract.Services.ContractService;
 using NorthWindProject.Application.Middlewares;
 using NorthWindProject.Application.Services;
+using NorthWindProject.Application.Services.ContractService;
 using NorthWindProject.Application.Services.PurchaseService;
 
 namespace NorthWind.API

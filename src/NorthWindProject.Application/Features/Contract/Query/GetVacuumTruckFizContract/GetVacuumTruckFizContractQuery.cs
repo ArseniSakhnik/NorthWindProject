@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Services.ContractService;
 
 namespace NorthWindProject.Application.Features.Contract.Query.GetVacuumTruckFizContract
 {
@@ -19,11 +20,15 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetVacuumTruckFiz
     {
         private readonly AppDbContext _context;
         private readonly IEncryptionService _encryptionService;
+        private readonly IContractService _contractService;
 
-        public GetVacuumTruckFizContractQueryHandler(AppDbContext context, IEncryptionService encryptionService)
+        public GetVacuumTruckFizContractQueryHandler(AppDbContext context,
+            IEncryptionService encryptionService,
+            IContractService contractService)
         {
             _context = context;
             _encryptionService = encryptionService;
+            _contractService = contractService;
         }
 
         public async Task<VacuumTruckFizContractDto> Handle(GetVacuumTruckFizContractQuery request,
@@ -33,19 +38,17 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetVacuumTruckFiz
                 .Where(contract => contract.Id == request.ContractId)
                 .SingleOrDefaultAsync(cancellationToken);
 
-            contract.EncryptObject(_encryptionService);
-
-            return new VacuumTruckFizContractDto
+            if (contract is IEncryptObject encryptionContract)
             {
-                PassportSerialNumber = contract.PassportSerialNumber,
-                PassportId = contract.PassportId,
-                PassportIssued = contract.PassportIssued,
-                PassportIssueDate = contract.PassportIssueDate,
-                DivisionCode = contract.DivisionCode,
-                RegistrationAddress = contract.RegistrationAddress,
-                TerritoryAddress = contract.TerritoryAddress,
-                Price = contract.Price
-            };
+                encryptionContract.DecryptObject(_encryptionService);
+            }
+
+            var dto = new VacuumTruckFizContractDto();
+
+            _contractService.FillContractDto(contract, dto);
+            _contractService.FillFizContractDto(contract, dto);
+
+            return dto;
         }
     }
 }

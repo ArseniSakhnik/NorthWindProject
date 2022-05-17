@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Services.ContractService;
 
 namespace NorthWindProject.Application.Features.Contract.Query.GetVacuumTruckYurContract
 {
@@ -18,11 +19,15 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetVacuumTruckYur
     {
         private readonly AppDbContext _context;
         private readonly IEncryptionService _encryptionService;
+        private readonly IContractService _contractService;
 
-        public GetVacuumTruckYurContractQueryHandler(AppDbContext context, IEncryptionService encryptionService)
+        public GetVacuumTruckYurContractQueryHandler(AppDbContext context,
+            IEncryptionService encryptionService,
+            IContractService contractService)
         {
             _context = context;
             _encryptionService = encryptionService;
+            _contractService = contractService;
         }
 
         public async Task<VacuumTruckYurContractDto> Handle(GetVacuumTruckYurContractQuery request,
@@ -33,19 +38,12 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetVacuumTruckYur
 
             contract.DecryptObject(_encryptionService);
 
-            return new VacuumTruckYurContractDto
-            {
-                ClientShortName = contract.ClientShortName,
-                PersonalNameEntrepreneur = contract.PersonalNameEntrepreneur,
-                ActsOnBasis = contract.ActsOnBasis,
-                TerritoryAddress = contract.TerritoryAddress,
-                Price = contract.Price,
-                OGRN = contract.OGRN,
-                INN = contract.INN,
-                KPP = contract.KPP,
-                LegalAddress = contract.LegalAddress,
-                PhoneNumber = contract.PhoneNumber
-            };
+            var dto = new VacuumTruckYurContractDto();
+
+            _contractService.FillContractDto(contract, dto);
+            _contractService.FillYurContractDto(contract, dto);
+
+            return dto;
         }
     }
 }
