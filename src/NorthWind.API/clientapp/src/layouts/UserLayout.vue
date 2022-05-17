@@ -6,7 +6,6 @@
       />
     </div>
     <navbar/>
-<!--    <router-view/>-->
     <div class="user-section">
       <div class="background-image">
       </div>

@@ -9,12 +9,11 @@ namespace NorthWind.Core.Entities.User
         public string Name { get; set; }
         public string Surname { get; set; }
         public string MiddleName { get; set; }
+        public string FullName { get; set; }
         public List<Contract> Contracts { get; set; } = new();
 
         public List<Purchase.Purchase> Purchases { get; set; } = new();
-
-        public string FullName => $"{Surname} {Name} {MiddleName}";
-
+        
         public string FullNameShort => $"{Surname} {Name[..1]} {MiddleName[..1]}";
 
         public ApplicationUser GetUser()

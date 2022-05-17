@@ -29,3 +29,9 @@ export enum WasteType {
     sewageCarWashes = 3,
     other = 4
 }
+
+export enum ConfirmedType {
+    NotCheck = -1,
+    Confirm = 0,
+    NotConfirm = 1,
+}

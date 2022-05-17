@@ -11,6 +11,7 @@ namespace NorthWind.Core.Entities.Purchase
         public int UserId { get; set; }
         public ApplicationUser User { get; set; }
         public ServiceViewEnum ServiceTypeId { get; set; }
+        public bool IsConfirmed { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Name { get; set; }

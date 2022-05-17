@@ -1,7 +1,8 @@
 ﻿import HttpService from "@/services/HttpService";
 import {AssenizatorPurchaseDto, KDMDto, KGODto} from "@/services/PurchaseService/Requests";
-import {ServiceTypeEnum} from "@/enums/Enums";
+import {ConfirmedType, ServiceTypeEnum} from "@/enums/Enums";
 import {AxiosResponse} from "axios";
+import {PurchaseDto} from "@/services/PurchaseService/Response";
 
 export default class PurchaseService extends HttpService {
     constructor() {
@@ -61,8 +62,12 @@ export default class PurchaseService extends HttpService {
     public GetPurchase(purchaseId: number): Promise<AxiosResponse<AssenizatorPurchaseDto | KGODto | KDMDto>> {
         return this._get(`${purchaseId}`);
     }
-    
+
     public DeletePurchase(purchaseId: number) {
         return this._delete(`${purchaseId}`);
+    }
+
+    public GetAllPurchases(page: number, searchName: string, confirmedTypeId: ConfirmedType): Promise<AxiosResponse<PurchaseDto[]>> {
+        return this._get(`getAll?page=${page}&searchName=${searchName}&confirmedTypeId=${confirmedTypeId}`);
     }
 }

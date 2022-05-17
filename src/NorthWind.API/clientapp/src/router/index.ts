@@ -3,19 +3,17 @@ import VueRouter, {RouteConfig} from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Admin from '../views/Admin.vue'
-import CreateServicePage from '@/components/Admin/views/Services/CreateServicePage.vue'
 import DeveloperPage from "@/views/DeveloperPage/DeveloperPage.vue"
 import ConfirmEmail from "@/views/System/ConfirmEmail.vue"
 import CreateVacuumTruckFizContract from "@/views/Contracts/CreateVacuumTruckContract.vue"
 import CreateVacuumTruckYurContract from "@/views/Contracts/CreateVacuumTruckYurContract.vue";
 import CreateKgoContract from "@/views/Contracts/CreateKgoContract.vue";
-import AdminContracts from "@/views/AdminContracts.vue";
-import AdminContract from "@/views/AdminContract.vue";
 import UserInfo from "@/views/UserInfo.vue";
 import AboutCar from "@/views/AboutCar.vue";
 import DocumentsPage from "@/views/DocumentsPage.vue";
 import ContactsPage from "@/views/ContactsPage.vue";
 import PurchaseInfo from "@/views/PurchaseInfo.vue";
+import AdminPurchases from "@/views/AdminPurchases.vue";
 
 Vue.use(VueRouter)
 
@@ -45,27 +43,11 @@ const routes: Array<RouteConfig> = [
         }
     },
     {
-        path: '/admin',
-        name: 'Admin',
-        component: AdminContracts,
-        meta: {
-            layout: 'Admin'
-        }
-    },
-    {
         path: '/confirm-email',
         name: 'ConfirmEmail',
         component: ConfirmEmail,
         meta: {
             layout: 'System'
-        }
-    },
-    {
-        path: '/create-service',
-        name: 'CreateService',
-        component: CreateServicePage,
-        meta: {
-            layout: 'Admin'
         }
     },
     {
@@ -101,14 +83,6 @@ const routes: Array<RouteConfig> = [
         }
     },
     {
-        path: '/contract',
-        name: 'Contract',
-        component: AdminContract,
-        meta: {
-            layout: 'Admin'
-        }
-    },
-    {
         path: '/about-car',
         name: 'AboutCar',
         component: AboutCar,
@@ -138,6 +112,14 @@ const routes: Array<RouteConfig> = [
         component: PurchaseInfo,
         meta: {
             layout: 'User'
+        }
+    },
+    {
+        path: '/admin-purchases',
+        name: 'AdminPurchases',
+        component: AdminPurchases,
+        meta: {
+            layout: 'Admin'
         }
     }
 ]

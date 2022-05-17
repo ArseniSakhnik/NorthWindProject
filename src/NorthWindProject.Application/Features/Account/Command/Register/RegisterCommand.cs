@@ -29,11 +29,11 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         private readonly IEmailSenderService _emailSenderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
-        
+
         public RegisterCommandHandler(
-            UserManager<ApplicationUser> userManager, 
+            UserManager<ApplicationUser> userManager,
             IEmailSenderService emailSenderService,
-            SignInManager<ApplicationUser> signInManager, 
+            SignInManager<ApplicationUser> signInManager,
             IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
@@ -50,7 +50,8 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 MiddleName = request.MiddleName,
                 UserName = request.Email,
                 Email = request.Email,
-                PhoneNumber = request.PhoneNumber
+                PhoneNumber = request.PhoneNumber,
+                FullName = $"{request.Surname} {request.Name} {request.MiddleName} ",
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
