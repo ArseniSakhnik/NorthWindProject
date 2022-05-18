@@ -62,7 +62,7 @@ const userRoutes: Array<RouteConfig> = [
         }
     },
     {
-        path: 'create-vacuum-truck-yur-contract',
+        path: '/create-vacuum-truck-yur-contract',
         name: 'CreateVacuumTruckContract',
         component: CreateVacuumTruckYurContract,
         meta: {
@@ -70,7 +70,7 @@ const userRoutes: Array<RouteConfig> = [
         }
     },
     {
-        path: 'create-vacuum-truck-fiz-contract',
+        path: '/create-vacuum-truck-fiz-contract',
         name: 'CreateVacuumTruckFizContract',
         component: CreateVacuumTruckFizContract,
         meta: {

@@ -23,7 +23,7 @@ export interface VacuumTruckFizContract extends BaseFizContract {
 
 }
 
-export interface VacuumTruckYurContract extends BaseFizContract {
+export interface VacuumTruckYurContract extends BaseYurContract {
     
 }
 
