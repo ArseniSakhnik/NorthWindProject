@@ -35,3 +35,9 @@ export enum ConfirmedType {
     Confirm = 0,
     NotConfirm = 1,
 }
+
+export enum ClientEnum {
+    Yur = 1,
+    Fiz = 2
+    
+}

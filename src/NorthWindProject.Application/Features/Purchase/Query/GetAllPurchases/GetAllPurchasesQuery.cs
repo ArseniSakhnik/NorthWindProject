@@ -35,7 +35,10 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
             {
                 query = query
                     .Where(purchase =>
-                        purchase.User.FullName.ToLower().Trim().Contains(request.SearchName.ToLower().Trim()));
+                        purchase.User.FullName.ToLower().Trim().Contains(request.SearchName.ToLower().Trim())
+                        ||
+                        purchase.Place.ToLower().Trim().Contains(request.SearchName.ToLower().Trim())
+                    );
             }
 
             if (request.ConfirmedTypeId != ConfirmedType.НеПроверять)
@@ -48,8 +51,8 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
             }
 
             query = query
-                    .Skip((request.Page - 1) * 10)
-                    .Take(10);
+                .Skip((request.Page - 1) * 10)
+                .Take(10);
 
             return await query
                 .Select(purchase => new PurchaseDto

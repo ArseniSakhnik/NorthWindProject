@@ -1,57 +1,33 @@
-﻿export interface BaseCreateContractDto {
-    email: string
+﻿export interface BaseContract {
     phoneNumber: string
-    name: string
-    surname: string
-    middleName: string
+    placeName: string
+    email: string
 }
 
-export interface VacuumTruckFizIndividualContractDto extends BaseCreateContractDto {
-    passportSerialNumber: string
-    passportId: string
-    passportIssued: string
-    passportIssueDate: string
-    divisionCode: string
-    registrationAddress: string
-    territoryAddress: string
-    price: number
+export interface BaseFizContract extends BaseContract {
+    individualFullName: string;
 }
 
-export interface VacuumTruckYurContractDto extends BaseCreateContractDto {
-    clientShortName: string,
-    personalNameEntrepreneur: string,
-    actsOnBasis: string,
-    territoryAddress: string,
-    price: number,
-    priceString: string,
-    oGRN: string,
-    iNN: string,
-    kPP: string,
-    legalAddress: string,
-    phoneNumber: string,
-}
-
-export interface KGOYurContractDto extends BaseCreateContractDto {
-    fullNameClient: string
-    actOnTheBasis: number
-    volume: string
-    territoryAddress: string
-    machineReload: string
-    coastPrice: string
-    contractValidDate: string
-    price: number
+export interface BaseYurContract extends BaseContract {
     iNN: string
     kPP: string
     oGRN: string
     oKPO: string
-    legalAddress: string
-    phoneNumber: string
-    clientCompany: string
-    customerContactPersonAndJobTitle: string
-    phoneNumberOrFax: string
-    vehiclesNumber: number,
-    startDate: string
-    endDate: string
-    startTime: string
-    endTime: string
+    yurAddress: string
+    customerShortName: string
+    iEShortName: string
+    operatesOnBasis: string
+}
+
+export interface VacuumTruckFizContract extends BaseFizContract {
+
+}
+
+export interface VacuumTruckYurContract extends BaseFizContract {
+    
+}
+
+export interface KgoYurContract extends BaseYurContract {
+    volume: string
+    overload: string
 }

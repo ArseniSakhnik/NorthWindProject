@@ -16,7 +16,7 @@ import PurchaseTable from "@/components/Tables/PurchaseTable.vue";
 import UserSidebar from "@/components/UserSidebar.vue";
 
 @Component({components: {PurchaseTable, UserSidebar}})
-export default class UserInfo extends Vue {
+export default class UserPurchases extends Vue {
 
 }
 </script>

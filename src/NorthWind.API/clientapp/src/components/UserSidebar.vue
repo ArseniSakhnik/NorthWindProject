@@ -40,13 +40,13 @@ export default class UserSidebar extends Vue {
       viewId: 0,
       icon: 'mdi-file-document-multiple-outline',
       name: 'Мои заявки',
-      action: () => this.$router.push('/user-info')
+      action: () => this.$router.push('/user-purchases')
     },
     {
       viewId: 1,
       icon: 'mdi-check-circle',
       name: 'Мои контракты',
-      action: () => this.$router.push('/user-info')
+      action: () => this.$router.push('/user-contracts')
     }
   ]
 }

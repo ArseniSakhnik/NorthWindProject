@@ -8,16 +8,87 @@ import ConfirmEmail from "@/views/System/ConfirmEmail.vue"
 import CreateVacuumTruckFizContract from "@/views/Contracts/CreateVacuumTruckContract.vue"
 import CreateVacuumTruckYurContract from "@/views/Contracts/CreateVacuumTruckYurContract.vue";
 import CreateKgoContract from "@/views/Contracts/CreateKgoContract.vue";
-import UserInfo from "@/views/UserInfo.vue";
+import UserPurchases from "@/views/UserPurchases.vue";
 import AboutCar from "@/views/AboutCar.vue";
 import DocumentsPage from "@/views/DocumentsPage.vue";
 import ContactsPage from "@/views/ContactsPage.vue";
 import PurchaseInfo from "@/views/PurchaseInfo.vue";
 import AdminPurchases from "@/views/AdminPurchases.vue";
+import UserContracts from "@/views/UserContracts.vue";
 
 Vue.use(VueRouter)
 
-const routes: Array<RouteConfig> = [
+const adminRoutes: Array<RouteConfig> = [
+    {
+        path: '/admin-purchases',
+        name: 'AdminPurchases',
+        component: AdminPurchases,
+        meta: {
+            layout: 'Admin'
+        }
+    }
+]
+
+const userRoutes: Array<RouteConfig> = [
+    {
+        path: '/user-purchases',
+        name: 'UserInfo',
+        component: UserPurchases,
+        meta: {
+            layout: 'User'
+        }
+    },
+    {
+        path: '/purchase-info/:id',
+        name: 'PurchaseInfo',
+        component: PurchaseInfo,
+        meta: {
+            layout: 'User'
+        }
+    },
+    {
+        path: '/user-contracts',
+        name: 'UserContracts',
+        component: UserContracts,
+        meta: {
+            layout: 'User'
+        }
+    }
+]
+
+const mainRoutes: Array<RouteConfig> = [
+    {
+        path: '/about-car',
+        name: 'AboutCar',
+        component: AboutCar,
+        meta: {
+            layout: 'main'
+        }
+    },
+    {
+        path: '/documents',
+        name: 'Documents',
+        component: DocumentsPage,
+        meta: {
+            layout: 'main'
+        }
+    },
+    {
+        path: '/contacts',
+        name: 'Contacts',
+        component: ContactsPage,
+        meta: {
+            layout: 'main'
+        }
+    },
+    {
+        path: '/developer-page',
+        name: 'DeveloperPage',
+        component: DeveloperPage,
+        meta: {
+            layout: 'main'
+        }
+    },
     {
         path: '/',
         name: 'Home',
@@ -26,22 +97,9 @@ const routes: Array<RouteConfig> = [
             layout: 'Main'
         }
     },
-    {
-        path: '/about',
-        name: 'About',
-        component: About,
-        meta: {
-            layout: 'Main'
-        }
-    },
-    {
-        path: '/user-info',
-        name: 'UserInfo',
-        component: UserInfo,
-        meta: {
-            layout: 'User'
-        }
-    },
+]
+
+const systemRoutes: Array<RouteConfig> = [
     {
         path: '/confirm-email',
         name: 'ConfirmEmail',
@@ -50,14 +108,9 @@ const routes: Array<RouteConfig> = [
             layout: 'System'
         }
     },
-    {
-        path: '/developer-page',
-        name: 'DeveloperPage',
-        component: DeveloperPage,
-        meta: {
-            layout: 'Main'
-        }
-    },
+]
+
+const actionRoutes: Array<RouteConfig> = [
     {
         path: '/create-vacuum-truck-fiz-contract',
         name: 'CreateVacuumTruckFizContract',
@@ -82,47 +135,13 @@ const routes: Array<RouteConfig> = [
             layout: 'Action'
         }
     },
-    {
-        path: '/about-car',
-        name: 'AboutCar',
-        component: AboutCar,
-        meta: {
-            layout: 'Main'
-        }
-    },
-    {
-        path: '/documents',
-        name: 'Documents',
-        component: DocumentsPage,
-        meta: {
-            layout: 'main'
-        }
-    },
-    {
-        path: '/contacts',
-        name: 'Contacts',
-        component: ContactsPage,
-        meta: {
-            layout: 'main'
-        }
-    },
-    {
-        path: '/purchase-info/:id',
-        name: 'PurchaseInfo',
-        component: PurchaseInfo,
-        meta: {
-            layout: 'User'
-        }
-    },
-    {
-        path: '/admin-purchases',
-        name: 'AdminPurchases',
-        component: AdminPurchases,
-        meta: {
-            layout: 'Admin'
-        }
-    }
 ]
+
+const routes: Array<RouteConfig> = adminRoutes
+    .concat(userRoutes)
+    .concat(mainRoutes)
+    .concat(systemRoutes)
+    .concat(actionRoutes)
 
 const router = new VueRouter({
     routes

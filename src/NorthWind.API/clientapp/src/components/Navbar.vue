@@ -127,7 +127,7 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   group: any = null;
 
   goToUserInfo() {
-    this.$router.push('/user-info')
+    this.$router.push('/user-purchases')
   }
 
   isRegisterDialogOpened: boolean = false;

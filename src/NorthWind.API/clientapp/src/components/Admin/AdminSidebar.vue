@@ -40,13 +40,13 @@ export default class AdminSidebar extends Vue {
       viewId: 0,
       icon: 'mdi-file-document-multiple-outline',
       name: 'Заявки',
-      route: '/user-info'
+      route: '/admin-purchases'
     },
     {
       viewId: 1,
       icon: 'mdi-check-circle',
       name: 'Контракты',
-      route: '/user-info'
+      route: '/admin-contracts'
     } 
   ]
 

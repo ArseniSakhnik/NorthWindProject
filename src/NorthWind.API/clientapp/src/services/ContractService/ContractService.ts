@@ -1,8 +1,10 @@
 ﻿import HttpService from "@/services/HttpService"
 import {
-    VacuumTruckFizIndividualContractDto,
-    VacuumTruckYurContractDto
+    KgoYurContract,
+    VacuumTruckFizContract,
+    VacuumTruckYurContract,
 } from "@/services/ContractService/Requests"
+import {AxiosResponse} from "axios";
 
 export default class ContractService extends HttpService {
 
@@ -14,12 +16,16 @@ export default class ContractService extends HttpService {
         return this._createStore('')
     }
 
-    public SendVacuumTruckFizContract(data: VacuumTruckFizIndividualContractDto) {
+    public CreateVacuumTruckFizContract(data: VacuumTruckFizContract): Promise<AxiosResponse<string>> {
         return this._post('create-vacuum-truck-fiz-contract', data);
     }
 
-    public SendVacuumTruckYurContract(data: VacuumTruckYurContractDto) {
+    public CreateVacuumTruckYurContract(data: VacuumTruckYurContract): Promise<AxiosResponse<string>> {
         return this._post('create-vacuum-truck-yur-contract', data);
+    }
+
+    public CreateKGOYurContract(data: KgoYurContract) {
+        return this._post('create-kgo-yur-contract', data)
     }
 
 }
