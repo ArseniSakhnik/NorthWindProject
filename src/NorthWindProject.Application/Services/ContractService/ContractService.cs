@@ -123,6 +123,7 @@ namespace NorthWindProject.Application.Services.ContractService
             contract.DomainEvents.Add(new SendEmailContractAlertEvent
             {
                 Email = contract.Email,
+                ServicesRequestTypeId = servicesRequestTypeId,
                 Contract = contract
             });
 

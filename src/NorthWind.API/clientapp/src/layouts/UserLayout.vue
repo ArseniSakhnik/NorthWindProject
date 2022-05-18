@@ -1,10 +1,6 @@
 ﻿<template>
   <v-app v-if="isDataLoaded">
-    <div v-if="isActive" class="alert-section">
-      <success-alert
-          :message="alertMessage"
-      />
-    </div>
+    <success-alert/>
     <navbar/>
     <div class="user-section">
       <div class="background-image">
@@ -39,18 +35,14 @@ import SuccessAlert from "@/components/Alerts/SuccessAlert.vue";
 import {namespace} from "vuex-class";
 import UserSidebar from "@/components/UserSidebar.vue";
 
-const Alert = namespace('AlertStore')
 const User = namespace('CurrentUserStore')
 
 @Component({components: {Navbar, FooterSection, SuccessAlert, UserSidebar}})
 export default class MainLayout extends Vue {
-  @Alert.Action('CALL_ALERT') callAlert!: () => void;
-  @Alert.State('isActive') isActive!: boolean;
-  @Alert.State('alertMessage') alertMessage!: string;
   @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => Promise<void>;
+  
   isDataLoaded: boolean = false;
   currentView: number = 0;
-
 
   async created() {
     await this.getCurrentUserInfo()
@@ -59,13 +51,6 @@ export default class MainLayout extends Vue {
 }
 </script>
 <style scoped>
-.alert-section {
-  position: absolute;
-  top: 80vh;
-  z-index: 2;
-}
-
-
 @media screen and (max-width: 600px) {
   .text-block-setting {
     font-size: 26px

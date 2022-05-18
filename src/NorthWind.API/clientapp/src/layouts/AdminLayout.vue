@@ -1,10 +1,6 @@
 ﻿<template>
   <v-app v-if="isDataLoaded">
-    <div v-if="isActive" class="alert-section">
-      <success-alert
-          :message="alertMessage"
-      />
-    </div>
+    <success-alert/>
     <navbar/>
     <div class="user-section">
       <div class="background-image">
@@ -41,15 +37,12 @@ import UserSidebar from "@/components/UserSidebar.vue";
 import {namespace} from "vuex-class";
 import AdminSidebar from "@/components/Admin/AdminSidebar.vue";
 
-const Alert = namespace('AlertStore')
 const User = namespace('CurrentUserStore')
 
 @Component({components: {Navbar, FooterSection, SuccessAlert, AdminSidebar}})
 export default class AdminLayout extends Vue {
-  @Alert.Action('CALL_ALERT') callAlert!: () => void;
+
   @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => Promise<void>;
-  @Alert.State('isActive') isActive!: boolean;
-  @Alert.State('alertMessage') alertMessage!: string;
   isDataLoaded: boolean = false;
   currentView: number = 0;
 

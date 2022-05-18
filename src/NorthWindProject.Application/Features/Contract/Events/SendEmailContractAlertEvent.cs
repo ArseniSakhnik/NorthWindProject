@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Common.Interfaces.DomainEvents;
@@ -13,6 +14,8 @@ namespace NorthWindProject.Application.Features.Contract.Events
     public class SendEmailContractAlertEvent : DomainEvent
     {
         public NorthWind.Core.Entities.Contracts.BaseContract.Contract Contract { get; set; }
+        
+        public ServicesRequestTypeEnum ServicesRequestTypeId { get; set; }
         public string Email { get; set; }
     }
 
@@ -38,7 +41,8 @@ namespace NorthWindProject.Application.Features.Contract.Events
 
             var contractFile = await _mediator.Send(new ExportContractQuery
             {
-                ContractId = contract.Id
+                ContractId = contract.Id,
+                ServicesRequestTypeId = notification.DomainEvent.ServicesRequestTypeId
             }, cancellationToken);
 
             _emailSenderService.SendEmailAsync(new EmailBodyModel

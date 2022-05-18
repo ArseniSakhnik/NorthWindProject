@@ -32,7 +32,7 @@ export default class ContractOpener extends Vue {
   isChooseClientDialogOpened: boolean = false;
 
   goToCreateContract() {
-
+    
   }
 
   @Watch('selectedService')

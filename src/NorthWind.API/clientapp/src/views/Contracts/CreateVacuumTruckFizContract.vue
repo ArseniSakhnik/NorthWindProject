@@ -8,7 +8,7 @@
 import {Vue, Component} from "vue-property-decorator";
 
 @Component
-export default class CreateVacuumTruckContract extends Vue {
+export default class CreateVacuumTruckFizContract extends Vue {
   
 }
 </script>

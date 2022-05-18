@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
 using NorthWindProject.Application.Common.Extensions;
@@ -16,6 +17,7 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportContr
     public class ExportContractQuery : IRequest<FileModel>
     {
         public int ContractId { get; set; }
+        public ServicesRequestTypeEnum ServicesRequestTypeId { get; set; }
     }
 
     public class ExportContractQueryHandler : IRequestHandler<ExportContractQuery, FileModel>
@@ -39,20 +41,20 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportContr
             if (contract is IEncryptObject encryptObject) encryptObject.DecryptObject(_encryptionService);
 
             //todo возможно появление дополнительных документов
-            var documentData = contract.Service.DocumentServices.First();
+            var documentData = contract.Service.DocumentServices
+                .First(documentService => documentService.Id == request.ServicesRequestTypeId);
             var documentContent = documentData.Content;
 
-            await using var stream = new MemoryStream(documentContent);
+            await using var stream = new MemoryStream();
+            stream.Write(documentContent, 0, documentContent.Length);
+            
             var document = new Document(stream);
             var booksMarkNavigator = new BookmarksNavigator(document);
             var bookMarks = booksMarkNavigator.Document.Bookmarks;
             var namesAndValues = contract.GetNameAndValuesDictionary;
 
-            var index = 0;
             foreach (Bookmark mark in bookMarks)
             {
-                index++;
-
                 try
                 {
                     var documentField = documentData.DocumentFields
