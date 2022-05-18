@@ -4,7 +4,7 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceView
 {
     public class ServiceViewDto
     {
-        public ServiceViewEnum Id { get; set; }
+        public ServiceEnum Id { get; set; }
         public string Title { get; set; }
 
         public string MainImageName { get; set; }

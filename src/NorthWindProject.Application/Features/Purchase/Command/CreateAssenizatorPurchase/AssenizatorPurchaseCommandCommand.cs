@@ -43,7 +43,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreateAssenizat
                 WasteTypeId = request.WasteType,
                 PitVolume = request.PitVolume,
                 DistanceFromDriveway = request.DistanceFromDriveway,
-                ServiceTypeId = ServiceViewEnum.Ассенизатор
+                ServiceTypeId = ServiceEnum.Ассенизатор
             };
 
             await _purchaseService.CreatePurchase(_context, purchase, cancellationToken);

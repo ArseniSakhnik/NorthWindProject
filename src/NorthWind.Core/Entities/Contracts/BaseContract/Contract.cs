@@ -28,9 +28,9 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
 
         public int UserId { get; set; }
         public ApplicationUser User { get; set; }
-        public ServicesEnum ServiceId { get; set; }
+        public ServiceEnum ServiceId { get; set; }
         public Service Service { get; set; }
-        public int DocumentServiceId { get; set; }
+        public ServicesRequestTypeEnum DocumentServiceId { get; set; }
         public DocumentService DocumentService { get; set; }
 
         public IDictionary<string, string> GetNameAndValuesDictionary

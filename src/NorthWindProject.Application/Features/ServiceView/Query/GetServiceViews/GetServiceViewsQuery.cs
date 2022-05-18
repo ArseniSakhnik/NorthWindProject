@@ -28,9 +28,9 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceView
             return await _context.ServiceViews
                 .Select(view => new ServiceViewDto
                 {
-                    Id = view.Id,
-                    MainImageName = view.ServiceViewSettings.MainImageName,
-                    Title = view.ServiceViewSettings.Title,
+                    Id = view.ServiceId,
+                    MainImageName = view.MainImageName,
+                    Title = view.Title,
                 })
                 .ToListAsync(cancellationToken);
         }

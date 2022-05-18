@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NorthWind.Core.Entities.Contracts.BaseContract;
 using NorthWind.Core.Entities.Contracts.KgoYurContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
+using NorthWind.Core.Entities.Contracts.VacuumTruckYurContract;
 using NorthWind.Core.Entities.Services.BaseService;
 using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Extensions;
@@ -30,36 +31,20 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
             {
                 new()
                 {
-                    Id = 1,
-                    ServiceId = ServicesEnum.АссенизаторФиз,
+                    Id = ServicesRequestTypeEnum.АссенизаторФиз,
+                    ServiceId = ServiceEnum.Ассенизатор,
                     DocumentFields = Contract.GetDocumentFields<VacuumTruckFizContract>()
                 },
                 new()
                 {
-                    Id = 2,
-                    ServiceId = ServicesEnum.АссенизаторЮр,
-                    DocumentFields = new List<DocumentField>
-                    {
-                        new("individualEntrepreneurShortName", ""),
-                        new("fullNameClient", "Заказчик"),
-                        new("actOnTheBasis", "ДействуетНаОсновании"),
-                        new("territoryAddress", "АдресТерритории"),
-                        new("price", "Цена"),
-                        new("priceString", "ЦенаСтрока"),
-                        new("contractValidDate", "КонтрактДействуетДо"),
-                        new("oGRN", "ОГРН"),
-                        new("iNN", "ИНН"),
-                        new("kPP", "КПП"),
-                        new("legalAddress", "ЮридическийАдресс"),
-                        new("phoneNumber", "телефон"),
-                        new("email", "email"),
-                        new("shortNameClient", "короткоеИмяЗаказчика")
-                    }
+                    Id = ServicesRequestTypeEnum.АссенизаторЮр,
+                    ServiceId = ServiceEnum.Ассенизатор,
+                    DocumentFields = Contract.GetDocumentFields<VacuumTruckYurContract>()
                 },
                 new()
                 {
-                    Id = 3,
-                    ServiceId = ServicesEnum.КГОЮр,
+                    Id = ServicesRequestTypeEnum.КГОЮр,
+                    ServiceId = ServiceEnum.КГО,
                     DocumentFields = Contract.GetDocumentFields<KGOYurContract>()
                 }
             });

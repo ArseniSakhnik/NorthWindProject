@@ -7,9 +7,9 @@ namespace NorthWind.Core.Entities.Services.DocumentService
 {
     public class DocumentService
     {
-        public int Id { get; set; }
+        public ServicesRequestTypeEnum Id { get; set; }
 
-        public ServicesEnum ServiceId { get; set; }
+        public ServiceEnum ServiceId { get; set; }
         public Service Service { get; set; }
 
         public List<Contract> Contracts { get; set; }

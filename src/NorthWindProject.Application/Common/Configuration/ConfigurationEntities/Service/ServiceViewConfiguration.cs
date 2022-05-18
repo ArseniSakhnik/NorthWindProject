@@ -10,26 +10,31 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
     {
         public void Configure(EntityTypeBuilder<ServiceView> builder)
         {
-            builder.HasOne(view => view.ServiceViewSettings)
-                .WithOne(settings => settings.ServiceView)
-                .HasForeignKey<ServiceView>(view => view.ServiceViewSettingsId);
+            builder.HasKey(view => view.ServiceId);
+
+            builder.HasOne(view => view.Service)
+                .WithOne(service => service.ServiceView)
+                .HasForeignKey<ServiceView>(view => view.ServiceId);
 
             builder.HasData(new List<ServiceView>
             {
                 new()
                 {
-                    Id = ServiceViewEnum.Ассенизатор,
-                    ServiceViewSettingsId = 1
+                    ServiceId = ServiceEnum.Ассенизатор,
+                    Title = "Откачка жидких бытовых отходов".ToUpper(),
+                    MainImageName = "Assenizator.png"
                 },
                 new()
                 {
-                    Id = ServiceViewEnum.КГО,
-                    ServiceViewSettingsId = 2
+                    ServiceId = ServiceEnum.КГО,
+                    Title = "ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА".ToUpper(),
+                    MainImageName = "KGO.png"
                 },
                 new()
                 {
-                    Id = ServiceViewEnum.КДМ,
-                    ServiceViewSettingsId = 3
+                    ServiceId = ServiceEnum.КДМ,
+                    Title = "Полив и очистка территорий".ToUpper(),
+                    MainImageName = "PolivIOchistkaTerrityriy.png"
                 }
             });
         }

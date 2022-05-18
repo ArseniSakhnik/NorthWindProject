@@ -42,8 +42,8 @@ namespace NorthWindProject.Application.Services.PurchaseService
 
             BasePurchaseDto response = purchase.ServiceTypeId switch
             {
-                ServiceViewEnum.Ассенизатор => new AssenizatorPurchaseDto(),
-                ServiceViewEnum.КГО => new KGOPurchaseDto(),
+                ServiceEnum.Ассенизатор => new AssenizatorPurchaseDto(),
+                ServiceEnum.КГО => new KGOPurchaseDto(),
             };
 
             response.Id = purchase.Id;

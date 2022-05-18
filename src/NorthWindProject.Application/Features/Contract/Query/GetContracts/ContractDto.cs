@@ -10,6 +10,5 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetContracts
         public string Email { get; set; }
         public DateTime Created { get; set; }
         public string ClientFullName { get; set; }
-        public ServicesEnum ServiceTypeId { get; set; }
     }
 }

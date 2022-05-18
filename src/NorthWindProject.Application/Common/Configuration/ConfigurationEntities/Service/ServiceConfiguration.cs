@@ -18,34 +18,20 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
             {
                 new()
                 {
-                    Id = ServicesEnum.АссенизаторФиз,
-                    ServiceViewId = ServiceViewEnum.Ассенизатор
+                    Id = ServiceEnum.Ассенизатор,
+                    ServiceViewId = ServiceEnum.Ассенизатор
                 },
                 new()
                 {
-                    Id = ServicesEnum.АссенизаторЮр,
-                    ServiceViewId = ServiceViewEnum.Ассенизатор
+                    Id = ServiceEnum.КГО,
+                    ServiceViewId = ServiceEnum.КГО
                 },
                 new()
                 {
-                    Id = ServicesEnum.КГОФиз,
-                    ServiceViewId = ServiceViewEnum.КГО
-                },
-                new()
-                {
-                    Id = ServicesEnum.КГОЮр,
-                    ServiceViewId = ServiceViewEnum.КГО
-                },
-                new()
-                {
-                    Id = ServicesEnum.КДМФиз,
-                    ServiceViewId = ServiceViewEnum.КДМ
-                },
-                new()
-                {
-                    Id = ServicesEnum.КДМЮр,
-                    ServiceViewId = ServiceViewEnum.КДМ
+                    Id = ServiceEnum.КДМ,
+                    ServiceViewId = ServiceEnum.КДМ,
                 }
+                
             });
         }
     }

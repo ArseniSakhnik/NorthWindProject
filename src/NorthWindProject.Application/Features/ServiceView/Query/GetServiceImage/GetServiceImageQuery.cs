@@ -10,7 +10,7 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceImag
 {
     public class GetServiceImageQuery : IRequest<string>
     {
-        public ServiceViewEnum ServiceViewId { get; set; }
+        public ServiceEnum ServiceId { get; set; }
     }
 
     public class GetServiceImageQueryHandler : IRequestHandler<GetServiceImageQuery, string>
@@ -24,8 +24,8 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceImag
 
         public async Task<string> Handle(GetServiceImageQuery request, CancellationToken cancellationToken)
         {
-            return await _context.ServiceViewSettings
-                .Where(settings => settings.ServiceViewId == request.ServiceViewId)
+            return await _context.ServiceViews
+                .Where(settings => settings.ServiceId == request.ServiceId)
                 .Select(settings => settings.MainImageName)
                 .SingleOrDefaultAsync(cancellationToken);
         }

@@ -1,6 +1,6 @@
 ﻿namespace NorthWind.Core.Enums
 {
-    public enum ServiceViewEnum
+    public enum ServiceEnum
     {
         Ассенизатор = 1,
         КГО = 2,

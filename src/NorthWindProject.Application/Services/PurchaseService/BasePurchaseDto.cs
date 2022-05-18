@@ -13,6 +13,6 @@ namespace NorthWindProject.Application.Services.PurchaseService
         public string Place { get; set; }
         public string Comment { get; set; }
         
-        public ServiceViewEnum ServiceTypeId { get; set; }
+        public ServiceEnum ServiceTypeId { get; set; }
     }
 }

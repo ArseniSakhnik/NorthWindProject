@@ -15,6 +15,6 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
         public string UserFullName { get; set; }
         
         public bool IsConfirmed { get; set; }
-        public ServiceViewEnum ServiceTypeId { get; set; }
+        public ServiceEnum ServiceTypeId { get; set; }
     }
 }

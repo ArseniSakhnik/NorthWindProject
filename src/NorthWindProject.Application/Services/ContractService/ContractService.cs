@@ -23,7 +23,10 @@ namespace NorthWindProject.Application.Services.ContractService
         void FillContractDto(Contract contract, BaseContractDto baseContractDto);
         void FillFizContractDto(FizContract fizContract, BaseFizContractDto baseFizContractDto);
         void FillYurContractDto(YurContract yurContract, BaseYurContractDto baseYurContractDto);
-        Task CreateContractAsync(Contract contract, ServiceViewEnum serviceTypeId, CancellationToken cancellationToken);
+
+        Task CreateContractAsync(Contract contract,
+            ServicesRequestTypeEnum servicesRequestTypeId,
+            CancellationToken cancellationToken);
     }
 
     public class ContractService : IContractService
@@ -50,6 +53,7 @@ namespace NorthWindProject.Application.Services.ContractService
             contract.Year = currentDate.Year.ToString();
             contract.PhoneNumber = command.PhoneNumber;
             contract.PlaceName = command.PlaceName;
+            contract.Email = command.Email;
         }
 
         public void FillFizContract(BaseCreateFizContractCommand command, FizContract fizContract)
@@ -97,7 +101,7 @@ namespace NorthWindProject.Application.Services.ContractService
 
         public async Task CreateContractAsync(
             Contract contract,
-            ServiceViewEnum serviceTypeId,
+            ServicesRequestTypeEnum servicesRequestTypeId,
             CancellationToken cancellationToken)
         {
             var currentUserId = await _context.Users
@@ -105,18 +109,16 @@ namespace NorthWindProject.Application.Services.ContractService
                 .Select(user => user.Id)
                 .SingleOrDefaultAsync(cancellationToken);
 
-            var serviceInfo = await _context.Services
-                .AsNoTracking()
-                .Where(service => service.ServiceViewId == serviceTypeId)
-                .Select(service => new
-                    {ServiceId = service.Id, DocumentServiceId = service.DocumentServices.First().Id})
+            var documentService = await _context.DocumentServices
+                .Where(documentService => documentService.Id == servicesRequestTypeId)
                 .SingleOrDefaultAsync(cancellationToken);
 
             contract.UserId = currentUserId;
-            contract.ServiceId = serviceInfo.ServiceId;
-            contract.DocumentServiceId = serviceInfo.DocumentServiceId;
+            contract.ServiceId = documentService.ServiceId;
+            contract.DocumentServiceId = documentService.Id;
 
-            if (contract is IEncryptObject contractEncrypt) contractEncrypt.EncryptObject(_encryptionService);
+            if (contract is IEncryptObject contractEncrypt)
+                contractEncrypt.EncryptObject(_encryptionService);
 
             contract.DomainEvents.Add(new SendEmailContractAlertEvent
             {

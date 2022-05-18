@@ -30,7 +30,6 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetContracts
                     Email = contract.User.Email,
                     Created = contract.Created,
                     ClientFullName = contract.User.FullName,
-                    ServiceTypeId = contract.ServiceId
                 }));
         }
     }

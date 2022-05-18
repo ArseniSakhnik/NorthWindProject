@@ -4,8 +4,9 @@ namespace NorthWind.Core.Entities.Services
 {
     public class ServiceView
     {
-        public ServiceViewEnum Id { get; set; }
-        public int ServiceViewSettingsId { get; set; }
-        public ServiceViewSettings ServiceViewSettings { get; set; }
+        public ServiceEnum ServiceId { get; set; }
+        public Service Service { get; set; }
+        public string Title { get; set; }
+        public string MainImageName { get; set; }
     }
 }

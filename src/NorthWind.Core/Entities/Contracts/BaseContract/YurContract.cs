@@ -24,18 +24,6 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
 
         public void DecryptObject(IEncryptionService encryptionService)
         {
-            INN = encryptionService.Encrypt(INN);
-            KPP = encryptionService.Encrypt(KPP);
-            OGRN = encryptionService.Encrypt(OGRN);
-            OKPO = encryptionService.Encrypt(OKPO);
-            YurAddress = encryptionService.Encrypt(YurAddress);
-            CustomerShortName = encryptionService.Encrypt(CustomerShortName);
-            IEShortName = encryptionService.Encrypt(IEShortName);
-            OperatesOnBasis = encryptionService.Encrypt(OperatesOnBasis);
-        }
-
-        public void EncryptObject(IEncryptionService encryptionService)
-        {
             INN = encryptionService.Decipher(INN);
             KPP = encryptionService.Decipher(KPP);
             OGRN = encryptionService.Decipher(OGRN);
@@ -44,6 +32,18 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
             CustomerShortName = encryptionService.Decipher(CustomerShortName);
             IEShortName = encryptionService.Decipher(IEShortName);
             OperatesOnBasis = encryptionService.Decipher(OperatesOnBasis);
+        }
+
+        public void EncryptObject(IEncryptionService encryptionService)
+        {
+            INN = encryptionService.Encrypt(INN);
+            KPP = encryptionService.Encrypt(KPP);
+            OGRN = encryptionService.Encrypt(OGRN);
+            OKPO = encryptionService.Encrypt(OKPO);
+            YurAddress = encryptionService.Encrypt(YurAddress);
+            CustomerShortName = encryptionService.Encrypt(CustomerShortName);
+            IEShortName = encryptionService.Encrypt(IEShortName);
+            OperatesOnBasis = encryptionService.Encrypt(OperatesOnBasis);
         }
     }
 }

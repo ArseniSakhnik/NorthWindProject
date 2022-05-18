@@ -42,7 +42,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreateKGO
                 Comment = request.Comment,
                 PlannedWasteVolume = request.PlannedWasteVolume,
                 DistanceFromDriveway = request.DistanceFromDriveway,
-                ServiceTypeId = ServiceViewEnum.КГО
+                ServiceTypeId = ServiceEnum.КГО
             };
 
             await _purchaseService.CreatePurchase(_context, purchase, cancellationToken);

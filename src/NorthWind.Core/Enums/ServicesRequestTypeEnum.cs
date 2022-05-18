@@ -1,6 +1,6 @@
 ﻿namespace NorthWind.Core.Enums
 {
-    public enum ServicesEnum
+    public enum ServicesRequestTypeEnum
     {
         АссенизаторЮр = 1,
         АссенизаторФиз = 2,

@@ -15,6 +15,7 @@ using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckYurContract;
 using NorthWind.Core.Entities.Purchase;
 using NorthWind.Core.Entities.Services;
+using NorthWind.Core.Entities.Services.DocumentService;
 using NorthWind.Core.Entities.Services.Files;
 using NorthWind.Core.Entities.Test;
 using NorthWind.Core.Entities.User;
@@ -157,8 +158,9 @@ namespace NorthWindProject.Application.Common.Access
 
         public DbSet<ServiceView> ServiceViews { get; set; }
 
-        public DbSet<ServiceViewSettings> ServiceViewSettings { get; set; }
         public DbSet<Service> Services { get; set; }
+        
+        public DbSet<DocumentService> DocumentServices { get; set; }
 
         #endregion
 

@@ -31,8 +31,10 @@ namespace NorthWindProject.Application.Features.Contract.Command.CreateVacuumTru
             _contractService.FillContract(request, contract);
             _contractService.FillYurContract(request, contract);
 
-            await _contractService.CreateContractAsync(contract, ServiceViewEnum.КГО, cancellationToken);
-            
+            await _contractService.CreateContractAsync(contract,
+                ServicesRequestTypeEnum.АссенизаторЮр,
+                cancellationToken);
+
             return Unit.Value;
         }
     }

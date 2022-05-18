@@ -34,7 +34,7 @@ namespace NorthWindProject.Application.Features.Contract.Command.CreateKgoYurCon
             kgoContract.Overload = request.Overload;
 
             await _contractService.CreateContractAsync(kgoContract,
-                ServiceViewEnum.Ассенизатор,
+                ServicesRequestTypeEnum.КГОЮр,
                 cancellationToken);
 
             return Unit.Value;

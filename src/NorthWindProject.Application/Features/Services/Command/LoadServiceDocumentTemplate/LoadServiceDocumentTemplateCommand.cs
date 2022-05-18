@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Access;
 
 namespace NorthWindProject.Application.Features.Services.Command.LoadServiceDocumentTemplate
 {
     public class LoadServiceDocumentTemplateCommand : IRequest
     {
-        public int ServiceId { get; set; }
+        public ServicesRequestTypeEnum ServicesRequestTypeId { get; set; }
         public IFormFile File { get; set; }
     }
 
@@ -26,15 +27,13 @@ namespace NorthWindProject.Application.Features.Services.Command.LoadServiceDocu
 
         public async Task<Unit> Handle(LoadServiceDocumentTemplateCommand request, CancellationToken cancellationToken)
         {
-            var service = await _context.Services
-                .Include(service => service.DocumentServices)
-                .SingleOrDefaultAsync(service => (int) service.Id == request.ServiceId, cancellationToken);
+            var documentService = await _context.DocumentServices
+                .Where(documentService => documentService.Id == request.ServicesRequestTypeId)
+                .SingleOrDefaultAsync(cancellationToken);
 
             await using var stream = new MemoryStream();
             await request.File.OpenReadStream().CopyToAsync(stream, cancellationToken);
 
-            //TODO пока что по умолчанию один файл
-            var documentService = service.DocumentServices.First();
             documentService.Content = stream.ToArray();
 
             await _context.SaveChangesAsync(cancellationToken);
