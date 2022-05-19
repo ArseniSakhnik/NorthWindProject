@@ -9,16 +9,14 @@
     <v-card>
       <v-card-title>Выберите тип договора</v-card-title>
       <v-card-text>
-        <v-list-item-group
-            v-model="selectedClientSync"
-        >
+        <v-list-item-group>
           <v-list-item
               v-for="(item, i) in clientTypes"
               :key="i"
               class="mt-2"
           >
             <v-list-item-content>
-              <div style="font-size: 1.5em">{{ item.title }}</div>
+              <div style="font-size: 1.5em" @click="selectClientType(item.id)">{{ item.title }}</div>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -46,6 +44,10 @@ export default class ChooseClientTypeConfirm extends Mixins(DialogWindowMixin) {
       title: 'Физическое лицо'
     }
   ]
+  
+  selectClientType(id: ClientEnum) {
+    this.selectedClientSync = id;
+  }
 }
 </script>
 <style scoped lang="scss">

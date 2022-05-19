@@ -34,7 +34,8 @@ const userRoutes: Array<RouteConfig> = [
         name: 'UserInfo',
         component: UserPurchases,
         meta: {
-            layout: 'User'
+            layout: 'User',
+            name: 'Ваши заявки'
         }
     },
     {
@@ -42,7 +43,8 @@ const userRoutes: Array<RouteConfig> = [
         name: 'PurchaseInfo',
         component: PurchaseInfo,
         meta: {
-            layout: 'User'
+            layout: 'User',
+            name: 'Информация о заявке'
         }
     },
     {
@@ -50,7 +52,8 @@ const userRoutes: Array<RouteConfig> = [
         name: 'UserContracts',
         component: UserContracts,
         meta: {
-            layout: 'User'
+            layout: 'User',
+            name: 'Ваши договоры'
         }
     },
     {
@@ -58,7 +61,8 @@ const userRoutes: Array<RouteConfig> = [
         name: 'CreateKgoYurContract',
         component: CreateKgoYurContract,
         meta: {
-            layout: 'User'
+            layout: 'User',
+            name: 'Заявка на вывоз крупногабаритного мусора'
         }
     },
     {
@@ -66,7 +70,8 @@ const userRoutes: Array<RouteConfig> = [
         name: 'CreateVacuumTruckContract',
         component: CreateVacuumTruckYurContract,
         meta: {
-            layout: 'User'
+            layout: 'User',
+            name: 'Заявка на вывоз крупногабаритного мусора '
         }
     },
     {
@@ -74,7 +79,8 @@ const userRoutes: Array<RouteConfig> = [
         name: 'CreateVacuumTruckFizContract',
         component: CreateVacuumTruckFizContract,
         meta: {
-            layout: 'User'
+            layout: 'User',
+            name: 'Заявка на откачку жидких бытовых отходов'
         }
     }
 ]

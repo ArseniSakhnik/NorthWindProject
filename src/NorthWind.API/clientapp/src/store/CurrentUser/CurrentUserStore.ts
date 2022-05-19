@@ -43,6 +43,9 @@ export const CurrentUserStore: Module<CurrentUserStoreTypes, any> = {
         },
         IS_USER_ADMIN(state): boolean {
             return state.roles.some(role => role == RolesEnum.Admin);
+        },
+        FIO(state): string {
+            return `${state.surname} ${state.name} ${state.middleName}`;
         }
     }
 }

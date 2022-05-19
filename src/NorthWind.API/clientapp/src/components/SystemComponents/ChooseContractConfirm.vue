@@ -9,16 +9,14 @@
     <v-card>
       <v-card-title>Выберите услугу</v-card-title>
       <v-card-text>
-        <v-list-item-group
-            v-model="selectedServiceSync"
-        >
+        <v-list-item-group>
           <v-list-item
               v-for="(item, i) in services"
               :key="i"
               class="mt-2"
           >
             <v-list-item-content>
-              <div style="font-size: 1.5em">{{ item.title }}</div>
+              <div style="font-size: 1.5em" @click="selectService(item.id)">{{ item.title }}</div>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -38,18 +36,22 @@ export default class ChooseContractConfirm extends Mixins(DialogWindowMixin) {
 
   services: { title: string, id: ServiceTypeEnum }[] = [
     {
-      id: ServiceTypeEnum.Assenizator,
-      title: 'Откачка жидких бытовых отходов',
-    },
-    {
       id: ServiceTypeEnum.KGO,
       title: 'Вывоз строительного и крупногабаритного мусора',
+    },
+    {
+      id: ServiceTypeEnum.Assenizator,
+      title: 'Откачка жидких бытовых отходов',
     },
     {
       id: ServiceTypeEnum.WaterCleaning,
       title: 'Полив и очистка территорий'
     }
   ]
+
+  selectService(id: ServiceTypeEnum) {
+    this.selectedServiceSync = id;
+  }
 }
 </script>
 <style scoped lang="scss">

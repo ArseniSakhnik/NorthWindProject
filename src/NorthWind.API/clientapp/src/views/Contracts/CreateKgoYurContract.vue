@@ -12,7 +12,7 @@
     <yur-contract-part
         :local-data.sync="localData"
     />
-    <action-bar
+    <action-card-bar
         @send="createKgoYurContract"
         @cancel="back"
     />
@@ -26,13 +26,13 @@ import YurContractPart from "@/components/Contracts/ContractPart/YurContractPart
 import KGOContractInfo from "@/components/Contracts/ContractPart/KGOContractInfo.vue";
 import ContractInfo from "@/components/Contracts/ContractPart/ContractInfo.vue";
 import PlacePicker from "@/components/Contracts/ContractPart/PlacePicker.vue";
-import ActionBar from "@/components/Contracts/ContractPart/ActionBar.vue";
+import ActionCardBar from "@/components/Contracts/ContractPart/ActionCardBar.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {namespace} from "vuex-class";
 
 const Alert = namespace('AlertStore')
 
-@Component({components: {PlacePicker, YurContractPart, KGOContractInfo, ContractInfo, ActionBar}})
+@Component({components: {PlacePicker, YurContractPart, KGOContractInfo, ContractInfo, ActionCardBar}})
 export default class CreateKgoYurContract extends Mixins(HttpServiceMixin) {
   @Alert.Action('CALL_ALERT') callAlert!: (alertData: any) => void;
 
@@ -54,7 +54,7 @@ export default class CreateKgoYurContract extends Mixins(HttpServiceMixin) {
 
   async createKgoYurContract() {
     const alertData = {
-      message: 'Контракт был отправлен',
+      message: 'Контракт был создан',
       delay: 7000,
       isError: false
     };
@@ -65,8 +65,7 @@ export default class CreateKgoYurContract extends Mixins(HttpServiceMixin) {
           this.$router.push('/user-contracts')
         })
         .catch(error => {
-          const errorAlert = this.getErrorMessage(error);
-          alertData.message = errorAlert;
+          alertData.message = this.getErrorMessage(error);
           alertData.isError = true;
           this.callAlert(alertData);
         })

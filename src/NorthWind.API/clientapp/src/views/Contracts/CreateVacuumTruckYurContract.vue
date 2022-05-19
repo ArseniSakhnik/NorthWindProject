@@ -9,22 +9,32 @@
     <place-picker
         :local-data.sync="localData"
     />
+    <action-card-bar
+        @send="createVacuumTruckYurContract"
+    />
   </v-container>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import {Vue, Component, Mixins} from "vue-property-decorator";
 import {VacuumTruckYurContract} from "@/services/ContractService/Requests";
 import YurContractPart from "@/components/Contracts/ContractPart/YurContractPart.vue";
 import ContractInfo from "@/components/Contracts/ContractPart/ContractInfo.vue";
 import PlacePicker from "@/components/Contracts/ContractPart/PlacePicker.vue";
+import ActionCardBar from "@/components/Contracts/ContractPart/ActionCardBar.vue";
+import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
+import {namespace} from "vuex-class";
 
-@Component({components: {PlacePicker, ContractInfo, YurContractPart}})
-export default class CreateVacuumTruckContract extends Vue {
+const Alert = namespace('AlertStore')
+
+@Component({components: {PlacePicker, ContractInfo, YurContractPart, ActionCardBar}})
+export default class CreateVacuumTruckContract extends Mixins(HttpServiceMixin) {
+  @Alert.Action('CALL_ALERT') callAlert!: (alertData: any) => void;
+
   localData: VacuumTruckYurContract = {
     customerShortName: '',
     email: '',//
-    iEShortName: '',
+    iEShortName: '', //
     iNN: '', //
     kPP: '',//
     oGRN: '',//
@@ -33,6 +43,29 @@ export default class CreateVacuumTruckContract extends Vue {
     phoneNumber: '',//
     placeName: '',
     yurAddress: ''//
+  }
+
+  async createVacuumTruckYurContract() {
+    const alertData = {
+      message: 'Контракт был отправлен',
+      delay: 7000,
+      isError: false
+    };
+
+    await this.contractService.CreateVacuumTruckYurContract(this.localData)
+        .then(() => {
+          this.callAlert(alertData)
+          this.$router.push('/user-contracts')
+        })
+        .catch(error => {
+          alertData.message = this.getErrorMessage(error);
+          alertData.isError = true;
+          this.callAlert(alertData);
+        })
+  }
+
+  back() {
+    this.$router.back();
   }
 }
 </script>

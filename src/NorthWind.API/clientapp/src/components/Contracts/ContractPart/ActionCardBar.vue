@@ -18,7 +18,7 @@
 import {Vue, Component, Emit} from "vue-property-decorator";
 
 @Component
-export default class ActionBar extends Vue {
+export default class ActionCardBar extends Vue {
 
   @Emit()
   send(e: any) {

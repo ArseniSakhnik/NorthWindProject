@@ -32,7 +32,25 @@ export default class ContractOpener extends Vue {
   isChooseClientDialogOpened: boolean = false;
 
   goToCreateContract() {
-    
+    switch (this.selectedService) {
+      case ServiceTypeEnum.Assenizator:
+        switch (this.selectedClient) {
+          case ClientEnum.Yur:
+            this.$router.push('/create-vacuum-truck-yur-contract');
+            break;
+          case ClientEnum.Fiz:
+            this.$router.push('/create-vacuum-truck-fiz-contract');
+            break;
+        }
+        break;
+      case ServiceTypeEnum.KGO:
+        switch (this.selectedClient) {
+          case ClientEnum.Yur:
+            this.$router.push('/create-kgo-yur-contract');
+            break;
+        }
+        break;
+    }
   }
 
   @Watch('selectedService')
