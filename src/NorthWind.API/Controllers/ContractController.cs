@@ -36,14 +36,14 @@ namespace NorthWind.API.Controllers
         
         [HttpPost("create-vacuum-truck-fiz-contract")]
         public async Task<IActionResult> CreateContractToVacuumTruckFizContract(
-            CreateVacuumTruckYurContractCommand contractCommand, CancellationToken cancellationToken)
+            CreateVacuumTruckFizContractCommand contractCommand, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(contractCommand, cancellationToken));
         }
 
         [HttpPost("create-vacuum-truck-yur-contract")]
         public async Task<IActionResult> CreateContractToVacuumTruckYurContract(
-            CreateVacuumTruckFizContractCommand command, CancellationToken cancellationToken)
+            CreateVacuumTruckYurContractCommand command, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(command, cancellationToken));
         }

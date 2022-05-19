@@ -57,7 +57,7 @@ export default class ContractsTable extends Mixins(HttpServiceMixin, AlertMixin)
   ]
 
   openContract(id: number) {
-    
+    this.$router.push(`/contract-info/${id}`);
   }
 
   async removeContract(id: number) {

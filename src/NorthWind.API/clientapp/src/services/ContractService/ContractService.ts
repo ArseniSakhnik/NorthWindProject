@@ -31,7 +31,11 @@ export default class ContractService extends HttpService {
     public GetUserContracts(): Promise<AxiosResponse<any>> {
         return this._get('get-user-contracts');
     }
-    
+
+    public GetContract(contractId: number): Promise<AxiosResponse<any>> {
+        return this._get(`${contractId}`)
+    }
+
     public RemoveContracts(contractId: number): Promise<AxiosResponse<any>> {
         return this._delete(`${contractId}`);
     }

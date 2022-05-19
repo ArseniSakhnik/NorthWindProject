@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Dynamic;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using NorthWindProject.Application.Common.Access;
@@ -7,12 +8,12 @@ using NorthWindProject.Application.Services.ContractService;
 
 namespace NorthWindProject.Application.Features.Contract.Query.GetContract
 {
-    public class GetContractQuery : IRequest<BaseContractDto>
+    public class GetContractQuery : IRequest<ExpandoObject>
     {
         public int ContractId { get; set; }
     }
 
-    public class GetContractQueryHandler : IRequestHandler<GetContractQuery, BaseContractDto>
+    public class GetContractQueryHandler : IRequestHandler<GetContractQuery, ExpandoObject>
     {
         private readonly IContractService _contractService;
 
@@ -21,7 +22,7 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetContract
             _contractService = contractService;
         }
 
-        public async Task<BaseContractDto> Handle(GetContractQuery request, CancellationToken cancellationToken)
+        public async Task<ExpandoObject> Handle(GetContractQuery request, CancellationToken cancellationToken)
             => await _contractService.GetContract(request.ContractId, cancellationToken);
     }
 }

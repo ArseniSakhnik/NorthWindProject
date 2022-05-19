@@ -2,11 +2,14 @@
   <v-container>
     <fiz-contract-part
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <place-picker
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <action-card-bar
+        v-if="!noActionBar"
         @send="createVacuumTruckFizContract"
         @cancel="back"
     />
@@ -14,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Mixins} from "vue-property-decorator";
+import {Vue, Component, Mixins, Prop} from "vue-property-decorator";
 import {VacuumTruckFizContract} from "@/services/ContractService/Requests";
 import FizContractPart from "@/components/Contracts/ContractPart/FizContractPart.vue";
 import PlacePicker from "@/components/Contracts/ContractPart/PlacePicker.vue";
@@ -27,13 +30,17 @@ const Alert = namespace('AlertStore')
 @Component({components: {ActionCardBar, PlacePicker, FizContractPart}})
 export default class CreateVacuumTruckFizContract extends Mixins(HttpServiceMixin) {
   @Alert.Action('CALL_ALERT') callAlert!: (alertData: any) => void;
-
-  localData: VacuumTruckFizContract = {
-    email: '',
-    individualFullName: '',
-    phoneNumber: '',
-    placeName: ''
-  }
+  @Prop({required: false, default: () => false}) isView!: boolean;
+  @Prop({required: false, default: () => false}) noActionBar!: boolean;
+  
+  @Prop({
+    required: false, default: () => ({
+      email: '',
+      individualFullName: '',
+      phoneNumber: '',
+      placeName: ''
+    })
+  }) localData!: VacuumTruckFizContract;
 
   async createVacuumTruckFizContract() {
     const alertData = {

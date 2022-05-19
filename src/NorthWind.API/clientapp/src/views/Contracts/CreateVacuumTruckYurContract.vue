@@ -2,21 +2,26 @@
   <v-container>
     <contract-info
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <yur-contract-part
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <place-picker
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <action-card-bar
+        v-if="!noActionBar"
         @send="createVacuumTruckYurContract"
+        @cancel="back"
     />
   </v-container>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Mixins} from "vue-property-decorator";
+import {Vue, Component, Mixins, Prop} from "vue-property-decorator";
 import {VacuumTruckYurContract} from "@/services/ContractService/Requests";
 import YurContractPart from "@/components/Contracts/ContractPart/YurContractPart.vue";
 import ContractInfo from "@/components/Contracts/ContractPart/ContractInfo.vue";
@@ -30,20 +35,24 @@ const Alert = namespace('AlertStore')
 @Component({components: {PlacePicker, ContractInfo, YurContractPart, ActionCardBar}})
 export default class CreateVacuumTruckContract extends Mixins(HttpServiceMixin) {
   @Alert.Action('CALL_ALERT') callAlert!: (alertData: any) => void;
+  @Prop({required: false, default: () => false}) isView!: boolean;
+  @Prop({required: false, default: () => false}) noActionBar!: boolean;
 
-  localData: VacuumTruckYurContract = {
-    customerShortName: '',
-    email: '',//
-    iEShortName: '', //
-    iNN: '', //
-    kPP: '',//
-    oGRN: '',//
-    oKPO: '',//
-    operatesOnBasis: '',
-    phoneNumber: '',//
-    placeName: '',
-    yurAddress: ''//
-  }
+  @Prop({
+    required: false, default: () => ({
+      customerShortName: '',
+      email: '',//
+      iEShortName: '', //
+      iNN: '', //
+      kPP: '',//
+      oGRN: '',//
+      oKPO: '',//
+      operatesOnBasis: '',
+      phoneNumber: '',//
+      placeName: '',
+      yurAddress: ''//
+    })
+  }) localData!: VacuumTruckYurContract;
 
   async createVacuumTruckYurContract() {
     const alertData = {

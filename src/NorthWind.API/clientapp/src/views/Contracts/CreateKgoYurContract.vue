@@ -2,17 +2,22 @@
   <v-container>
     <contract-info
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <place-picker
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <k-g-o-contract-info
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <yur-contract-part
         :local-data.sync="localData"
+        :is-view="isView"
     />
     <action-card-bar
+        v-if="!noActionBar"
         @send="createKgoYurContract"
         @cancel="back"
     />
@@ -20,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Mixins} from "vue-property-decorator";
+import {Vue, Component, Mixins, Prop} from "vue-property-decorator";
 import {KgoYurContract} from "@/services/ContractService/Requests";
 import YurContractPart from "@/components/Contracts/ContractPart/YurContractPart.vue";
 import KGOContractInfo from "@/components/Contracts/ContractPart/KGOContractInfo.vue";
@@ -35,22 +40,27 @@ const Alert = namespace('AlertStore')
 @Component({components: {PlacePicker, YurContractPart, KGOContractInfo, ContractInfo, ActionCardBar}})
 export default class CreateKgoYurContract extends Mixins(HttpServiceMixin) {
   @Alert.Action('CALL_ALERT') callAlert!: (alertData: any) => void;
+  @Prop({required: false, default: () => false}) isView!: boolean;
+  @Prop({required: false, default: () => false}) noActionBar!: boolean;
 
-  localData: KgoYurContract = {
-    customerShortName: '', //
-    email: '', //
-    iEShortName: '', //
-    iNN: '', //
-    kPP: '', //
-    oGRN: '', //
-    oKPO: '', //
-    operatesOnBasis: '', //
-    overload: '', //
-    phoneNumber: '', //
-    placeName: '',
-    volume: '', //
-    yurAddress: '' //
-  }
+  @Prop({
+    required: false, 
+    default: () => ({
+      customerShortName: '', //
+      email: '', //
+      iEShortName: '', //
+      iNN: '', //
+      kPP: '', //
+      oGRN: '', //
+      oKPO: '', //
+      operatesOnBasis: '', //
+      overload: '', //
+      phoneNumber: '', //
+      placeName: '',
+      volume: '', //
+      yurAddress: '' //
+    })
+  }) localData!: KgoYurContract;
 
   async createKgoYurContract() {
     const alertData = {

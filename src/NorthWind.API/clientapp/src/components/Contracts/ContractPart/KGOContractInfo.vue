@@ -10,6 +10,7 @@
           label="Тип отходов"
           outlined
           dense
+          :readonly="isView"
       />
       <v-text-field
           v-model="localDataSync.overload"
@@ -17,18 +18,21 @@
           outlined
           dense
           readonly
+          :readonly="isView"
       />
     </v-card-text>
   </v-card>
 </template>
 
 <script lang="ts">
-import {Vue, Component, PropSync, Watch} from "vue-property-decorator";
+import {Vue, Component, PropSync, Watch, Prop} from "vue-property-decorator";
 import {KgoYurContract} from "@/services/ContractService/Requests";
 
 @Component
 export default class KGOContractInfo extends Vue {
   @PropSync('localData') localDataSync!: KgoYurContract;
+  @Prop({required: false, default: () => false}) isView!: boolean;
+
 
   volumeItems: { name: string }[] = [
     {

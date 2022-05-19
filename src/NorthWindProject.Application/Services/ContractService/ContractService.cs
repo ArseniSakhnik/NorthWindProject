@@ -24,10 +24,10 @@ namespace NorthWindProject.Application.Services.ContractService
         void FillContract(BaseCreateContractCommand command, Contract contract);
         void FillFizContract(BaseCreateFizContractCommand command, FizContract fizContract);
         void FillYurContract(BaseCreateYurContractCommand command, YurContract yurContract);
-        void FillContractDto(Contract contract, BaseContractDto baseContractDto);
-        void FillFizContractDto(FizContract fizContract, BaseFizContractDto baseFizContractDto);
-        void FillYurContractDto(YurContract yurContract, BaseYurContractDto baseYurContractDto);
-        Task<BaseContractDto> GetContract(int contractId, CancellationToken cancellationToken);
+        void FillContractDto(Contract contract, dynamic baseContractDto);
+        void FillFizContractDto(FizContract fizContract, dynamic baseFizContractDto);
+        void FillYurContractDto(YurContract yurContract, dynamic baseYurContractDto);
+        Task<dynamic> GetContract(int contractId, CancellationToken cancellationToken);
 
         Task CreateContractAsync(Contract contract,
             ServicesRequestTypeEnum servicesRequestTypeId,
@@ -78,33 +78,42 @@ namespace NorthWindProject.Application.Services.ContractService
             yurContract.OperatesOnBasis = command.OperatesOnBasis;
         }
 
-        public void FillContractDto(Contract contract, BaseContractDto baseContractDto)
+        public void FillContractDto(Contract contract, dynamic baseContractDto)
         {
-            baseContractDto.Day = contract.Day;
-            baseContractDto.Month = contract.Month;
-            baseContractDto.Year = contract.Year;
-            baseContractDto.PhoneNumber = contract.PhoneNumber;
-            baseContractDto.PlaceName = contract.PlaceName;
+            baseContractDto.day = contract.Day;
+            baseContractDto.month = contract.Month;
+            baseContractDto.year = contract.Year;
+            baseContractDto.phoneNumber = contract.PhoneNumber;
+            baseContractDto.placeName = contract.PlaceName;
+            baseContractDto.email = contract.Email;
+
+            baseContractDto.serviceRequestTypeId = contract switch
+            {
+                VacuumTruckYurContract => ServicesRequestTypeEnum.АссенизаторЮр,
+                VacuumTruckFizContract => ServicesRequestTypeEnum.АссенизаторФиз,
+                KGOYurContract => ServicesRequestTypeEnum.КГОЮр,
+                _ => throw new NotImplementedException()
+            };
         }
 
-        public void FillFizContractDto(FizContract fizContract, BaseFizContractDto baseFizContractDto)
+        public void FillFizContractDto(FizContract fizContract, dynamic baseFizContractDto)
         {
-            baseFizContractDto.IndividualFullName = fizContract.IndividualFullName;
+            baseFizContractDto.individualFullName = fizContract.IndividualFullName;
         }
 
-        public void FillYurContractDto(YurContract yurContract, BaseYurContractDto baseYurContractDto)
+        public void FillYurContractDto(YurContract yurContract, dynamic baseYurContractDto)
         {
-            baseYurContractDto.INN = yurContract.INN;
-            baseYurContractDto.KPP = yurContract.KPP;
-            baseYurContractDto.OGRN = yurContract.OGRN;
-            baseYurContractDto.OKPO = yurContract.OKPO;
-            baseYurContractDto.YurAddress = yurContract.YurAddress;
-            baseYurContractDto.CustomerShortName = yurContract.CustomerShortName;
-            baseYurContractDto.IEShortName = yurContract.IEShortName;
-            baseYurContractDto.OperatesOnBasis = yurContract.OperatesOnBasis;
+            baseYurContractDto.iNN = yurContract.INN;
+            baseYurContractDto.kPP = yurContract.KPP;
+            baseYurContractDto.oGRN = yurContract.OGRN;
+            baseYurContractDto.oKPO = yurContract.OKPO;
+            baseYurContractDto.yurAddress = yurContract.YurAddress;
+            baseYurContractDto.customerShortName = yurContract.CustomerShortName;
+            baseYurContractDto.iEShortName = yurContract.IEShortName;
+            baseYurContractDto.operatesOnBasis = yurContract.OperatesOnBasis;
         }
 
-        public async Task<BaseContractDto> GetContract(int contractId, CancellationToken cancellationToken)
+        public async Task<dynamic> GetContract(int contractId, CancellationToken cancellationToken)
         {
             var contract = await _context.Contracts
                 .Where(contract => contract.Id == contractId)
@@ -119,21 +128,21 @@ namespace NorthWindProject.Application.Services.ContractService
 
             FillContractDto(contract, contractDto);
 
-            if (contract is YurContract yurContract)
+            switch (contract)
             {
-                FillYurContractDto(yurContract, contractDto);
-            }
-
-            if (contract is FizContract fizContract)
-            {
-                FillFizContractDto(fizContract, contractDto);
+                case YurContract yurContract:
+                    FillYurContractDto(yurContract, contractDto);
+                    break;
+                case FizContract fizContract:
+                    FillFizContractDto(fizContract, contractDto);
+                    break;
             }
 
 
             if (contract is KGOYurContract kgoYurContract)
             {
-                contractDto.Overload = kgoYurContract.Overload;
-                contractDto.Volume = kgoYurContract.Volume;
+                contractDto.overload = kgoYurContract.Overload;
+                contractDto.volume = kgoYurContract.Volume;
             }
 
             return contractDto;
