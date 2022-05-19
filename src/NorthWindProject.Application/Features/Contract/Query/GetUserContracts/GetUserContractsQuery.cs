@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.Extensions;
 
 namespace NorthWindProject.Application.Features.Contract.Query.GetUserContracts
 {
@@ -26,13 +27,18 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetUserContracts
         }
 
         public async Task<IList<ContractDto>> Handle(GetUserContractsQuery request, CancellationToken cancellationToken)
-            => await _context.Contracts
+        {
+            var query = _context.Contracts.AsQueryable();
+
+            return await query
                 .Where(contract => contract.UserId == _currentUserService.UserId)
                 .Select(contract => new ContractDto
                 {
                     Id = contract.Id,
-                    ServiceName = contract.Service.ServiceView.Title
+                    ServiceName = contract.Service.ServiceView.Title,
+                    PlaceName = contract.PlaceName
                 })
                 .ToListAsync(cancellationToken);
+        }
     }
 }

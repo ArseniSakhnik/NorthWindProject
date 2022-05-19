@@ -14,6 +14,7 @@ import UserContracts from "@/views/UserContracts.vue";
 import CreateKgoYurContract from '@/views/Contracts/CreateKgoYurContract.vue';
 import CreateVacuumTruckYurContract from "@/views/Contracts/CreateVacuumTruckYurContract.vue";
 import CreateVacuumTruckFizContract from "@/views/Contracts/CreateVacuumTruckFizContract.vue";
+import ContractInfoPage from "@/views/ContractInfoPage.vue";
 
 Vue.use(VueRouter)
 
@@ -81,6 +82,15 @@ const userRoutes: Array<RouteConfig> = [
         meta: {
             layout: 'User',
             name: 'Заявка на откачку жидких бытовых отходов'
+        }
+    },
+    {
+        path: '/contract-info/:id',
+        name: 'ContractInfo',
+        component: ContractInfoPage,
+        meta: {
+            layout: 'User',
+            name: 'Сведения о заявке'
         }
     }
 ]

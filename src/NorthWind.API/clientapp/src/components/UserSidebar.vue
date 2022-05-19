@@ -45,7 +45,7 @@ export default class UserSidebar extends Vue {
     {
       viewId: 1,
       icon: 'mdi-check-circle',
-      name: 'Мои контракты',
+      name: 'Мои договоры',
       action: () => this.$router.push('/user-contracts')
     }
   ]

@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Dynamic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Entities.Contracts.BaseContract;
+using NorthWind.Core.Entities.Contracts.KgoYurContract;
+using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
+using NorthWind.Core.Entities.Contracts.VacuumTruckYurContract;
 using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
@@ -23,6 +27,7 @@ namespace NorthWindProject.Application.Services.ContractService
         void FillContractDto(Contract contract, BaseContractDto baseContractDto);
         void FillFizContractDto(FizContract fizContract, BaseFizContractDto baseFizContractDto);
         void FillYurContractDto(YurContract yurContract, BaseYurContractDto baseYurContractDto);
+        Task<BaseContractDto> GetContract(int contractId, CancellationToken cancellationToken);
 
         Task CreateContractAsync(Contract contract,
             ServicesRequestTypeEnum servicesRequestTypeId,
@@ -97,6 +102,41 @@ namespace NorthWindProject.Application.Services.ContractService
             baseYurContractDto.CustomerShortName = yurContract.CustomerShortName;
             baseYurContractDto.IEShortName = yurContract.IEShortName;
             baseYurContractDto.OperatesOnBasis = yurContract.OperatesOnBasis;
+        }
+
+        public async Task<BaseContractDto> GetContract(int contractId, CancellationToken cancellationToken)
+        {
+            var contract = await _context.Contracts
+                .Where(contract => contract.Id == contractId)
+                .SingleOrDefaultAsync(cancellationToken);
+
+            if (contract is IEncryptObject encryptionContract)
+            {
+                encryptionContract.DecryptObject(_encryptionService);
+            }
+
+            dynamic contractDto = new ExpandoObject();
+
+            FillContractDto(contract, contractDto);
+
+            if (contract is YurContract yurContract)
+            {
+                FillYurContractDto(yurContract, contractDto);
+            }
+
+            if (contract is FizContract fizContract)
+            {
+                FillFizContractDto(fizContract, contractDto);
+            }
+
+
+            if (contract is KGOYurContract kgoYurContract)
+            {
+                contractDto.Overload = kgoYurContract.Overload;
+                contractDto.Volume = kgoYurContract.Volume;
+            }
+
+            return contractDto;
         }
 
         public async Task CreateContractAsync(

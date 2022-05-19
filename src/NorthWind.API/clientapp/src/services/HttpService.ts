@@ -41,7 +41,7 @@ export default abstract class HttpService {
         return this.baseRequest(path, 'PUT', body)
     }
 
-    protected _delete<TResponse>(path: string) {
+    protected _delete<TResponse>(path: string): Promise<TResponse> {
         return this.baseRequest(path, 'DELETE');
     }
 

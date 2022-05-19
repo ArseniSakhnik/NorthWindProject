@@ -32,5 +32,10 @@ namespace NorthWindProject.Application.Common.Extensions
         {
             return $"{str[..1]}.";
         }
+
+        public static string ToPrepare(this string str)
+        {
+            return str.Trim().ToLower();
+        }
     }
 }

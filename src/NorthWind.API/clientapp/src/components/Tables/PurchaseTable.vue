@@ -10,7 +10,7 @@
     ></v-text-field>
     <v-data-table
         :headers="headers"
-        :items="desserts"
+        :items="data"
         :search="search"
     >
       <template v-slot:item.open="props">
@@ -39,7 +39,7 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
     },
     {
       text: 'Место оказания услуги',
-      value: 'place'
+      value: 'placeName'
     },
     {
       text: '',
@@ -53,7 +53,7 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
     }
   ]
 
-  desserts = []
+  data = []
 
   async mounted() {
     await this.getPurchases();
@@ -62,7 +62,7 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
   async getPurchases() {
     await this.purchaseService.GetPurchases()
         .then(response => {
-          this.desserts = response.data.map((item: any) => ({
+          this.data = response.data.map((item: any) => ({
             ...item,
             serviceName: getServiceName(item.serviceTypeId)
           }))

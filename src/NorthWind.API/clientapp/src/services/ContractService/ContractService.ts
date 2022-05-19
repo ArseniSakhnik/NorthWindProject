@@ -28,4 +28,12 @@ export default class ContractService extends HttpService {
         return this._post('create-kgo-yur-contract', data)
     }
 
+    public GetUserContracts(): Promise<AxiosResponse<any>> {
+        return this._get('get-user-contracts');
+    }
+    
+    public RemoveContracts(contractId: number): Promise<AxiosResponse<any>> {
+        return this._delete(`${contractId}`);
+    }
+
 }

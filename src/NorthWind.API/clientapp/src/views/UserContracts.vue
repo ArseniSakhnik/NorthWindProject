@@ -3,9 +3,7 @@
     <v-card>
       <v-card-title>
         <v-spacer></v-spacer>
-        <contract-opener
-          
-        />
+        <contract-opener/>
       </v-card-title>
       <v-card>
         <contracts-table/>
