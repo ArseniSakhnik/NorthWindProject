@@ -9,7 +9,16 @@ export default class ValidationMixin extends Vue {
       return true;
     }
 
-    const string = value.trim();
+    const string = String(value).trim();
+    return string.length !== 0 || 'Поле обязательно для заполнения'
+  }
+
+  isStringNotEmptyTest(value: string | null) {
+    if (value === null) {
+      return true;
+    }
+
+    const string = String(value).trim();
     return string.length !== 0 || 'Поле обязательно для заполнения'
   }
 

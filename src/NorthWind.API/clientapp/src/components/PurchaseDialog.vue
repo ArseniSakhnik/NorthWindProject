@@ -50,7 +50,7 @@
             />
             <k-g-o-purchase
                 v-else-if="serviceType === 2"
-                :planned-waste-volume="localData.plannedWasteVolume"
+                :planned-waste-volume.sync="localData.plannedWasteVolume"
             />
           </v-stepper-content>
 
@@ -108,8 +108,7 @@ import CalculateKGO from "@/components/Calculate/CalculateKGO.vue";
 import StringField from "@/components/Fields/StringField.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {namespace} from "vuex-class";
-
-const Alert = namespace('AlertStore');
+import AlertMixin from "@/mixins/AlertMixin.vue";
 
 @Component({
   components: {
@@ -121,12 +120,11 @@ const Alert = namespace('AlertStore');
     KGOPurchase
   }
 })
-export default class PurchaseDialog extends Mixins(DialogWindowMixin, ValidationMixin, HttpServiceMixin) {
+export default class PurchaseDialog extends Mixins(DialogWindowMixin, HttpServiceMixin, AlertMixin) {
   @Ref('personalInformationInfo') personalInformationInfoRef!: any;
   @Ref('serviceBlock') serviceBlock!: any;
   @Ref('priceBlock') priceBlock!: any;
   @Prop() serviceType!: ServiceTypeEnum;
-  @Alert.Action('CALL_ALERT') callAlert!: (data: { message: string, delay: number }) => void;
 
   currentStep: number = 1;
   errorMessage: string = '';
@@ -143,7 +141,7 @@ export default class PurchaseDialog extends Mixins(DialogWindowMixin, Validation
   }
 
   async nextStep() {
-    const hasErrors = this.hasErrors;
+    const hasErrors = this.hasErrors();
 
     if (!hasErrors && this.currentStep === 3) {
       await this.sendPurchase();
@@ -158,20 +156,23 @@ export default class PurchaseDialog extends Mixins(DialogWindowMixin, Validation
   async sendPurchase() {
     await this.purchaseService.createPurchase(this.serviceType, this.localData)
         .then(response => {
-          const alertData = {
-            message: response.data,
-            delay: 7000
-          };
-          this.callAlert(alertData)
+          this.callAlert({
+            message: 'Заявка была отправлена',
+            delay: 7000,
+            isError: false
+          })
           this.toggleRegisterWindow(false)
         })
         .catch(error => {
-          this.errorMessage = this.getErrorMessage(error);
-          window.alert(this.errorMessage);
+          this.callAlert({
+            message: this.getErrorMessage(error),
+            delay: 7000,
+            isError: true
+          })
         });
   }
 
-  get hasErrors() {
+  hasErrors() {
     switch (this.currentStep) {
       case 1:
         return this.personalInformationInfoRef.validateComponent();

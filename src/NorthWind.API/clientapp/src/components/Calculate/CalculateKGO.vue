@@ -11,6 +11,7 @@
             v-model="placeSynced"
             label="Место оказания услуги*"
             :is-readonly="isMapOpened"
+            :rules="[isStringNotEmpty]"
         />
         <string-field
             v-if="!isView"
@@ -57,12 +58,13 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop, PropSync} from "vue-property-decorator";
+import {Vue, Component, Prop, PropSync, Mixins} from "vue-property-decorator";
 import YandexMap from "@/components/YMaps/YandexMap.vue";
 import StringField from "@/components/Fields/StringField.vue";
+import ValidationMixin from "@/mixins/ValidationMixin.vue";
 
 @Component({components: {YandexMap, StringField}})
-export default class CalculateKGO extends Vue {
+export default class CalculateKGO extends Mixins(ValidationMixin) {
   @Prop() isView!: boolean;
   @Prop() plannedWasteVolume!: number;
   @PropSync('place') placeSynced!: string;

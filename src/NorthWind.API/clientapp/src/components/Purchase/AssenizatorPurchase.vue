@@ -7,12 +7,11 @@
           sm="4"
       >
         <v-select
-            ref="1"
             :items="items"
             item-text="name"
             item-value="id"
             v-model="wasteTypeSynced"
-            label="Тип отходов"
+            label="Тип отходов*"
             outlined
             dense
             :readonly="isView"
@@ -30,6 +29,7 @@
             prefix="м³"
             :is-number="true"
             :is-readonly="isView"
+            :rules="[isStringNotEmpty]"
         />
       </v-col>
       <v-col
@@ -44,6 +44,7 @@
             prefix="м"
             :is-number="true"
             :is-readonly="isView"
+            :rules="[isStringNotEmpty]"
         />
       </v-col>
     </v-row>
@@ -54,11 +55,12 @@
 import {Component, Mixins, Prop, PropSync, Vue} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
 import {WasteType} from "@/enums/Enums";
+import ValidationMixin from "@/mixins/ValidationMixin.vue";
 
 @Component({
   components: {StringField}
 })
-export default class AssenizatorPurchase extends Vue {
+export default class AssenizatorPurchase extends Mixins(ValidationMixin) {
   @Prop({required: false, default: () => false}) isView!: boolean;
   @PropSync('wasteType') wasteTypeSynced!: number;
   @PropSync('pitVolume') pitVolumeSynced!: number;

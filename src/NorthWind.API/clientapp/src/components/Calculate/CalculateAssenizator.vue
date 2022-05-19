@@ -8,6 +8,7 @@
       >
         <string-field
             ref="1"
+            :rules="[isStringNotEmpty]"
             v-model="placeSynced"
             label="Место оказания услуги*"
             :is-readonly="isMapOpened || isView"
@@ -57,12 +58,13 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop, PropSync} from "vue-property-decorator";
+import {Vue, Component, Prop, PropSync, Mixins} from "vue-property-decorator";
 import YandexMap from "@/components/YMaps/YandexMap.vue";
 import StringField from "@/components/Fields/StringField.vue";
+import ValidationMixin from "@/mixins/ValidationMixin.vue";
 
 @Component({components: {YandexMap, StringField}})
-export default class CalculateAssenizator extends Vue {
+export default class CalculateAssenizator extends Mixins(ValidationMixin) {
   @Prop({required: false, default: () => false}) isView!: boolean;
   @Prop() distanceFromDriveway!: number;
   @PropSync('place') placeSynced!: string;

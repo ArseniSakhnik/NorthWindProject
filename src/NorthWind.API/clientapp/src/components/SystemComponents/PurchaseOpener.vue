@@ -33,6 +33,7 @@ export default class PurchaseOpener extends Vue {
   }
   
   @Watch('isDialogActive')
+  @Watch('serviceType')
   isDialogActiveChangeHandler() {
     if (!this.isDialogActive) {
       this.updateToken++;

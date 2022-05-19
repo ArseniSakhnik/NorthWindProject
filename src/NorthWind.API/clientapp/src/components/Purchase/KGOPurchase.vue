@@ -9,6 +9,7 @@
         <string-field
             ref="1"
             v-model="plannedWasteVolumeSynced"
+            :rules="[isStringNotEmptyTest]"
             label="Примерный объем выгребной ямы*"
             mask="####"
             prefix="м³"
@@ -26,11 +27,12 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, PropSync, Prop} from "vue-property-decorator";
+import {Vue, Component, PropSync, Prop, Mixins} from "vue-property-decorator";
 import StringField from "@/components/Fields/StringField.vue";
+import ValidationMixin from "@/mixins/ValidationMixin.vue";
 
 @Component({components: {StringField}})
-export default class KGOPurchase extends Vue {
+export default class KGOPurchase extends Mixins(ValidationMixin) {
   @Prop() isView!: boolean;
   @PropSync('plannedWasteVolume') plannedWasteVolumeSynced!: number;
 }
