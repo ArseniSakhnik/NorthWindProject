@@ -37,7 +37,7 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetPurchases
                     Name = purchase.Name,
                     Surname = purchase.Surname,
                     MiddleName = purchase.MiddleName,
-                    Place = purchase.Place,
+                    PlaceName = purchase.Place,
                     Comment = purchase.Comment,
                     ServiceTypeId = purchase.ServiceTypeId,
                 })

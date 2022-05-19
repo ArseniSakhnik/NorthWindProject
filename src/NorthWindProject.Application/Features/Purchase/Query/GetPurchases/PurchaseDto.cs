@@ -10,7 +10,7 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetPurchases
         public string Name { get; set; }
         public string Surname { get; set; }
         public string MiddleName { get; set; }
-        public string Place { get; set; }
+        public string PlaceName { get; set; }
         public string Comment { get; set; }
         
         public string ServiceName { get; set; }
