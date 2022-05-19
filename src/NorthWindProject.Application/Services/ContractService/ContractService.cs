@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Contracts.BaseContract;
 using NorthWind.Core.Entities.Contracts.KgoYurContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
@@ -175,9 +176,19 @@ namespace NorthWindProject.Application.Services.ContractService
                 ServicesRequestTypeId = servicesRequestTypeId,
                 Contract = contract
             });
-
+            
+            AuditableEntityFill(contract);
             await _context.Contracts.AddAsync(contract, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        private void AuditableEntityFill(AuditableEntity contract)
+        {
+            contract.CreatedByUsername = _currentUserService.UserName;
+            contract.CreatedByUserId = _currentUserService.UserId == 0
+                ? null
+                : _currentUserService.UserId;
+            contract.Created = DateTime.Now;
         }
     }
 }
