@@ -1,16 +1,18 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NorthWindProject.Application.Common.Access;
 
 namespace NorthWindProject.Application.Features.Contract.Query.GetContracts
 {
-    public class GetContractsQuery : IRequest<IQueryable<ContractDto>>
+    public class GetContractsQuery : IRequest<IList<ContractDto>>
     {
     }
 
-    public class GetContractsQueryHandler : IRequestHandler<GetContractsQuery, IQueryable<ContractDto>>
+    public class GetContractsQueryHandler : IRequestHandler<GetContractsQuery, IList<ContractDto>>
     {
         private readonly AppDbContext _context;
 
@@ -20,9 +22,9 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetContracts
         }
 
         //а как вообще заявка то создается
-        public Task<IQueryable<ContractDto>> Handle(GetContractsQuery request, CancellationToken cancellationToken)
+        public async Task<IList<ContractDto>> Handle(GetContractsQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(_context.Contracts
+            return await _context.Contracts
                 .Select(contract => new ContractDto
                 {
                     Id = contract.Id,
@@ -30,7 +32,8 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetContracts
                     Email = contract.User.Email,
                     Created = contract.Created,
                     ClientFullName = contract.User.FullName,
-                }));
+                })
+                .ToListAsync(cancellationToken);
         }
     }
 }

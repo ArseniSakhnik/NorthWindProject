@@ -15,14 +15,11 @@ namespace NorthWind.API.Controllers
     public class ContractController : ApiController
     {
         [HttpGet]
-        public async Task<IActionResult> GetContracts(DataSourceLoadOptions options,
-            CancellationToken cancellationToken)
+        public async Task<IActionResult> GetContracts(CancellationToken cancellationToken)
         {
-            var query = await Mediator.Send(new GetContractsQuery(), cancellationToken);
-            options.RequireTotalCount = true;
-            return Ok(await DataSourceLoader.LoadAsync(query, options, cancellationToken));
+            return Ok(await Mediator.Send(new GetContractsQuery(), cancellationToken));
         }
-        
+
         [HttpGet("{contractId:int}")]
         public async Task<IActionResult> GetPurchase(int contractId, CancellationToken cancellationToken)
             => Ok(await Mediator.Send(new GetContractQuery
@@ -33,7 +30,7 @@ namespace NorthWind.API.Controllers
         [HttpGet("get-user-contracts")]
         public async Task<IActionResult> GetUserContracts(CancellationToken cancellationToken)
             => Ok(await Mediator.Send(new GetUserContractsQuery(), cancellationToken));
-        
+
         [HttpPost("create-vacuum-truck-fiz-contract")]
         public async Task<IActionResult> CreateContractToVacuumTruckFizContract(
             CreateVacuumTruckFizContractCommand contractCommand, CancellationToken cancellationToken)

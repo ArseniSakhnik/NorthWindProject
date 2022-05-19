@@ -44,7 +44,6 @@
 
 <script lang="ts">
 import {Vue, Component, PropSync, Mixins, Watch} from "vue-property-decorator";
-import {AssenizatorPurchaseDto} from "@/services/PurchaseService/Requests";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
 import AssenizatorPurchase from "@/components/Purchase/AssenizatorPurchase.vue";
 import CalculateAssenizator from "@/components/Calculate/CalculateAssenizator.vue";
