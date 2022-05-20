@@ -58,6 +58,7 @@ namespace NorthWindProject.Application.Services.PurchaseService
             response.Place = purchase.Place;
             response.Comment = purchase.Comment;
             response.ServiceTypeId = purchase.ServiceTypeId;
+            response.IsConfirmed = purchase.IsConfirmed;
 
             if (purchase is AssenizatorPurchase assenizatorPurchase)
             {

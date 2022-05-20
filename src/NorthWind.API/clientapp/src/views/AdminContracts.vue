@@ -43,12 +43,12 @@ export default class AdminContracts extends Mixins(HttpServiceMixin, MomentMixin
       value: 'serviceName'
     },
     {
-      text: 'Место',
-      value: 'placeName'
-    },
-    {
       text: 'ФИО',
       value: 'clientFullName'
+    },
+    {
+      text: 'Место',
+      value: 'placeName'
     },
     {
       text: 'Номер телефона',

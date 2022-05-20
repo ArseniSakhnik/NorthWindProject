@@ -3,6 +3,7 @@
       outlined
       tile
   >
+    <v-card-title>Заявка на вывоз крупногабаритного мусора</v-card-title>
     <v-card-text>
       <personal-information-info
           ref="personalInformationInfo"
@@ -15,7 +16,7 @@
       />
       <k-g-o-purchase
           ref="purchase"
-          :planned-waste-volume="localDataInit.plannedWasteVolume"
+          :planned-waste-volume.sync="localDataInit.plannedWasteVolume"
           :is-view="isView"
       />
       <calculate-k-g-o
@@ -26,7 +27,7 @@
           :is-view="isView"
       />
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions v-if="isUserView">
       <v-spacer></v-spacer>
       <div v-if="isView">
         <v-btn @click="back">Назад</v-btn>
@@ -35,6 +36,18 @@
       <div v-else>
         <v-btn @click="cancelRedact">Отмена</v-btn>
         <v-btn class="orange darken-3" style="color: white" @click="save(localData.serviceTypeId)">Сохранить</v-btn>
+      </div>
+    </v-card-actions>
+    <v-card-actions v-if="isAdminView">
+      <v-spacer></v-spacer>
+      <div>
+        <v-btn @click="back">Назад</v-btn>
+        <v-btn 
+            class="orange darken-3"
+            style="color: white" 
+            @click="confirmPurchase(localData)"
+        >{{ confirmTitle }}
+        </v-btn>
       </div>
     </v-card-actions>
   </v-card>
@@ -48,10 +61,12 @@ import KGOPurchase from "@/components/Purchase/KGOPurchase.vue";
 import CalculateKGO from "@/components/Calculate/CalculateKGO.vue";
 import KillReactivityMixin from "@/mixins/KillReactivityMixin.vue";
 import PurchaseViewMixin from "@/mixins/PurchaseViewMixin.vue";
+import IsUserView from "@/mixins/IsUserView.vue";
+import {PurchaseDto} from "@/services/PurchaseService/Response";
 
 @Component({components: {PersonalInformationInfo, KGOPurchase, CalculateKGO}})
-export default class KGOPurchaseView extends Mixins(PurchaseViewMixin) {
-  
+export default class KGOPurchaseView extends Mixins(PurchaseViewMixin, IsUserView) {
+
 }
 </script>
 <style scoped lang="scss">

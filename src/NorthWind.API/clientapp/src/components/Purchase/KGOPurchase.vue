@@ -10,7 +10,7 @@
             ref="1"
             v-model="plannedWasteVolumeSynced"
             :rules="[isStringNotEmptyTest]"
-            label="Примерный объем выгребной ямы*"
+            label="Планируемый объем мусора*"
             mask="####"
             prefix="м³"
             :is-number="true"

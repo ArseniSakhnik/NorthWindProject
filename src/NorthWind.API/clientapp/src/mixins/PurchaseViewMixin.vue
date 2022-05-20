@@ -5,6 +5,7 @@ import KillReactivityMixin from "@/mixins/KillReactivityMixin.vue";
 import {ServiceTypeEnum} from "@/enums/Enums";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import AlertMixin from "@/mixins/AlertMixin.vue";
+import {PurchaseDto} from "@/services/PurchaseService/Response";
 
 @Component
 export default class PurchaseViewMixin extends Mixins(HttpServiceMixin, AlertMixin) {
@@ -42,7 +43,7 @@ export default class PurchaseViewMixin extends Mixins(HttpServiceMixin, AlertMix
       await this.purchaseService.UpdatePurchase(serviceTypeId, this.localDataInit)
           .then(() => {
             this.callAlert({
-              message: 'Договор был успешно отредактирован',
+              message: 'Заявка была успешно отредактирована',
               delay: 7000,
               isError: false
             })
@@ -56,20 +57,41 @@ export default class PurchaseViewMixin extends Mixins(HttpServiceMixin, AlertMix
     }
   }
 
+  async confirmPurchase(item: PurchaseDto) {
+    await this.purchaseService.ConfirmPurchase(item.id, !item.isConfirmed)
+        .then(() => {
+          this.callAlert({
+            message: 'Успешно',
+            isError: false,
+            delay: 7000
+          })
+          this.localData.isConfirmed = !this.localData.isConfirmed; 
+        })
+        .catch(error => this.callAlert({
+          message: this.getErrorMessage(error),
+          delay: 7000,
+          isError: false
+        }));
+  }
+
   hasErrors(): boolean {
     const personalInfoValidate = this.personalInformation.validateComponent
         ? this.personalInformation.validateComponent()
         : false;
-    
+
     const purchaseInfoValidate = this.purchaseInfo.validateComponent
         ? this.purchaseInfo.validateComponent()
         : false;
-    
+
     const calculateInfoValidate = this.calculateInfo.validateComponent
         ? this.calculateInfo.validateComponent()
         : false;
-    
+
     return personalInfoValidate || purchaseInfoValidate || calculateInfoValidate;
+  }
+
+  get confirmTitle() {
+    return this.localData.isConfirmed ? 'Отменить согласование' : 'Согласовать';
   }
 }
 </script>

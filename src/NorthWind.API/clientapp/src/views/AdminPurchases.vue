@@ -18,6 +18,9 @@
         >
         </v-text-field>
       </template>
+      <template v-slot:item.check="props">
+        <v-icon @click="openPurchase(props.item.id)">mdi-eye</v-icon>
+      </template>
       <template v-slot:item.isConfirmed="props">
         <v-icon v-if="!props.item.isConfirmed" @click="confirmPurchase(props.item)">mdi-thumb-down</v-icon>
         <v-icon v-else @click="confirmPurchase(props.item)">mdi-thumb-up</v-icon>
@@ -37,10 +40,11 @@ import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {PurchaseDto} from "@/services/PurchaseService/Response";
 import {getServiceName} from "@/utils/getServiceName";
 import {ConfirmedType} from "@/enums/Enums";
+import AlertMixin from "@/mixins/AlertMixin.vue";
 
 @Component
-export default class AdminPurchases extends Mixins(HttpServiceMixin) {
-  headers: { text: string, value: string }[] = [
+export default class AdminPurchases extends Mixins(HttpServiceMixin, AlertMixin) {
+  headers = [
     {
       text: 'Услуга',
       value: 'serviceName',
@@ -62,8 +66,14 @@ export default class AdminPurchases extends Mixins(HttpServiceMixin) {
       value: 'email'
     },
     {
+      text: 'Открыть',
+      value: 'check',
+      align: 'center'
+    },
+    {
       text: 'Согласовано',
-      value: 'isConfirmed'
+      value: 'isConfirmed',
+      align: 'center'
     },
   ]
 
@@ -80,7 +90,19 @@ export default class AdminPurchases extends Mixins(HttpServiceMixin) {
 
   async confirmPurchase(item: PurchaseDto) {
     await this.purchaseService.ConfirmPurchase(item.id, !item.isConfirmed)
-        .then(() => this.getPurchases());
+        .then(() => {
+          this.getPurchases()
+          this.callAlert({
+            message: 'Успешно',
+            isError: false,
+            delay: 7000
+          })
+        })
+        .catch(error => this.callAlert({
+          message: this.getErrorMessage(error),
+          delay: 7000,
+          isError: false
+        }));
   }
 
   async getPurchases() {
@@ -92,11 +114,15 @@ export default class AdminPurchases extends Mixins(HttpServiceMixin) {
 
     this.data = this.data.map(item => ({...item, serviceName: getServiceName(item.serviceTypeId)}))
   }
-  
+
+  openPurchase(id: number) {
+    this.$router.push(`purchase-info-admin/${id}`)
+  }
+
   @Watch('searchName')
   async searchNameHandler(search: string | null) {
     if (!search) search = '';
-    
+
     await this.getPurchases();
   }
 
@@ -104,21 +130,6 @@ export default class AdminPurchases extends Mixins(HttpServiceMixin) {
   async pagesCountChangeHandler() {
     await this.getPurchases();
   }
-
-  // @Watch('searchName')
-  // async searchNameHandler(search: string | null) {
-  //   if (!search) search = '';
-  //
-  //   await this.getPagesCount();
-  //   await this.getPurchases();
-  //
-  //   this.page = 1;
-  // }
-  //
-  // @Watch('page')
-  // async pagesCountChangeHandler() {
-  //   await this.getPurchases();
-  // }
 }
 </script>
 <style scoped lang="scss">

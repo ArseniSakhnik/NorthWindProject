@@ -37,7 +37,16 @@ const adminRoutes: Array<RouteConfig> = [
             layout: 'Admin',
             name: 'Договоры'
         }
-    }
+    },
+    {
+        path: '/purchase-info-admin/:id',
+        name: 'PurchaseInfo',
+        component: PurchaseInfo,
+        meta: {
+            layout: 'Admin',
+            name: 'Информация о заявке'
+        }
+    },
 ]
 
 const userRoutes: Array<RouteConfig> = [
