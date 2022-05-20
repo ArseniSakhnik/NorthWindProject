@@ -5,6 +5,8 @@ import {
     VacuumTruckYurContract,
 } from "@/services/ContractService/Requests"
 import {AxiosResponse} from "axios";
+import {ContractAndPageDto, ContractDto} from "@/services/ContractService/Responses";
+import {ConfirmedType} from "@/enums/Enums";
 
 export default class ContractService extends HttpService {
 
@@ -12,8 +14,8 @@ export default class ContractService extends HttpService {
         super('contract');
     }
 
-    public GetContracts() {
-        return this._createStore('')
+    public GetContracts(page: number, searchName: string, confirmedTypeId: ConfirmedType): Promise<AxiosResponse<ContractAndPageDto>> {
+        return this._get(`?page=${page}&searchName=${searchName}&confirmedTypeId=${confirmedTypeId}`);
     }
 
     public CreateVacuumTruckFizContract(data: VacuumTruckFizContract): Promise<AxiosResponse<string>> {

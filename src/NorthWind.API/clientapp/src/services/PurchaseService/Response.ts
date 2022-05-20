@@ -13,3 +13,8 @@ export type PurchaseDto = {
     isConfirmed: boolean
     serviceTypeId: ServiceTypeEnum
 }
+
+export type PurchasesAndPageCount = {
+    purchases: PurchaseDto[],
+    pagesCount: number
+}

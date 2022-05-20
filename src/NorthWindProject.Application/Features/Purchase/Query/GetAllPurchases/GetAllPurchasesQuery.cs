@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,17 +6,18 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Common.Extensions;
 
 namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
 {
-    public class GetAllPurchasesQuery : IRequest<IList<PurchaseDto>>
+    public class GetAllPurchasesQuery : IRequest<PurchaseAndPageCountDto>
     {
         public int Page { get; set; }
         public string SearchName { get; set; }
         public ConfirmedType ConfirmedTypeId { get; set; }
     }
 
-    public class GetAllPurchasesQueryHandler : IRequestHandler<GetAllPurchasesQuery, IList<PurchaseDto>>
+    public class GetAllPurchasesQueryHandler : IRequestHandler<GetAllPurchasesQuery, PurchaseAndPageCountDto>
     {
         private readonly AppDbContext _context;
 
@@ -25,7 +26,7 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
             _context = context;
         }
 
-        public async Task<IList<PurchaseDto>> Handle(GetAllPurchasesQuery request, CancellationToken cancellationToken)
+        public async Task<PurchaseAndPageCountDto> Handle(GetAllPurchasesQuery request, CancellationToken cancellationToken)
         {
             var query = _context.Purchases
                 .AsNoTracking()
@@ -50,11 +51,10 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
                         .Where(purchase => !purchase.IsConfirmed);
             }
 
-            query = query
+            var purchases = await query
                 .Skip((request.Page - 1) * 10)
-                .Take(10);
-
-            return await query
+                .Take(10)
+                .OrderByDescending(contract => contract.Created)
                 .Select(purchase => new PurchaseDto
                 {
                     Id = purchase.Id,
@@ -67,9 +67,18 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
                     Comment = purchase.Comment,
                     ServiceTypeId = purchase.ServiceTypeId,
                     UserFullName = purchase.User.FullName,
-                    IsConfirmed = purchase.IsConfirmed
+                    IsConfirmed = purchase.IsConfirmed,
+                    Created = purchase.Created.ToIsoString()
                 })
                 .ToListAsync(cancellationToken);
+
+            var purchasesCount = await query.CountAsync(cancellationToken);
+
+            return new PurchaseAndPageCountDto
+            {
+                Purchases = purchases,
+                PagesCount = (int) Math.Ceiling((decimal) purchasesCount / 10)
+            };
         }
     }
 }

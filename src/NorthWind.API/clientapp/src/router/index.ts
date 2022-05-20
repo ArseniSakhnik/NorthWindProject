@@ -15,6 +15,7 @@ import CreateKgoYurContract from '@/views/Contracts/CreateKgoYurContract.vue';
 import CreateVacuumTruckYurContract from "@/views/Contracts/CreateVacuumTruckYurContract.vue";
 import CreateVacuumTruckFizContract from "@/views/Contracts/CreateVacuumTruckFizContract.vue";
 import ContractInfoPage from "@/views/ContractInfoPage.vue";
+import AdminContracts from "@/views/AdminContracts.vue";
 
 Vue.use(VueRouter)
 
@@ -24,7 +25,17 @@ const adminRoutes: Array<RouteConfig> = [
         name: 'AdminPurchases',
         component: AdminPurchases,
         meta: {
-            layout: 'Admin'
+            layout: 'Admin',
+            name: 'Заявки'
+        }
+    },
+    {
+        path: '/admin-contracts',
+        name: 'AdminContracts',
+        component: AdminContracts,
+        meta: {
+            layout: 'Admin',
+            name: 'Договоры'
         }
     }
 ]

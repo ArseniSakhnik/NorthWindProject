@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Purchase;
 using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
@@ -28,6 +30,7 @@ namespace NorthWindProject.Application.Services.PurchaseService
                 .Where(user => user.Id == _currentUserService.UserId)
                 .SingleOrDefaultAsync(cancellationToken);
 
+            AuditableEntityFill(purchase);
             currentUser.Purchases.Add(purchase);
         }
 
@@ -113,6 +116,15 @@ namespace NorthWindProject.Application.Services.PurchaseService
                 purchase.PlannedWasteVolume = kgoCommand.PlannedWasteVolume;
                 purchase.DistanceFromDriveway = kgoCommand.PlannedWasteVolume;
             }
+        }
+        
+        private void AuditableEntityFill(AuditableEntity purchase)
+        {
+            purchase.CreatedByUsername = _currentUserService.UserName;
+            purchase.CreatedByUserId = _currentUserService.UserId == 0
+                ? null
+                : _currentUserService.UserId;
+            purchase.Created = DateTime.Now;
         }
     }
 }

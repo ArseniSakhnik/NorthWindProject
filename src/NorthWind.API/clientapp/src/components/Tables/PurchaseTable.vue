@@ -27,6 +27,7 @@
 import {Vue, Component, Mixins} from "vue-property-decorator";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {getServiceName} from "@/utils/getServiceName";
+import moment from "moment";
 
 @Component
 export default class PurchaseTable extends Mixins(HttpServiceMixin) {
@@ -42,12 +43,16 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
       value: 'placeName'
     },
     {
-      text: '',
+      text: 'Дата создания',
+      value: 'created'
+    },
+    {
+      text: 'Открыть',
       value: 'open',
       sortable: false
     },
     {
-      text: '',
+      text: 'Удалить',
       value: 'delete',
       sortable: false
     }
@@ -64,7 +69,8 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
         .then(response => {
           this.data = response.data.map((item: any) => ({
             ...item,
-            serviceName: getServiceName(item.serviceTypeId)
+            serviceName: getServiceName(item.serviceTypeId),
+            created: moment(item.created).format('DD-MM-YYYY')
           }))
         })
   }

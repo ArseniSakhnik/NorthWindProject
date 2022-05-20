@@ -23,7 +23,7 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
         [DocumentProp("год")] public string Year { get; set; }
         [DocumentProp("номертелефона")] public string PhoneNumber { get; set; }
         [DocumentProp("адрестерритории")] public string PlaceName { get; set; }
-        
+
         public string Email { get; set; }
 
         public int UserId { get; set; }
@@ -32,6 +32,19 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
         public Service Service { get; set; }
         public ServicesRequestTypeEnum DocumentServiceId { get; set; }
         public DocumentService DocumentService { get; set; }
+
+        [NotMapped] public List<DomainEvent> DomainEvents { get; set; } = new();
+
+        public string GetServiceNameAndType()
+        {
+            return DocumentServiceId switch
+            {
+                ServicesRequestTypeEnum.АссенизаторФиз => "ОТКАЧКА ЖИДКИХ БЫТОВЫХ ОТХОДОВ (физ. лицо)",
+                ServicesRequestTypeEnum.АссенизаторЮр => "ОТКАЧКА ЖИДКИХ БЫТОВЫХ ОТХОДОВ (юр. лицо)",
+                ServicesRequestTypeEnum.КГОЮр => "ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА (юр. лицо)",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
 
         public IDictionary<string, string> GetNameAndValuesDictionary
         {
@@ -47,8 +60,6 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
                             : prop.GetValue(this, null)?.ToString());
             }
         }
-
-        [NotMapped] public List<DomainEvent> DomainEvents { get; set; } = new();
 
         public static List<DocumentField> GetDocumentFields<T>()
         {

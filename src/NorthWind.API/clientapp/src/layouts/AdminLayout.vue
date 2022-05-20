@@ -4,6 +4,7 @@
     <navbar/>
     <div class="user-section">
       <div class="background-image">
+        <h2 v-if="hasName">{{ name }}</h2>
       </div>
       <v-row>
         <v-col
@@ -50,12 +51,38 @@ export default class AdminLayout extends Vue {
     await this.getCurrentUserInfo()
         .then(() => this.isDataLoaded = true);
   }
+
+  get name(): any {
+    return this.$route.meta?.name
+  }
+
+  get hasName(): boolean {
+    return this.$route.meta?.name?.length > 0;
+  }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .background-image {
-  background-image: url('../assets/backgrounds/phons.png');
+  background-image: url('../assets/backgrounds/qweqwe 2.png');
   height: 20vh;
+
+  position: relative;
+  background-blend-mode: multiply;
+  background-position: center bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+
+  h2 {
+    position: absolute;
+    bottom: 20%;
+    margin-left: 10vw;
+    color: #FFFFFF;
+
+    font-size: 2em;
+    font-family: Raleway, sans-serif;
+    font-weight: bold;
+  }
 }
 
 .user-section {

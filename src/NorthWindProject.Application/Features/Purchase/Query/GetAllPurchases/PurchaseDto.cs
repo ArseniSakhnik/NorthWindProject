@@ -14,6 +14,7 @@ namespace NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases
         public string Comment { get; set; }
         public string UserFullName { get; set; }
         
+        public string Created { get; set; }
         public bool IsConfirmed { get; set; }
         public ServiceEnum ServiceTypeId { get; set; }
     }

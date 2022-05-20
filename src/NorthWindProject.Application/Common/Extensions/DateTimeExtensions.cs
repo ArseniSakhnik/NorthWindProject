@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Globalization;
 
 namespace NorthWindProject.Application.Common.Extensions
 {
     public static class DateTimeExtensions
     {
+        public static string ToIsoString(this DateTime date)
+        {
+            return date.ToString("yyyy-MM-dd'T'HH:mm:ss.fffK", CultureInfo.InvariantCulture);
+        }
+
         public static string GetNumberOfMonthInDativeCase(this DateTime date)
         {
             return date.Month switch

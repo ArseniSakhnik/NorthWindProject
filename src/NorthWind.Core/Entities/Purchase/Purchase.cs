@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.User;
 using NorthWind.Core.Enums;
 
 namespace NorthWind.Core.Entities.Purchase
 {
-    public abstract class Purchase
+    public abstract class Purchase : AuditableEntity
     {
         public int Id { get; set; }
 

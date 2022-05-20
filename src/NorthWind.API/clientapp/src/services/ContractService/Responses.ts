@@ -29,3 +29,18 @@ export interface KGOYurContractDto extends BaseYurContractDto {
     overload: string;
     volume: string;
 }
+
+export type ContractDto = {
+    id: string, 
+    serviceName: string, 
+    placeName: string, 
+    phoneNumber: string, 
+    email: string, 
+    created: string, 
+    clientFullName: string, 
+}
+
+export type ContractAndPageDto = {
+    contracts: ContractDto[],
+    pageCount: number
+}

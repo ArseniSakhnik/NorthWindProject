@@ -15,9 +15,10 @@ namespace NorthWind.API.Controllers
     public class ContractController : ApiController
     {
         [HttpGet]
-        public async Task<IActionResult> GetContracts(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetContracts([FromQuery] GetContractsQuery query,
+            CancellationToken cancellationToken)
         {
-            return Ok(await Mediator.Send(new GetContractsQuery(), cancellationToken));
+            return Ok(await Mediator.Send(query, cancellationToken));
         }
 
         [HttpGet("{contractId:int}")]

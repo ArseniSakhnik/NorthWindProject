@@ -16,7 +16,6 @@
             placeholder="Поиск"
             clearable
         >
-
         </v-text-field>
       </template>
       <template v-slot:item.isConfirmed="props">
@@ -47,16 +46,20 @@ export default class AdminPurchases extends Mixins(HttpServiceMixin) {
       value: 'serviceName',
     },
     {
-      text: 'Место',
-      value: 'place'
-    },
-    {
       text: 'ФИО',
       value: 'userFullName'
     },
     {
+      text: 'Место',
+      value: 'place'
+    },
+    {
       text: 'Номер телефона',
       value: 'phoneNumber'
+    },
+    {
+      text: 'Email',
+      value: 'email'
     },
     {
       text: 'Согласовано',
@@ -72,7 +75,6 @@ export default class AdminPurchases extends Mixins(HttpServiceMixin) {
   confirmedTypeId: ConfirmedType = ConfirmedType.NotCheck;
 
   async mounted() {
-    await this.getPagesCount();
     await this.getPurchases();
   }
 
@@ -83,30 +85,40 @@ export default class AdminPurchases extends Mixins(HttpServiceMixin) {
 
   async getPurchases() {
     await this.purchaseService.GetAllPurchases(this.page, this.searchName, this.confirmedTypeId)
-        .then(response => this.data = response.data);
+        .then(response => {
+          this.data = response.data.purchases;
+          this.pagesCount = response.data.pagesCount
+        });
 
     this.data = this.data.map(item => ({...item, serviceName: getServiceName(item.serviceTypeId)}))
   }
-
-  async getPagesCount() {
-    await this.purchaseService.GetPagesCount()
-        .then(response => this.pagesCount = response.data);
-  }
-
+  
   @Watch('searchName')
   async searchNameHandler(search: string | null) {
     if (!search) search = '';
     
-    await this.getPagesCount();
     await this.getPurchases();
-    
-    this.page = 1;
   }
 
   @Watch('page')
   async pagesCountChangeHandler() {
     await this.getPurchases();
   }
+
+  // @Watch('searchName')
+  // async searchNameHandler(search: string | null) {
+  //   if (!search) search = '';
+  //
+  //   await this.getPagesCount();
+  //   await this.getPurchases();
+  //
+  //   this.page = 1;
+  // }
+  //
+  // @Watch('page')
+  // async pagesCountChangeHandler() {
+  //   await this.getPurchases();
+  // }
 }
 </script>
 <style scoped lang="scss">

@@ -86,7 +86,7 @@ export default class MainLayout extends Vue {
 }
 
 .background-image {
-  background-image: url('../assets/backgrounds/phons.png');
+  background-image: url('../assets/backgrounds/qweqwe 2.png');
   height: 20vh;
 
   position: relative;

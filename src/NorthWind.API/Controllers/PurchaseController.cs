@@ -10,7 +10,7 @@ using NorthWindProject.Application.Features.Purchase.Command.UpdateKGO;
 using NorthWindProject.Application.Features.Purchase.Query.GetAllPurchases;
 using NorthWindProject.Application.Features.Purchase.Query.GetPages;
 using NorthWindProject.Application.Features.Purchase.Query.GetPurchase;
-using NorthWindProject.Application.Features.Purchase.Query.GetPurchases;
+using NorthWindProject.Application.Features.Purchase.Query.GetUserPurchases;
 
 namespace NorthWind.API.Controllers
 {
@@ -18,7 +18,7 @@ namespace NorthWind.API.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetPurchases(CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(new GetPurchasesQuery(), cancellationToken));
+            => Ok(await Mediator.Send(new GetUserPurchasesQuery(), cancellationToken));
 
         [HttpGet("{purchaseId:int}")]
         public async Task<IActionResult> GetPurchase(int purchaseId, CancellationToken cancellationToken)
@@ -26,10 +26,6 @@ namespace NorthWind.API.Controllers
             {
                 PurchaseId = purchaseId
             }, cancellationToken));
-
-        [HttpGet("pages")]
-        public async Task<IActionResult> GetPages(CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(new GetPagesQuery(), cancellationToken));
 
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllPurchases([FromQuery] GetAllPurchasesQuery query,
