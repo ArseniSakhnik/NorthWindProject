@@ -14,9 +14,10 @@
               v-for="(item, i) in clientTypes"
               :key="i"
               class="mt-2"
+              @click="selectClientType(item.id)"
           >
             <v-list-item-content>
-              <div style="font-size: 1.5em" @click="selectClientType(item.id)">{{ item.title }}</div>
+              <div style="font-size: 1.5em">{{ item.title }}</div>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -33,7 +34,7 @@ import {ClientEnum} from "@/enums/Enums";
 @Component
 export default class ChooseClientTypeConfirm extends Mixins(DialogWindowMixin) {
   @PropSync('selectedClient') selectedClientSync!: ClientEnum;
-  
+
   clientTypes: { id: ClientEnum, title: string }[] = [
     {
       id: ClientEnum.Yur,
@@ -44,7 +45,7 @@ export default class ChooseClientTypeConfirm extends Mixins(DialogWindowMixin) {
       title: 'Физическое лицо'
     }
   ]
-  
+
   selectClientType(id: ClientEnum) {
     this.selectedClientSync = id;
   }

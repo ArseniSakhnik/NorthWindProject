@@ -14,9 +14,10 @@
               v-for="(item, i) in services"
               :key="i"
               class="mt-2"
+              @click="selectService(item.id)"
           >
             <v-list-item-content>
-              <div style="font-size: 1.5em" @click="selectService(item.id)">{{ item.title }}</div>
+              <div style="font-size: 1.5em">{{ item.title }}</div>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>

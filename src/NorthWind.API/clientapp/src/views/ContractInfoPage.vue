@@ -4,16 +4,19 @@
         v-if="localData.serviceRequestTypeId === 1"
         :local-data="localData"
         :is-view="isView"
+        :no-action-bar="true"
     />
     <create-vacuum-truck-fiz-contract
         v-else-if="localData.serviceRequestTypeId === 2"
         :local-data="localData"
         :is-view="isView"
+        :no-action-bar="true"
     />
     <create-kgo-yur-contract
         v-else-if="localData.serviceRequestTypeId === 3"
         :local-data="localData"
         :is-view="isView"
+        :no-action-bar="true"
     />
   </v-container>
 </template>
