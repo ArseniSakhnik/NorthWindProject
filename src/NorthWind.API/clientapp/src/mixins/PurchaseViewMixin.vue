@@ -4,9 +4,10 @@ import {KGODto} from "@/services/PurchaseService/Requests";
 import KillReactivityMixin from "@/mixins/KillReactivityMixin.vue";
 import {ServiceTypeEnum} from "@/enums/Enums";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
+import AlertMixin from "@/mixins/AlertMixin.vue";
 
 @Component
-export default class PurchaseViewMixin extends Mixins(HttpServiceMixin) {
+export default class PurchaseViewMixin extends Mixins(HttpServiceMixin, AlertMixin) {
   @Prop() localData!: any;
   @Ref('personalInformationInfo') personalInformation!: any;
   @Ref('purchase') purchaseInfo!: any;
@@ -40,10 +41,18 @@ export default class PurchaseViewMixin extends Mixins(HttpServiceMixin) {
     if (!this.hasErrors()) {
       await this.purchaseService.UpdatePurchase(serviceTypeId, this.localDataInit)
           .then(() => {
-            alert('Успешно');
-            this.setView(false);
+            this.callAlert({
+              message: 'Договор был успешно отредактирован',
+              delay: 7000,
+              isError: false
+            })
+            this.setView(true);
           })
-          .catch(error => this.getErrorMessage(error));
+          .catch(error => this.callAlert({
+            message: this.getErrorMessage(error),
+            delay: 7000,
+            isError: false
+          }));
     }
   }
 
