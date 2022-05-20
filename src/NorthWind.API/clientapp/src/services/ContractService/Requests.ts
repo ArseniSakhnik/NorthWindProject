@@ -1,7 +1,10 @@
-﻿export interface BaseContract {
+﻿import {ServiceEnum} from "@/enums/Enums";
+
+export interface BaseContract {
     phoneNumber: string
     placeName: string
-    email: string
+    email: string,
+    serviceRequestTypeId: ServiceEnum
 }
 
 export interface BaseFizContract extends BaseContract {

@@ -17,8 +17,22 @@
         :is-view="isView"
     />
     <action-card-bar
-        v-if="!noActionBar"
-        @send="createKgoYurContract"
+        v-if="!isRedactPage"
+        @send="createContract"
+        @cancel="back"
+    />
+    <action-card-bar
+        v-if="isRedactPage && isView"
+        send-title="Редактировать"
+        cancel-title="Отмена"
+        @send="isView = true"
+        @cancel="isView = false"
+    />
+    <action-card-bar
+        v-if="isRedactPage && !isView"
+        send-title="Сохранить"
+        cancel-title="Назад"
+        @send="updateContract"
         @cancel="back"
     />
   </v-container>
@@ -34,17 +48,13 @@ import PlacePicker from "@/components/Contracts/ContractPart/PlacePicker.vue";
 import ActionCardBar from "@/components/Contracts/ContractPart/ActionCardBar.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {namespace} from "vuex-class";
-
-const Alert = namespace('AlertStore')
+import ContractViewMixin from "@/mixins/ContractViewMixin.vue";
+import {ServiceEnum} from "@/enums/Enums";
 
 @Component({components: {PlacePicker, YurContractPart, KGOContractInfo, ContractInfo, ActionCardBar}})
-export default class CreateKgoYurContract extends Mixins(HttpServiceMixin) {
-  @Alert.Action('CALL_ALERT') callAlert!: (alertData: any) => void;
-  @Prop({required: false, default: () => false}) isView!: boolean;
-  @Prop({required: false, default: () => false}) noActionBar!: boolean;
-
+export default class CreateKgoYurContract extends Mixins(ContractViewMixin) {
   @Prop({
-    required: false, 
+    required: false,
     default: () => ({
       customerShortName: '', //
       email: '', //
@@ -58,32 +68,10 @@ export default class CreateKgoYurContract extends Mixins(HttpServiceMixin) {
       phoneNumber: '', //
       placeName: '',
       volume: '', //
-      yurAddress: '' //
+      yurAddress: '', //
+      serviceRequestTypeId: ServiceEnum.KGOYur
     })
   }) localData!: KgoYurContract;
-
-  async createKgoYurContract() {
-    const alertData = {
-      message: 'Контракт был создан',
-      delay: 7000,
-      isError: false
-    };
-
-    await this.contractService.CreateKGOYurContract(this.localData)
-        .then(() => {
-          this.callAlert(alertData)
-          this.$router.push('/user-contracts')
-        })
-        .catch(error => {
-          alertData.message = this.getErrorMessage(error);
-          alertData.isError = true;
-          this.callAlert(alertData);
-        })
-  }
-
-  back() {
-    this.$router.back();
-  }
 }
 </script>
 <style scoped lang="scss">

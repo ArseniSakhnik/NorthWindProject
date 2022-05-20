@@ -3,20 +3,17 @@
     <create-vacuum-truck-yur-contract
         v-if="localData.serviceRequestTypeId === 1"
         :local-data="localData"
-        :is-view="isView"
-        :no-action-bar="true"
+        :is-redact-page="true"
     />
     <create-vacuum-truck-fiz-contract
         v-else-if="localData.serviceRequestTypeId === 2"
         :local-data="localData"
-        :is-view="isView"
-        :no-action-bar="true"
+        :is-redact-page="true"
     />
     <create-kgo-yur-contract
         v-else-if="localData.serviceRequestTypeId === 3"
         :local-data="localData"
-        :is-view="isView"
-        :no-action-bar="true"
+        :is-redact-page="true"
     />
   </v-container>
 </template>
@@ -37,8 +34,6 @@ export default class ContractInfoPage extends Mixins(HttpServiceMixin) {
   purchaseId: number = 0;
   localData!: BaseContractDto;
 
-  isView: boolean = true;
-
   created() {
     this.purchaseId = Number(this.$route.params.id);
   }
@@ -48,7 +43,6 @@ export default class ContractInfoPage extends Mixins(HttpServiceMixin) {
       this.localData = response.data
       this.isDataLoaded = true;
     });
-    console.log(this.localData)
   }
 
 }

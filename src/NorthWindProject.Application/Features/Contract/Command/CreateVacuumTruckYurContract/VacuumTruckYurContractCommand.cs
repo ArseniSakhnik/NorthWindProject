@@ -8,13 +8,13 @@ using NorthWindProject.Application.Services.ContractService;
 
 namespace NorthWindProject.Application.Features.Contract.Command.CreateVacuumTruckYurContract
 {
-    public class CreateVacuumTruckYurContractCommand : BaseCreateYurContractCommand, IRequest
+    public class VacuumTruckYurContractCommand : BaseYurContractCommand, IRequest
     {
     }
 
     public class
         CreateVacuumTruckYurContractCommandHandler : IRequestHandler<
-            CreateVacuumTruckYurContractCommand>
+            VacuumTruckYurContractCommand>
     {
         private readonly IContractService _contractService;
 
@@ -23,7 +23,7 @@ namespace NorthWindProject.Application.Features.Contract.Command.CreateVacuumTru
             _contractService = contractService;
         }
 
-        public async Task<Unit> Handle(CreateVacuumTruckYurContractCommand request,
+        public async Task<Unit> Handle(VacuumTruckYurContractCommand request,
             CancellationToken cancellationToken)
         {
             var contract = new VacuumTruckYurContract();

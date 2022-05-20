@@ -5,7 +5,7 @@ using NorthWindProject.Application.Features.Contract.Command.BaseCreateContract;
 
 namespace NorthWindProject.Application.Features.Contract.Command.BaseContractValidator
 {
-    public class BaseCreateYurContractCommandValidator : AbstractValidator<BaseCreateYurContractCommand>
+    public class BaseCreateYurContractCommandValidator : AbstractValidator<BaseYurContractCommand>
     {
         public BaseCreateYurContractCommandValidator(ICurrentUserService currentUserService)
         {

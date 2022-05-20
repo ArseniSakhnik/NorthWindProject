@@ -8,13 +8,13 @@ using NorthWindProject.Application.Services.ContractService;
 
 namespace NorthWindProject.Application.Features.Contract.Command.CreateKgoYurContract
 {
-    public class CreateKgoYurContractCommand : BaseCreateYurContractCommand, IRequest
+    public class KgoYurContractCommand : BaseYurContractCommand, IRequest
     {
         public string Volume { get; set; }
         public string Overload { get; set; }
     }
 
-    public class CreateKgoYurContractCommandHandler : IRequestHandler<CreateKgoYurContractCommand>
+    public class CreateKgoYurContractCommandHandler : IRequestHandler<KgoYurContractCommand>
     {
         private readonly IContractService _contractService;
 
@@ -23,7 +23,7 @@ namespace NorthWindProject.Application.Features.Contract.Command.CreateKgoYurCon
             _contractService = contractService;
         }
 
-        public async Task<Unit> Handle(CreateKgoYurContractCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(KgoYurContractCommand request, CancellationToken cancellationToken)
         {
             var kgoContract = new KGOYurContract();
 

@@ -22,9 +22,9 @@ namespace NorthWindProject.Application.Services.ContractService
 {
     public interface IContractService
     {
-        void FillContract(BaseCreateContractCommand command, Contract contract);
-        void FillFizContract(BaseCreateFizContractCommand command, FizContract fizContract);
-        void FillYurContract(BaseCreateYurContractCommand command, YurContract yurContract);
+        void FillContract(BaseContractCommand command, Contract contract);
+        void FillFizContract(BaseFizContractCommand command, FizContract fizContract);
+        void FillYurContract(BaseYurContractCommand command, YurContract yurContract);
         void FillContractDto(Contract contract, dynamic baseContractDto);
         void FillFizContractDto(FizContract fizContract, dynamic baseFizContractDto);
         void FillYurContractDto(YurContract yurContract, dynamic baseYurContractDto);
@@ -50,7 +50,7 @@ namespace NorthWindProject.Application.Services.ContractService
             _encryptionService = encryptionService;
         }
 
-        public void FillContract(BaseCreateContractCommand command, Contract contract)
+        public void FillContract(BaseContractCommand command, Contract contract)
         {
             var currentDate = DateTime.Now;
 
@@ -62,12 +62,12 @@ namespace NorthWindProject.Application.Services.ContractService
             contract.Email = command.Email;
         }
 
-        public void FillFizContract(BaseCreateFizContractCommand command, FizContract fizContract)
+        public void FillFizContract(BaseFizContractCommand command, FizContract fizContract)
         {
             fizContract.IndividualFullName = command.IndividualFullName;
         }
 
-        public void FillYurContract(BaseCreateYurContractCommand command, YurContract yurContract)
+        public void FillYurContract(BaseYurContractCommand command, YurContract yurContract)
         {
             yurContract.INN = command.INN;
             yurContract.KPP = command.KPP;
@@ -81,6 +81,7 @@ namespace NorthWindProject.Application.Services.ContractService
 
         public void FillContractDto(Contract contract, dynamic baseContractDto)
         {
+            baseContractDto.id = contract.Id;
             baseContractDto.day = contract.Day;
             baseContractDto.month = contract.Month;
             baseContractDto.year = contract.Year;

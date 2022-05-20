@@ -1,6 +1,6 @@
 ﻿namespace NorthWindProject.Application.Features.Contract.Command.BaseCreateContract
 {
-    public abstract class BaseCreateFizContractCommand : BaseCreateContractCommand
+    public abstract class BaseFizContractCommand : BaseContractCommand
     {
         public string IndividualFullName { get; set; }
     }

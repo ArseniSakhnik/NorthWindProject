@@ -6,7 +6,7 @@ using NorthWindProject.Application.Features.Contract.Command.BaseContractValidat
 namespace NorthWindProject.Application.Features.Contract.Command.CreateVacuumTruckYurContract
 {
     public class
-        CreateVacuumTruckYurContractCommandValidator : AbstractValidator<CreateVacuumTruckYurContractCommand>
+        CreateVacuumTruckYurContractCommandValidator : AbstractValidator<VacuumTruckYurContractCommand>
     {
         public CreateVacuumTruckYurContractCommandValidator(ICurrentUserService currentUserService)
         {

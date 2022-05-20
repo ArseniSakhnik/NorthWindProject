@@ -13,8 +13,22 @@
         :is-view="isView"
     />
     <action-card-bar
-        v-if="!noActionBar"
-        @send="createVacuumTruckYurContract"
+        v-if="!isRedactPage"
+        @send="createContract"
+        @cancel="back"
+    />
+    <action-card-bar
+        v-if="isRedactPage && isView"
+        send-title="Редактировать"
+        cancel-title="Отмена"
+        @send="toggleView(false)"
+        @cancel="toggleView(true)"
+    />
+    <action-card-bar
+        v-if="isRedactPage && !isView"
+        send-title="Сохранить"
+        cancel-title="Назад"
+        @send="updateContract"
         @cancel="back"
     />
   </v-container>
@@ -29,15 +43,12 @@ import PlacePicker from "@/components/Contracts/ContractPart/PlacePicker.vue";
 import ActionCardBar from "@/components/Contracts/ContractPart/ActionCardBar.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import {namespace} from "vuex-class";
+import ContractViewMixin from "@/mixins/ContractViewMixin.vue";
+import {ServiceEnum} from "@/enums/Enums";
 
-const Alert = namespace('AlertStore')
 
 @Component({components: {PlacePicker, ContractInfo, YurContractPart, ActionCardBar}})
-export default class CreateVacuumTruckContract extends Mixins(HttpServiceMixin) {
-  @Alert.Action('CALL_ALERT') callAlert!: (alertData: any) => void;
-  @Prop({required: false, default: () => false}) isView!: boolean;
-  @Prop({required: false, default: () => false}) noActionBar!: boolean;
-
+export default class CreateVacuumTruckContract extends Mixins(ContractViewMixin) {
   @Prop({
     required: false, default: () => ({
       customerShortName: '',
@@ -50,32 +61,11 @@ export default class CreateVacuumTruckContract extends Mixins(HttpServiceMixin) 
       operatesOnBasis: '',
       phoneNumber: '',//
       placeName: '',
-      yurAddress: ''//
+      yurAddress: '', //,
+      serviceRequestTypeId: ServiceEnum.AssenizatorYur
     })
   }) localData!: VacuumTruckYurContract;
-
-  async createVacuumTruckYurContract() {
-    const alertData = {
-      message: 'Контракт был отправлен',
-      delay: 7000,
-      isError: false
-    };
-
-    await this.contractService.CreateVacuumTruckYurContract(this.localData)
-        .then(() => {
-          this.callAlert(alertData)
-          this.$router.push('/user-contracts')
-        })
-        .catch(error => {
-          alertData.message = this.getErrorMessage(error);
-          alertData.isError = true;
-          this.callAlert(alertData);
-        })
-  }
-
-  back() {
-    this.$router.back();
-  }
+  
 }
 </script>
 <style scoped lang="scss">

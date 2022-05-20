@@ -1,6 +1,6 @@
 ﻿namespace NorthWindProject.Application.Features.Contract.Command.BaseCreateContract
 {
-    public abstract class BaseCreateYurContractCommand : BaseCreateContractCommand
+    public abstract class BaseYurContractCommand : BaseContractCommand
     {
         public string INN { get; set; }
         public string KPP { get; set; }
