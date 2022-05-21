@@ -47,12 +47,14 @@ export default class ContractsTable extends Mixins(HttpServiceMixin, AlertMixin)
     {
       text: 'Открыть',
       value: 'open',
-      align: 'center'
+      align: 'center',
+      sortable: false
     },
     {
       text: 'Удалить',
       value: 'delete',
-      align: 'center'
+      align: 'center',
+      sortable: false
     }
   ]
 
@@ -89,7 +91,6 @@ export default class ContractsTable extends Mixins(HttpServiceMixin, AlertMixin)
     await this.contractService.GetUserContracts()
         .then(response => this.data = response.data);
   }
-
 }
 </script>
 <style scoped lang="scss">

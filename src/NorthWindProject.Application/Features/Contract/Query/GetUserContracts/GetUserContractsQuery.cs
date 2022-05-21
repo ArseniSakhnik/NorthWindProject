@@ -36,7 +36,8 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetUserContracts
                 {
                     Id = contract.Id,
                     ServiceName = contract.Service.ServiceView.Title,
-                    PlaceName = contract.PlaceName
+                    PlaceName = contract.PlaceName,
+                    IsConfirmed = contract.IsConfirmed
                 })
                 .ToListAsync(cancellationToken);
         }

@@ -25,8 +25,8 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
         [DocumentProp("адрестерритории")] public string PlaceName { get; set; }
 
         public string Email { get; set; }
-
         public int UserId { get; set; }
+        public bool IsConfirmed { get; set; }
         public ApplicationUser User { get; set; }
         public ServiceEnum ServiceId { get; set; }
         public Service Service { get; set; }

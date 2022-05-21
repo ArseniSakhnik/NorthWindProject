@@ -13,19 +13,26 @@
         :is-view="isView"
     />
     <action-card-bar
-        v-if="!isRedactPage"
+        v-if="isAdminView"
+        @send="confirmPurchase"
+        send-title="Подтвердить"
+        cancel-title="Назад"
+        @cancel="back"
+    />
+    <action-card-bar
+        v-else-if="!isRedactPage && isUserView"
         @send="createContract"
         @cancel="back"
     />
     <action-card-bar
-        v-if="isRedactPage && isView"
+        v-if="isRedactPage && isView && isUserView"
         send-title="Редактировать"
         cancel-title="Отмена"
         @send="toggleView(false)"
         @cancel="toggleView(true)"
     />
     <action-card-bar
-        v-if="isRedactPage && !isView"
+        v-if="isRedactPage && !isView && isUserView"
         send-title="Сохранить"
         cancel-title="Назад"
         @send="updateContract"
@@ -65,7 +72,7 @@ export default class CreateVacuumTruckContract extends Mixins(ContractViewMixin)
       serviceRequestTypeId: ServiceEnum.AssenizatorYur
     })
   }) localData!: VacuumTruckYurContract;
-  
+
 }
 </script>
 <style scoped lang="scss">

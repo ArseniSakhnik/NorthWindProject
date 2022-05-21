@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using DevExtreme.AspNet.Data;
 using Microsoft.AspNetCore.Mvc;
+using NorthWindProject.Application.Features.Contract.Command.ConfirmContract;
 using NorthWindProject.Application.Features.Contract.Command.CreateKgoYurContract;
 using NorthWindProject.Application.Features.Contract.Command.CreateVacuumTruckFizContract;
 using NorthWindProject.Application.Features.Contract.Command.CreateVacuumTruckYurContract;
@@ -34,6 +35,11 @@ namespace NorthWind.API.Controllers
         [HttpGet("get-user-contracts")]
         public async Task<IActionResult> GetUserContracts(CancellationToken cancellationToken)
             => Ok(await Mediator.Send(new GetUserContractsQuery(), cancellationToken));
+
+        [HttpPut("confirm")]
+        public async Task<IActionResult> ConfirmContract(ConfirmContractCommand command,
+            CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(command, cancellationToken));
 
         [HttpPost("create-vacuum-truck-fiz-contract")]
         public async Task<IActionResult> CreateContractToVacuumTruckFizContract(

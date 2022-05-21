@@ -47,6 +47,15 @@ const adminRoutes: Array<RouteConfig> = [
             name: 'Информация о заявке'
         }
     },
+    {
+        path: '/contract-info-admin/:id',
+        name: 'ContractInfoAdmin',
+        component: ContractInfoPage,
+        meta: {
+            layout: 'Admin',
+            name: 'Информация о договоре'
+        }
+    }
 ]
 
 const userRoutes: Array<RouteConfig> = [

@@ -6,6 +6,8 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetUserContracts
     {
         public int Id { get; set; }
         public string ServiceName { get; set; }
+        
+        public bool IsConfirmed { get; set; }
         public string PlaceName { get; set; }
     }
 }

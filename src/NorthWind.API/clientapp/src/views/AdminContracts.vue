@@ -18,6 +18,13 @@
         >
         </v-text-field>
       </template>
+      <template v-slot:item.confirm="props">
+        <v-icon v-if="!props.item.isConfirmed" @click="confirmPurchase(props.item)">mdi-thumb-down</v-icon>
+        <v-icon v-else @click="confirmPurchase(props.item)">mdi-thumb-up</v-icon>
+      </template>
+      <template v-slot:item.open="props">
+        <v-icon @click="openPurchase(props.item.id)">mdi-eye</v-icon>
+      </template>
     </v-data-table>
     <v-pagination
         v-model="page"
@@ -34,10 +41,11 @@ import {ConfirmedType} from "@/enums/Enums";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import MomentMixin from "@/mixins/MomentMixin.vue";
 import moment from "moment";
+import AlertMixin from "@/mixins/AlertMixin.vue";
 
 @Component
-export default class AdminContracts extends Mixins(HttpServiceMixin, MomentMixin) {
-  headers: { text: string, value: string }[] = [
+export default class AdminContracts extends Mixins(HttpServiceMixin, MomentMixin, AlertMixin) {
+  headers = [
     {
       text: 'Услуга',
       value: 'serviceName'
@@ -61,7 +69,17 @@ export default class AdminContracts extends Mixins(HttpServiceMixin, MomentMixin
     {
       text: 'Email',
       value: 'email'
-    }
+    },
+    {
+      text: 'Открыть',
+      value: 'open'
+    },
+    {
+      text: 'Подтверждено',
+      value: 'confirm',
+      align: 'center',
+      sortable: false
+    },
   ]
 
   data: ContractDto[] = []
@@ -86,6 +104,27 @@ export default class AdminContracts extends Mixins(HttpServiceMixin, MomentMixin
         });
   }
 
+  openPurchase(contractId: number) {
+    //@ts-ignore
+    this.$router.push(`/contract-info-admin/${contractId}`);
+  }
+
+  async confirmPurchase(item: any) {
+    await this.contractService.ConfirmContract(item.id, !item.isConfirmed)
+        .then(() => this.callAlert({
+          message: 'Успешно',
+          delay: 7000,
+          isError: false
+        }))
+        .catch(error => this.callAlert({
+          message: this.getErrorMessage(error),
+          delay: 7000,
+          isError: true
+        }));
+
+    await this.getContracts();
+  }
+
   @Watch('searchName')
   async searchNameHandler(search: string | null) {
     if (!search) search = '';
@@ -94,7 +133,7 @@ export default class AdminContracts extends Mixins(HttpServiceMixin, MomentMixin
 
     this.page = 1;
   }
-  
+
   @Watch('page')
   async pageChangeHandler() {
     await this.getContracts()

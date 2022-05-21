@@ -88,6 +88,7 @@ namespace NorthWindProject.Application.Services.ContractService
             baseContractDto.phoneNumber = contract.PhoneNumber;
             baseContractDto.placeName = contract.PlaceName;
             baseContractDto.email = contract.Email;
+            baseContractDto.isConfirmed = contract.IsConfirmed;
 
             baseContractDto.serviceRequestTypeId = contract switch
             {

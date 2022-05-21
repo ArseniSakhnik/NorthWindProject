@@ -21,6 +21,13 @@ export default class ContractService extends HttpService {
         }
     }
 
+    public ConfirmContract(contractId: number, isConfirmed: boolean) {
+        return this._put('confirm', {
+            contractId,
+            isConfirmed
+        });
+    }
+
     public GetContracts(page: number, searchName: string, confirmedTypeId: ConfirmedType): Promise<AxiosResponse<ContractAndPageDto>> {
         return this._get(`?page=${page}&searchName=${searchName}&confirmedTypeId=${confirmedTypeId}`);
     }
