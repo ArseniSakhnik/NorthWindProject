@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -21,7 +22,6 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
         public string MiddleName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string Password { get; set; }
     }
 
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, string>
@@ -54,7 +54,9 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 FullName = $"{request.Surname} {request.Name} {request.MiddleName} ",
             };
 
-            var result = await _userManager.CreateAsync(user, request.Password);
+            var password = CreatePassword();
+
+            var result = await _userManager.CreateAsync(user, password);
 
             if (!result.Succeeded) throw new ClientValidationException("Не удалось зарегестрироваться");
 
@@ -72,13 +74,32 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                 Username = "Здравствуйте!",
                 Subject = "Подтверждение аккаунта",
                 HtmlBody =
-                    $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>"
+                    $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>" +
+                    $"<div>Ваш пароль: {password}</div>"
             });
 
-            await _userManager.AddToRoleAsync(user, RolesEnum.Пользователь.ToString());
+            await _userManager.AddToRoleAsync(user, "Client");
             // await _signInManager.SignInAsync(user, false);
 
             return "Для завершения регистрации подтвердите аккаунт на электронной почте";
+        }
+
+
+        private static string CreatePassword()
+        {
+            var rnd = new Random();
+
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            var res = new StringBuilder();
+
+            var length = rnd.Next(7, 10);
+
+            while (0 < length--)
+            {
+                res.Append(valid[rnd.Next(valid.Length)]);
+            }
+
+            return res.ToString();
         }
     }
 }

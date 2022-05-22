@@ -9,7 +9,6 @@ export type RegisterModel = {
     middleName: string
     email: string
     phoneNumber: string
-    password: string
 }
 
 export type ConfirmEmailModel = {

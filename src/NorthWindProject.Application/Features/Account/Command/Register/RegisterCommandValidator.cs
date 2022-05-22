@@ -37,9 +37,6 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
 
             RuleFor(command => command.PhoneNumber)
                 .SetValidator(new StringValidator());
-
-            RuleFor(command => command.Password)
-                .SetValidator(new StringValidator());
         }
 
         private async Task<bool> IsEmailUnique(string email, CancellationToken cancellationToken)

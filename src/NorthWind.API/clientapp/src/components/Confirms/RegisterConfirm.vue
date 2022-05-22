@@ -61,14 +61,6 @@
                     prefix="+7"
                 />
               </v-col>
-              <v-col cols="12">
-                <v-text-field
-                    v-model="localData.password"
-                    label="Пароль"
-                    required
-                    type="password"
-                />
-              </v-col>
               <v-col>
                 <div v-if="errorMessage.length" class="error-message">{{ errorMessage }}</div>
               </v-col>
@@ -114,7 +106,6 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin, DialogWind
     email: 'sakhnikarseni@mail.ru',
     middleName: 'Алексеевич',
     name: 'Арсений',
-    password: 'парольДаЯ',
     phoneNumber: '9021945789',
     surname: 'Сахник',
   }
