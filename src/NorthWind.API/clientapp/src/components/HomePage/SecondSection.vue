@@ -1,7 +1,7 @@
 <template>
   <div class="second-section">
     <v-container>
-      <v-btn color="#FF9B52" text>
+      <v-btn color="#FF9B52" text @click="toService">
         <v-icon left>
           mdi-arrow-up-left
         </v-icon>
@@ -112,6 +112,10 @@ import SliderAuto from "@/components/SliderAuto.vue";
   components: {SliderAuto, RecyclingHome, AboutService, Customer, Land, RecyclingCar, Reward, Time, ArrowRight}
 })
 export default class SecondSection extends Vue {
+  toService() {
+    scroll(0, 0)
+  }
+  
 }
 </script>
 
