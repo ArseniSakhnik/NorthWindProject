@@ -29,7 +29,7 @@
       </template>
       <vs-navbar-item v-for="({title, to},index) in menuItems"
                       :key="index"
-                      :to="to">
+                      @click="goTo(to)">
         {{ title }}
       </vs-navbar-item>
       <template #right>
@@ -95,7 +95,7 @@
               class="navbar-items-list"
           >
             <v-list-item v-for="item in menuItems">
-              <v-list-item-title @click="$router.push(item.to)">{{ item.title }}</v-list-item-title>
+              <v-list-item-title @click="goTo(item.to)">{{ item.title }}</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -125,6 +125,14 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
 
   drawer: boolean = false;
   group: any = null;
+
+  goTo(to: string) {
+    if (this.$route.path === to) {
+      scroll(0, 0);
+    } else {
+      this.$router.push(to)
+    }
+  }
 
   goToUserInfo() {
     this.$router.push('/user-purchases')
@@ -178,7 +186,7 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   gotoMainPage() {
     this.$router.push('/')
   }
-  
+
   closeLoginAndOpenRegisterForm() {
     this.isLogInDialogOpened = false;
     this.isRegisterDialogOpened = true;
