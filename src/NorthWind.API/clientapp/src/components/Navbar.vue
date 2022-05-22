@@ -16,11 +16,7 @@
         />
       </template>
       <template v-else #left>
-        <img
-            src="../assets/small_logo.png"
-            @click="gotoMainPage"
-            alt="Logo"
-        />
+        <logo style="max-width: 50px; max-height: 50px;" class="mr-2"/>
         <span
             @click="gotoMainPage"
         >
@@ -111,11 +107,12 @@ import {namespace} from "vuex-class";
 import RegisterConfirm from "@/components/Confirms/RegisterConfirm.vue";
 import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import LoginConfirm from "@/components/Confirms/LoginConfirm.vue";
+import Logo from "@/components/Logo/Logo.vue";
 
 const User = namespace('CurrentUserStore');
 
 @Component({
-  components: {RegisterConfirm, LoginConfirm}
+  components: {RegisterConfirm, LoginConfirm, Logo}
 })
 export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   @User.Getter('IS_USER_AUTHENTICATED') isUserAuthenticated!: boolean;
