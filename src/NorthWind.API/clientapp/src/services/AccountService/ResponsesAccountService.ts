@@ -11,3 +11,8 @@ export type UserDto = {
     fullName: string,
     roles: RolesEnum[]
 }
+
+export type UserAndPageDto = {
+    users: UserDto[],
+    pagesCount: number
+}

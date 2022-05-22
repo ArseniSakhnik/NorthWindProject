@@ -16,6 +16,7 @@ import CreateVacuumTruckYurContract from "@/views/Contracts/CreateVacuumTruckYur
 import CreateVacuumTruckFizContract from "@/views/Contracts/CreateVacuumTruckFizContract.vue";
 import ContractInfoPage from "@/views/ContractInfoPage.vue";
 import AdminContracts from "@/views/AdminContracts.vue";
+import AdminUsers from "@/views/AdminUsers.vue";
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,15 @@ const adminRoutes: Array<RouteConfig> = [
         meta: {
             layout: 'Admin',
             name: 'Договоры'
+        }
+    },
+    {
+        path: '/admin-users',
+        name: 'AdminUsers',
+        component: AdminUsers,
+        meta: {
+            layout: 'Admin',
+            name: 'Пользователи'
         }
     },
     {

@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using NorthWind.Core.Entities.User;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Exceptions;
 using NorthWindProject.Application.Common.Extensions;
 using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 using NorthWindProject.Application.Common.Models;
-using NorthWindProject.Application.Entities.User;
 
 namespace NorthWindProject.Application.Features.Account.Command.Register
 {
@@ -75,7 +75,7 @@ namespace NorthWindProject.Application.Features.Account.Command.Register
                     $"<div>Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>Подтверждение регистрации</a></div>"
             });
 
-            await _userManager.AddToRoleAsync(user, RolesEnum.Client.ToString());
+            await _userManager.AddToRoleAsync(user, RolesEnum.Пользователь.ToString());
             // await _signInManager.SignInAsync(user, false);
 
             return "Для завершения регистрации подтвердите аккаунт на электронной почте";

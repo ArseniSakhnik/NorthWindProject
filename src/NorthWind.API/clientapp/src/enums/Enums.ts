@@ -10,6 +10,7 @@ export enum ServiceViewEnum {
 }
 
 export enum RolesEnum {
+    All = 0,
     Admin = 1,
     Client = 2
 }
@@ -39,5 +40,4 @@ export enum ConfirmedType {
 export enum ClientEnum {
     Yur = 1,
     Fiz = 2
-    
 }

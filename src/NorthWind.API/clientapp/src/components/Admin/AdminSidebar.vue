@@ -47,7 +47,13 @@ export default class AdminSidebar extends Vue {
       icon: 'mdi-check-circle',
       name: 'Контракты',
       route: '/admin-contracts'
-    } 
+    },
+    {
+      viewId: 2,
+      icon: 'mdi-human-edit',
+      name: 'Пользователи',
+      route: '/admin-users'
+    }
   ]
 
   goTo(route: string) {
