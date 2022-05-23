@@ -53,7 +53,7 @@ namespace NorthWind.API
 
             if (isMariaDb)
             {
-                var mySqlVersion = new MariaDbServerVersion(new Version(10, 5, 15));
+                var mySqlVersion = new MariaDbServerVersion(new Version(mySqlMajor, mySqlMinor, mySqlBuild));
                 services.AddDbContext<AppDbContext>(options =>
                 {
                     options.UseMySql(connectionString, mySqlVersion,

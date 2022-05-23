@@ -11,6 +11,7 @@
           v-model="localDataSync.phoneNumber"
           label="Номер телефона"
           prefix="+7"
+          mask="(###)-###-##-##"
           :is-readonly="isView"
       />
       <string-field

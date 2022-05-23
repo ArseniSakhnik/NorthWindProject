@@ -8,10 +8,14 @@
     <v-card>
       <v-card-title>
         <h2>{{ serviceTitle }}</h2>
-        <h2>Сложно? Закажите <span
+        <h2> Сложно? Закажите <span
+            class=""
             @click="openRequestCall"
-            style="cursor: pointer"
-        >Обратный звонок</span></h2>
+            style="cursor: pointer; background-color: transparent !important; text-decoration: underline"
+        >
+          Обратный звонок
+        </span>
+        </h2>
       </v-card-title>
       <v-card-text>
         <v-stepper
@@ -83,6 +87,7 @@
         </v-stepper>
       </v-card-text>
       <v-card-actions>
+        <v-spacer></v-spacer>
         <v-btn @click="currentStep--" :disabled="currentStep === 1">
           Назад
         </v-btn>
@@ -144,9 +149,8 @@ export default class PurchaseDialog extends Mixins(DialogWindowMixin, HttpServic
     serviceTypeId: undefined
   }
 
-  @Emit()
   openRequestCall(e: any) {
-    return e;
+    this.$emit('openRequestCall')
   }
 
   async nextStep() {

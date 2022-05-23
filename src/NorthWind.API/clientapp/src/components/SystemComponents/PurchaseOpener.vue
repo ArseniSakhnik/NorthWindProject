@@ -35,6 +35,7 @@ export default class PurchaseOpener extends Vue {
   isRequestDialogActive: boolean = false;
   
   openRequestCall() {
+    this.isDialogActive = false;
     this.isRequestDialogActive = true;
   }
 
