@@ -5,6 +5,7 @@ import ServiceViewService from "@/services/ServiceViewService/ServiceViewService
 import ContractService from "@/services/ContractService/ContractService";
 import {CarsService} from "@/services/CarsService/CarsService";
 import PurchaseService from "@/services/PurchaseService/PurchaseService";
+import RequestCallService from "@/services/RequestCallService/RequestCallService";
 
 @Component
 export default class HttpServiceMixin extends Vue {
@@ -13,6 +14,7 @@ export default class HttpServiceMixin extends Vue {
   protected serviceViewService: ServiceViewService = new ServiceViewService()
   protected contractService: ContractService = new ContractService()
   protected purchaseService: PurchaseService = new PurchaseService()
+  protected requestCallService: RequestCallService = new RequestCallService()
 
   getErrorMessage(error: any): string {
     return error.response.data.errorMessage;

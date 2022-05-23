@@ -20,6 +20,7 @@ using NorthWindProject.Application.Middlewares;
 using NorthWindProject.Application.Services;
 using NorthWindProject.Application.Services.ContractService;
 using NorthWindProject.Application.Services.PurchaseService;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace NorthWind.API
 {
@@ -48,13 +49,26 @@ namespace NorthWind.API
             var mySqlMajor = int.Parse(appSettings.MySqlMajorVersion);
             var mySqlMinor = int.Parse(appSettings.MySqlMinorVersion);
             var mySqlBuild = int.Parse(appSettings.MySqlBuild);
-            var mySqlVersion = new MySqlServerVersion(new Version(mySqlMajor, mySqlMinor, mySqlBuild));
-            services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseMySql(connectionString, mySqlVersion,
-                    sql => { sql.MigrationsAssembly("NorthWind.API"); });
-            });
+            var isMariaDb = appSettings.IsMariaDb;
 
+            if (isMariaDb)
+            {
+                var mySqlVersion = new MariaDbServerVersion(new Version(10, 5, 15));
+                services.AddDbContext<AppDbContext>(options =>
+                {
+                    options.UseMySql(connectionString, mySqlVersion,
+                        sql => { sql.MigrationsAssembly("NorthWind.API"); });
+                });
+            }
+            else
+            {
+                var mySqlVersion = new MySqlServerVersion(new Version(mySqlMajor, mySqlMinor, mySqlBuild));
+                services.AddDbContext<AppDbContext>(options =>
+                {
+                    options.UseMySql(connectionString, mySqlVersion,
+                        sql => { sql.MigrationsAssembly("NorthWind.API"); });
+                });
+            }
 
             services.AddHttpContextAccessor();
             services.AddApplication();

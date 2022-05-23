@@ -8,6 +8,10 @@
     <v-card>
       <v-card-title>
         <h2>{{ serviceTitle }}</h2>
+        <h2>Сложно? Закажите <span
+            @click="openRequestCall"
+            style="cursor: pointer"
+        >Обратный звонок</span></h2>
       </v-card-title>
       <v-card-text>
         <v-stepper
@@ -95,7 +99,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins, Prop, Ref, Watch} from "vue-property-decorator";
+import {Component, Emit, Mixins, Prop, Ref, Watch} from "vue-property-decorator";
 import DialogWindowMixin from "@/mixins/DialogWindowMixin.vue";
 import AssenizatorPurchase from "@/components/Purchase/AssenizatorPurchase.vue";
 import PersonalInformationInfo from "@/components/FieldSections/PersonalInformationInfo.vue";
@@ -140,14 +144,17 @@ export default class PurchaseDialog extends Mixins(DialogWindowMixin, HttpServic
     serviceTypeId: undefined
   }
 
+  @Emit()
+  openRequestCall(e: any) {
+    return e;
+  }
+
   async nextStep() {
     const hasErrors = this.hasErrors();
-
     if (!hasErrors && this.currentStep === 3) {
       await this.sendPurchase();
       return;
     }
-
     if (!hasErrors) {
       this.currentStep++;
     }

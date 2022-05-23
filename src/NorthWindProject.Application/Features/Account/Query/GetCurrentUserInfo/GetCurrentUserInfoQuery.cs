@@ -25,6 +25,11 @@ namespace NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo
 
         public async Task<UserDto> Handle(GetCurrentUserInfoQuery request, CancellationToken cancellationToken)
         {
+            var roles = _context.UserRoles
+                .Where(usr => usr.UserId == _currentUserService.UserId)
+                .Select(usr => usr.RoleId)
+                .ToList();
+            
             return _currentUserService.UserId == 0
                 ? new UserDto()
                 : await _context.Users
@@ -39,10 +44,7 @@ namespace NorthWindProject.Application.Features.Account.Query.GetCurrentUserInfo
                         Surname = user.Surname,
                         MiddleName = user.MiddleName,
                         FullName = $"{user.Name} {user.MiddleName} {user.Surname}",
-                        Roles = _context.UserRoles
-                            .Where(usr => usr.UserId == _currentUserService.UserId)
-                            .Select(usr => usr.RoleId)
-                            .ToList()
+                        Roles = roles
                     })
                     .SingleOrDefaultAsync(cancellationToken);
         }

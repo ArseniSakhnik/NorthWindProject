@@ -20,6 +20,42 @@
         <_ContentIncludedByDefault Remove="clientapp\package-lock.json" />
         <_ContentIncludedByDefault Remove="clientapp\package.json" />
         <_ContentIncludedByDefault Remove="clientapp\tsconfig.json" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\css\app.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\css\chunk-vendors.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\fonts\dxicons.ttf" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\fonts\dxicons.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\fonts\dxicons.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\car1.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\car2.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\car3.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\car4.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\documents.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\Frame30.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\android-chrome-192x192.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\android-chrome-512x512.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\android-chrome-maskable-192x192.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\android-chrome-maskable-512x512.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\apple-touch-icon-120x120.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\apple-touch-icon-152x152.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\apple-touch-icon-180x180.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\apple-touch-icon-60x60.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\apple-touch-icon-76x76.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\apple-touch-icon.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\favicon-16x16.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\favicon-32x32.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\msapplication-icon-144x144.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\mstile-150x150.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\icons\safari-pinned-tab.svg" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\insignts-1-1192699.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\phons.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\qweqwe 2.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\img\small_logo.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\js\app.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\js\chunk-vendors.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\manifest.json" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\precache-manifest.e2827f92acc438b0a7145712136c8948.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\robots.txt" />
+        <_ContentIncludedByDefault Remove="wwwroot\bundles\service-worker.js" />
     </ItemGroup>
 
     <ItemGroup>

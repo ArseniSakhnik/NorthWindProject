@@ -11,7 +11,6 @@ namespace NorthWindProject.Application.Features.RequestCall.Command.CreateReques
     public class CreateRequestCallCommand : IRequest
     {
         public string Name { get; set; }
-
         public string PhoneNumber { get; set; }
         public string Comment { get; set; }
     }

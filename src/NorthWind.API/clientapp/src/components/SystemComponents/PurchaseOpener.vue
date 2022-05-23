@@ -1,5 +1,8 @@
 ﻿<template>
   <div>
+    <confirm-request-call
+        :is-active.sync="isRequestDialogActive"
+    />
     <orange-button
         style="margin-right: 1em"
         title="Заказать услугу"
@@ -9,6 +12,7 @@
         :key="updateToken"
         :is-active.sync="isDialogActive"
         :service-type="serviceType"
+        @openRequestCall="openRequestCall"
     />
   </div>
 </template>
@@ -18,15 +22,21 @@ import {Component, Prop, Ref, Vue, Watch} from "vue-property-decorator";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import {ServiceTypeEnum} from "@/enums/Enums";
 import PurchaseDialog from "@/components/PurchaseDialog.vue";
+import ConfirmRequestCall from "@/components/Confirms/ConfirmRequestCall.vue";
 
 
-@Component({components: {OrangeButton, PurchaseDialog}})
+@Component({components: {OrangeButton, PurchaseDialog, ConfirmRequestCall}})
 export default class PurchaseOpener extends Vue {
   @Ref('dialogRef') dialogRef!: any;
   @Prop() serviceType!: ServiceTypeEnum;
   updateToken: number = 1;
   
   isDialogActive: boolean = false;
+  isRequestDialogActive: boolean = false;
+  
+  openRequestCall() {
+    this.isRequestDialogActive = true;
+  }
 
   openPurchase() {
     this.isDialogActive = true;
