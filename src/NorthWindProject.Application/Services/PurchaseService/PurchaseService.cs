@@ -2,12 +2,15 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Purchase;
+using NorthWind.Core.Entities.User;
 using NorthWind.Core.Enums;
 using NorthWind.Core.Interfaces;
 using NorthWindProject.Application.Common.Access;
+using NorthWindProject.Application.Features.Account.Command.Register;
 using NorthWindProject.Application.Features.Purchase.Command.BaseCreatePurchase;
 using NorthWindProject.Application.Features.Purchase.Command.UpdateAssenizator;
 using NorthWindProject.Application.Features.Purchase.Command.UpdateKGO;
@@ -17,18 +20,46 @@ namespace NorthWindProject.Application.Services.PurchaseService
     public class PurchaseService
     {
         private readonly ICurrentUserService _currentUserService;
+        private readonly IMediator _mediator;
 
-        public PurchaseService(ICurrentUserService currentUserService)
+        public PurchaseService(ICurrentUserService currentUserService, IMediator mediator)
         {
             _currentUserService = currentUserService;
+            _mediator = mediator;
         }
 
-        public async Task CreatePurchase<T>(AppDbContext context, T purchase, CancellationToken cancellationToken)
+        public async Task CreatePurchase<T>(AppDbContext context, 
+            T purchase, 
+            CancellationToken cancellationToken)
             where T : Purchase
         {
-            var currentUser = await context.Users
-                .Where(user => user.Id == _currentUserService.UserId)
-                .SingleOrDefaultAsync(cancellationToken);
+
+            var isUserAuthenticated = _currentUserService.UserId != 0;
+
+            ApplicationUser currentUser = null;
+
+            if (!isUserAuthenticated)
+            {
+                currentUser = await context.Users
+                    .Where(user => user.Email == purchase.Email)
+                    .SingleOrDefaultAsync(cancellationToken);
+
+                if (currentUser is null)
+                {
+                    await _mediator.Send(new RegisterCommand
+                    {
+                        Name = purchase.Name,
+                        Surname = purchase.Surname,
+                        MiddleName = purchase.MiddleName,
+                        Email = purchase.Email,
+                        PhoneNumber = purchase.PhoneNumber
+                    }, cancellationToken);
+                    
+                    currentUser = await context.Users
+                        .Where(user => user.Email == purchase.Email)
+                        .SingleOrDefaultAsync(cancellationToken);
+                }
+            }
 
             AuditableEntityFill(purchase);
             currentUser.Purchases.Add(purchase);
@@ -118,7 +149,7 @@ namespace NorthWindProject.Application.Services.PurchaseService
                 purchase.DistanceFromDriveway = kgoCommand.PlannedWasteVolume;
             }
         }
-        
+
         private void AuditableEntityFill(AuditableEntity purchase)
         {
             purchase.CreatedByUsername = _currentUserService.UserName;

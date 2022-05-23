@@ -40,6 +40,10 @@ namespace NorthWind.API.Controllers
         [HttpPost("kgo")]
         public async Task<IActionResult> CreateKGO(KgoCommand command, CancellationToken cancellationToken)
             => Ok(await Mediator.Send(command, cancellationToken));
+        
+        [HttpPut("kgo")]
+        public async Task<IActionResult> UpdateKGO(UpdateKGOCommand command, CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(command, cancellationToken));
 
         [HttpPut("assenizator")]
         public async Task<IActionResult> UpdateAssenizator(UpdateAssenizatorCommand command,
@@ -49,10 +53,6 @@ namespace NorthWind.API.Controllers
         [HttpPut("confirm")]
         public async Task<IActionResult> ApprovePurchase(ConfirmPurchaseCommand command,
             CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(command, cancellationToken));
-
-        [HttpPut("kgo")]
-        public async Task<IActionResult> UpdateKGO(UpdateKGOCommand command, CancellationToken cancellationToken)
             => Ok(await Mediator.Send(command, cancellationToken));
 
         [HttpDelete("{purchaseId:int}")]

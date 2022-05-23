@@ -8,7 +8,7 @@
     <v-card>
       <v-card-title>
         <h2>{{ serviceTitle }}</h2>
-        <h2> Сложно? Закажите <span
+        <h2>&nbspСложно? Закажите <span
             class=""
             @click="openRequestCall"
             style="cursor: pointer; background-color: transparent !important; text-decoration: underline"
