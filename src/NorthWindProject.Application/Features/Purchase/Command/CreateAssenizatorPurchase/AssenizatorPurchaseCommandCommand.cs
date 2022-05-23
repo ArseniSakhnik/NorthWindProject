@@ -35,7 +35,7 @@ namespace NorthWindProject.Application.Features.Purchase.Command.CreateAssenizat
             {
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
-                Name = request.PhoneNumber,
+                Name = request.Name,
                 Surname = request.Surname,
                 MiddleName = request.MiddleName,
                 Place = request.Place,

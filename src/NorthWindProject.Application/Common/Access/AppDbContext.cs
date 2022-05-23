@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Entities.Car;
 using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Contracts.BaseContract;
+using NorthWind.Core.Entities.Contracts.KgoFizContract;
 using NorthWind.Core.Entities.Contracts.KgoYurContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckYurContract;
@@ -172,6 +173,8 @@ namespace NorthWindProject.Application.Common.Access
         public DbSet<VacuumTruckYurContract> VacuumTruckYurContracts { get; set; }
         public DbSet<KGOYurContract> KGOYurContracts { get; set; }
         
+        public DbSet<KGOFizContract> KGOFizContracts { get; set; }
+
         public DbSet<RequestCall> RequestCalls { get; set; }
 
         #endregion

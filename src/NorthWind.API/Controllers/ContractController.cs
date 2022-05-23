@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DevExtreme.AspNet.Data;
 using Microsoft.AspNetCore.Mvc;
 using NorthWindProject.Application.Features.Contract.Command.ConfirmContract;
+using NorthWindProject.Application.Features.Contract.Command.CreateKgoFizContract;
 using NorthWindProject.Application.Features.Contract.Command.CreateKgoYurContract;
 using NorthWindProject.Application.Features.Contract.Command.CreateVacuumTruckFizContract;
 using NorthWindProject.Application.Features.Contract.Command.CreateVacuumTruckYurContract;
@@ -57,6 +58,13 @@ namespace NorthWind.API.Controllers
 
         [HttpPost("create-kgo-yur-contract")]
         public async Task<IActionResult> CreateContractKgo(KgoYurContractCommand command,
+            CancellationToken cancellationToken)
+        {
+            return Ok(await Mediator.Send(command, cancellationToken));
+        }
+
+        [HttpPost("create-kgo-fiz-contract")]
+        public async Task<IActionResult> CreateKgoFizContract(CreateKgoFizContractCommand command,
             CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(command, cancellationToken));

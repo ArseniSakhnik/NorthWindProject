@@ -171,13 +171,6 @@ namespace NorthWindProject.Application.Services.ContractService
 
             if (contract is IEncryptObject contractEncrypt)
                 contractEncrypt.EncryptObject(_encryptionService);
-
-            contract.DomainEvents.Add(new SendEmailContractAlertEvent
-            {
-                Email = contract.Email,
-                ServicesRequestTypeId = servicesRequestTypeId,
-                Contract = contract
-            });
             
             AuditableEntityFill(contract);
             await _context.Contracts.AddAsync(contract, cancellationToken);
