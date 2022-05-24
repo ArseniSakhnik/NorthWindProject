@@ -50,6 +50,10 @@ export default class AboutCar extends Mixins(HttpServiceMixin) {
   @Ref('hooper') hooperRef!: any;
 
   cars: Car[] = [];
+  
+  mounted() {
+    this.currentCarIndex = Number(this.$route.params.id);
+  }
 
   currentCarIndex: number = 0;
   isDataLoaded: boolean = false;
@@ -61,6 +65,7 @@ export default class AboutCar extends Mixins(HttpServiceMixin) {
   async created() {
     const {data} = await this.carsService.getCars();
     this.cars = data
+    console.log(this.cars);
     this.isDataLoaded = true;
   }
 

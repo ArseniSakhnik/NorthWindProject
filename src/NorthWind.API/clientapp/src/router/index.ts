@@ -146,7 +146,7 @@ const userRoutes: Array<RouteConfig> = [
 
 const mainRoutes: Array<RouteConfig> = [
     {
-        path: '/about-car',
+        path: '/about-car/:id',
         name: 'AboutCar',
         component: AboutCar,
         meta: {

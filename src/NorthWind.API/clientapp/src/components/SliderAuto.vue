@@ -1,12 +1,13 @@
 ﻿<template>
   <hooper :infiniteScroll="isComputer" :itemsToShow="numberOfSlides" class="slider-section">
-    <slide v-for="index in 4" class="slider">
+    <slide v-for="car in cars" class="slider">
       <div
-          :style="`background-image: url(${getImage(index)})`"
+          :style="`background-image: url(${getImage(car.index)})`"
           class="block"
+          @click="goToCar(car.index)"
       >
         <div class="bottom-card">
-          <h5 class="text-white">БУНКЕРОВОЗЫ</h5>
+          <h5 class="text-white">{{ car.title }}</h5>
           <div class="price-block">₽ 2 000/час</div>
           <ul>
             <li>
@@ -42,6 +43,29 @@ export default class SliderAuto extends Mixins(BreakPointsMixin) {
   clicked: boolean = false;
   xAxis: number = 0;
   x: number = 0;
+
+  cars: { title: string, index: number }[] = [
+    {
+      title: 'КОМБИНИРОВАННЫЕ ДОРОЖНЫЕ МАШИНЫ',
+      index: 1,
+    },
+    {
+      title: 'БУНКЕРОВОЗЫ',
+      index: 2
+    },
+    {
+      title: 'МУЛЬТИЛИФТ',
+      index: 3,
+    },
+    {
+      title: 'АССЕНИЗАТОР',
+      index: 4
+    }
+  ]
+
+  goToCar(index: number) {
+    this.$router.push(`/about-car/${index}`)
+  }
 
   get numberOfSlides() {
     return this.isComputer ? 3 : 1;
