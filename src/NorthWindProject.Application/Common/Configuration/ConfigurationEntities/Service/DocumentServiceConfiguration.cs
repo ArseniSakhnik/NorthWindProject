@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NorthWind.Core.Entities.Contracts.BaseContract;
+using NorthWind.Core.Entities.Contracts.KgoFizContract;
 using NorthWind.Core.Entities.Contracts.KgoYurContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckYurContract;
@@ -46,6 +47,12 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
                     Id = ServicesRequestTypeEnum.КГОЮр,
                     ServiceId = ServiceEnum.КГО,
                     DocumentFields = Contract.GetDocumentFields<KGOYurContract>()
+                },
+                new()
+                {
+                    Id = ServicesRequestTypeEnum.КГОФиз,
+                    ServiceId = ServiceEnum.КГО,
+                    DocumentFields = Contract.GetDocumentFields<KGOFizContract>()
                 }
             });
         }

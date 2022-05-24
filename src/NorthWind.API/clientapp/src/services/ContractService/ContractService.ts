@@ -1,5 +1,10 @@
 ﻿import HttpService from "@/services/HttpService"
-import {KgoYurContract, VacuumTruckFizContract, VacuumTruckYurContract,} from "@/services/ContractService/Requests"
+import {
+    KgoFizContract,
+    KgoYurContract,
+    VacuumTruckFizContract,
+    VacuumTruckYurContract,
+} from "@/services/ContractService/Requests"
 import {AxiosResponse} from "axios";
 import {BaseContractDto, ContractAndPageDto} from "@/services/ContractService/Responses";
 import {ConfirmedType, ServiceEnum} from "@/enums/Enums";
@@ -10,7 +15,7 @@ export default class ContractService extends HttpService {
         super('contract');
     }
 
-    public CreateContract(data: VacuumTruckFizContract | VacuumTruckYurContract | KgoYurContract): Promise<AxiosResponse<string>> {
+    public CreateContract(data: VacuumTruckFizContract | VacuumTruckYurContract | KgoYurContract | KgoFizContract): Promise<AxiosResponse<string>> {
         switch (data.serviceRequestTypeId) {
             case ServiceEnum.AsseniatorFiz:
                 return this.CreateVacuumTruckFizContract(data as VacuumTruckFizContract);
@@ -18,6 +23,8 @@ export default class ContractService extends HttpService {
                 return this.CreateVacuumTruckYurContract(data as VacuumTruckYurContract);
             case ServiceEnum.KGOYur:
                 return this.CreateKGOYurContract(data as KgoYurContract);
+            case ServiceEnum.KgoFiz:
+                return this.CreateKGOFizContract(data as KgoFizContract)
         }
     }
 
@@ -42,6 +49,10 @@ export default class ContractService extends HttpService {
 
     private CreateKGOYurContract(data: KgoYurContract): Promise<AxiosResponse<string>> {
         return this._post('create-kgo-yur-contract', data)
+    }
+    
+    private CreateKGOFizContract(data: KgoFizContract): Promise<AxiosResponse<string>> {
+        return this._post('create-kgo-fiz-contract', data);
     }
 
     public GetUserContracts(): Promise<AxiosResponse<any>> {

@@ -1,7 +1,8 @@
 ﻿export enum ServiceEnum {
     AssenizatorYur = 1,
     AsseniatorFiz = 2,
-    KGOYur = 3
+    KGOYur = 3,
+    KgoFiz = 4
 }
 
 export enum ServiceViewEnum {

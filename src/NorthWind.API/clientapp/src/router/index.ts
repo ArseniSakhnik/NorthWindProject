@@ -17,6 +17,7 @@ import CreateVacuumTruckFizContract from "@/views/Contracts/CreateVacuumTruckFiz
 import ContractInfoPage from "@/views/ContractInfoPage.vue";
 import AdminContracts from "@/views/AdminContracts.vue";
 import AdminUsers from "@/views/AdminUsers.vue";
+import CreateKgoFizContract from "@/views/CreateKgoFizContract.vue";
 
 Vue.use(VueRouter)
 
@@ -100,6 +101,15 @@ const userRoutes: Array<RouteConfig> = [
         path: '/create-kgo-yur-contract',
         name: 'CreateKgoYurContract',
         component: CreateKgoYurContract,
+        meta: {
+            layout: 'User',
+            name: 'Заявка на вывоз крупногабаритного мусора'
+        }
+    },
+    {
+        path: '/create-kgo-fiz-contract',
+        name: 'CreateKgoFizContract',
+        component: CreateKgoFizContract,
         meta: {
             layout: 'User',
             name: 'Заявка на вывоз крупногабаритного мусора'

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NorthWind.Core.Entities.Common;
 using NorthWind.Core.Entities.Contracts.BaseContract;
+using NorthWind.Core.Entities.Contracts.KgoFizContract;
 using NorthWind.Core.Entities.Contracts.KgoYurContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckFizContract;
 using NorthWind.Core.Entities.Contracts.VacuumTruckYurContract;
@@ -95,7 +96,7 @@ namespace NorthWindProject.Application.Services.ContractService
                 VacuumTruckYurContract => ServicesRequestTypeEnum.АссенизаторЮр,
                 VacuumTruckFizContract => ServicesRequestTypeEnum.АссенизаторФиз,
                 KGOYurContract => ServicesRequestTypeEnum.КГОЮр,
-                _ => throw new NotImplementedException()
+                KGOFizContract => ServicesRequestTypeEnum.КГОФиз
             };
         }
 

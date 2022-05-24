@@ -42,6 +42,7 @@ namespace NorthWind.Core.Entities.Contracts.BaseContract
                 ServicesRequestTypeEnum.АссенизаторФиз => "ОТКАЧКА ЖИДКИХ БЫТОВЫХ ОТХОДОВ (физ. лицо)",
                 ServicesRequestTypeEnum.АссенизаторЮр => "ОТКАЧКА ЖИДКИХ БЫТОВЫХ ОТХОДОВ (юр. лицо)",
                 ServicesRequestTypeEnum.КГОЮр => "ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА (юр. лицо)",
+                ServicesRequestTypeEnum.КГОФиз => "ВЫВОЗ СТРОИТЕЛЬНОГО И КРУПНОГАБАРИТНОГО МУСОРА (физ. лицо)",
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

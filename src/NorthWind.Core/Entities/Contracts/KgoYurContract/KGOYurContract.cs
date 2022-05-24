@@ -6,7 +6,7 @@ using NorthWind.Core.Interfaces;
 
 namespace NorthWind.Core.Entities.Contracts.KgoYurContract
 {
-    [Table("KGOContract")]
+    [Table("KGOYurContract")]
     public class KGOYurContract : YurContract
     {
         [DocumentProp("объем")] public string Volume { get; set; }

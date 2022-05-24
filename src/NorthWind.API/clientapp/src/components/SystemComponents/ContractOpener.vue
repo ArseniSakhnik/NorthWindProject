@@ -48,6 +48,8 @@ export default class ContractOpener extends Vue {
           case ClientEnum.Yur:
             this.$router.push('/create-kgo-yur-contract');
             break;
+          case ClientEnum.Fiz:
+            this.$router.push('/create-kgo-fiz-contract');
         }
         break;
     }

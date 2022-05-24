@@ -15,6 +15,11 @@
         :local-data="localData"
         :is-redact-page="true"
     />
+    <create-kgo-fiz-contract
+        v-else-if="localData.serviceRequestTypeId === 4"
+        :local-data="localData"
+        :is-redact-page="true"
+    />
   </v-container>
 </template>
 
@@ -25,9 +30,10 @@ import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import CreateVacuumTruckFizContract from "@/views/Contracts/CreateVacuumTruckFizContract.vue";
 import CreateVacuumTruckYurContract from '@/views/Contracts/CreateVacuumTruckYurContract.vue';
 import CreateKgoYurContract from "@/views/Contracts/CreateKgoYurContract.vue";
+import CreateKgoFizContract from "@/views/CreateKgoFizContract.vue";
 
 @Component({
-  components: {CreateKgoYurContract, CreateVacuumTruckFizContract, CreateVacuumTruckYurContract}
+  components: {CreateKgoFizContract, CreateKgoYurContract, CreateVacuumTruckFizContract, CreateVacuumTruckYurContract}
 })
 export default class ContractInfoPage extends Mixins(HttpServiceMixin) {
   isDataLoaded: boolean = false;

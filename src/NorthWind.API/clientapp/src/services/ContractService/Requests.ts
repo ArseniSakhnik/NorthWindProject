@@ -34,3 +34,8 @@ export interface KgoYurContract extends BaseYurContract {
     volume: string
     overload: string
 }
+
+export interface KgoFizContract extends BaseFizContract {
+    volume: string,
+    overload: string
+}
