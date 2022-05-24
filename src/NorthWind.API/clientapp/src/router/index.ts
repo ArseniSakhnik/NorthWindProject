@@ -18,6 +18,7 @@ import ContractInfoPage from "@/views/ContractInfoPage.vue";
 import AdminContracts from "@/views/AdminContracts.vue";
 import AdminUsers from "@/views/AdminUsers.vue";
 import CreateKgoFizContract from "@/views/CreateKgoFizContract.vue";
+import AdminRequestCalls from "@/views/AdminRequestCalls.vue";
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,15 @@ const adminRoutes: Array<RouteConfig> = [
             layout: 'Admin',
             name: 'Пользователи'
         }
+    },
+    {
+      path: '/admin-request-calls',
+      name: 'AdminRequestCalls',
+      component: AdminRequestCalls,
+      meta: {
+          layout: 'Admin',
+          name: 'Обратные звокни'
+      }  
     },
     {
         path: '/purchase-info-admin/:id',

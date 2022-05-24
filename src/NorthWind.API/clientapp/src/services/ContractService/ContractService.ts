@@ -50,7 +50,7 @@ export default class ContractService extends HttpService {
     private CreateKGOYurContract(data: KgoYurContract): Promise<AxiosResponse<string>> {
         return this._post('create-kgo-yur-contract', data)
     }
-    
+
     private CreateKGOFizContract(data: KgoFizContract): Promise<AxiosResponse<string>> {
         return this._post('create-kgo-fiz-contract', data);
     }
@@ -75,6 +75,9 @@ export default class ContractService extends HttpService {
                 return this.UpdateVacuumTruckYurContract(data);
             case ServiceEnum.KGOYur:
                 return this.UpdateKGOYurContract(data);
+            case ServiceEnum.KgoFiz:
+                return this.UpdateKGOFizContract(data);
+
         }
     }
 
@@ -88,6 +91,10 @@ export default class ContractService extends HttpService {
 
     private UpdateKGOYurContract(data: BaseContractDto): Promise<AxiosResponse<string>> {
         return this._put('update-kgo-yur-contract', data)
+    }
+
+    private UpdateKGOFizContract(data: BaseContractDto): Promise<AxiosResponse<string>> {
+        return this._put('update-kgo-fiz-contract', data);
     }
 
 }

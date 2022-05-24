@@ -53,6 +53,12 @@ export default class AdminSidebar extends Vue {
       icon: 'mdi-human-edit',
       name: 'Пользователи',
       route: '/admin-users'
+    },
+    {
+      viewId: 3,
+      icon: 'mdi-card-account-phone',
+      name: 'Обратные звокни',
+      route: '/admin-request-calls'
     }
   ]
 

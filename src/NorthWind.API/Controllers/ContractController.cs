@@ -8,6 +8,7 @@ using NorthWindProject.Application.Features.Contract.Command.CreateKgoYurContrac
 using NorthWindProject.Application.Features.Contract.Command.CreateVacuumTruckFizContract;
 using NorthWindProject.Application.Features.Contract.Command.CreateVacuumTruckYurContract;
 using NorthWindProject.Application.Features.Contract.Command.DeleteContract;
+using NorthWindProject.Application.Features.Contract.Command.UpdateKgoFizContract;
 using NorthWindProject.Application.Features.Contract.Command.UpdateKgoYurContract;
 using NorthWindProject.Application.Features.Contract.Command.UpdateVacuumTruckFizContract;
 using NorthWindProject.Application.Features.Contract.Command.UpdateVacuumTruckYurContract;
@@ -86,6 +87,13 @@ namespace NorthWind.API.Controllers
 
         [HttpPut("update-kgo-yur-contract")]
         public async Task<IActionResult> UpdateContractKgo(UpdateKgoYurContractCommand command,
+            CancellationToken cancellationToken)
+        {
+            return Ok(await Mediator.Send(command, cancellationToken));
+        }
+
+        [HttpPut("update-kgo-fiz-contract")]
+        public async Task<IActionResult> UpdateKgoFizContract(UpdateKgoFizContractCommand command,
             CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(command, cancellationToken));
