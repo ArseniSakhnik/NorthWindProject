@@ -44,10 +44,10 @@ export default class ChooseContractConfirm extends Mixins(DialogWindowMixin) {
       id: ServiceTypeEnum.Assenizator,
       title: 'Откачка жидких бытовых отходов',
     },
-    {
-      id: ServiceTypeEnum.WaterCleaning,
-      title: 'Полив и очистка территорий'
-    }
+    // {
+    //   id: ServiceTypeEnum.WaterCleaning,
+    //   title: 'Полив и очистка территорий'
+    // }
   ]
 
   selectService(id: ServiceTypeEnum) {

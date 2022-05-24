@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NorthWind.Core.Enums;
 using NorthWindProject.Application.Common.Access;
 
 namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceViews
@@ -26,6 +27,8 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceView
             CancellationToken cancellationToken)
         {
             return await _context.ServiceViews
+                .Where(serviceView => serviceView.ServiceId != ServiceEnum.КДМ)
+                .OrderBy(serviceView => serviceView.ServiceId != ServiceEnum.КГО)
                 .Select(view => new ServiceViewDto
                 {
                     Id = view.ServiceId,
