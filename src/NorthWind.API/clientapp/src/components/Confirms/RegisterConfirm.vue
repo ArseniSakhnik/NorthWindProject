@@ -103,11 +103,11 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin, DialogWind
   @Alert.Action('CALL_ALERT') callAlert!: (data: { message: string, delay: number }) => void;
 
   localData: RegisterModel = {
-    email: 'sakhnikarseni@mail.ru',
-    middleName: 'Алексеевич',
-    name: 'Арсений',
-    phoneNumber: '9021945789',
-    surname: 'Сахник',
+    email: '',
+    middleName: '',
+    name: '',
+    phoneNumber: '',
+    surname: '',
   }
 
   errorMessage: string = '';

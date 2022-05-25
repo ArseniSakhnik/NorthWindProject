@@ -71,8 +71,8 @@ const User = namespace('CurrentUserStore');
 export default class LoginConfirm extends Mixins(HttpServiceMixin, DialogWindowMixin) {
   @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => void;
 
-  email: string = 'sakhnikarseni@mail.ru'
-  password: string = 'парольДаЯ'
+  email: string = ''
+  password: string = ''
   errorMsg: string = ''
   showPassword: boolean = false;
 
