@@ -1,5 +1,8 @@
-﻿namespace NorthWind.Core.Entities.Purchase
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace NorthWind.Core.Entities.Purchase
 {
+    [Table("KGOPurchase")]
     public class KGOPurchase : Purchase
     {
         //какой объем мусора планируется вывозить 

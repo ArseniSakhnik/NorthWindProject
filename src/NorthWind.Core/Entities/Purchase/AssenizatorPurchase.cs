@@ -1,7 +1,9 @@
-﻿using NorthWind.Core.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using NorthWind.Core.Enums;
 
 namespace NorthWind.Core.Entities.Purchase
 {
+    [Table("AssenizatorPurchase")]
     public class AssenizatorPurchase : Purchase
     {
         //Тип отходов
