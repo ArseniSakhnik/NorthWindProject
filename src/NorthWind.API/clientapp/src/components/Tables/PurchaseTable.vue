@@ -49,12 +49,14 @@ export default class PurchaseTable extends Mixins(HttpServiceMixin) {
     {
       text: 'Открыть',
       value: 'open',
-      sortable: false
+      sortable: false,
+      align: 'center'
     },
     {
       text: 'Удалить',
       value: 'delete',
-      sortable: false
+      sortable: false,
+      align: 'center'
     }
   ]
 

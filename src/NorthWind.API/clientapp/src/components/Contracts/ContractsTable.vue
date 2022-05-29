@@ -28,6 +28,7 @@
 import {Vue, Component, Mixins} from "vue-property-decorator";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
 import AlertMixin from "@/mixins/AlertMixin.vue";
+import moment from "moment/moment";
 
 @Component
 export default class ContractsTable extends Mixins(HttpServiceMixin, AlertMixin) {
@@ -41,14 +42,18 @@ export default class ContractsTable extends Mixins(HttpServiceMixin, AlertMixin)
       value: 'serviceName',
     },
     {
-      text: 'Место',
+      text: 'Место оказания услуги',
       value: 'placeName',
+    },
+    {
+      text: 'Дата создания',
+      value: 'created'
     },
     {
       text: 'Открыть',
       value: 'open',
       align: 'center',
-      sortable: false
+      sortable: false,
     },
     {
       text: 'Удалить',
@@ -88,8 +93,11 @@ export default class ContractsTable extends Mixins(HttpServiceMixin, AlertMixin)
   }
 
   async getContracts() {
-    await this.contractService.GetUserContracts()
-        .then(response => this.data = response.data);
+    //@ts-ignore
+    await this.contractService.GetUserContracts().then(response => this.data = response.data.map(item => ({
+          ...item,
+          created: moment(item.created).format('DD-MM-YYYY')
+        })));
   }
 }
 </script>

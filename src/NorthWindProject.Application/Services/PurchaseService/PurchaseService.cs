@@ -36,7 +36,7 @@ namespace NorthWindProject.Application.Services.PurchaseService
 
             var isUserAuthenticated = _currentUserService.UserId != 0;
 
-            ApplicationUser currentUser = null;
+            ApplicationUser currentUser;
 
             if (!isUserAuthenticated)
             {
@@ -59,6 +59,11 @@ namespace NorthWindProject.Application.Services.PurchaseService
                         .Where(user => user.Email == purchase.Email)
                         .SingleOrDefaultAsync(cancellationToken);
                 }
+            }
+            else
+            {
+                currentUser = await context.Users
+                    .SingleOrDefaultAsync(user => user.Id == _currentUserService.UserId, cancellationToken);
             }
 
             AuditableEntityFill(purchase);

@@ -56,6 +56,10 @@ export default class AdminUsers extends Mixins(HttpServiceMixin) {
       value: 'roleNames'
     },
     {
+      text: 'Номера телефона',
+      value: 'phoneNumber'
+    },
+    {
       text: 'Просмотреть/редактировать',
       value: 'open',
       sortable: false,
