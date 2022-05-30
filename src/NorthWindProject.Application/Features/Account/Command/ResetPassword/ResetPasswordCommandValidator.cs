@@ -23,8 +23,7 @@ namespace NorthWindProject.Application.Features.Account.Command.ResetPassword
         private async Task<bool> DoesUserExist(string email, CancellationToken cancellationToken)
         {
             return await _context.Users
-                .AnyAsync(user
-                    => user.Email == email, cancellationToken);
+                .AnyAsync(user => user.Email.ToLower().Trim() == email.ToLower().Trim(), cancellationToken);
         }
     }
 }

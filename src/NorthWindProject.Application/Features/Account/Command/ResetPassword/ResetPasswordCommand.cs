@@ -35,7 +35,7 @@ namespace NorthWindProject.Application.Features.Account.Command.ResetPassword
         public async Task<Unit> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
             var user = await _context.Users
-                .Where(user => user.Email == request.Email)
+                .Where(user => user.Email.ToLower().Trim() == request.Email.ToLower().Trim())
                 .SingleOrDefaultAsync(cancellationToken);
 
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -46,7 +46,7 @@ namespace NorthWindProject.Application.Features.Account.Command.ResetPassword
 
             _emailSenderService.SendEmailAsync(new EmailBodyModel
             {
-                ToEmail = request.Email,
+                ToEmail = user.Email,
                 Username = "Здравствуйте!",
                 Subject = "Изменение пароля",
                 HtmlBody =
