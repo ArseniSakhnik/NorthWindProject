@@ -17,7 +17,7 @@ export default class AccountService extends HttpService {
     GetUsersAll(page: number, searchName: string, roleTypeId: RolesEnum): Promise<AxiosResponse<UserAndPageDto>> {
         return this._get(`get-all?page=${page}&searchName=${searchName}&roleTypeId=${roleTypeId}`);
     }
-    
+
     ChangeUserRoles(userId: number, roles: RolesEnum[]) {
         return this._put('change-user-roles', {
             userId,
@@ -39,5 +39,11 @@ export default class AccountService extends HttpService {
 
     ConfirmEmail(confirmEmailModel: ConfirmEmailModel): Promise<AxiosResponse<void>> {
         return this._post('confirm-email', confirmEmailModel)
+    }
+
+    ResetPassword(email: string): Promise<AxiosResponse<void>> {
+        return this._post('reset-password', {
+            email
+        });
     }
 }

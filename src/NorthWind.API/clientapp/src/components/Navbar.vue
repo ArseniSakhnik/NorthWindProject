@@ -67,9 +67,14 @@
         <login-confirm
             :is-active.sync="isLogInDialogOpened"
             @closeLoginAndOpenRegisterForm="closeLoginAndOpenRegisterForm"
+            @closeLoginAndOpenResetPasswordEmail="closeLoginAndOpenResetPasswordEmail"
         />
         <register-confirm
             :is-active.sync="isRegisterDialogOpened"
+        />
+        <reset-password-confirm
+            :is-active.sync="isResetPasswordEmailOpened"
+            :initial-email="emailToConfirm"
         />
       </template>
     </vs-navbar>
@@ -108,11 +113,12 @@ import RegisterConfirm from "@/components/Confirms/RegisterConfirm.vue";
 import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import LoginConfirm from "@/components/Confirms/LoginConfirm.vue";
 import Logo from "@/components/Logo/Logo.vue";
+import ResetPasswordConfirm from "@/components/Confirms/ResetPasswordConfirm.vue";
 
 const User = namespace('CurrentUserStore');
 
 @Component({
-  components: {RegisterConfirm, LoginConfirm, Logo}
+  components: {ResetPasswordConfirm, RegisterConfirm, LoginConfirm, Logo}
 })
 export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   @User.Getter('IS_USER_AUTHENTICATED') isUserAuthenticated!: boolean;
@@ -122,6 +128,7 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
 
   drawer: boolean = false;
   group: any = null;
+  emailToConfirm: string = '';
 
   goTo(to: string) {
     if (this.$route.path === to) {
@@ -136,7 +143,8 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   }
 
   isRegisterDialogOpened: boolean = false;
-  isLogInDialogOpened: boolean = false
+  isLogInDialogOpened: boolean = false;
+  isResetPasswordEmailOpened: boolean = false;
   dialog: boolean = false;
 
   get menuItems(): any[] {
@@ -187,6 +195,12 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   closeLoginAndOpenRegisterForm() {
     this.isLogInDialogOpened = false;
     this.isRegisterDialogOpened = true;
+  }
+
+  closeLoginAndOpenResetPasswordEmail(email: string) {
+    this.emailToConfirm = email;
+    this.isLogInDialogOpened = false;
+    this.isResetPasswordEmailOpened = true;
   }
 }
 </script>

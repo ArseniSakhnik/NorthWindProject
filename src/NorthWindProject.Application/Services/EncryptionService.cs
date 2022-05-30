@@ -16,13 +16,13 @@ namespace NorthWindProject.Application.Services
 
         public string Encrypt(string str)
         {
-            // return _blowFish.EncryptCBC(str);
+            return _blowFish.EncryptCBC(str);
             return str;
         }
 
         public string Decipher(string str)
         {
-            // return _blowFish.DecryptCBC(str);
+            return _blowFish.DecryptCBC(str);
             return str;
         }
     }

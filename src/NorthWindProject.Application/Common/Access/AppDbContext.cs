@@ -106,7 +106,7 @@ namespace NorthWindProject.Application.Common.Access
         {
             var hasher = new PasswordHasher<ApplicationUser>();
 
-            var assemblyWithConfigurations = GetType().Assembly; //get whatever assembly you want
+            var assemblyWithConfigurations = GetType().Assembly;
             builder.ApplyConfigurationsFromAssembly(assemblyWithConfigurations);
 
             builder.Entity<IdentityRole<int>>().HasData(new List<IdentityRole<int>>

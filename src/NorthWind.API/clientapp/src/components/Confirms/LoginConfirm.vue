@@ -35,6 +35,8 @@
           </v-row>
           <v-row>
             <span class="registration-text" @click="closeLoginAndOpenRegisterForm">Регистрация</span>
+            <v-spacer></v-spacer>
+            <span class="registration-text" @click="closeLoginAndOpenResetPasswordEmail">Забыли пароль?</span>
           </v-row>
         </v-card-text>
         <v-card-actions>
@@ -78,7 +80,7 @@ export default class LoginConfirm extends Mixins(HttpServiceMixin, DialogWindowM
 
   rules = {
     required: (value: any) => !!value || 'Обязательно для заполнения',
-    min: (v: string) => v.length >= 8 || 'Min 8 characters',
+    min: (v: string) => v.length >= 3 || 'Min 3 characters',
     emailMatch: () => (`The email and password you entered don't match`),
   }
 
@@ -97,6 +99,10 @@ export default class LoginConfirm extends Mixins(HttpServiceMixin, DialogWindowM
 
   closeLoginAndOpenRegisterForm() {
     this.$emit('closeLoginAndOpenRegisterForm');
+  }
+
+  closeLoginAndOpenResetPasswordEmail() {
+    this.$emit('closeLoginAndOpenResetPasswordEmail', this.email);
   }
 }
 </script>

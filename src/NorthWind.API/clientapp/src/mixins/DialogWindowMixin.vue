@@ -6,6 +6,8 @@ export default class DialogWindowMixin extends Vue {
   @PropSync('isActive') isConfirmActive!: boolean;
   @Ref('dialogRef') dialogRef!: any;
 
+  errorMsg: string = '';
+
   toggleRegisterWindow(isOpen: boolean) {
     this.isConfirmActive = isOpen;
   }
@@ -21,5 +23,7 @@ export default class DialogWindowMixin extends Vue {
 }
 </script>
 <style scoped>
-
+.error-message {
+  color: red;
+}
 </style>
