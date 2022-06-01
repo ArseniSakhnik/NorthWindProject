@@ -20,7 +20,6 @@ using NorthWindProject.Application.Middlewares;
 using NorthWindProject.Application.Services;
 using NorthWindProject.Application.Services.ContractService;
 using NorthWindProject.Application.Services.PurchaseService;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace NorthWind.API
 {

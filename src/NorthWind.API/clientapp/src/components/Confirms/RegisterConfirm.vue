@@ -64,22 +64,36 @@
               <v-col>
                 <div v-if="errorMessage.length" class="error-message">{{ errorMessage }}</div>
               </v-col>
+              <v-row>
+                <v-checkbox
+                    v-model="iAcceptTermsOfUser"
+                >
+                  <template v-slot:label>
+                    <span
+                        @click="closeRegisterAndOpenTermsOfUser"
+                    >
+                      Я ознакомился с соглашением о персональных данных
+                    </span>
+                  </template>
+                </v-checkbox>
+              </v-row>
             </v-row>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-              color="blue darken-1"
+              color="orange darken-3"
               text
               @click="toggleRegisterWindow(false)"
           >
             Закрыть
           </v-btn>
           <v-btn
-              color="blue darken-1"
+              color="orange darken-3"
               text
               @click="register"
+              :disabled="!iAcceptTermsOfUser"
           >
             Отправить
           </v-btn>
@@ -101,6 +115,8 @@ const Alert = namespace('AlertStore');
 @Component
 export default class RegisterConfirm extends Mixins(HttpServiceMixin, DialogWindowMixin) {
   @Alert.Action('CALL_ALERT') callAlert!: (data: { message: string, delay: number }) => void;
+
+  iAcceptTermsOfUser: boolean = false;
 
   localData: RegisterModel = {
     email: '',
@@ -130,6 +146,10 @@ export default class RegisterConfirm extends Mixins(HttpServiceMixin, DialogWind
         .catch(error => {
           this.errorMessage = this.getErrorMessage(error);
         })
+  }
+
+  closeRegisterAndOpenTermsOfUser() {
+    this.$emit('closeRegisterAndOpenTermsOfUser')
   }
 }
 </script>

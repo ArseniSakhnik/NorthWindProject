@@ -71,10 +71,14 @@
         />
         <register-confirm
             :is-active.sync="isRegisterDialogOpened"
+            @closeRegisterAndOpenTermsOfUser="closeRegisterAndOpenTermsOfUser"
         />
         <reset-password-confirm
             :is-active.sync="isResetPasswordEmailOpened"
             :initial-email="emailToConfirm"
+        />
+        <terms-of-user-confirm
+            :is-active.sync="iAcceptTermsOfUserConfirmOpened"
         />
       </template>
     </vs-navbar>
@@ -114,11 +118,12 @@ import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import LoginConfirm from "@/components/Confirms/LoginConfirm.vue";
 import Logo from "@/components/Logo/Logo.vue";
 import ResetPasswordConfirm from "@/components/Confirms/ResetPasswordConfirm.vue";
+import TermsOfUserConfirm from "@/components/Confirms/TermsOfUserConfirm.vue";
 
 const User = namespace('CurrentUserStore');
 
 @Component({
-  components: {ResetPasswordConfirm, RegisterConfirm, LoginConfirm, Logo}
+  components: {TermsOfUserConfirm, ResetPasswordConfirm, RegisterConfirm, LoginConfirm, Logo}
 })
 export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   @User.Getter('IS_USER_AUTHENTICATED') isUserAuthenticated!: boolean;
@@ -145,6 +150,7 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   isRegisterDialogOpened: boolean = false;
   isLogInDialogOpened: boolean = false;
   isResetPasswordEmailOpened: boolean = false;
+  iAcceptTermsOfUserConfirmOpened: boolean = false;
   dialog: boolean = false;
 
   get menuItems(): any[] {
@@ -201,6 +207,11 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
     this.emailToConfirm = email;
     this.isLogInDialogOpened = false;
     this.isResetPasswordEmailOpened = true;
+  }
+
+  closeRegisterAndOpenTermsOfUser() {
+    this.iAcceptTermsOfUserConfirmOpened = true;
+    this.isRegisterDialogOpened = false;
   }
 }
 </script>
