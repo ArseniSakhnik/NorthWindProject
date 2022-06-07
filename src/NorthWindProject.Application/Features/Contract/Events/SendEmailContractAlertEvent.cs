@@ -37,22 +37,22 @@ namespace NorthWindProject.Application.Features.Contract.Events
         public async Task Handle(DomainEventNotification<SendEmailContractAlertEvent> notification,
             CancellationToken cancellationToken)
         {
-            var contract = notification.DomainEvent.Contract;
-
-            var contractFile = await _mediator.Send(new ExportContractQuery
-            {
-                ContractId = contract.Id,
-                ServicesRequestTypeId = notification.DomainEvent.ServicesRequestTypeId
-            }, cancellationToken);
-
-            _emailSenderService.SendEmailAsync(new EmailBodyModel
-            {
-                ToEmail = notification.DomainEvent.Email,
-                Username = "Здравствуйте!",
-                Subject = "Вы отправили заявку",
-                HtmlBody = "<div>Ваша заявка</div>",
-                Files = new List<FileModel> {contractFile}
-            });
+            // var contract = notification.DomainEvent.Contract;
+            //
+            // var contractFile = await _mediator.Send(new ExportContractQuery
+            // {
+            //     ContractId = contract.Id,
+            //     ServicesRequestTypeId = notification.DomainEvent.ServicesRequestTypeId
+            // }, cancellationToken);
+            //
+            // _emailSenderService.SendEmailAsync(new EmailBodyModel
+            // {
+            //     ToEmail = notification.DomainEvent.Email,
+            //     Username = "Здравствуйте!",
+            //     Subject = "Вы отправили заявку",
+            //     HtmlBody = "<div>Ваша заявка</div>",
+            //     Files = new List<FileModel> {contractFile}
+            // });
         }
     }
 }

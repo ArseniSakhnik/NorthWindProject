@@ -4,6 +4,14 @@
       <v-spacer></v-spacer>
       <v-btn @click="cancel">{{ cancelTitle }}</v-btn>
       <v-btn
+          v-if="isAdminView"
+          class="orange darken-4"
+          style="color: white"
+          @click="exportContract"
+      >
+        Экспортировать
+      </v-btn>
+      <v-btn
           class="orange darken-4"
           style="color: white"
           @click="send"
@@ -23,6 +31,8 @@ export default class ActionCardBar extends Vue {
   cancelTitle!: string;
   @Prop({required: false, default: () => 'Отправить'})
   sendTitle!: string;
+  @Prop({required: false, default: () => false})
+  isAdminView!: boolean;
 
 
   @Emit()
@@ -33,6 +43,10 @@ export default class ActionCardBar extends Vue {
   @Emit()
   cancel(e: any) {
     return e;
+  }
+
+  exportContract(e: any) {
+    this.$emit('exportContract')
   }
 
 }

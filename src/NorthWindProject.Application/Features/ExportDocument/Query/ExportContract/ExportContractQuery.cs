@@ -17,7 +17,6 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportContr
     public class ExportContractQuery : IRequest<FileModel>
     {
         public int ContractId { get; set; }
-        public ServicesRequestTypeEnum ServicesRequestTypeId { get; set; }
     }
 
     public class ExportContractQueryHandler : IRequestHandler<ExportContractQuery, FileModel>
@@ -34,15 +33,18 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportContr
         public async Task<FileModel> Handle(ExportContractQuery request, CancellationToken cancellationToken)
         {
             var contract = await _context.Contracts
+                .Include(contract => contract.User)
                 .Include(contract => contract.Service)
                 .ThenInclude(service => service.DocumentServices)
                 .SingleOrDefaultAsync(contract => contract.Id == request.ContractId, cancellationToken);
+
+            var servicesRequestTypeId = contract.DocumentServiceId;
 
             if (contract is IEncryptObject encryptObject) encryptObject.DecryptObject(_encryptionService);
 
             //todo возможно появление дополнительных документов
             var documentData = contract.Service.DocumentServices
-                .First(documentService => documentService.Id == request.ServicesRequestTypeId);
+                .First(documentService => documentService.Id == servicesRequestTypeId);
             var documentContent = documentData.Content;
 
             await using var stream = new MemoryStream();
@@ -77,6 +79,7 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportContr
 
             return new FileModel
             {
+                Name = contract.User.FullName,
                 Content = stream.ToArray()
             };
         }

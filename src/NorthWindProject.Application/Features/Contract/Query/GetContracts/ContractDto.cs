@@ -12,5 +12,6 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetContracts
         public string Email { get; set; }
         public string Created { get; set; }
         public string ClientFullName { get; set; }
+        public bool IsConfirmed { get; set; }
     }
 }

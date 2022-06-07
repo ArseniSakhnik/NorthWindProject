@@ -74,6 +74,22 @@ export default class ContractViewMixin extends Mixins(HttpServiceMixin, AlertMix
         }));
   }
 
+  async exportContract() {
+    //@ts-ignore
+    // await this.contractService.ExportContract(this.localData.id);
+    await fetch(`/api/Contract/export?contractId=${this.localData.id}`)
+        .then(response => response.blob())
+        .then(blob => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+        })
+  }
+
   back() {
     this.$router.back();
   }

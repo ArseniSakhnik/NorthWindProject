@@ -53,6 +53,7 @@ namespace NorthWindProject.Application.Features.Contract.Query.GetContracts
                     Email = contract.Email,
                     Created = contract.Created.ToIsoString(),
                     ClientFullName = contract.User.FullName,
+                    IsConfirmed = contract.IsConfirmed
                 })
                 .ToListAsync(cancellationToken);
 

@@ -15,9 +15,11 @@
     <action-card-bar
         v-if="isAdminView"
         @send="confirmPurchase"
-        :send-title="localData.isConfirmed ? 'Отменить согласование' : 'Согласовать'"
-        cancel-title="Назад"
         @cancel="back"
+        send-title="Согласовать"
+        cancel-title="Назад"
+        :is-admin-view="isAdminView"
+        @exportContract="exportContract"
     />
     <action-card-bar
         v-else-if="!isRedactPage && isUserView"

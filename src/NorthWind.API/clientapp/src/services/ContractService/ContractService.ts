@@ -81,6 +81,10 @@ export default class ContractService extends HttpService {
         }
     }
 
+    public ExportContract(contractId: number): Promise<AxiosResponse<any>> {
+        return this._get(`export?contractId=${contractId}`);
+    }
+
     private UpdateVacuumTruckFizContract(data: BaseContractDto): Promise<AxiosResponse<string>> {
         return this._put('update-vacuum-truck-fiz-contract', data)
     }

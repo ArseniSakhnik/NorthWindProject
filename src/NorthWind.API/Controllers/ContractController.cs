@@ -15,6 +15,7 @@ using NorthWindProject.Application.Features.Contract.Command.UpdateVacuumTruckYu
 using NorthWindProject.Application.Features.Contract.Query.GetContract;
 using NorthWindProject.Application.Features.Contract.Query.GetContracts;
 using NorthWindProject.Application.Features.Contract.Query.GetUserContracts;
+using NorthWindProject.Application.Features.ExportDocument.Query.ExportContract;
 
 namespace NorthWind.API.Controllers
 {
@@ -25,6 +26,16 @@ namespace NorthWind.API.Controllers
             CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(query, cancellationToken));
+        }
+
+        [HttpGet("export")]
+        public async Task<IActionResult> ExportContract([FromQuery] ExportContractQuery query,
+            CancellationToken cancellationToken)
+        {
+            var data = await Mediator.Send(query, cancellationToken);
+            return File(data.Content,
+                "application/msword",
+                $"{data.Name}.doc");
         }
 
         [HttpGet("{contractId:int}")]
