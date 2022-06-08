@@ -12,6 +12,7 @@
           <ul>
             <li v-for="(item, index) in navigationItems"
                 :key="index"
+                @click="goTo(item.to)"
             >
               {{ item.title }}
             </li>
@@ -20,9 +21,9 @@
         <div class="phone-numbers">
           <h4>Навигация</h4>
           <ul>
-            <li>+7 (xxx) xxx-xx-xx</li>
-            <li>+7 (xxx) xxx-xx-xx</li>
-            <li>todotodo@bk.ru</li>
+            <li>+7 (978) 024-30-05</li>
+            <li>+7 (978) 024-30-06</li>
+            <li>northwind82@bk.ru</li>
           </ul>
         </div>
       </div>
@@ -50,21 +51,21 @@ export default class FooterSection extends Vue {
     },
     {
       title: 'Документы',
-      to: '/'
-    },
-    {
-      title: 'Вакансии',
-      to: '/'
+      to: '/documents'
     },
     {
       title: 'Контакты',
-      to: '/'
-    },
-    {
-      title: 'Аккаунт',
-      to: '/'
+      to: '/contacts'
     },
   ]
+
+  goTo(to: string) {
+    if (this.$route.path === to) {
+      scroll(0, 0);
+    } else {
+      this.$router.push(to)
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

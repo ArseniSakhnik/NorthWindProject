@@ -1,6 +1,14 @@
 ﻿<template>
-  <hooper :infiniteScroll="isComputer" :itemsToShow="numberOfSlides" class="slider-section">
-    <slide v-for="car in cars" class="slider">
+  <hooper 
+      :infiniteScroll="isComputer" 
+      :itemsToShow="numberOfSlides" 
+      class="slider-section"
+      @beforeSlide="disableClick"
+  >
+    <slide 
+        v-for="car in cars" 
+        class="slider"
+    >
       <div
           :style="`background-image: url(${getImage(car.index)})`"
           class="block"
@@ -40,33 +48,45 @@ import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 export default class SliderAuto extends Mixins(BreakPointsMixin) {
   @Ref('sliderContainer') sliderContainer!: HTMLElement;
   @Ref('slider') slider!: HTMLElement;
+  canClick: boolean = false;
   clicked: boolean = false;
   xAxis: number = 0;
   x: number = 0;
 
-  cars: { title: string, index: number }[] = [
+  cars: { title: string, index: number, price: string }[] = [
     {
       title: 'КОМБИНИРОВАННЫЕ ДОРОЖНЫЕ МАШИНЫ',
       index: 1,
+      price: '₽ 2 000/час'
     },
     {
       title: 'БУНКЕРОВОЗЫ',
-      index: 2
+      index: 2,
+      price: '₽ 2 000/час'
     },
     {
       title: 'МУЛЬТИЛИФТ',
       index: 3,
+      price: '₽ 2 000/час'
     },
     {
       title: 'АССЕНИЗАТОР',
-      index: 4
+      index: 4,
+      price: '₽ 2 000/час'
     }
   ]
 
   goToCar(index: number) {
+    if (!this.canClick) return;
+    
     this.$router.push(`/about-car/${index}`)
   }
-
+  
+  disableClick() {
+    console.log(0)
+    this.canClick = false;
+    setTimeout(() => this.canClick = true, 500);
+  }
   get numberOfSlides() {
     return this.isComputer ? 3 : 1;
   }

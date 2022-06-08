@@ -17,7 +17,9 @@
                 :service-type="slideItems[currentSlide].id"
                 style="display: inline-block"
             />
-            <transparent-button/>
+            <transparent-button
+                @action="aboutService"
+            />
           </v-col>
         </v-row>
       </div>
@@ -101,6 +103,10 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
     } else {
       this.currentSlide--
     }
+  }
+
+  private aboutService() {
+    this.$emit('toSecondSection');
   }
 }
 </script>

@@ -52,7 +52,7 @@ export default class AboutCar extends Mixins(HttpServiceMixin) {
   cars: Car[] = [];
   
   mounted() {
-    this.currentCarIndex = Number(this.$route.params.id);
+    this.currentCarIndex = Number(this.$route.params.id) - 1;
   }
 
   currentCarIndex: number = 0;
@@ -65,7 +65,6 @@ export default class AboutCar extends Mixins(HttpServiceMixin) {
   async created() {
     const {data} = await this.carsService.getCars();
     this.cars = data
-    console.log(this.cars);
     this.isDataLoaded = true;
   }
 
