@@ -13,6 +13,7 @@
         :headers="headers"
         :items="data"
         :search="search"
+        no-data-text="У Вас пока что нет договоров"
     >
       <template v-slot:item.open="props">
         <v-icon @click="openContract(props.item.id)">mdi-eye</v-icon>

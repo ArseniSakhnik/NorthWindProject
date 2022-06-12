@@ -123,10 +123,10 @@ namespace NorthWindProject.Application.Services.ContractService
                 .Where(contract => contract.Id == contractId)
                 .SingleOrDefaultAsync(cancellationToken);
 
-            if (contract is IEncryptObject encryptionContract)
-            {
-                encryptionContract.DecryptObject(_encryptionService);
-            }
+            // if (contract is IEncryptObject encryptionContract)
+            // {
+            //     encryptionContract.DecryptObject(_encryptionService);
+            // }
 
             dynamic contractDto = new ExpandoObject();
 
@@ -170,8 +170,8 @@ namespace NorthWindProject.Application.Services.ContractService
             contract.ServiceId = documentService.ServiceId;
             contract.DocumentServiceId = documentService.Id;
 
-            if (contract is IEncryptObject contractEncrypt)
-                contractEncrypt.EncryptObject(_encryptionService);
+            // if (contract is IEncryptObject contractEncrypt)
+            //     contractEncrypt.EncryptObject(_encryptionService);
             
             AuditableEntityFill(contract);
             await _context.Contracts.AddAsync(contract, cancellationToken);

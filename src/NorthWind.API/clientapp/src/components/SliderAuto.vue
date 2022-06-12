@@ -1,12 +1,12 @@
 ﻿<template>
-  <hooper 
-      :infiniteScroll="isComputer" 
-      :itemsToShow="numberOfSlides" 
+  <hooper
+      :infiniteScroll="isComputer"
+      :itemsToShow="numberOfSlides"
       class="slider-section"
       @beforeSlide="disableClick"
   >
-    <slide 
-        v-for="car in cars" 
+    <slide
+        v-for="car in cars"
         class="slider"
     >
       <div
@@ -16,19 +16,19 @@
       >
         <div class="bottom-card">
           <h5 class="text-white">{{ car.title }}</h5>
-          <div class="price-block">₽ 2 000/час</div>
+          <div class="price-block">{{ car.price }}</div>
           <ul>
             <li>
               <h5>Мощность двигателя</h5>
-              <p>240 ед.</p>
+              <p>{{ car.enginePower }}</p>
             </li>
             <li>
               <h5>Вместимость кузова</h5>
-              <p>8 м³</p>
+              <p>{{ car.capacity }}</p>
             </li>
             <li>
-              <h5>Мощность двигателя</h5>
-              <p>МАЗ-5337</p>
+              <h5>{{ 'Базовое \n шосси' }}</h5>
+              <p>{{ car.basicHighway }}</p>
             </li>
           </ul>
         </div>
@@ -53,40 +53,53 @@ export default class SliderAuto extends Mixins(BreakPointsMixin) {
   xAxis: number = 0;
   x: number = 0;
 
-  cars: { title: string, index: number, price: string }[] = [
+  cars: { title: string, index: number, price: string, enginePower: string, capacity: string, basicHighway: string }[] = [
     {
       title: 'КОМБИНИРОВАННЫЕ ДОРОЖНЫЕ МАШИНЫ',
       index: 1,
-      price: '₽ 2 000/час'
+      price: '₽ 5 000/час',
+      enginePower: '245 ед.',
+      capacity: '-',
+      basicHighway: 'КАМАЗ-65115'
     },
     {
       title: 'БУНКЕРОВОЗЫ',
       index: 2,
-      price: '₽ 2 000/час'
+      price: '₽ 3 400/час',
+      enginePower: '240 ед.',
+      capacity: '8 м³',
+      basicHighway: 'МАЗ-5337'
     },
     {
       title: 'МУЛЬТИЛИФТ',
       index: 3,
-      price: '₽ 2 000/час'
+      price: '₽ 2 200/час',
+      enginePower: '250 ед.',
+      capacity: '27 м³',
+      basicHighway: 'Мерседес-Бенц 1625'
     },
     {
       title: 'АССЕНИЗАТОР',
       index: 4,
-      price: '₽ 2 000/час'
+      price: '₽ 2 000/час',
+      enginePower: '227 ед.',
+      capacity: '10 м³',
+      basicHighway: 'МАЗ-КО 523'
     }
   ]
 
   goToCar(index: number) {
     if (!this.canClick) return;
-    
+
     this.$router.push(`/about-car/${index}`)
   }
-  
+
   disableClick() {
     console.log(0)
     this.canClick = false;
     setTimeout(() => this.canClick = true, 500);
   }
+
   get numberOfSlides() {
     return this.isComputer ? 3 : 1;
   }

@@ -35,6 +35,14 @@ export default class UserSidebar extends Vue {
   @PropSync('currentView') currentViewSynced!: number;
   @User.Getter('IS_USER_ADMIN') isUserAdmin!: boolean;
 
+  mounted() {
+    if (this.$route.fullPath === 'user-contracts') {
+      this.currentViewSynced = 1;
+    } else if (this.$route.fullPath === 'user-purchases') {
+      this.currentViewSynced = 0;
+    }
+  }
+
   views: { viewId: number, icon: string, name: string, action: () => void } [] = [
     {
       viewId: 0,

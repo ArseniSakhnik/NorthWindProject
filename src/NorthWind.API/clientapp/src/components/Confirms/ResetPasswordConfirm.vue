@@ -3,14 +3,13 @@
       ref="dialogRef"
       persistent
       width="500"
-      @click:outside="toggleRegisterWindow(false)"
-      scrollable
-  >
+      @click:outside="toggleRegisterWindow(false)">
     <v-card>
       <v-card-title>
         <span class="text-h5">Сброс пароля</span>
       </v-card-title>
       <v-card-text>
+        <div style="height: 50px;"></div>
         <v-row>
           <v-text-field
               outlined
@@ -26,8 +25,6 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-            class="orange darken-3" style="color: white"
-            text
             @click="toggleRegisterWindow(false)"
         >
           Отмена
