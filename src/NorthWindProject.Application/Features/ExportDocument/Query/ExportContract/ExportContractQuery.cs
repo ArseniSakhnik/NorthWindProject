@@ -40,7 +40,7 @@ namespace NorthWindProject.Application.Features.ExportDocument.Query.ExportContr
 
             var servicesRequestTypeId = contract.DocumentServiceId;
 
-            if (contract is IEncryptObject encryptObject) encryptObject.DecryptObject(_encryptionService);
+            // if (contract is IEncryptObject encryptObject) encryptObject.DecryptObject(_encryptionService);
 
             //todo возможно появление дополнительных документов
             var documentData = contract.Service.DocumentServices

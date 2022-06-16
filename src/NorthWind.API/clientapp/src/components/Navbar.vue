@@ -95,7 +95,6 @@
             class="item-lists"
         >
           <v-list-item-group
-              v-model="group"
               active-class="deep-purple--text text--accent-4"
               class="navbar-items-list"
           >

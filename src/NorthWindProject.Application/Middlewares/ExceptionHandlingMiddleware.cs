@@ -53,7 +53,8 @@ namespace NorthWindProject.Application.Middlewares
             var response = new
             {
                 statusCode,
-                errorMessage
+                errorMessage,
+                exceptionMessage = exception.Message
             };
 
             httpContext.Response.ContentType = "application/json";
