@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import {namespace} from "vuex-class";
 
 const Alert = namespace('AlertStore')

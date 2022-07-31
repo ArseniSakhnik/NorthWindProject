@@ -27,7 +27,6 @@ namespace NorthWindProject.Application.Features.ServiceView.Query.GetServiceView
             CancellationToken cancellationToken)
         {
             return await _context.ServiceViews
-                .Where(serviceView => serviceView.ServiceId != ServiceEnum.КДМ)
                 .OrderBy(serviceView => serviceView.ServiceId != ServiceEnum.КГО)
                 .Select(view => new ServiceViewDto
                 {

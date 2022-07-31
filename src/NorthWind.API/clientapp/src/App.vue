@@ -6,14 +6,11 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
 import MainLayout from '@/layouts/MainLayout.vue'
-import AdminLayout from '@/layouts/AdminLayout.vue'
 import SystemLayout from "@/layouts/SystemLayout.vue"
 import ActionLayout from "@/layouts/ActionLayout.vue"
-import {namespace} from "vuex-class";
-import UserLayout from "@/layouts/UserLayout.vue";
 
 
-@Component({components: {MainLayout, AdminLayout, SystemLayout, ActionLayout, UserLayout}})
+@Component({components: {MainLayout, SystemLayout, ActionLayout}})
 export default class App extends Vue {
   isDataLoaded: boolean = false;
 }

@@ -40,18 +40,16 @@
 <script lang="ts">
 import {Component, Mixins, Prop, Ref} from 'vue-property-decorator'
 import SlideContent from "@/components/HomePage/firstSection/SlideContent.vue";
-import SlidesNavigation from "@/components/HomePage/firstSection/SlidesNavigation.vue";
 import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import OrangeButton from "@/components/Buttons/OrangeButton.vue";
 import TransparentButton from "@/components/Buttons/TransparentButton.vue";
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue";
-import PurchaseOpener from "@/components/SystemComponents/PurchaseOpener.vue";
 import {ServiceTypeEnum} from "@/enums/Enums";
 
 
 type Slide = { id: ServiceTypeEnum, title: string; image: string }
 @Component({
-  components: {SlidesNavigation, SlideContent, OrangeButton, TransparentButton, PurchaseOpener}
+  components: {SlideContent, OrangeButton, TransparentButton}
 })
 export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMixin) {
   @Prop({type: Boolean}) isSecondSectionOpened!: boolean;
@@ -77,7 +75,7 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
 
   async created() {
     const {data: serviceView} = await this.serviceViewService.GetServiceViews();
-
+    
     this.slideItems = serviceView.map(item => ({
       id: item.id,
       image: `/ServiceImage/${item.mainImageName}`,

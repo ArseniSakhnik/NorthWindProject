@@ -97,7 +97,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="clientapp\src\components\Admin\AdminSidebar.vue" />
         <Content Include="clientapp\src\views\ContactsPage.vue" />
         <Content Include="clientapp\src\views\DocumentsPage.vue" />
     </ItemGroup>
