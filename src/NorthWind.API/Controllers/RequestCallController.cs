@@ -8,7 +8,7 @@ namespace NorthWind.API.Controllers
     public class RequestCallController : ApiController
     {
         [HttpPost]
-        public async Task<IActionResult> CreateRequestCall(CancellationToken cancellationToken)
-            => Ok(await Mediator.Send(new CreateRequestCallCommand(), cancellationToken));
+        public async Task<IActionResult> CreateRequestCall(CreateRequestCallCommand command, CancellationToken cancellationToken)
+            => Ok(await Mediator.Send(command, cancellationToken));
     }
 }
