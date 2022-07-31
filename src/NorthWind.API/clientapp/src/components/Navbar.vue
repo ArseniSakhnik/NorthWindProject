@@ -1,13 +1,13 @@
 <template>
   <div class="my-div">
     <vs-navbar
-        class="bg-transparent blur"
-        padding-scroll
-        text-white
-        fixed
-        square
         center-collapsed
+        class="bg-transparent blur"
         color="primary"
+        fixed
+        padding-scroll
+        square
+        text-white
     >
       <template v-if="isMobile" #left>
         <v-system-bar class="opacity"/>
@@ -16,7 +16,7 @@
         />
       </template>
       <template v-else #left>
-        <logo style="max-width: 50px; max-height: 50px;" class="mr-2"/>
+        <logo class="mr-2" style="max-width: 50px; max-height: 50px;"/>
         <span
             @click="gotoMainPage"
         >
@@ -28,71 +28,18 @@
                       @click="goTo(to)">
         {{ title }}
       </vs-navbar-item>
-      <template #right>
-        <vs-button
-            color="#fff"
-            flat
-            @click="openLoginWindow"
-            v-if="!isUserAuthenticated"
-        >
-          Войти
-        </vs-button>
-        <vs-button
-            color="#fff"
-            flat
-            @click="openRegisterWindow"
-            v-if="!isUserAuthenticated"
-        >
-          Регистрация
-        </vs-button>
-        <div>
-          <vs-button
-              v-if="isUserAuthenticated"
-              color="#fff"
-              flat
-              @click="goToUserInfo"
-          >
-            Личный кабинет
-          </vs-button>
-        </div>
-        <div v-if="isUserAuthenticated">
-          <vs-button
-              color="#fff"
-              flat
-              @click="logout"
-          >
-            Выйти
-          </vs-button>
-        </div>
-        <login-confirm
-            :is-active.sync="isLogInDialogOpened"
-            @closeLoginAndOpenRegisterForm="closeLoginAndOpenRegisterForm"
-            @closeLoginAndOpenResetPasswordEmail="closeLoginAndOpenResetPasswordEmail"
-        />
-        <register-confirm
-            :is-active.sync="isRegisterDialogOpened"
-            @closeRegisterAndOpenTermsOfUser="closeRegisterAndOpenTermsOfUser"
-        />
-        <reset-password-confirm
-            :is-active.sync="isResetPasswordEmailOpened"
-            :initial-email="emailToConfirm"
-        />
-        <terms-of-user-confirm
-            :is-active.sync="iAcceptTermsOfUserConfirmOpened"
-        />
-      </template>
     </vs-navbar>
-    <div class="navigation-drawer" v-if="drawer">
+    <div v-if="drawer" class="navigation-drawer">
       <v-navigation-drawer
           v-model="drawer"
+          absolute
           bottom
           temporary
-          absolute
       >
         <v-list
-            nav
-            dense
             class="item-lists"
+            dense
+            nav
         >
           <v-list-item-group
               active-class="deep-purple--text text--accent-4"
@@ -112,27 +59,42 @@
 import {Component, Mixins} from 'vue-property-decorator';
 import HttpServiceMixin from "@/mixins/HttpServiceMixin.vue"
 import {namespace} from "vuex-class";
-import RegisterConfirm from "@/components/Confirms/RegisterConfirm.vue";
 import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
-import LoginConfirm from "@/components/Confirms/LoginConfirm.vue";
 import Logo from "@/components/Logo/Logo.vue";
-import ResetPasswordConfirm from "@/components/Confirms/ResetPasswordConfirm.vue";
 import TermsOfUserConfirm from "@/components/Confirms/TermsOfUserConfirm.vue";
 
 const User = namespace('CurrentUserStore');
 
 @Component({
-  components: {TermsOfUserConfirm, ResetPasswordConfirm, RegisterConfirm, LoginConfirm, Logo}
+  components: {TermsOfUserConfirm, Logo}
 })
 export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
-  @User.Getter('IS_USER_AUTHENTICATED') isUserAuthenticated!: boolean;
-  @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => void;
-  @User.State('fullName') fullName!: string;
-  @User.Getter('IS_USER_ADMIN') isUserAdmin!: boolean;
 
   drawer: boolean = false;
   group: any = null;
   emailToConfirm: string = '';
+  isRegisterDialogOpened: boolean = false;
+  isLogInDialogOpened: boolean = false;
+  isResetPasswordEmailOpened: boolean = false;
+  iAcceptTermsOfUserConfirmOpened: boolean = false;
+  dialog: boolean = false;
+
+  get menuItems(): any[] {
+    return [
+      {
+        title: 'Услуги',
+        to: '/'
+      },
+      {
+        title: 'Документы',
+        to: '/documents'
+      },
+      {
+        title: 'Контакты',
+        to: '/contacts'
+      },
+    ];
+  }
 
   goTo(to: string) {
     if (this.$route.path === to) {
@@ -146,51 +108,12 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
     this.$router.push('/user-purchases')
   }
 
-  isRegisterDialogOpened: boolean = false;
-  isLogInDialogOpened: boolean = false;
-  isResetPasswordEmailOpened: boolean = false;
-  iAcceptTermsOfUserConfirmOpened: boolean = false;
-  dialog: boolean = false;
-
-  get menuItems(): any[] {
-    const items = [
-      {
-        title: 'Услуги',
-        to: '/'
-      },
-      {
-        title: 'Документы',
-        to: '/documents'
-      },
-      {
-        title: 'Контакты',
-        to: '/contacts'
-      },
-    ]
-
-    if (this.isUserAdmin) {
-      items.push({
-        title: 'Панель администрирования',
-        to: '/admin-purchases'
-      })
-    }
-
-    return items;
-  }
-
   openRegisterWindow() {
     this.isRegisterDialogOpened = true;
   }
 
   openLoginWindow() {
     this.isLogInDialogOpened = true;
-  }
-
-  async logout() {
-    await this.accountService.Logout()
-        .then(async () => {
-          await this.getCurrentUserInfo()
-        });
   }
 
   gotoMainPage() {
@@ -214,7 +137,7 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .blur {
   backdrop-filter: blur(3px);
 }

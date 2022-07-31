@@ -3,11 +3,7 @@
     <confirm-request-call
         :is-active.sync="isRequestDialogActive"
     />
-    <orange-button
-        style="margin-right: 1em"
-        title="Заказать услугу"
-        @action="openPurchase"
-    />
+    
     <purchase-dialog
         :key="updateToken"
         :is-active.sync="isDialogActive"

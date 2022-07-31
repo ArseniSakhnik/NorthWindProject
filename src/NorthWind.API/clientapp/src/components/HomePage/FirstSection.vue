@@ -13,9 +13,10 @@
           <v-col v-if="isComputer"/>
           <v-col>
             <h1 class="text-white slide-text">{{ slideItems[currentSlide].title }}</h1>
-            <purchase-opener
-                :service-type="slideItems[currentSlide].id"
-                style="display: inline-block"
+            <orange-button
+                style="margin-right: 1em"
+                title="Заказать услугу"
+                @action="openRequestCall"
             />
             <transparent-button
                 @action="aboutService"
@@ -54,8 +55,9 @@ type Slide = { id: ServiceTypeEnum, title: string; image: string }
 })
 export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMixin) {
   @Prop({type: Boolean}) isSecondSectionOpened!: boolean;
-  isDataLoad: boolean = false;
   @Ref('first-section') private firstSection!: HTMLElement;
+
+  isDataLoad: boolean = false;
   private currentSlide: number = 0;
   private slideItems: Slide[] = [
     {
@@ -107,6 +109,10 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
 
   private aboutService() {
     this.$emit('toSecondSection');
+  }
+
+  private openRequestCall() {
+    console.log('kal')
   }
 }
 </script>
