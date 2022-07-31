@@ -31,4 +31,8 @@
       <Compile Remove="Services\PasswordService\PasswordService.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Services" />
+    </ItemGroup>
+
 </Project>

@@ -7,11 +7,10 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NorthWind.API.APIExtensions;
-using NorthWindProject.Application.Common.Interfaces.DomainEvents;
 using NorthWindProject.Application.ConfigurationModels;
 using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Middlewares;
-using NorthWindProject.Application.Services;
+using NorthWindProject.Application.Services.BotService;
 
 namespace NorthWind.API
 {
@@ -36,11 +35,11 @@ namespace NorthWind.API
 
             services.AddHttpContextAccessor();
             services.AddApplication();
-
-
+            
             services.AddRazorPages();
 
-            services.AddScoped<IEmailSenderService, EmailSenderService>();
+            services.AddScoped<BotService>();
+
             services.AddTransient<ExceptionHandlingMiddleware>();
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Test", Version = "v1"}); });

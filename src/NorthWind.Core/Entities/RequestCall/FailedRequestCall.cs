@@ -2,7 +2,7 @@
 
 namespace NorthWind.Core.Entities.RequestCall
 {
-    public class RequestCall : AuditableEntity
+    public class FailedRequestCall
     {
         public int Id { get; set; }
         public string Name { get; set; }
