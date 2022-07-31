@@ -57,5 +57,23 @@ namespace NorthWind.API.APIExtensions
                 }
             });
         }
+
+        public static void AddSitemap(this IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.StartsWithSegments("/sitemap.xml"))
+                {
+                    var sitemapPath = Path.Combine(env.ContentRootPath, "wwwroot/seo/sitemap.xml");
+                    var output = await File.ReadAllTextAsync(sitemapPath);
+                    context.Response.ContentType = "application/xml";
+                    await context.Response.WriteAsync(output);
+                }
+                else
+                {
+                    await next();
+                }
+            });
+        }
     }
 }

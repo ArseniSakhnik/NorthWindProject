@@ -65,6 +65,7 @@ namespace NorthWind.API
             app.UseAuthorization();
 
             app.AddRobots(env);
+            app.AddSitemap(env);
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseEndpoints(endpoints =>
