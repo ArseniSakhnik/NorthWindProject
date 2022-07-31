@@ -82,6 +82,7 @@
         <None Remove="clientapp\src\views\DocumentsPage.vue" />
         <None Remove="clientapp\src\views\VacanciesPage.vue" />
         <None Remove="clientapp\src\views\ContactsPage.vue" />
+        <None Include="wwwroot\seo\robots.txt" />
         <None Include="wwwroot\ServiceImage\Documents\License1.jpg" />
         <None Include="wwwroot\ServiceImage\Documents\License2.jpg" />
         <None Include="wwwroot\ServiceImage\Documents\Сertificate.jpg" />
@@ -99,6 +100,14 @@
     <ItemGroup>
         <Content Include="clientapp\src\views\ContactsPage.vue" />
         <Content Include="clientapp\src\views\DocumentsPage.vue" />
+        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon.png" />
+        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-76x76.png" />
+        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-60x60.png" />
+        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-180x180.png" />
+        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-152x152.png" />
+        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-120x120.png" />
+        <Content Remove="wwwroot\bundles\img\icons\favicon-16x16.png" />
+        <Content Remove="wwwroot\bundles\img\icons\favicon-32x32.png" />
     </ItemGroup>
 
 </Project>

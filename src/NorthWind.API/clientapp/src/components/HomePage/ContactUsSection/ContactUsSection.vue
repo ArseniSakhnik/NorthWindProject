@@ -46,6 +46,7 @@
       <orange-button
           title="Отправить"
           @action="sendRequestCall"
+          :disabled="sendButtonDisabled"
       />
     </v-col>
   </v-row>
@@ -70,8 +71,10 @@ export default class ContactUsSection extends Mixins(HttpServiceMixin, AlertMixi
     phoneNumber: '',
     comment: '',
   }
+  sendButtonDisabled: boolean = false;
 
   async sendRequestCall() {
+    this.sendButtonDisabled = true;
     await this.requestCallService.SendRequestCall(this.localData)
         .then(_ => {
           this.callAlert({
@@ -79,6 +82,9 @@ export default class ContactUsSection extends Mixins(HttpServiceMixin, AlertMixi
             isError: false,
             message: 'Обратный звонок был успешно отправлен'
           })
+        })
+        .finally(() => {
+          this.sendButtonDisabled = false;
         })
   }
 

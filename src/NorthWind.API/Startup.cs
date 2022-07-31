@@ -27,7 +27,7 @@ namespace NorthWind.API
         public void ConfigureServices(IServiceCollection services)
         {
             var appSettingsSection = Configuration.GetSection("AppSettings");
-            
+
             services.Configure<AppSettings>(appSettingsSection);
             var appSettings = appSettingsSection.Get<AppSettings>();
 
@@ -35,7 +35,7 @@ namespace NorthWind.API
 
             services.AddHttpContextAccessor();
             services.AddApplication();
-            
+
             services.AddRazorPages();
 
             services.AddScoped<BotService>();
@@ -64,6 +64,7 @@ namespace NorthWind.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.AddRobots(env);
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseEndpoints(endpoints =>

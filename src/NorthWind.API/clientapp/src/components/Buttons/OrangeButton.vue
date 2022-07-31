@@ -1,5 +1,5 @@
 ﻿<template>
-  <button class="button" @click="action">
+  <button class="button" @click="action" :disabled="disabled">
     {{ title }}
   </button>
 </template>
@@ -10,6 +10,7 @@ import {Component, Emit, Prop, Vue} from "vue-property-decorator";
 @Component
 export default class OrangeButton extends Vue {
   @Prop({type: String}) title!: string;
+  @Prop({default: () => false}) disabled!: boolean;
 
   @Emit()
   action(e: PointerEvent) {

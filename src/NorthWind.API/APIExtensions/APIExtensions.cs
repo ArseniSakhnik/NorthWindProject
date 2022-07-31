@@ -1,4 +1,8 @@
 ﻿using System;
+using System.IO;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NorthWindProject.Application.Common.Access;
@@ -35,7 +39,23 @@ namespace NorthWind.API.APIExtensions
                 });
             }
         }
-        
-        public static void AddEmailSenderService(this IServiceCollection services, AppSettings appSettings) {}
+
+        public static void AddRobots(this IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.StartsWithSegments("/robots.txt"))
+                {
+                    var robotsTxtPath = Path.Combine(env.ContentRootPath, "wwwroot/seo/robots.txt");
+                    var output = await File.ReadAllTextAsync(robotsTxtPath);
+                    context.Response.ContentType = "text/plain";
+                    await context.Response.WriteAsync(output);
+                }
+                else
+                {
+                    await next();
+                }
+            });
+        }
     }
 }
