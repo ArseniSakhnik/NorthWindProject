@@ -1,5 +1,5 @@
 ﻿<template>
-  <v-app v-if="isDataLoaded">
+  <v-app>
     <success-alert/>
     <navbar/>
     <router-view/>
@@ -14,18 +14,9 @@ import FooterSection from "@/components/Footer.vue";
 import SuccessAlert from "@/components/Alerts/SuccessAlert.vue";
 import {namespace} from "vuex-class";
 
-const User = namespace('CurrentUserStore')
-
 @Component({components: {Navbar, FooterSection, SuccessAlert}})
 export default class MainLayout extends Vue {
-  @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => Promise<void>;
-
-  isDataLoaded: boolean = false;
-
-  async created() {
-    await this.getCurrentUserInfo()
-        .then(() => this.isDataLoaded = true);
-  }
+  
 }
 </script>
 <style scoped>

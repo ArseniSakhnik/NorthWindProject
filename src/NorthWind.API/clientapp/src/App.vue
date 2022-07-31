@@ -1,5 +1,5 @@
 <template>
-  <component :is="$route.meta.layout + '-layout'" v-if="isDataLoaded">
+  <component :is="$route.meta.layout + '-layout'">
   </component>
 </template>
 
@@ -12,17 +12,10 @@ import ActionLayout from "@/layouts/ActionLayout.vue"
 import {namespace} from "vuex-class";
 import UserLayout from "@/layouts/UserLayout.vue";
 
-const User = namespace('CurrentUserStore');
 
 @Component({components: {MainLayout, AdminLayout, SystemLayout, ActionLayout, UserLayout}})
 export default class App extends Vue {
-  @User.Action('GET_CURRENT_USER_INFO') getCurrentUserInfo!: () => Promise<void>;
   isDataLoaded: boolean = false;
-
-  async created() {
-    await this.getCurrentUserInfo()
-        .then(() => this.isDataLoaded = true);
-  }
 }
 </script>
 <style>

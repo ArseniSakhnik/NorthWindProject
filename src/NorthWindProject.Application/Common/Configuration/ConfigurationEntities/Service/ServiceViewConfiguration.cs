@@ -12,10 +12,6 @@ namespace NorthWindProject.Application.Common.Configuration.ConfigurationEntitie
         {
             builder.HasKey(view => view.ServiceId);
 
-            builder.HasOne(view => view.Service)
-                .WithOne(service => service.ServiceView)
-                .HasForeignKey<ServiceView>(view => view.ServiceId);
-
             builder.HasData(new List<ServiceView>
             {
                 new()
