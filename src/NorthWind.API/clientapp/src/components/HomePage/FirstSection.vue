@@ -110,7 +110,7 @@ export default class FirstSection extends Mixins(BreakPointsMixin, HttpServiceMi
   }
 
   private openRequestCall() {
-    console.log('kal')
+    this.$emit('toContactUsSection')
   }
 }
 </script>

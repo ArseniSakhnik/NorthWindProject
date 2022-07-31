@@ -61,6 +61,7 @@ import {namespace} from "vuex-class";
 })
 export default class ContactUsSection extends Mixins(HttpServiceMixin, AlertMixin, ValidationMixin) {
   
+  
   hasErrors() {
     return this.validateComponent();
   }

@@ -3,11 +3,14 @@
     <div v-if="isSecondSectionOpened" class="second-section-opened"/>
     <first-section
         @toSecondSection="toSecondSection"
+        @toContactUsSection="toContactUsSection"
     />
     <second-section
         ref="secondSection"
     />
-    <third-section/>
+    <third-section
+        ref="contactUsSection"
+    />
   </div>
 </template>
 
@@ -22,12 +25,21 @@ import ThirdSection from "@/components/HomePage/thirdSection/ThirdSection.vue";
 })
 export default class Home extends Vue {
   @Ref('secondSection') secondSection!: any;
+  @Ref('contactUsSection') contactUsSection!: any;
 
   toSecondSection() {
     const el = this.secondSection.$el;
 
     if (el) {
       el.scrollIntoView({behavior: 'smooth'});
+    }
+  }
+
+  toContactUsSection() {
+    const el = this.contactUsSection.$el;
+
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth'})
     }
   }
 
