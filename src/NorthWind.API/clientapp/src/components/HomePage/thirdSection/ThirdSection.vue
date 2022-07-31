@@ -1,28 +1,6 @@
 ﻿<template>
   <div style="background-color: #f2f6ff">
     <v-container style="margin-top: 250px; margin-bottom: 170px">
-      <v-row>
-        <v-col
-            cols="12"
-            lg="5"
-        >
-          <div class="text-block">
-            <h2 class="second-section-font">УТИЛИЗАЦИЯ</h2>
-            <p>Мусор утилизируется строго в предназначенных для этого местах: крупногабаритные отходы - в Тургеневском
-              карьере, жидкие отходы - в Водоканале.</p>
-            <p>К строительному мусору относятся бой кирпича, старые обои, обломки фундамента и стеновых перегородок,
-              плиты
-              перекрытий, железобетонные конструкции. </p>
-          </div>
-        </v-col>
-        <v-col
-            class="svg-container"
-            cols="12"
-            lg="7"
-        >
-          <map-svg/>
-        </v-col>
-      </v-row>
       <v-row class="padding">
         <v-col>
           <h2 class="second-section-font">СВЯЗАТЬСЯ С НАМИ</h2>
