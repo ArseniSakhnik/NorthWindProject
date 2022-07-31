@@ -24,11 +24,13 @@
       <h5>ЗАКАЗАТЬ ЗВОНОК</h5>
       <string-field
           ref="1"
+          v-model="localData.name"
           label="Имя*"
           :rules="[isStringNotEmpty]"
       />
       <string-field
           ref="2"
+          v-model="localData.phoneNumber"
           mask="(###)-###-##-##"
           prefix="+7"
           label="Номер телефона*"
@@ -36,12 +38,14 @@
       />
       <v-textarea
           label="Комментарий"
+          v-model="localData.comment"
           counter
           single-line
           outlined
       />
       <orange-button
           title="Отправить"
+          @action="sendRequestCall"
       />
     </v-col>
   </v-row>
@@ -55,13 +59,29 @@ import AlertMixin from "@/mixins/AlertMixin.vue";
 import ValidationMixin from "@/mixins/ValidationMixin.vue";
 import StringField from "@/components/Fields/StringField.vue";
 import {namespace} from "vuex-class";
+import {RequestCall} from "@/services/RequestCallService/RequestCallServiceRequests";
 
 @Component({
   components: {OrangeButton, StringField}
 })
 export default class ContactUsSection extends Mixins(HttpServiceMixin, AlertMixin, ValidationMixin) {
-  
-  
+  localData: RequestCall = {
+    name: '',
+    phoneNumber: '',
+    comment: '',
+  }
+
+  async sendRequestCall() {
+    await this.requestCallService.SendRequestCall(this.localData)
+        .then(_ => {
+          this.callAlert({
+            delay: 8000,
+            isError: false,
+            message: 'Обратный звонок был успешно отправлен'
+          })
+        })
+  }
+
   hasErrors() {
     return this.validateComponent();
   }

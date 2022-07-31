@@ -5,7 +5,7 @@ using NorthWindProject.Application.Features.RequestCall;
 
 namespace NorthWind.API.Controllers
 {
-    public class RequestCall : ApiController
+    public class RequestCallController : ApiController
     {
         [HttpPost]
         public async Task<IActionResult> CreateRequestCall(CancellationToken cancellationToken)
