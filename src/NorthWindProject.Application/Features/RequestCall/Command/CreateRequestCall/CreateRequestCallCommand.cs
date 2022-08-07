@@ -1,16 +1,11 @@
-﻿using System.Net.Http;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper.Configuration;
 using MediatR;
-using Microsoft.Extensions.Options;
 using NorthWind.Core.Entities.RequestCall;
 using NorthWindProject.Application.Common.Access;
-using NorthWindProject.Application.ConfigurationModels;
 using NorthWindProject.Application.Services.BotService;
-using Org.BouncyCastle.Ocsp;
 
-namespace NorthWindProject.Application.Features.RequestCall
+namespace NorthWindProject.Application.Features.RequestCall.Command.CreateRequestCall
 {
     public class CreateRequestCallCommand : IRequest
     {
@@ -40,9 +35,9 @@ namespace NorthWindProject.Application.Features.RequestCall
                 number = request.PhoneNumber,
             };
 
-            var result = await _botService.SendRequestCall(sendRequestCallDto);
+            var succeed = await _botService.SendRequestCall(sendRequestCallDto);
 
-            if (result.IsSuccessStatusCode) return Unit.Value;
+            if (succeed) return Unit.Value;
             
             
             var failedRequestCall = new FailedRequestCall

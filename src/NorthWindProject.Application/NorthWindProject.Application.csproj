@@ -11,6 +11,7 @@
         <PackageReference Include="FluentValidation" Version="10.3.3" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.3" />
         <PackageReference Include="FreeSpire.Doc" Version="9.9.7" />
+        <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.0" />
         <PackageReference Include="MailKit" Version="3.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.10" />
@@ -29,10 +30,6 @@
 
     <ItemGroup>
       <Compile Remove="Services\PasswordService\PasswordService.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Services\Seo" />
     </ItemGroup>
 
 </Project>

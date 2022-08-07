@@ -1,4 +1,7 @@
 using System.IO;
+using Hangfire;
+using Hangfire.Common;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,17 +14,18 @@ using NorthWindProject.Application.ConfigurationModels;
 using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Middlewares;
 using NorthWindProject.Application.Services.BotService;
+using NorthWindProject.Application.Services.RecurringJobService;
 
 namespace NorthWind.API
 {
     public class Startup
     {
+        private IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,10 +47,13 @@ namespace NorthWind.API
             services.AddTransient<ExceptionHandlingMiddleware>();
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Test", Version = "v1"}); });
+
+            services.AddHangfire(x => { x.UseMemoryStorage(); });
+            services.AddHangfireServer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobs)
         {
             if (env.IsDevelopment())
             {
@@ -74,6 +81,8 @@ namespace NorthWind.API
                 endpoints.MapRazorPages();
             });
 
+            app.UseHangfireDashboard();
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/ServiceImage")),
@@ -85,6 +94,11 @@ namespace NorthWind.API
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/img")),
                 RequestPath = "/img"
             });
+
+            recurringJobs.AddOrUpdate("failed_request_calls",
+                Job.FromExpression<RecurringJobService>(x => x.SendRequestFailedRequestCalls()),
+                Cron.Hourly()
+            );
         }
     }
 }

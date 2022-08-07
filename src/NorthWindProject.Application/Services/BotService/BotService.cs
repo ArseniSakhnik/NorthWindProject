@@ -18,14 +18,24 @@ namespace NorthWindProject.Application.Services.BotService
         }
 
 
-        public async Task<HttpResponseMessage> SendRequestCall(SendRequestCallDto requestCallDto)
+        public async Task<bool> SendRequestCall(SendRequestCallDto requestCallDto)
         {
-            var botUrl = _appSettings.BotUrl;
-            var jsonRequestCall = JsonConvert.SerializeObject(requestCallDto);
-            var data = new StringContent(jsonRequestCall, Encoding.UTF8, "application/json");
+            try
+            {
+                var botUrl = _appSettings.BotUrl;
+                var jsonRequestCall = JsonConvert.SerializeObject(requestCallDto);
+                var data = new StringContent(jsonRequestCall, Encoding.UTF8, "application/json");
 
-            using var client = new HttpClient();
-            return await client.PostAsync(botUrl, data);
+                using var client = new HttpClient();
+                var response = await client.PostAsync(botUrl, data);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
+            
         }
     }
 }
