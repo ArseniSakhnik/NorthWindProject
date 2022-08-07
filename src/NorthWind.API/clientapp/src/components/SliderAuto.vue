@@ -16,7 +16,6 @@
       >
         <div class="bottom-card">
           <h5 class="text-white">{{ car.title }}</h5>
-          <div class="price-block">{{ car.price }}</div>
           <ul>
             <li>
               <h5>Мощность двигателя</h5>
