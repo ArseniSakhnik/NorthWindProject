@@ -15,10 +15,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Ref, Vue} from 'vue-property-decorator'
+import {Component, Ref, Vue, Watch} from 'vue-property-decorator'
 import FirstSection from "@/components/HomePage/FirstSection.vue";
 import SecondSection from "@/components/HomePage/SecondSection.vue";
 import ThirdSection from "@/components/HomePage/thirdSection/ThirdSection.vue";
+import {namespace} from "vuex-class";
+
+const RequestCall = namespace('RequestCallStore')
 
 @Component({
   components: {ThirdSection, SecondSection, FirstSection}
@@ -26,6 +29,8 @@ import ThirdSection from "@/components/HomePage/thirdSection/ThirdSection.vue";
 export default class Home extends Vue {
   @Ref('secondSection') secondSection!: any;
   @Ref('contactUsSection') contactUsSection!: any;
+  @RequestCall.State('signal') signal!: boolean;
+  @RequestCall.Mutation('OPEN_CONTACT_US_SECTION') openContactUsSection!: (value: boolean) => void;
 
   toSecondSection() {
     const el = this.secondSection.$el;
@@ -40,6 +45,14 @@ export default class Home extends Vue {
 
     if (el) {
       el.scrollIntoView({behavior: 'smooth'})
+    }
+  }
+
+  @Watch('signal')
+  signalChangeHandler(signal: boolean) {
+    if (signal) {
+      this.toContactUsSection();
+      this.openContactUsSection(false);
     }
   }
 

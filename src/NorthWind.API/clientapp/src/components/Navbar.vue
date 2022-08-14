@@ -28,6 +28,15 @@
                       @click="goTo(to)">
         {{ title }}
       </vs-navbar-item>
+      <template #right>
+        <vs-button
+            color="#fff"
+            flat
+            @click="openRequestCallForm"
+        >
+          Заказать звонок
+        </vs-button>
+      </template>
     </vs-navbar>
     <div v-if="drawer" class="navigation-drawer">
       <v-navigation-drawer
@@ -63,12 +72,14 @@ import BreakPointsMixin from "@/mixins/BreakPointsMixin.vue";
 import Logo from "@/components/Logo/Logo.vue";
 import TermsOfUserConfirm from "@/components/Confirms/TermsOfUserConfirm.vue";
 
-const User = namespace('CurrentUserStore');
+const RequestCall = namespace('RequestCallStore')
 
 @Component({
   components: {TermsOfUserConfirm, Logo}
 })
 export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
+  @RequestCall.State('signal') signal!: boolean;
+  @RequestCall.Mutation('OPEN_CONTACT_US_SECTION') openContactUsSection!: (value: boolean) => void;
 
   drawer: boolean = false;
   group: any = null;
@@ -112,8 +123,8 @@ export default class Navbar extends Mixins(HttpServiceMixin, BreakPointsMixin) {
     this.isRegisterDialogOpened = true;
   }
 
-  openLoginWindow() {
-    this.isLogInDialogOpened = true;
+  openRequestCallForm() {
+    this.openContactUsSection(true);
   }
 
   gotoMainPage() {
