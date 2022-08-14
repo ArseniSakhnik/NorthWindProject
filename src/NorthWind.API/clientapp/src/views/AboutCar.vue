@@ -116,13 +116,12 @@ export default class AboutCar extends Mixins(HttpServiceMixin) {
 
 .text-info {
   p {
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    /* or 27px */
-
-    letter-spacing: 0.1em;
-    color: black;
+    //font-family: Raleway, sans-serif;
+    //font-weight: bold;
+    ///* or 27px */
+    //
+    //letter-spacing: 0.1em;
+    //color: black;
   }
 }
 </style>
