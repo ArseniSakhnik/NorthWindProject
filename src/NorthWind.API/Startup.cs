@@ -4,8 +4,6 @@ using Hangfire.Common;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -17,6 +15,7 @@ using NorthWindProject.Application.DependencyInjection;
 using NorthWindProject.Application.Middlewares;
 using NorthWindProject.Application.Services.BotService;
 using NorthWindProject.Application.Services.RecurringJobService;
+using VueCliMiddleware;
 
 namespace NorthWind.API
 {
@@ -42,12 +41,19 @@ namespace NorthWind.API
             services.AddHttpContextAccessor();
             services.AddApplication();
 
-            services.AddRazorPages();
-
             services.AddScoped<BotService>();
 
             services.AddTransient<ExceptionHandlingMiddleware>();
+
+
             services.AddControllers();
+            
+            
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "clientapp/dist";
+            });
+
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Test", Version = "v1"}); });
 
             services.AddHangfire(x => { x.UseMemoryStorage(); });
@@ -60,7 +66,6 @@ namespace NorthWind.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseExceptionHandler("/Error");
                 app.UseHsts();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Kal"));
@@ -77,24 +82,28 @@ namespace NorthWind.API
             app.AddSitemap(env);
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapRazorPages();
-            });
+
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             app.UseHangfireDashboard();
-
+            
+            if (!env.IsDevelopment()) {
+                app.UseSpaStaticFiles();
+            }
+            
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/ServiceImage")),
                 RequestPath = "/ServiceImage"
             });
 
-            app.UseStaticFiles(new StaticFileOptions
+            app.UseSpa(spa =>
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/bundles/img")),
-                RequestPath = "/img"
+                if (env.IsDevelopment())
+                {
+                    spa.Options.SourcePath = "clientapp";
+                    spa.UseVueCli(npmScript: "serve");
+                }
             });
 
             recurringJobs.AddOrUpdate("failed_request_calls",

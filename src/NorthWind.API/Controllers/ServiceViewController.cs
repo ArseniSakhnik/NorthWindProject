@@ -15,13 +15,6 @@ namespace NorthWind.API.Controllers
             _environment = environment;
         }
 
-        // [HttpGet]
-        // public async Task<IActionResult> GetServiceViews(CancellationToken cancellationToken)
-        // {
-        //     var response = await Mediator.Send(new GetServiceViewsQuery(), cancellationToken);
-        //     return Ok(response);
-        // }
-
         [HttpGet]
         public async Task<IActionResult> GetServiceViews(CancellationToken cancellationToken)
             => Ok(await Mediator.Send(new GetServiceViewsQuery(), cancellationToken));

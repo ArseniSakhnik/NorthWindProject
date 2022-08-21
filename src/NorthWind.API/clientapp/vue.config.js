@@ -5,8 +5,8 @@ module.exports = {
         'vuetify',
         'vuex-module-decorators'
     ],
-    outputDir: path.resolve('../wwwroot/bundles/'),
-    filenameHashing: false,
+    // filenameHashing: false,
+    // outputDir: path.resolve('../wwwroot/bundles/'),
     // chainWebpack: config => {
     //     config.plugins.delete('html')
     //     config.plugins.delete('preload')

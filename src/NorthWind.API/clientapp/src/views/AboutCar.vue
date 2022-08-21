@@ -59,7 +59,7 @@ export default class AboutCar extends Mixins(HttpServiceMixin) {
   isDataLoaded: boolean = false;
 
   get imageLink() {
-    return `ServiceImage/Cars/${this.cars[this.currentCarIndex].path}`
+    return `${window.location.origin}/ServiceImage/Cars/${this.cars[this.currentCarIndex].path}`
   }
 
   async created() {

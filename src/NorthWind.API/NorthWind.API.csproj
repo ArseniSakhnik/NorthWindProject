@@ -56,6 +56,13 @@
         <_ContentIncludedByDefault Remove="wwwroot\bundles\precache-manifest.e2827f92acc438b0a7145712136c8948.js" />
         <_ContentIncludedByDefault Remove="wwwroot\bundles\robots.txt" />
         <_ContentIncludedByDefault Remove="wwwroot\bundles\service-worker.js" />
+        <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Privacy.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
+        <_ContentIncludedByDefault Remove="clientapp\dist\manifest.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -64,6 +71,7 @@
         <PackageReference Include="MailKit" Version="3.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.17" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -74,6 +82,7 @@
         <PackageReference Include="Hangfire.Core" Version="1.7.*" />
         <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.*" />
         <PackageReference Include="Hangfire.AspNetCore" Version="1.7.*" />
+        <PackageReference Include="VueCliMiddleware" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -96,19 +105,16 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="clientapp\public\img\icons" />
         <Folder Include="clientapp\src\assets\cars" />
         <Folder Include="clientapp\src\assets\documents" />
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="clientapp\public\favicon.ico" />
+        <Content Include="clientapp\public\img\favicon.png" />
         <Content Include="clientapp\src\views\ContactsPage.vue" />
         <Content Include="clientapp\src\views\DocumentsPage.vue" />
-        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon.png" />
-        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-76x76.png" />
-        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-60x60.png" />
-        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-180x180.png" />
-        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-152x152.png" />
-        <Content Remove="wwwroot\bundles\img\icons\apple-touch-icon-120x120.png" />
         <Content Remove="wwwroot\bundles\img\icons\favicon-16x16.png" />
         <Content Remove="wwwroot\bundles\img\icons\favicon-32x32.png" />
     </ItemGroup>

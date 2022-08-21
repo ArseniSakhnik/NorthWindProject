@@ -14,7 +14,8 @@ export default abstract class HttpService {
     baseRequest<TResponse, TBody>(path: string, methodType: MethodType, body: TBody | null = null): Promise<TResponse> {
         const url = this.basePath + '/' + path;
         const requestConfig: AxiosRequestConfig = {
-            withCredentials: true
+            withCredentials: true,
+            baseURL: window.location.origin
         }
 
         switch (methodType) {

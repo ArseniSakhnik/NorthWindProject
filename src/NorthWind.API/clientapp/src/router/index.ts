@@ -50,6 +50,7 @@ const mainRoutes: Array<RouteConfig> = [
 const routes: Array<RouteConfig> = mainRoutes
 
 const router = new VueRouter({
+    mode: 'history',
     routes
 })
 

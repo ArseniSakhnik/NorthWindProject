@@ -1,0 +1,11 @@
+﻿version: '3'
+services: 
+  mariadb:
+    image: mariadb:10.5.15
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=S3cret
+      - MYSQL_PASSWORD=123456
+      - MYSQL_USER=nwdbuser
+      - MYSQL_DATABASE=nwdb
