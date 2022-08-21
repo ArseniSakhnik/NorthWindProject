@@ -43,9 +43,11 @@ const mainRoutes: Array<RouteConfig> = [
     },
     {
         path: '*',
-        redirect: `${window.location.origin}/`
+        beforeEnter: (to, from, next) => {
+            next('/')
+        }
     }
-]
+];
 
 const routes: Array<RouteConfig> = mainRoutes
 
