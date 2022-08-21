@@ -108,6 +108,7 @@
         <Folder Include="clientapp\public\img\icons" />
         <Folder Include="clientapp\src\assets\cars" />
         <Folder Include="clientapp\src\assets\documents" />
+        <Folder Include="clientapp\src\scripts" />
     </ItemGroup>
 
     <ItemGroup>
