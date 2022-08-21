@@ -41,6 +41,10 @@ const mainRoutes: Array<RouteConfig> = [
             layout: 'Main'
         }
     },
+    {
+        path: '*',
+        redirect: `${window.location.origin}/`
+    }
 ]
 
 const routes: Array<RouteConfig> = mainRoutes
